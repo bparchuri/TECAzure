@@ -1,0 +1,68 @@
+{
+	"name": "AzureSqlTable27",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase34",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Code_segment",
+				"type": "nchar"
+			},
+			{
+				"name": "Poste_segment",
+				"type": "varchar"
+			},
+			{
+				"name": "Id_transaction",
+				"type": "varchar"
+			},
+			{
+				"name": "Date_ope",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Type_equipement",
+				"type": "varchar"
+			},
+			{
+				"name": "Num_syst_emetteur",
+				"type": "nchar"
+			},
+			{
+				"name": "CEB",
+				"type": "varchar"
+			},
+			{
+				"name": "Num_serie",
+				"type": "nchar"
+			},
+			{
+				"name": "Num_service",
+				"type": "varchar"
+			},
+			{
+				"name": "Code_user",
+				"type": "nchar"
+			},
+			{
+				"name": "Compagnie_agent",
+				"type": "nchar"
+			},
+			{
+				"name": "Type_emplacement",
+				"type": "char"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "EIS779_SEGMENT_001"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

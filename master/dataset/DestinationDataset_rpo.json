@@ -1,0 +1,21 @@
+{
+	"name": "DestinationDataset_rpo",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStore3",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureDataLakeStoreLocation"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

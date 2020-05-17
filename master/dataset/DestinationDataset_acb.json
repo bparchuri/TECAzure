@@ -1,0 +1,19 @@
+{
+	"name": "DestinationDataset_acb",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage4",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "test",
+				"container": "tec-zip"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

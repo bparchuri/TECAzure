@@ -1,0 +1,19 @@
+{
+	"name": "Binary3",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage4",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "004_REC_20200319_00001_04.csv",
+				"container": "tec-unzip"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

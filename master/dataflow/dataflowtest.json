@@ -1,0 +1,73 @@
+{
+	"name": "dataflowtest",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "AzureSqlTable12",
+						"type": "DatasetReference"
+					},
+					"name": "Segment1"
+				},
+				{
+					"dataset": {
+						"referenceName": "AzureSqlTable13",
+						"type": "DatasetReference"
+					},
+					"name": "segment0"
+				},
+				{
+					"dataset": {
+						"referenceName": "AzureSqlTable15",
+						"type": "DatasetReference"
+					},
+					"name": "segment2"
+				},
+				{
+					"dataset": {
+						"referenceName": "AzureSqlTable16",
+						"type": "DatasetReference"
+					},
+					"name": "segment3"
+				},
+				{
+					"dataset": {
+						"referenceName": "AzureSqlTable17",
+						"type": "DatasetReference"
+					},
+					"name": "segment4"
+				},
+				{
+					"dataset": {
+						"referenceName": "AzureSqlTable19",
+						"type": "DatasetReference"
+					},
+					"name": "segment5"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "AzureSqlTable18",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "Join2"
+				},
+				{
+					"name": "Join3"
+				},
+				{
+					"name": "Join4"
+				}
+			],
+			"script": "source(output(\n\t\tCode_segment as string,\n\t\tPoste_segment as string,\n\t\tId_transaction as string,\n\t\tDate_ope as timestamp,\n\t\tType_equipement as string,\n\t\tNum_syst_emetteur as string,\n\t\tCEB as string,\n\t\tNum_serie as string,\n\t\tNum_service as string,\n\t\tCode_user as string,\n\t\tCompagnie_agent as string,\n\t\tType_emplacement as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> Segment1\nsource(output(\n\t\tCode_segment as string,\n\t\tPlateforme as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> segment0\nsource(output(\n\t\tCode_segment as string,\n\t\tPoste_segment as string,\n\t\tId_transaction as string,\n\t\tId_oper_vente as string,\n\t\tType_mvt as string,\n\t\tCateg_produit as string,\n\t\tNum_produit as string,\n\t\tNum_article as string,\n\t\tNum_unicite as string,\n\t\tNum_serie as string,\n\t\tNum_contrat as string,\n\t\tNum_serie_prev as string,\n\t\tDate_Debut as timestamp,\n\t\tDate_Fin as timestamp,\n\t\tId_entreprise as string,\n\t\tMontant_part_tiers as double,\n\t\t{Quantité} as string,\n\t\tTauxTVA_an as string,\n\t\tMontant_global_vente as double,\n\t\tNb_jetons as string,\n\t\tNb_jetons_avant as string,\n\t\tId_convention as string,\n\t\tLibelle_convention as string,\n\t\tNum_mobib as string,\n\t\tCode_article as string,\n\t\tNum_reseau_produit as string,\n\t\tNum_contrat_prev as string,\n\t\tNum_commande as string,\n\t\tNum_elt_commande as string,\n\t\tType_elt_commande as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> segment2\nsource(output(\n\t\tCode_segment as string,\n\t\tPoste_segment as string,\n\t\tId_transaction as string,\n\t\tId_paiement as string,\n\t\tCode_moyen_paiement as string,\n\t\tSens_paiement as string,\n\t\tMontant as double,\n\t\tId_entreprise as string,\n\t\tComm_struct as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> segment3\nsource(output(\n\t\tCode_segment as string,\n\t\tPoste_segment as string,\n\t\tId_transaction as string,\n\t\tId_paiement as string,\n\t\tCode_moyen_paiement as string,\n\t\tSens_paiement as string,\n\t\tMontant as double,\n\t\tHardware_type as string,\n\t\tMode_TPV as string,\n\t\tBrand_id as string,\n\t\tMachine_number as string,\n\t\tPdv_clct_nr as string,\n\t\tPdv_gen_tx_nb as string,\n\t\tTransaction_identifier as string,\n\t\tDateh_tpe as timestamp,\n\t\tAuth_code as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> segment4\nsource(output(\n\t\tCode_segment as string,\n\t\tPoste_segment as string,\n\t\tId_transaction as string,\n\t\tId_paiement as string,\n\t\tTransactionReference as string,\n\t\tTransactionDateTime as string,\n\t\tSens_paiement as string,\n\t\tStatementReference as string,\n\t\tPaymentMeanBrand as string,\n\t\tValueDate as timestamp,\n\t\tAmount as double,\n\t\tAuthorizationId as string,\n\t\tMerchantId as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> segment5\nSegment1, segment2 join(Segment1@Id_transaction == segment2@Id_transaction,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> Join2\nJoin2, segment3 join(Segment1@Id_transaction == segment3@Id_transaction,\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> Join3\nsegment0, Join3 join(segment0@Code_segment == '000',\n\tjoinType:'inner',\n\tbroadcast: 'left')~> Join4\nJoin4 sink(input(\n\t\tCode_segment as string,\n\t\tPoste_segment as string,\n\t\tId_transaction as string,\n\t\tNum_serie as string,\n\t\tId_entreprise as string,\n\t\tId_paiement as string,\n\t\tCode_moyen_paiement as string,\n\t\tSens_paiement as string,\n\t\tMontant as string,\n\t\tType_equipement as integer,\n\t\tDate_ope as timestamp,\n\t\tName as string,\n\t\tGuid as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tmapColumn(\n\t\tCode_segment = {segment0@Code_segment},\n\t\tPoste_segment = {Segment1@Poste_segment},\n\t\tId_transaction = {Segment1@Id_transaction},\n\t\tNum_serie = {Segment1@Num_serie},\n\t\tId_entreprise = {segment2@Id_entreprise},\n\t\tId_paiement,\n\t\tCode_moyen_paiement,\n\t\tSens_paiement,\n\t\tMontant,\n\t\tType_equipement,\n\t\tDate_ope,\n\t\tName = Plateforme,\n\t\tGuid = {segment3@Id_entreprise}\n\t)) ~> sink1"
+		}
+	}
+}

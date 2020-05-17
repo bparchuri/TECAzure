@@ -1,0 +1,16 @@
+{
+	"name": "DynamicsCrmEntity2",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DynamicsCrm1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DynamicsCrmEntity",
+		"schema": [],
+		"typeProperties": {
+			"entityName": "tec_eis779atlas"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

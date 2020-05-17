@@ -1,0 +1,311 @@
+{
+	"name": "DataLaketoSQL",
+	"properties": {
+		"activities": [
+			{
+				"name": "U-SQL to load data in Data Analytics Table",
+				"type": "DataLakeAnalyticsU-SQL",
+				"dependsOn": [
+					{
+						"activity": "CSVtoLakestore",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"scriptPath": "u-sql1/uploaddata",
+					"scriptLinkedService": {
+						"referenceName": "linkedService1",
+						"type": "LinkedServiceReference"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureDataLakeAnalytics1",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "U-SQL to insert data of Top 10 records",
+				"type": "DataLakeAnalyticsU-SQL",
+				"dependsOn": [
+					{
+						"activity": "U-SQL to load data in Data Analytics Table",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"scriptPath": "u-sql to insert data of top 10 records/Unnamed",
+					"scriptLinkedService": {
+						"referenceName": "linkedService1",
+						"type": "LinkedServiceReference"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureDataLakeAnalytics1",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Copy Data to SQL Table",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "U-SQL to insert data of Top 10 records",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureDataLakeStoreReadSettings",
+							"recursive": true
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink"
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"type": "Int32",
+									"ordinal": 1
+								},
+								"sink": {
+									"name": "FaultId"
+								}
+							},
+							{
+								"source": {
+									"ordinal": 2
+								},
+								"sink": {
+									"name": "FaultCustomerNumber"
+								}
+							},
+							{
+								"source": {
+									"ordinal": 3
+								},
+								"sink": {
+									"name": "FaultDesc"
+								}
+							},
+							{
+								"source": {
+									"type": "DateTime",
+									"ordinal": 4
+								},
+								"sink": {
+									"name": "Date"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "SourceDataset_a7r",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DestinationDataset_a7r",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "SFTPToBlob",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "Datatest/004_REC.7z"
+					},
+					{
+						"name": "Destination",
+						"value": "tec-zip//activity('Get Metadata1').output.itemName"
+					}
+				],
+				"typeProperties": {
+					"source": {
+						"type": "BinarySource",
+						"storeSettings": {
+							"type": "AzureDataLakeStoreReadSettings",
+							"recursive": true
+						}
+					},
+					"sink": {
+						"type": "BinarySink",
+						"storeSettings": {
+							"type": "AzureBlobStorageWriteSettings"
+						}
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "Binary7",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "Binary5",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "WebHooktounzipfileinblob",
+				"type": "WebHook",
+				"dependsOn": [
+					{
+						"activity": "SFTPToBlob",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://s9events.azure-automation.net/webhooks?token=%2f6DFHmAlp1IwMj7RMctho5kkedwacMpWbMbrIoorOGo%3d",
+					"method": "POST",
+					"body": {
+						"value": "@json(\nconcat(\n'\n{\n\"connectionName\":\"',variables('varConnectionName'),'\",\"storageAccountKey\":\"',variables('storageAccountKey'),'\",\"fileName\":\"',variables('fileName'),'\"\n,\"zipfolder\":\"',variables('zipfolder'),'\"\n,\"Unzipfolder\":\"',variables('Unzipfolder'),'\"\n}'))",
+						"type": "Expression"
+					},
+					"timeout": "00:10:00",
+					"reportStatusOnCallBack": true
+				}
+			},
+			{
+				"name": "CSVtoLakestore",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "WebHooktounzipfileinblob",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "tec-unzip//"
+					},
+					{
+						"name": "Destination",
+						"value": "Datatest/"
+					}
+				],
+				"typeProperties": {
+					"source": {
+						"type": "BinarySource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"prefix": "Book"
+						}
+					},
+					"sink": {
+						"type": "BinarySink",
+						"storeSettings": {
+							"type": "AzureDataLakeStoreWriteSettings"
+						}
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "Binary8",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "Binary9",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"variables": {
+			"varConnectionName": {
+				"type": "String",
+				"defaultValue": "AzureRunAsConnection"
+			},
+			"storageAccountKey": {
+				"type": "String",
+				"defaultValue": "anN7Z4SYBJARaT6MtMKJe9j/POX0jE4KRt757I1lHGntJvsOBoKp5xuW4+zuTyYgUcTyZjB3Bf+pGVJpEiET2w=="
+			},
+			"fileName": {
+				"type": "String",
+				"defaultValue": "TECValidation.7z"
+			},
+			"zipfolder": {
+				"type": "String",
+				"defaultValue": "tec-zip"
+			},
+			"Unzipfolder": {
+				"type": "String",
+				"defaultValue": "tec-unzip"
+			}
+		},
+		"annotations": []
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

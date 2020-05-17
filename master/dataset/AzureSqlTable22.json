@@ -1,0 +1,36 @@
+{
+	"name": "AzureSqlTable22",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase29",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "FaultId",
+				"type": "varchar"
+			},
+			{
+				"name": "FaultCustomerName",
+				"type": "varchar"
+			},
+			{
+				"name": "FaultDesc",
+				"type": "varchar"
+			},
+			{
+				"name": "Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Validations"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

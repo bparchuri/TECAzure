@@ -1,0 +1,183 @@
+{
+	"name": "Validations_DLS_SQLValidations_SQLPowerAPP",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy Data to SQL Table",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "CSVtoLakestore",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": "SELECT TOP (100000) [FaultId]\n      ,[FaultCustomerName]\n      ,[FaultDesc]\n      ,[Date]\n  FROM [dbo].[Validations]",
+						"queryTimeout": "02:00:00"
+					},
+					"sink": {
+						"type": "AzureSqlSink"
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "FaultId",
+									"type": "String"
+								},
+								"sink": {
+									"name": "FaultId",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "FaultDesc",
+									"type": "String"
+								},
+								"sink": {
+									"name": "FaultDesc",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "FaultCustomerName",
+									"type": "String"
+								},
+								"sink": {
+									"name": "FaultCustomerNumber",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Date",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "Date",
+									"type": "DateTime"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "AzureSqlTable23",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AzureSqlTable24",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "CSVtoLakestore",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureDataLakeStoreReadSettings",
+							"recursive": true
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink"
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "FaultId",
+									"type": "String"
+								},
+								"sink": {
+									"name": "FaultId",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "FaultCustomerName",
+									"type": "String"
+								},
+								"sink": {
+									"name": "FaultCustomerName",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "FaultDesc",
+									"type": "String"
+								},
+								"sink": {
+									"name": "FaultDesc",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Date",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "Date",
+									"type": "DateTime"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "DelimitedText2",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AzureSqlTable22",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": []
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

@@ -1,0 +1,20 @@
+{
+	"name": "Binary4",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage4",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "004_REC.7z",
+				"folderPath": "Validation/Zip",
+				"container": "tec-zip"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

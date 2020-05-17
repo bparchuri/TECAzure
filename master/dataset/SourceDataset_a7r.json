@@ -1,0 +1,23 @@
+{
+	"name": "SourceDataset_a7r",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "linkedService1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureDataLakeStoreLocation",
+				"fileName": "TECData.csv",
+				"folderPath": "Outputs"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": false,
+			"quoteChar": "\""
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

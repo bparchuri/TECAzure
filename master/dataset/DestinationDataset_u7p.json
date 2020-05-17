@@ -1,0 +1,16 @@
+{
+	"name": "DestinationDataset_u7p",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Dynamics POC2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DynamicsEntity",
+		"schema": [],
+		"typeProperties": {
+			"entityName": "contact"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
