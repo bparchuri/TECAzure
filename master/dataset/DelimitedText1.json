@@ -2,7 +2,7 @@
 	"name": "DelimitedText1",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureDataLakeStore2",
+			"referenceName": "linkedService4",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
@@ -11,7 +11,7 @@
 			"location": {
 				"type": "AzureDataLakeStoreLocation",
 				"fileName": "004_REC_20200319_00001_04.csv",
-				"folderPath": "ATLAS"
+				"folderPath": "TECData"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
