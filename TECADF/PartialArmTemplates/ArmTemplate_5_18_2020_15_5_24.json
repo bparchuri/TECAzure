@@ -1,0 +1,37 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "TECADF"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/linkedService4')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureDataLakeStore",
+				"typeProperties": {
+					"dataLakeStoreUri": "https://teclake.azuredatalakestore.net/webhdfs/v1",
+					"servicePrincipalId": "c038161c-8af4-42d6-a627-a13aaf999634",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "**********"
+					},
+					"tenant": "6e5433e0-76fc-44b7-b71b-0e5446a3fa94",
+					"subscriptionId": "34ba1e1c-f8c4-4630-b179-c38b99516873",
+					"resourceGroupName": "TEC"
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}
