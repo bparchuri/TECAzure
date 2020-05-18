@@ -1,0 +1,16 @@
+{
+	"name": "linkedService4",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureDataLakeStore",
+		"typeProperties": {
+			"dataLakeStoreUri": "https://teclake.azuredatalakestore.net/webhdfs/v1",
+			"servicePrincipalId": "c038161c-8af4-42d6-a627-a13aaf999634",
+			"tenant": "6e5433e0-76fc-44b7-b71b-0e5446a3fa94",
+			"subscriptionId": "34ba1e1c-f8c4-4630-b179-c38b99516873",
+			"resourceGroupName": "TEC",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIlRFQ0FERl9kMjBiOGUzNS1kMTdhLTRjMWUtYjU3OC1jNjE1YjAxMjA4ZWEiDQp9"
+		}
+	}
+}
