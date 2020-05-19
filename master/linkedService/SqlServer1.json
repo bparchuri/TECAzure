@@ -5,12 +5,12 @@
 		"annotations": [],
 		"type": "SqlServer",
 		"typeProperties": {
-			"connectionString": "integrated security=True;data source=\" (localdb)\\MSSQLLocalDB\";initial catalog=master",
+			"connectionString": "integrated security=True;data source=localhost\\SQLEXPRESS;initial catalog=TECInt",
 			"userName": "adflux\\bparchuri",
-			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJhNTkwZDY4OC01ZDQ3LTQ1NzEtODY3OS0zOTI2MzUzN2UxYzYiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJjZjRjOTIyNi1kNWVmLTQ4YzItOTYzNC1kMmNhMmMxMTJlZWIiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
 		},
 		"connectVia": {
-			"referenceName": "integrationRuntime5",
+			"referenceName": "integrationRuntime7",
 			"type": "IntegrationRuntimeReference"
 		}
 	}
