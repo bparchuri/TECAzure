@@ -70,7 +70,12 @@
 							"type": "AzureBlobStorageWriteSettings"
 						}
 					},
-					"enableStaging": false
+					"enableStaging": false,
+					"skipErrorFile": {
+						"fileMissing": false,
+						"fileForbidden": false
+					},
+					"validateDataConsistency": false
 				},
 				"inputs": [
 					{
@@ -125,6 +130,9 @@
 						},
 						"wildcardFolderPath": "Datatest",
 						"wildcardFileName": "*.7z"
+					},
+					"formatSettings": {
+						"type": "BinaryReadSettings"
 					}
 				}
 			},
