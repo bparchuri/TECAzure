@@ -1,16 +1,16 @@
 {
-	"name": "Binary5",
+	"name": "UnzipFile",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureBlobStorage4",
+			"referenceName": "ADLS_Poc_Tec",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
 		"type": "Binary",
 		"typeProperties": {
 			"location": {
-				"type": "AzureBlobStorageLocation",
-				"container": "tec-zip"
+				"type": "AzureDataLakeStoreLocation",
+				"folderPath": "PocTecUnzip"
 			}
 		}
 	},

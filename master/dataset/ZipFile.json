@@ -1,8 +1,8 @@
 {
-	"name": "Binary7",
+	"name": "ZipFile",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureDataLakeStore3",
+			"referenceName": "ADLS_Poc_Tec",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
@@ -10,7 +10,8 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureDataLakeStoreLocation",
-				"folderPath": "Datatest"
+				"fileName": "004_REC_20200319_00001_04.7z",
+				"folderPath": "PocTecZip"
 			}
 		}
 	},

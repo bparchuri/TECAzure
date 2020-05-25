@@ -3,11 +3,11 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "WebHook1",
+				"name": "WebHook",
 				"type": "WebHook",
 				"dependsOn": [
 					{
-						"activity": "Set variable1",
+						"activity": "Set variable of unzip foldername",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -15,7 +15,7 @@
 				],
 				"userProperties": [],
 				"typeProperties": {
-					"url": "https://s9events.azure-automation.net/webhooks?token=%2f6DFHmAlp1IwMj7RMctho5kkedwacMpWbMbrIoorOGo%3d",
+					"url": "https://73b5abb6-b245-4036-a400-b70e2ee719cd.webhook.ne.azure-automation.net/webhooks?token=ZwpD11G%2bYIvPMIRvaVwt8dZcV%2bHf1Tq7m2hYT9Owlik%3d",
 					"method": "POST",
 					"body": {
 						"value": "@json(\nconcat(\n'\n{\n\"connectionName\":\"',variables('varConnectionName'),'\",\"storageAccountKey\":\"',variables('storageAccountKey'),'\",\"fileName\":\"',variables('fileName'),'\"\n,\"zipfolder\":\"',variables('zipfolder'),'\"\n,\"Unzipfolder\":\"',variables('Unzipfolder'),'\"\n}'))",
@@ -26,7 +26,7 @@
 				}
 			},
 			{
-				"name": "Copy data1",
+				"name": "Copy Zip file to ADLS",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -51,51 +51,37 @@
 						"type": "BinarySource",
 						"storeSettings": {
 							"type": "AzureDataLakeStoreReadSettings",
-							"recursive": true,
-							"modifiedDatetimeStart": {
-								"value": "@addhours(adddays(utcnow(),-5),-12)",
-								"type": "Expression"
-							},
-							"modifiedDatetimeEnd": {
-								"value": "@adddays(utcnow(),-5)",
-								"type": "Expression"
-							},
-							"wildcardFolderPath": "Datatest",
-							"wildcardFileName": "*.7z"
+							"recursive": false
 						}
 					},
 					"sink": {
 						"type": "BinarySink",
 						"storeSettings": {
-							"type": "AzureBlobStorageWriteSettings"
+							"type": "AzureDataLakeStoreWriteSettings"
 						}
 					},
 					"enableStaging": false,
-					"skipErrorFile": {
-						"fileMissing": false,
-						"fileForbidden": false
-					},
 					"validateDataConsistency": false
 				},
 				"inputs": [
 					{
-						"referenceName": "Binary7",
+						"referenceName": "ZipFile",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "Binary5",
+						"referenceName": "UnzipFile",
 						"type": "DatasetReference"
 					}
 				]
 			},
 			{
-				"name": "Get Metadata1",
+				"name": "Get Metadata of Zip File",
 				"type": "GetMetadata",
 				"dependsOn": [
 					{
-						"activity": "Copy data1",
+						"activity": "Copy Zip file to ADLS",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -111,23 +97,13 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "Binary7",
+						"referenceName": "ZipFile",
 						"type": "DatasetReference"
 					},
-					"fieldList": [
-						"childItems"
-					],
+					"fieldList": [],
 					"storeSettings": {
 						"type": "AzureDataLakeStoreReadSettings",
 						"recursive": true,
-						"modifiedDatetimeStart": {
-							"value": "@addhours(adddays(utcnow(),-5),-12)",
-							"type": "Expression"
-						},
-						"modifiedDatetimeEnd": {
-							"value": "@adddays(utcnow(),-5)",
-							"type": "Expression"
-						},
 						"wildcardFolderPath": "Datatest",
 						"wildcardFileName": "*.7z"
 					},
@@ -137,11 +113,11 @@
 				}
 			},
 			{
-				"name": "Filter2",
+				"name": "Filter 7z files",
 				"type": "Filter",
 				"dependsOn": [
 					{
-						"activity": "Get Metadata1",
+						"activity": "Get Metadata of Zip File",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -150,7 +126,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "@activity('Get Metadata1').output.childItems",
+						"value": "@activity('Get Metadata of Zip File').output.childItems",
 						"type": "Expression"
 					},
 					"condition": {
@@ -160,11 +136,11 @@
 				}
 			},
 			{
-				"name": "Set variable1",
+				"name": "Set variable of zip file name",
 				"type": "SetVariable",
 				"dependsOn": [
 					{
-						"activity": "Filter2",
+						"activity": "Filter 7z files",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -174,7 +150,80 @@
 				"typeProperties": {
 					"variableName": "fileName",
 					"value": {
-						"value": "@string(activity('Filter2').output.value[0].name)",
+						"value": "@string(activity('Filter 7z files').output.value[0].name)",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Set variable of zip folder name",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Set variable of zip file name",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "zipfolder",
+					"value": {
+						"value": "@activity('Get Metadata of Zip File').output.itemName",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Get Metadata of Unzip folder",
+				"type": "GetMetadata",
+				"dependsOn": [
+					{
+						"activity": "Set variable of zip folder name",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "UnzipFile",
+						"type": "DatasetReference"
+					},
+					"fieldList": [],
+					"storeSettings": {
+						"type": "AzureDataLakeStoreReadSettings"
+					},
+					"formatSettings": {
+						"type": "BinaryReadSettings"
+					}
+				}
+			},
+			{
+				"name": "Set variable of unzip foldername",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Get Metadata of Unzip folder",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "Unzipfolder",
+					"value": {
+						"value": "@activity('Get Metadata of Unzip folder').output.itemName",
 						"type": "Expression"
 					}
 				}
@@ -187,7 +236,7 @@
 			},
 			"storageAccountKey": {
 				"type": "String",
-				"defaultValue": "anN7Z4SYBJARaT6MtMKJe9j/POX0jE4KRt757I1lHGntJvsOBoKp5xuW4+zuTyYgUcTyZjB3Bf+pGVJpEiET2w=="
+				"defaultValue": " YDuDqj7C2A+fWSpmuibYXlDAsVRyIXQpgZcCtm23kUEFTsYFMvZbxhUmBHmbgHEeNcCmukz6O1Iji7H6deZPiw=="
 			},
 			"fileName": {
 				"type": "String",
@@ -200,6 +249,10 @@
 			"Unzipfolder": {
 				"type": "String",
 				"defaultValue": "tec-unzip"
+			},
+			"extractfolder": {
+				"type": "String",
+				"defaultValue": "7Zfiles"
 			}
 		},
 		"annotations": []
