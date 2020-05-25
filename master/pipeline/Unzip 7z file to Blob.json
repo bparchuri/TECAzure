@@ -201,7 +201,9 @@
 						"referenceName": "UnzipFile",
 						"type": "DatasetReference"
 					},
-					"fieldList": [],
+					"fieldList": [
+						"itemName"
+					],
 					"storeSettings": {
 						"type": "AzureDataLakeStoreReadSettings",
 						"recursive": true
