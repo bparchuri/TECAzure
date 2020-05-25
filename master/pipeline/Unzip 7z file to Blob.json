@@ -101,7 +101,7 @@
 						"type": "DatasetReference"
 					},
 					"fieldList": [
-						"exists"
+						"itemName"
 					],
 					"storeSettings": {
 						"type": "AzureDataLakeStoreReadSettings",
