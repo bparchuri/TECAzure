@@ -101,7 +101,7 @@
 						"type": "DatasetReference"
 					},
 					"fieldList": [
-						"itemName"
+						"childItems"
 					],
 					"storeSettings": {
 						"type": "AzureDataLakeStoreReadSettings",
