@@ -229,7 +229,8 @@
 						"itemName"
 					],
 					"storeSettings": {
-						"type": "AzureDataLakeStoreReadSettings"
+						"type": "AzureDataLakeStoreReadSettings",
+						"recursive": true
 					},
 					"formatSettings": {
 						"type": "BinaryReadSettings"
@@ -261,6 +262,10 @@
 			"extractfolder": {
 				"type": "String",
 				"defaultValue": "7Zfiles"
+			},
+			"dataLakeStorageGen1Name": {
+				"type": "String",
+				"defaultValue": "dlspoctec"
 			}
 		},
 		"annotations": []
