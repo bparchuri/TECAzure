@@ -79,13 +79,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "AzureSqlTable23",
+						"referenceName": "SQLTEC",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "AzureSqlTable24",
+						"referenceName": "SQLValidations",
 						"type": "DatasetReference"
 					}
 				]
