@@ -1,8 +1,8 @@
 {
-	"name": "AzureSqlTable26",
+	"name": "SQLSegment0",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureSqlDatabase33",
+			"referenceName": "SQLPocTec",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
