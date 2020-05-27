@@ -7,7 +7,10 @@
 		},
 		"annotations": [],
 		"type": "DynamicsCrmEntity",
-		"schema": []
+		"schema": [],
+		"typeProperties": {
+			"entityName": "tec_eis779atlas"
+		}
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"
 }
