@@ -296,7 +296,142 @@
 						"disableMetricsCollection": false
 					},
 					"enableStaging": false,
-					"parallelCopies": 50
+					"parallelCopies": 50,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Code_segment",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Code_segment",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Poste_segment",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Poste_segment",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Id_transaction",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Id_transaction",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Num_serie",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Num_serie",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Id_entreprise",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Id_entreprise",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Id_paiement",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Id_paiement",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Code_moyen_paiement",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Code_moyen_paiement",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Sens_paiement",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Sens_paiement",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Montant",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "Montant",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "Type_Eqiupment",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Type_equipement",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Date_ope",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "Date_ope",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "Plateforme",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Name",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Unique_Id",
+									"type": "Guid"
+								},
+								"sink": {
+									"name": "Guid",
+									"type": "Guid"
+								}
+							}
+						]
+					}
 				},
 				"inputs": [
 					{
