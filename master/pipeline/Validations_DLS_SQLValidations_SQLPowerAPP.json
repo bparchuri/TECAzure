@@ -37,7 +37,7 @@
 							{
 								"source": {
 									"name": "FaultId",
-									"type": "String"
+									"type": "Int32"
 								},
 								"sink": {
 									"name": "FaultId",
@@ -56,7 +56,7 @@
 							},
 							{
 								"source": {
-									"name": "FaultCustomerName",
+									"name": "FaultCustomerNumber",
 									"type": "String"
 								},
 								"sink": {
