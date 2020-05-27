@@ -1,17 +1,18 @@
 {
-	"name": "DelimitedText1",
+	"name": "ADLSCSV",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "linkedService4",
+			"referenceName": "ADLSGen2",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
-				"type": "AzureDataLakeStoreLocation",
+				"type": "AzureBlobFSLocation",
 				"fileName": "004_REC_20200319_00001_04.csv",
-				"folderPath": "TECData"
+				"folderPath": "7Zfiles",
+				"fileSystem": "poc-tec"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
