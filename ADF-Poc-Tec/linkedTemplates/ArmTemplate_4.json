@@ -366,11 +366,11 @@
 					},
 					"zipfolder": {
 						"type": "String",
-						"defaultValue": "tec-zip"
+						"defaultValue": "PocTecZip"
 					},
 					"Unzipfolder": {
 						"type": "String",
-						"defaultValue": "tec-unzip"
+						"defaultValue": "PocTecUnzip"
 					},
 					"extractfolder": {
 						"type": "String",
