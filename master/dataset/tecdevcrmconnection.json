@@ -1,16 +1,13 @@
 {
-	"name": "DynamicsCrmEntity2",
+	"name": "tecdevcrmconnection",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "DynamicsCrm1",
+			"referenceName": "TecDevCRM",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
 		"type": "DynamicsCrmEntity",
-		"schema": [],
-		"typeProperties": {
-			"entityName": "tec_eis779atlas"
-		}
+		"schema": []
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"
 }
