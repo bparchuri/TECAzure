@@ -48,15 +48,16 @@
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "ADLS_Poc_Tec",
+					"referenceName": "ADLSGen2",
 					"type": "LinkedServiceReference"
 				},
 				"annotations": [],
 				"type": "Binary",
 				"typeProperties": {
 					"location": {
-						"type": "AzureDataLakeStoreLocation",
-						"folderPath": "PocTecUnzip"
+						"type": "AzureBlobFSLocation",
+						"folderPath": "PocTecUnzip",
+						"fileSystem": "poc-tec"
 					}
 				}
 			},
@@ -68,15 +69,16 @@
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "ADLS_Poc_Tec",
+					"referenceName": "ADLSGen2",
 					"type": "LinkedServiceReference"
 				},
 				"annotations": [],
 				"type": "Binary",
 				"typeProperties": {
 					"location": {
-						"type": "AzureDataLakeStoreLocation",
-						"folderPath": "PocTecZip"
+						"type": "AzureBlobFSLocation",
+						"folderPath": "PocTecZip",
+						"fileSystem": "poc-tec"
 					}
 				}
 			},
@@ -162,17 +164,20 @@
 							"source": {
 								"type": "BinarySource",
 								"storeSettings": {
-									"type": "AzureDataLakeStoreReadSettings",
-									"recursive": false
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true
 								}
 							},
 							"sink": {
 								"type": "BinarySink",
 								"storeSettings": {
-									"type": "AzureDataLakeStoreWriteSettings"
+									"type": "AzureBlobFSWriteSettings"
 								}
 							},
 							"enableStaging": false,
+							"skipErrorFile": {
+								"fileMissing": true
+							},
 							"validateDataConsistency": false
 						},
 						"inputs": [
@@ -219,10 +224,7 @@
 								"itemName"
 							],
 							"storeSettings": {
-								"type": "AzureDataLakeStoreReadSettings",
-								"recursive": true,
-								"wildcardFolderPath": "Datatest",
-								"wildcardFileName": "*.7z"
+								"type": "AzureBlobFSReadSettings"
 							},
 							"formatSettings": {
 								"type": "BinaryReadSettings"

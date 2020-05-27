@@ -1,0 +1,336 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "ADF-Poc-Tec"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/Unzip 7z file to Blob')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "WebHook",
+						"type": "WebHook",
+						"dependsOn": [
+							{
+								"activity": "Set variable of unzip foldername",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "https://73b5abb6-b245-4036-a400-b70e2ee719cd.webhook.ne.azure-automation.net/webhooks?token=8LyOr5IWcaX0XlNXtAVn4%2bBho02rNT9g5unFl2cEnR4%3d",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"body": {
+								"value": "@json(\nconcat(\n'\n{\n\"connectionName\":\"',variables('varConnectionName'),'\",\"storageAccountKey\":\"',variables('storageAccountKey'),'\",\"fileName\":\"',variables('fileName'),'\"\n,\"zipfolder\":\"',variables('zipfolder'),'\"\n,\"Unzipfolder\":\"',variables('Unzipfolder'),'\"\n,\"extractfolder\":\"',variables('extractfolder'),'\"\n,\"dataLakeStorageGen1Name\":\"',variables('dataLakeStorageGen1Name'),'\"\n}'))",
+								"type": "Expression"
+							},
+							"timeout": "00:10:00",
+							"reportStatusOnCallBack": true
+						}
+					},
+					{
+						"name": "Copy Zip file to ADLS",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [
+							{
+								"name": "Source",
+								"value": "Datatest/"
+							},
+							{
+								"name": "Destination",
+								"value": "tec-zip//"
+							}
+						],
+						"typeProperties": {
+							"source": {
+								"type": "BinarySource",
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true
+								}
+							},
+							"sink": {
+								"type": "BinarySink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								}
+							},
+							"enableStaging": false,
+							"skipErrorFile": {
+								"fileMissing": true
+							},
+							"validateDataConsistency": false
+						},
+						"inputs": [
+							{
+								"referenceName": "ZipFile",
+								"type": "DatasetReference"
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "UnzipFile",
+								"type": "DatasetReference"
+							}
+						]
+					},
+					{
+						"name": "Get Metadata of Zip File",
+						"type": "GetMetadata",
+						"dependsOn": [
+							{
+								"activity": "Copy Zip file to ADLS",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "ZipFile",
+								"type": "DatasetReference"
+							},
+							"fieldList": [
+								"itemName"
+							],
+							"storeSettings": {
+								"type": "AzureBlobFSReadSettings"
+							},
+							"formatSettings": {
+								"type": "BinaryReadSettings"
+							}
+						}
+					},
+					{
+						"name": "Filter 7z files",
+						"type": "Filter",
+						"dependsOn": [
+							{
+								"activity": "Get Metadata of Unzip File",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@activity('Get Metadata of Zip File').output.childItems",
+								"type": "Expression"
+							},
+							"condition": {
+								"value": "@endswith(item().name,'.7z')",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "Set variable of zip file name",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "Filter 7z files",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "fileName",
+							"value": {
+								"value": "@string(activity('Filter 7z files').output.value[0].name)",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "Set variable of zip folder name",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "Set variable of zip file name",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "zipfolder",
+							"value": {
+								"value": "@activity('Get Metadata of Zip File').output.itemName",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "Set variable of unzip foldername",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "Set variable of zip folder name",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "Unzipfolder",
+							"value": {
+								"value": "@activity('Get Metadata of Unzip File').output.itemName",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "Get Metadata of Unzip File",
+						"type": "GetMetadata",
+						"dependsOn": [
+							{
+								"activity": "Get Metadata of Zip File",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "UnzipFile",
+								"type": "DatasetReference"
+							},
+							"fieldList": [
+								"itemName"
+							],
+							"storeSettings": {
+								"type": "AzureDataLakeStoreReadSettings",
+								"recursive": true
+							},
+							"formatSettings": {
+								"type": "BinaryReadSettings"
+							}
+						}
+					}
+				],
+				"variables": {
+					"varConnectionName": {
+						"type": "String",
+						"defaultValue": "AzureRunAsConnection"
+					},
+					"storageAccountKey": {
+						"type": "String",
+						"defaultValue": " YDuDqj7C2A+fWSpmuibYXlDAsVRyIXQpgZcCtm23kUEFTsYFMvZbxhUmBHmbgHEeNcCmukz6O1Iji7H6deZPiw=="
+					},
+					"fileName": {
+						"type": "String",
+						"defaultValue": "TECValidation.7z"
+					},
+					"zipfolder": {
+						"type": "String",
+						"defaultValue": "PocTecZip"
+					},
+					"Unzipfolder": {
+						"type": "String",
+						"defaultValue": "PocTecUnzip"
+					},
+					"extractfolder": {
+						"type": "String",
+						"defaultValue": "7Zfiles"
+					},
+					"dataLakeStorageGen1Name": {
+						"type": "String",
+						"defaultValue": "dlspoctec"
+					}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/ZipFile')]",
+				"[concat(variables('factoryId'), '/datasets/UnzipFile')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/UnzipFile')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ADLSGen2",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": "PocTecUnzip",
+						"fileSystem": "poc-tec"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ZipFile')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ADLSGen2",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": "PocTecZip",
+						"fileSystem": "poc-tec"
+					}
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}
