@@ -1,0 +1,693 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "ADF-Poc-Tec"
+		},
+		"ADLS_Poc_Tec_servicePrincipalKey": {
+			"value": ""
+		},
+		"AzureBlobStorage2_connectionString": {
+			"value": ""
+		},
+		"AzureBlobStorage3_connectionString": {
+			"value": ""
+		},
+		"AzureBlobStorage4_connectionString": {
+			"value": ""
+		},
+		"AzureDataLakeAnalytics1_servicePrincipalKey": {
+			"value": ""
+		},
+		"AzureDataLakeStore1_servicePrincipalKey": {
+			"value": ""
+		},
+		"AzureDataLakeStore2_servicePrincipalKey": {
+			"value": ""
+		},
+		"AzureDataLakeStore3_servicePrincipalKey": {
+			"value": ""
+		},
+		"AzureDataLakeStore4_servicePrincipalKey": {
+			"value": ""
+		},
+		"AzureDataLakeStore5_servicePrincipalKey": {
+			"value": ""
+		},
+		"AzureSqlDatabase10_connectionString": {
+			"value": ""
+		},
+		"AzureSqlDatabase10_servicePrincipalKey": {
+			"value": ""
+		},
+		"AzureSqlDatabase11_connectionString": {
+			"value": ""
+		},
+		"AzureSqlDatabase11_servicePrincipalKey": {
+			"value": ""
+		},
+		"AzureSqlDatabase12_connectionString": {
+			"value": ""
+		},
+		"AzureSqlDatabase12_servicePrincipalKey": {
+			"value": ""
+		},
+		"AzureSqlDatabase13_connectionString": {
+			"value": ""
+		},
+		"AzureSqlDatabase13_servicePrincipalKey": {
+			"value": ""
+		},
+		"AzureSqlDatabase14_connectionString": {
+			"value": ""
+		},
+		"AzureSqlDatabase14_servicePrincipalKey": {
+			"value": ""
+		},
+		"AzureSqlDatabase15_connectionString": {
+			"value": ""
+		},
+		"AzureSqlDatabase15_servicePrincipalKey": {
+			"value": ""
+		},
+		"AzureSqlDatabase16_connectionString": {
+			"value": ""
+		},
+		"AzureSqlDatabase16_servicePrincipalKey": {
+			"value": ""
+		},
+		"AzureSqlDatabase17_connectionString": {
+			"value": ""
+		},
+		"AzureSqlDatabase17_servicePrincipalKey": {
+			"value": ""
+		},
+		"AzureSqlDatabase18_connectionString": {
+			"value": ""
+		},
+		"AzureSqlDatabase18_servicePrincipalKey": {
+			"value": ""
+		},
+		"AzureSqlDatabase19_connectionString": {
+			"value": ""
+		},
+		"AzureSqlDatabase19_servicePrincipalKey": {
+			"value": ""
+		},
+		"AzureSqlDatabase2_connectionString": {
+			"value": ""
+		},
+		"AzureSqlDatabase2_servicePrincipalKey": {
+			"value": ""
+		},
+		"AzureSqlDatabase20_connectionString": {
+			"value": ""
+		},
+		"AzureSqlDatabase20_servicePrincipalKey": {
+			"value": ""
+		},
+		"AzureSqlDatabase21_connectionString": {
+			"value": ""
+		},
+		"AzureSqlDatabase21_servicePrincipalKey": {
+			"value": ""
+		},
+		"AzureSqlDatabase22_connectionString": {
+			"value": ""
+		},
+		"AzureSqlDatabase22_servicePrincipalKey": {
+			"value": ""
+		},
+		"AzureSqlDatabase23_connectionString": {
+			"value": ""
+		},
+		"AzureSqlDatabase23_servicePrincipalKey": {
+			"value": ""
+		},
+		"AzureSqlDatabase24_connectionString": {
+			"value": ""
+		},
+		"AzureSqlDatabase24_servicePrincipalKey": {
+			"value": ""
+		},
+		"AzureSqlDatabase25_connectionString": {
+			"value": ""
+		},
+		"AzureSqlDatabase25_servicePrincipalKey": {
+			"value": ""
+		},
+		"AzureSqlDatabase26_connectionString": {
+			"value": ""
+		},
+		"AzureSqlDatabase26_servicePrincipalKey": {
+			"value": ""
+		},
+		"AzureSqlDatabase27_connectionString": {
+			"value": ""
+		},
+		"AzureSqlDatabase27_servicePrincipalKey": {
+			"value": ""
+		},
+		"AzureSqlDatabase28_connectionString": {
+			"value": ""
+		},
+		"AzureSqlDatabase28_servicePrincipalKey": {
+			"value": ""
+		},
+		"AzureSqlDatabase29_connectionString": {
+			"value": ""
+		},
+		"AzureSqlDatabase29_servicePrincipalKey": {
+			"value": ""
+		},
+		"AzureSqlDatabase3_connectionString": {
+			"value": ""
+		},
+		"AzureSqlDatabase3_servicePrincipalKey": {
+			"value": ""
+		},
+		"AzureSqlDatabase30_connectionString": {
+			"value": ""
+		},
+		"AzureSqlDatabase30_servicePrincipalKey": {
+			"value": ""
+		},
+		"AzureSqlDatabase31_connectionString": {
+			"value": ""
+		},
+		"AzureSqlDatabase31_servicePrincipalKey": {
+			"value": ""
+		},
+		"AzureSqlDatabase32_connectionString": {
+			"value": ""
+		},
+		"AzureSqlDatabase32_servicePrincipalKey": {
+			"value": ""
+		},
+		"AzureSqlDatabase33_connectionString": {
+			"value": ""
+		},
+		"AzureSqlDatabase33_servicePrincipalKey": {
+			"value": ""
+		},
+		"AzureSqlDatabase34_connectionString": {
+			"value": ""
+		},
+		"AzureSqlDatabase34_servicePrincipalKey": {
+			"value": ""
+		},
+		"AzureSqlDatabase35_connectionString": {
+			"value": ""
+		},
+		"AzureSqlDatabase35_servicePrincipalKey": {
+			"value": ""
+		},
+		"AzureSqlDatabase36_connectionString": {
+			"value": ""
+		},
+		"AzureSqlDatabase36_servicePrincipalKey": {
+			"value": ""
+		},
+		"AzureSqlDatabase37_connectionString": {
+			"value": ""
+		},
+		"AzureSqlDatabase37_servicePrincipalKey": {
+			"value": ""
+		},
+		"AzureSqlDatabase38_connectionString": {
+			"value": ""
+		},
+		"AzureSqlDatabase38_servicePrincipalKey": {
+			"value": ""
+		},
+		"AzureSqlDatabase5_connectionString": {
+			"value": ""
+		},
+		"AzureSqlDatabase5_servicePrincipalKey": {
+			"value": ""
+		},
+		"AzureSqlDatabase6_connectionString": {
+			"value": ""
+		},
+		"AzureSqlDatabase6_servicePrincipalKey": {
+			"value": ""
+		},
+		"AzureSqlDatabase7_connectionString": {
+			"value": ""
+		},
+		"AzureSqlDatabase7_servicePrincipalKey": {
+			"value": ""
+		},
+		"AzureSqlDatabase8_connectionString": {
+			"value": ""
+		},
+		"AzureSqlDatabase8_servicePrincipalKey": {
+			"value": ""
+		},
+		"AzureSqlDatabase9_connectionString": {
+			"value": ""
+		},
+		"AzureSqlDatabase9_servicePrincipalKey": {
+			"value": ""
+		},
+		"Dynamics POC2_password": {
+			"value": ""
+		},
+		"DynamicsCrm1_password": {
+			"value": ""
+		},
+		"Sftp1_password": {
+			"value": ""
+		},
+		"Sftp2_password": {
+			"value": ""
+		},
+		"SqlServer1_connectionString": {
+			"value": ""
+		},
+		"SqlServer1_password": {
+			"value": ""
+		},
+		"linkedService1_servicePrincipalKey": {
+			"value": ""
+		},
+		"linkedService3_connectionString": {
+			"value": ""
+		},
+		"linkedService3_servicePrincipalKey": {
+			"value": ""
+		},
+		"linkedService4_servicePrincipalKey": {
+			"value": ""
+		},
+		"ADLSGen2_servicePrincipalKey": {
+			"value": ""
+		},
+		"SQLPocTec_connectionString": {
+			"value": ""
+		},
+		"SQLPocTec_servicePrincipalKey": {
+			"value": ""
+		},
+		"TecDevCRM_password": {
+			"value": ""
+		},
+		"ADLS_Poc_Tec_properties_typeProperties_dataLakeStoreUri": {
+			"value": "https://dlspoctec.azuredatalakestore.net/webhdfs/v1"
+		},
+		"ADLS_Poc_Tec_properties_typeProperties_servicePrincipalId": {
+			"value": "b4537ba3-1639-42cb-9143-8bfbcb683e79"
+		},
+		"ADLS_Poc_Tec_properties_typeProperties_tenant": {
+			"value": "6e5433e0-76fc-44b7-b71b-0e5446a3fa94"
+		},
+		"ADLS_Poc_Tec_properties_typeProperties_subscriptionId": {
+			"value": "17bfcc0a-bd44-4775-9fae-38640875d0f6"
+		},
+		"ADLS_Poc_Tec_properties_typeProperties_resourceGroupName": {
+			"value": "rs-poctec"
+		},
+		"AzureDataLakeAnalytics1_properties_typeProperties_accountName": {
+			"value": "tecanalytics"
+		},
+		"AzureDataLakeAnalytics1_properties_typeProperties_servicePrincipalId": {
+			"value": "af815f86-c897-49ea-9d16-d7448dfe5007"
+		},
+		"AzureDataLakeAnalytics1_properties_typeProperties_tenant": {
+			"value": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureDataLakeAnalytics1_properties_typeProperties_subscriptionId": {
+			"value": "fc5231d7-a1db-4a65-99a6-f6fbdb8c40fa"
+		},
+		"AzureDataLakeAnalytics1_properties_typeProperties_resourceGroupName": {
+			"value": "DataLake"
+		},
+		"AzureDataLakeStore1_properties_typeProperties_dataLakeStoreUri": {
+			"value": "https://tecdatalakestore.azuredatalakestore.net/webhdfs/v1"
+		},
+		"AzureDataLakeStore1_properties_typeProperties_servicePrincipalId": {
+			"value": "af815f86-c897-49ea-9d16-d7448dfe5007"
+		},
+		"AzureDataLakeStore1_properties_typeProperties_tenant": {
+			"value": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureDataLakeStore1_properties_typeProperties_subscriptionId": {
+			"value": "fc5231d7-a1db-4a65-99a6-f6fbdb8c40fa"
+		},
+		"AzureDataLakeStore1_properties_typeProperties_resourceGroupName": {
+			"value": "DataLake"
+		},
+		"AzureDataLakeStore2_properties_typeProperties_dataLakeStoreUri": {
+			"value": "https://tecdatalakestore.azuredatalakestore.net/webhdfs/v1"
+		},
+		"AzureDataLakeStore2_properties_typeProperties_servicePrincipalId": {
+			"value": "af815f86-c897-49ea-9d16-d7448dfe5007"
+		},
+		"AzureDataLakeStore2_properties_typeProperties_tenant": {
+			"value": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureDataLakeStore2_properties_typeProperties_subscriptionId": {
+			"value": "fc5231d7-a1db-4a65-99a6-f6fbdb8c40fa"
+		},
+		"AzureDataLakeStore2_properties_typeProperties_resourceGroupName": {
+			"value": "DataLake"
+		},
+		"AzureDataLakeStore3_properties_typeProperties_dataLakeStoreUri": {
+			"value": "https://tecdatalakestore.azuredatalakestore.net/webhdfs/v1"
+		},
+		"AzureDataLakeStore3_properties_typeProperties_servicePrincipalId": {
+			"value": "af815f86-c897-49ea-9d16-d7448dfe5007"
+		},
+		"AzureDataLakeStore3_properties_typeProperties_tenant": {
+			"value": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureDataLakeStore3_properties_typeProperties_subscriptionId": {
+			"value": "fc5231d7-a1db-4a65-99a6-f6fbdb8c40fa"
+		},
+		"AzureDataLakeStore3_properties_typeProperties_resourceGroupName": {
+			"value": "DataLake"
+		},
+		"AzureDataLakeStore4_properties_typeProperties_dataLakeStoreUri": {
+			"value": "https://tecdatalakestore.azuredatalakestore.net/webhdfs/v1"
+		},
+		"AzureDataLakeStore4_properties_typeProperties_servicePrincipalId": {
+			"value": "af815f86-c897-49ea-9d16-d7448dfe5007"
+		},
+		"AzureDataLakeStore4_properties_typeProperties_tenant": {
+			"value": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureDataLakeStore4_properties_typeProperties_subscriptionId": {
+			"value": "fc5231d7-a1db-4a65-99a6-f6fbdb8c40fa"
+		},
+		"AzureDataLakeStore4_properties_typeProperties_resourceGroupName": {
+			"value": "DataLake"
+		},
+		"AzureDataLakeStore5_properties_typeProperties_dataLakeStoreUri": {
+			"value": "https://tecdatalakestore.azuredatalakestore.net/webhdfs/v1"
+		},
+		"AzureDataLakeStore5_properties_typeProperties_servicePrincipalId": {
+			"value": "af815f86-c897-49ea-9d16-d7448dfe5007"
+		},
+		"AzureDataLakeStore5_properties_typeProperties_tenant": {
+			"value": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureDataLakeStore5_properties_typeProperties_subscriptionId": {
+			"value": "fc5231d7-a1db-4a65-99a6-f6fbdb8c40fa"
+		},
+		"AzureDataLakeStore5_properties_typeProperties_resourceGroupName": {
+			"value": "DataLake"
+		},
+		"AzureSqlDatabase10_properties_typeProperties_servicePrincipalId": {
+			"value": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase10_properties_typeProperties_tenant": {
+			"value": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase11_properties_typeProperties_servicePrincipalId": {
+			"value": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase11_properties_typeProperties_tenant": {
+			"value": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase12_properties_typeProperties_servicePrincipalId": {
+			"value": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase12_properties_typeProperties_tenant": {
+			"value": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase13_properties_typeProperties_servicePrincipalId": {
+			"value": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase13_properties_typeProperties_tenant": {
+			"value": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase14_properties_typeProperties_servicePrincipalId": {
+			"value": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase14_properties_typeProperties_tenant": {
+			"value": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase15_properties_typeProperties_servicePrincipalId": {
+			"value": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase15_properties_typeProperties_tenant": {
+			"value": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase16_properties_typeProperties_servicePrincipalId": {
+			"value": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase16_properties_typeProperties_tenant": {
+			"value": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase17_properties_typeProperties_servicePrincipalId": {
+			"value": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase17_properties_typeProperties_tenant": {
+			"value": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase18_properties_typeProperties_servicePrincipalId": {
+			"value": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase18_properties_typeProperties_tenant": {
+			"value": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase19_properties_typeProperties_servicePrincipalId": {
+			"value": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase19_properties_typeProperties_tenant": {
+			"value": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase2_properties_typeProperties_servicePrincipalId": {
+			"value": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase2_properties_typeProperties_tenant": {
+			"value": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase20_properties_typeProperties_servicePrincipalId": {
+			"value": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase20_properties_typeProperties_tenant": {
+			"value": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase21_properties_typeProperties_servicePrincipalId": {
+			"value": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase21_properties_typeProperties_tenant": {
+			"value": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase22_properties_typeProperties_servicePrincipalId": {
+			"value": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase22_properties_typeProperties_tenant": {
+			"value": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase23_properties_typeProperties_servicePrincipalId": {
+			"value": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase23_properties_typeProperties_tenant": {
+			"value": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase24_properties_typeProperties_servicePrincipalId": {
+			"value": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase24_properties_typeProperties_tenant": {
+			"value": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase25_properties_typeProperties_servicePrincipalId": {
+			"value": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase25_properties_typeProperties_tenant": {
+			"value": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase26_properties_typeProperties_servicePrincipalId": {
+			"value": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase26_properties_typeProperties_tenant": {
+			"value": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase27_properties_typeProperties_servicePrincipalId": {
+			"value": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase27_properties_typeProperties_tenant": {
+			"value": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase28_properties_typeProperties_servicePrincipalId": {
+			"value": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase28_properties_typeProperties_tenant": {
+			"value": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase29_properties_typeProperties_servicePrincipalId": {
+			"value": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase29_properties_typeProperties_tenant": {
+			"value": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase3_properties_typeProperties_servicePrincipalId": {
+			"value": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase3_properties_typeProperties_tenant": {
+			"value": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase30_properties_typeProperties_servicePrincipalId": {
+			"value": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase30_properties_typeProperties_tenant": {
+			"value": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase31_properties_typeProperties_servicePrincipalId": {
+			"value": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase31_properties_typeProperties_tenant": {
+			"value": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase32_properties_typeProperties_servicePrincipalId": {
+			"value": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase32_properties_typeProperties_tenant": {
+			"value": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase33_properties_typeProperties_servicePrincipalId": {
+			"value": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase33_properties_typeProperties_tenant": {
+			"value": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase34_properties_typeProperties_servicePrincipalId": {
+			"value": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase34_properties_typeProperties_tenant": {
+			"value": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase35_properties_typeProperties_servicePrincipalId": {
+			"value": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase35_properties_typeProperties_tenant": {
+			"value": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase36_properties_typeProperties_servicePrincipalId": {
+			"value": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase36_properties_typeProperties_tenant": {
+			"value": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase37_properties_typeProperties_servicePrincipalId": {
+			"value": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase37_properties_typeProperties_tenant": {
+			"value": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase38_properties_typeProperties_servicePrincipalId": {
+			"value": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase38_properties_typeProperties_tenant": {
+			"value": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase5_properties_typeProperties_servicePrincipalId": {
+			"value": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase5_properties_typeProperties_tenant": {
+			"value": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase6_properties_typeProperties_servicePrincipalId": {
+			"value": "af815f86-c897-49ea-9d16-d7448dfe5007"
+		},
+		"AzureSqlDatabase6_properties_typeProperties_tenant": {
+			"value": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase7_properties_typeProperties_servicePrincipalId": {
+			"value": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase7_properties_typeProperties_tenant": {
+			"value": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase8_properties_typeProperties_servicePrincipalId": {
+			"value": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase8_properties_typeProperties_tenant": {
+			"value": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase9_properties_typeProperties_servicePrincipalId": {
+			"value": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase9_properties_typeProperties_tenant": {
+			"value": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"Dynamics POC2_properties_typeProperties_username": {
+			"value": "dev01@labx.bdbelux.be"
+		},
+		"DynamicsCrm1_properties_typeProperties_username": {
+			"value": "Bhargav.Parchuri@letec.be"
+		},
+		"Sftp1_properties_typeProperties_host": {
+			"value": "test.rebex.net"
+		},
+		"Sftp1_properties_typeProperties_userName": {
+			"value": "demo"
+		},
+		"Sftp2_properties_typeProperties_host": {
+			"value": "test.rebex.net"
+		},
+		"Sftp2_properties_typeProperties_userName": {
+			"value": "demo"
+		},
+		"SqlServer1_properties_typeProperties_userName": {
+			"value": "adflux\\bparchuri"
+		},
+		"linkedService1_properties_typeProperties_dataLakeStoreUri": {
+			"value": "https://tecdatalakestore.azuredatalakestore.net/webhdfs/v1"
+		},
+		"linkedService1_properties_typeProperties_servicePrincipalId": {
+			"value": "af815f86-c897-49ea-9d16-d7448dfe5007"
+		},
+		"linkedService1_properties_typeProperties_tenant": {
+			"value": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"linkedService1_properties_typeProperties_subscriptionId": {
+			"value": "fc5231d7-a1db-4a65-99a6-f6fbdb8c40fa"
+		},
+		"linkedService1_properties_typeProperties_resourceGroupName": {
+			"value": "DataLake"
+		},
+		"linkedService3_properties_typeProperties_servicePrincipalId": {
+			"value": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"linkedService3_properties_typeProperties_tenant": {
+			"value": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"linkedService4_properties_typeProperties_dataLakeStoreUri": {
+			"value": "https://teclake.azuredatalakestore.net/webhdfs/v1"
+		},
+		"linkedService4_properties_typeProperties_servicePrincipalId": {
+			"value": "c038161c-8af4-42d6-a627-a13aaf999634"
+		},
+		"linkedService4_properties_typeProperties_tenant": {
+			"value": "6e5433e0-76fc-44b7-b71b-0e5446a3fa94"
+		},
+		"linkedService4_properties_typeProperties_subscriptionId": {
+			"value": "34ba1e1c-f8c4-4630-b179-c38b99516873"
+		},
+		"linkedService4_properties_typeProperties_resourceGroupName": {
+			"value": "TEC"
+		},
+		"ADLSGen2_properties_typeProperties_url": {
+			"value": "https://sapoctec.dfs.core.windows.net"
+		},
+		"ADLSGen2_properties_typeProperties_tenant": {
+			"value": "6e5433e0-76fc-44b7-b71b-0e5446a3fa94"
+		},
+		"ADLSGen2_properties_typeProperties_servicePrincipalId": {
+			"value": "b4537ba3-1639-42cb-9143-8bfbcb683e79"
+		},
+		"SQLPocTec_properties_typeProperties_servicePrincipalId": {
+			"value": "b4537ba3-1639-42cb-9143-8bfbcb683e79"
+		},
+		"SQLPocTec_properties_typeProperties_tenant": {
+			"value": "6e5433e0-76fc-44b7-b71b-0e5446a3fa94"
+		},
+		"TecDevCRM_properties_typeProperties_username": {
+			"value": "Bhargav.Parchuri@letec.be"
+		}
+	}
+}

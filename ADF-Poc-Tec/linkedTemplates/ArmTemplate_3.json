@@ -1,0 +1,1155 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "ADF-Poc-Tec"
+		},
+		"ADLSGen2_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'ADLSGen2'"
+		},
+		"SQLPocTec_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SQLPocTec'"
+		},
+		"SQLPocTec_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'SQLPocTec'"
+		},
+		"TecDevCRM_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'TecDevCRM'"
+		},
+		"ADLSGen2_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://sapoctec.dfs.core.windows.net"
+		},
+		"ADLSGen2_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "6e5433e0-76fc-44b7-b71b-0e5446a3fa94"
+		},
+		"ADLSGen2_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "b4537ba3-1639-42cb-9143-8bfbcb683e79"
+		},
+		"SQLPocTec_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "b4537ba3-1639-42cb-9143-8bfbcb683e79"
+		},
+		"SQLPocTec_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "6e5433e0-76fc-44b7-b71b-0e5446a3fa94"
+		},
+		"TecDevCRM_properties_typeProperties_username": {
+			"type": "string",
+			"defaultValue": "Bhargav.Parchuri@letec.be"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/ADLSGen2')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('ADLSGen2_properties_typeProperties_url')]",
+					"tenant": "[parameters('ADLSGen2_properties_typeProperties_tenant')]",
+					"servicePrincipalId": "[parameters('ADLSGen2_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('ADLSGen2_servicePrincipalKey')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SQLPocTec')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('SQLPocTec_connectionString')]",
+					"servicePrincipalId": "[parameters('SQLPocTec_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('SQLPocTec_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('SQLPocTec_properties_typeProperties_tenant')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/TecDevCRM')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "DynamicsCrm",
+				"typeProperties": {
+					"deploymentType": "Online",
+					"serviceUri": "https://tec-crm-dev.crm4.dynamics.com",
+					"authenticationType": "Office365",
+					"username": "[parameters('TecDevCRM_properties_typeProperties_username')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('TecDevCRM_password')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SQLEIS779')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SQLPocTec",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Code_segment",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EIS779"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SQLPocTec')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTable10')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase15",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Code_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Poste_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_transaction",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_paiement",
+						"type": "nchar"
+					},
+					{
+						"name": "Code_moyen_paiement",
+						"type": "nchar"
+					},
+					{
+						"name": "Sens_paiement",
+						"type": "varchar"
+					},
+					{
+						"name": "Montant",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Hardware_type",
+						"type": "nchar"
+					},
+					{
+						"name": "Mode_TPV",
+						"type": "nchar"
+					},
+					{
+						"name": "Brand_id",
+						"type": "varchar"
+					},
+					{
+						"name": "Machine_number",
+						"type": "nchar"
+					},
+					{
+						"name": "Pdv_clct_nr",
+						"type": "nchar"
+					},
+					{
+						"name": "Pdv_gen_tx_nb",
+						"type": "varchar"
+					},
+					{
+						"name": "Transaction_identifier",
+						"type": "varchar"
+					},
+					{
+						"name": "Dateh_tpe",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Auth_code",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EIS779_SEGMENT_004"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTable11')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase17",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EIS779_SEGMENT_000"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTable12')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase18",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Code_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Poste_segment",
+						"type": "varchar"
+					},
+					{
+						"name": "Id_transaction",
+						"type": "varchar"
+					},
+					{
+						"name": "Date_ope",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Type_equipement",
+						"type": "varchar"
+					},
+					{
+						"name": "Num_syst_emetteur",
+						"type": "nchar"
+					},
+					{
+						"name": "CEB",
+						"type": "varchar"
+					},
+					{
+						"name": "Num_serie",
+						"type": "nchar"
+					},
+					{
+						"name": "Num_service",
+						"type": "varchar"
+					},
+					{
+						"name": "Code_user",
+						"type": "nchar"
+					},
+					{
+						"name": "Compagnie_agent",
+						"type": "nchar"
+					},
+					{
+						"name": "Type_emplacement",
+						"type": "char"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EIS779_SEGMENT_001"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTable13')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase19",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Code_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Plateforme",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EIS779_SEGMENT_000"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTable14')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase20",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Code_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Poste_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_transaction",
+						"type": "nchar"
+					},
+					{
+						"name": "Num_serie",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_entreprise",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_paiement",
+						"type": "nchar"
+					},
+					{
+						"name": "Code_moyen_paiement",
+						"type": "nchar"
+					},
+					{
+						"name": "Sens_paiement",
+						"type": "varchar"
+					},
+					{
+						"name": "Montant",
+						"type": "varchar"
+					},
+					{
+						"name": "Type_equipement",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Date_ope",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Name",
+						"type": "varchar"
+					},
+					{
+						"name": "Guid",
+						"type": "uniqueidentifier"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EIS779_atlas"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTable15')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase21",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Code_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Poste_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_transaction",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_oper_vente",
+						"type": "nchar"
+					},
+					{
+						"name": "Type_mvt",
+						"type": "nchar"
+					},
+					{
+						"name": "Categ_produit",
+						"type": "nchar"
+					},
+					{
+						"name": "Num_produit",
+						"type": "nchar"
+					},
+					{
+						"name": "Num_article",
+						"type": "nchar"
+					},
+					{
+						"name": "Num_unicite",
+						"type": "nchar"
+					},
+					{
+						"name": "Num_serie",
+						"type": "nchar"
+					},
+					{
+						"name": "Num_contrat",
+						"type": "nchar"
+					},
+					{
+						"name": "Num_serie_prev",
+						"type": "nchar"
+					},
+					{
+						"name": "Date_Debut",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Date_Fin",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Id_entreprise",
+						"type": "nchar"
+					},
+					{
+						"name": "Montant_part_tiers",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Quantité",
+						"type": "nchar"
+					},
+					{
+						"name": "TauxTVA_an",
+						"type": "nchar"
+					},
+					{
+						"name": "Montant_global_vente",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Nb_jetons",
+						"type": "nchar"
+					},
+					{
+						"name": "Nb_jetons_avant",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_convention",
+						"type": "nchar"
+					},
+					{
+						"name": "Libelle_convention",
+						"type": "varchar"
+					},
+					{
+						"name": "Num_mobib",
+						"type": "nchar"
+					},
+					{
+						"name": "Code_article",
+						"type": "varchar"
+					},
+					{
+						"name": "Num_reseau_produit",
+						"type": "nchar"
+					},
+					{
+						"name": "Num_contrat_prev",
+						"type": "nchar"
+					},
+					{
+						"name": "Num_commande",
+						"type": "varchar"
+					},
+					{
+						"name": "Num_elt_commande",
+						"type": "varchar"
+					},
+					{
+						"name": "Type_elt_commande",
+						"type": "nchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EIS779_SEGMENT_002"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTable16')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase22",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Code_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Poste_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_transaction",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_paiement",
+						"type": "nchar"
+					},
+					{
+						"name": "Code_moyen_paiement",
+						"type": "nchar"
+					},
+					{
+						"name": "Sens_paiement",
+						"type": "varchar"
+					},
+					{
+						"name": "Montant",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Id_entreprise",
+						"type": "nchar"
+					},
+					{
+						"name": "Comm_struct",
+						"type": "char"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EIS779_SEGMENT_003"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTable17')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase23",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Code_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Poste_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_transaction",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_paiement",
+						"type": "nchar"
+					},
+					{
+						"name": "Code_moyen_paiement",
+						"type": "nchar"
+					},
+					{
+						"name": "Sens_paiement",
+						"type": "varchar"
+					},
+					{
+						"name": "Montant",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Hardware_type",
+						"type": "nchar"
+					},
+					{
+						"name": "Mode_TPV",
+						"type": "nchar"
+					},
+					{
+						"name": "Brand_id",
+						"type": "varchar"
+					},
+					{
+						"name": "Machine_number",
+						"type": "nchar"
+					},
+					{
+						"name": "Pdv_clct_nr",
+						"type": "nchar"
+					},
+					{
+						"name": "Pdv_gen_tx_nb",
+						"type": "varchar"
+					},
+					{
+						"name": "Transaction_identifier",
+						"type": "varchar"
+					},
+					{
+						"name": "Dateh_tpe",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Auth_code",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EIS779_SEGMENT_004"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTable18')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase25",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Code_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Poste_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_transaction",
+						"type": "nchar"
+					},
+					{
+						"name": "Num_serie",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_entreprise",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_paiement",
+						"type": "nchar"
+					},
+					{
+						"name": "Code_moyen_paiement",
+						"type": "nchar"
+					},
+					{
+						"name": "Sens_paiement",
+						"type": "varchar"
+					},
+					{
+						"name": "Montant",
+						"type": "varchar"
+					},
+					{
+						"name": "Type_equipement",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Date_ope",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Name",
+						"type": "varchar"
+					},
+					{
+						"name": "Guid",
+						"type": "uniqueidentifier"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EIS779_atlas"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTable19')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase26",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Code_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Poste_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_transaction",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_paiement",
+						"type": "nchar"
+					},
+					{
+						"name": "TransactionReference",
+						"type": "varchar"
+					},
+					{
+						"name": "TransactionDateTime",
+						"type": "varchar"
+					},
+					{
+						"name": "Sens_paiement",
+						"type": "varchar"
+					},
+					{
+						"name": "StatementReference",
+						"type": "varchar"
+					},
+					{
+						"name": "PaymentMeanBrand",
+						"type": "varchar"
+					},
+					{
+						"name": "ValueDate",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Amount",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "AuthorizationId",
+						"type": "varchar"
+					},
+					{
+						"name": "MerchantId",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EIS779_SEGMENT_005"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SQLAtlasCRM')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SQLPocTec",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Code_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Poste_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_transaction",
+						"type": "nchar"
+					},
+					{
+						"name": "Num_serie",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_entreprise",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_paiement",
+						"type": "nchar"
+					},
+					{
+						"name": "Code_moyen_paiement",
+						"type": "nchar"
+					},
+					{
+						"name": "Sens_paiement",
+						"type": "varchar"
+					},
+					{
+						"name": "Montant",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Type_equipement",
+						"type": "nchar"
+					},
+					{
+						"name": "Date_ope",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Name",
+						"type": "varchar"
+					},
+					{
+						"name": "Guid",
+						"type": "uniqueidentifier"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EIS779_atlas"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SQLPocTec')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SQLJoin')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SQLPocTec",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EIS779_atlas"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SQLPocTec')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SQLEIS779ATLAS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SQLPocTec",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Code_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Poste_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_transaction",
+						"type": "nchar"
+					},
+					{
+						"name": "Num_serie",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_entreprise",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_paiement",
+						"type": "nchar"
+					},
+					{
+						"name": "Code_moyen_paiement",
+						"type": "nchar"
+					},
+					{
+						"name": "Sens_paiement",
+						"type": "varchar"
+					},
+					{
+						"name": "Montant",
+						"type": "varchar"
+					},
+					{
+						"name": "Type_equipement",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Date_ope",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Name",
+						"type": "varchar"
+					},
+					{
+						"name": "Guid",
+						"type": "uniqueidentifier"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EIS779_atlas"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SQLPocTec')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SQLTECData')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SQLPocTec",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "FaultId",
+						"type": "varchar"
+					},
+					{
+						"name": "FaultCustomerName",
+						"type": "varchar"
+					},
+					{
+						"name": "FaultDesc",
+						"type": "varchar"
+					},
+					{
+						"name": "Date",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "TECData"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SQLPocTec')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SQLTEC')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SQLPocTec",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "FaultId",
+						"type": "varchar"
+					},
+					{
+						"name": "FaultCustomerName",
+						"type": "varchar"
+					},
+					{
+						"name": "FaultDesc",
+						"type": "varchar"
+					},
+					{
+						"name": "Date",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "TECData"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SQLPocTec')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SQLValidations')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SQLPocTec",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "FaultId",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "FaultDesc",
+						"type": "varchar"
+					},
+					{
+						"name": "FaultCustomerNumber",
+						"type": "varchar"
+					},
+					{
+						"name": "Date",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Validations"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SQLPocTec')]"
+			]
+		}
+	]
+}

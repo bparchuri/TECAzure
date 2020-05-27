@@ -1,0 +1,5972 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "ADF-Poc-Tec"
+		},
+		"ADLS_Poc_Tec_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'ADLS_Poc_Tec'"
+		},
+		"AzureBlobStorage2_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage2'"
+		},
+		"AzureBlobStorage3_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage3'"
+		},
+		"AzureBlobStorage4_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage4'"
+		},
+		"AzureDataLakeAnalytics1_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureDataLakeAnalytics1'"
+		},
+		"AzureDataLakeStore1_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureDataLakeStore1'"
+		},
+		"AzureDataLakeStore2_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureDataLakeStore2'"
+		},
+		"AzureDataLakeStore3_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureDataLakeStore3'"
+		},
+		"AzureDataLakeStore4_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureDataLakeStore4'"
+		},
+		"AzureDataLakeStore5_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureDataLakeStore5'"
+		},
+		"AzureSqlDatabase10_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase10'"
+		},
+		"AzureSqlDatabase10_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureSqlDatabase10'"
+		},
+		"AzureSqlDatabase11_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase11'"
+		},
+		"AzureSqlDatabase11_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureSqlDatabase11'"
+		},
+		"AzureSqlDatabase12_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase12'"
+		},
+		"AzureSqlDatabase12_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureSqlDatabase12'"
+		},
+		"AzureSqlDatabase13_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase13'"
+		},
+		"AzureSqlDatabase13_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureSqlDatabase13'"
+		},
+		"AzureSqlDatabase14_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase14'"
+		},
+		"AzureSqlDatabase14_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureSqlDatabase14'"
+		},
+		"AzureSqlDatabase15_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase15'"
+		},
+		"AzureSqlDatabase15_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureSqlDatabase15'"
+		},
+		"AzureSqlDatabase16_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase16'"
+		},
+		"AzureSqlDatabase16_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureSqlDatabase16'"
+		},
+		"AzureSqlDatabase17_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase17'"
+		},
+		"AzureSqlDatabase17_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureSqlDatabase17'"
+		},
+		"AzureSqlDatabase18_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase18'"
+		},
+		"AzureSqlDatabase18_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureSqlDatabase18'"
+		},
+		"AzureSqlDatabase19_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase19'"
+		},
+		"AzureSqlDatabase19_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureSqlDatabase19'"
+		},
+		"AzureSqlDatabase2_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase2'"
+		},
+		"AzureSqlDatabase2_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureSqlDatabase2'"
+		},
+		"AzureSqlDatabase20_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase20'"
+		},
+		"AzureSqlDatabase20_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureSqlDatabase20'"
+		},
+		"AzureSqlDatabase21_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase21'"
+		},
+		"AzureSqlDatabase21_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureSqlDatabase21'"
+		},
+		"AzureSqlDatabase22_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase22'"
+		},
+		"AzureSqlDatabase22_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureSqlDatabase22'"
+		},
+		"AzureSqlDatabase23_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase23'"
+		},
+		"AzureSqlDatabase23_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureSqlDatabase23'"
+		},
+		"AzureSqlDatabase24_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase24'"
+		},
+		"AzureSqlDatabase24_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureSqlDatabase24'"
+		},
+		"AzureSqlDatabase25_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase25'"
+		},
+		"AzureSqlDatabase25_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureSqlDatabase25'"
+		},
+		"AzureSqlDatabase26_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase26'"
+		},
+		"AzureSqlDatabase26_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureSqlDatabase26'"
+		},
+		"AzureSqlDatabase27_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase27'"
+		},
+		"AzureSqlDatabase27_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureSqlDatabase27'"
+		},
+		"AzureSqlDatabase28_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase28'"
+		},
+		"AzureSqlDatabase28_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureSqlDatabase28'"
+		},
+		"AzureSqlDatabase29_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase29'"
+		},
+		"AzureSqlDatabase29_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureSqlDatabase29'"
+		},
+		"AzureSqlDatabase3_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase3'"
+		},
+		"AzureSqlDatabase3_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureSqlDatabase3'"
+		},
+		"AzureSqlDatabase30_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase30'"
+		},
+		"AzureSqlDatabase30_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureSqlDatabase30'"
+		},
+		"AzureSqlDatabase31_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase31'"
+		},
+		"AzureSqlDatabase31_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureSqlDatabase31'"
+		},
+		"AzureSqlDatabase32_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase32'"
+		},
+		"AzureSqlDatabase32_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureSqlDatabase32'"
+		},
+		"AzureSqlDatabase33_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase33'"
+		},
+		"AzureSqlDatabase33_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureSqlDatabase33'"
+		},
+		"AzureSqlDatabase34_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase34'"
+		},
+		"AzureSqlDatabase34_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureSqlDatabase34'"
+		},
+		"AzureSqlDatabase35_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase35'"
+		},
+		"AzureSqlDatabase35_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureSqlDatabase35'"
+		},
+		"AzureSqlDatabase36_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase36'"
+		},
+		"AzureSqlDatabase36_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureSqlDatabase36'"
+		},
+		"AzureSqlDatabase37_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase37'"
+		},
+		"AzureSqlDatabase37_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureSqlDatabase37'"
+		},
+		"AzureSqlDatabase38_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase38'"
+		},
+		"AzureSqlDatabase38_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureSqlDatabase38'"
+		},
+		"AzureSqlDatabase5_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase5'"
+		},
+		"AzureSqlDatabase5_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureSqlDatabase5'"
+		},
+		"AzureSqlDatabase6_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase6'"
+		},
+		"AzureSqlDatabase6_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureSqlDatabase6'"
+		},
+		"AzureSqlDatabase7_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase7'"
+		},
+		"AzureSqlDatabase7_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureSqlDatabase7'"
+		},
+		"AzureSqlDatabase8_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase8'"
+		},
+		"AzureSqlDatabase8_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureSqlDatabase8'"
+		},
+		"AzureSqlDatabase9_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase9'"
+		},
+		"AzureSqlDatabase9_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureSqlDatabase9'"
+		},
+		"Dynamics POC2_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'Dynamics POC2'"
+		},
+		"DynamicsCrm1_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'DynamicsCrm1'"
+		},
+		"Sftp1_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'Sftp1'"
+		},
+		"Sftp2_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'Sftp2'"
+		},
+		"SqlServer1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SqlServer1'"
+		},
+		"SqlServer1_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'SqlServer1'"
+		},
+		"linkedService1_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'linkedService1'"
+		},
+		"linkedService3_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'linkedService3'"
+		},
+		"linkedService3_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'linkedService3'"
+		},
+		"linkedService4_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'linkedService4'"
+		},
+		"ADLSGen2_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'ADLSGen2'"
+		},
+		"SQLPocTec_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SQLPocTec'"
+		},
+		"SQLPocTec_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'SQLPocTec'"
+		},
+		"TecDevCRM_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'TecDevCRM'"
+		},
+		"ADLS_Poc_Tec_properties_typeProperties_dataLakeStoreUri": {
+			"type": "string",
+			"defaultValue": "https://dlspoctec.azuredatalakestore.net/webhdfs/v1"
+		},
+		"ADLS_Poc_Tec_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "b4537ba3-1639-42cb-9143-8bfbcb683e79"
+		},
+		"ADLS_Poc_Tec_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "6e5433e0-76fc-44b7-b71b-0e5446a3fa94"
+		},
+		"ADLS_Poc_Tec_properties_typeProperties_subscriptionId": {
+			"type": "string",
+			"defaultValue": "17bfcc0a-bd44-4775-9fae-38640875d0f6"
+		},
+		"ADLS_Poc_Tec_properties_typeProperties_resourceGroupName": {
+			"type": "string",
+			"defaultValue": "rs-poctec"
+		},
+		"AzureDataLakeAnalytics1_properties_typeProperties_accountName": {
+			"type": "string",
+			"defaultValue": "tecanalytics"
+		},
+		"AzureDataLakeAnalytics1_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "af815f86-c897-49ea-9d16-d7448dfe5007"
+		},
+		"AzureDataLakeAnalytics1_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureDataLakeAnalytics1_properties_typeProperties_subscriptionId": {
+			"type": "string",
+			"defaultValue": "fc5231d7-a1db-4a65-99a6-f6fbdb8c40fa"
+		},
+		"AzureDataLakeAnalytics1_properties_typeProperties_resourceGroupName": {
+			"type": "string",
+			"defaultValue": "DataLake"
+		},
+		"AzureDataLakeStore1_properties_typeProperties_dataLakeStoreUri": {
+			"type": "string",
+			"defaultValue": "https://tecdatalakestore.azuredatalakestore.net/webhdfs/v1"
+		},
+		"AzureDataLakeStore1_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "af815f86-c897-49ea-9d16-d7448dfe5007"
+		},
+		"AzureDataLakeStore1_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureDataLakeStore1_properties_typeProperties_subscriptionId": {
+			"type": "string",
+			"defaultValue": "fc5231d7-a1db-4a65-99a6-f6fbdb8c40fa"
+		},
+		"AzureDataLakeStore1_properties_typeProperties_resourceGroupName": {
+			"type": "string",
+			"defaultValue": "DataLake"
+		},
+		"AzureDataLakeStore2_properties_typeProperties_dataLakeStoreUri": {
+			"type": "string",
+			"defaultValue": "https://tecdatalakestore.azuredatalakestore.net/webhdfs/v1"
+		},
+		"AzureDataLakeStore2_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "af815f86-c897-49ea-9d16-d7448dfe5007"
+		},
+		"AzureDataLakeStore2_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureDataLakeStore2_properties_typeProperties_subscriptionId": {
+			"type": "string",
+			"defaultValue": "fc5231d7-a1db-4a65-99a6-f6fbdb8c40fa"
+		},
+		"AzureDataLakeStore2_properties_typeProperties_resourceGroupName": {
+			"type": "string",
+			"defaultValue": "DataLake"
+		},
+		"AzureDataLakeStore3_properties_typeProperties_dataLakeStoreUri": {
+			"type": "string",
+			"defaultValue": "https://tecdatalakestore.azuredatalakestore.net/webhdfs/v1"
+		},
+		"AzureDataLakeStore3_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "af815f86-c897-49ea-9d16-d7448dfe5007"
+		},
+		"AzureDataLakeStore3_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureDataLakeStore3_properties_typeProperties_subscriptionId": {
+			"type": "string",
+			"defaultValue": "fc5231d7-a1db-4a65-99a6-f6fbdb8c40fa"
+		},
+		"AzureDataLakeStore3_properties_typeProperties_resourceGroupName": {
+			"type": "string",
+			"defaultValue": "DataLake"
+		},
+		"AzureDataLakeStore4_properties_typeProperties_dataLakeStoreUri": {
+			"type": "string",
+			"defaultValue": "https://tecdatalakestore.azuredatalakestore.net/webhdfs/v1"
+		},
+		"AzureDataLakeStore4_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "af815f86-c897-49ea-9d16-d7448dfe5007"
+		},
+		"AzureDataLakeStore4_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureDataLakeStore4_properties_typeProperties_subscriptionId": {
+			"type": "string",
+			"defaultValue": "fc5231d7-a1db-4a65-99a6-f6fbdb8c40fa"
+		},
+		"AzureDataLakeStore4_properties_typeProperties_resourceGroupName": {
+			"type": "string",
+			"defaultValue": "DataLake"
+		},
+		"AzureDataLakeStore5_properties_typeProperties_dataLakeStoreUri": {
+			"type": "string",
+			"defaultValue": "https://tecdatalakestore.azuredatalakestore.net/webhdfs/v1"
+		},
+		"AzureDataLakeStore5_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "af815f86-c897-49ea-9d16-d7448dfe5007"
+		},
+		"AzureDataLakeStore5_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureDataLakeStore5_properties_typeProperties_subscriptionId": {
+			"type": "string",
+			"defaultValue": "fc5231d7-a1db-4a65-99a6-f6fbdb8c40fa"
+		},
+		"AzureDataLakeStore5_properties_typeProperties_resourceGroupName": {
+			"type": "string",
+			"defaultValue": "DataLake"
+		},
+		"AzureSqlDatabase10_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase10_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase11_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase11_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase12_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase12_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase13_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase13_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase14_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase14_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase15_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase15_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase16_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase16_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase17_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase17_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase18_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase18_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase19_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase19_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase2_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase2_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase20_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase20_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase21_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase21_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase22_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase22_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase23_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase23_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase24_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase24_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase25_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase25_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase26_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase26_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase27_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase27_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase28_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase28_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase29_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase29_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase3_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase3_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase30_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase30_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase31_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase31_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase32_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase32_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase33_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase33_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase34_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase34_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase35_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase35_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase36_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase36_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase37_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase37_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase38_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase38_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase5_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase5_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase6_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "af815f86-c897-49ea-9d16-d7448dfe5007"
+		},
+		"AzureSqlDatabase6_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase7_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase7_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase8_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase8_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase9_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase9_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"Dynamics POC2_properties_typeProperties_username": {
+			"type": "string",
+			"defaultValue": "dev01@labx.bdbelux.be"
+		},
+		"DynamicsCrm1_properties_typeProperties_username": {
+			"type": "string",
+			"defaultValue": "Bhargav.Parchuri@letec.be"
+		},
+		"Sftp1_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "test.rebex.net"
+		},
+		"Sftp1_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "demo"
+		},
+		"Sftp2_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "test.rebex.net"
+		},
+		"Sftp2_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "demo"
+		},
+		"SqlServer1_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "adflux\\bparchuri"
+		},
+		"linkedService1_properties_typeProperties_dataLakeStoreUri": {
+			"type": "string",
+			"defaultValue": "https://tecdatalakestore.azuredatalakestore.net/webhdfs/v1"
+		},
+		"linkedService1_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "af815f86-c897-49ea-9d16-d7448dfe5007"
+		},
+		"linkedService1_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"linkedService1_properties_typeProperties_subscriptionId": {
+			"type": "string",
+			"defaultValue": "fc5231d7-a1db-4a65-99a6-f6fbdb8c40fa"
+		},
+		"linkedService1_properties_typeProperties_resourceGroupName": {
+			"type": "string",
+			"defaultValue": "DataLake"
+		},
+		"linkedService3_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"linkedService3_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"linkedService4_properties_typeProperties_dataLakeStoreUri": {
+			"type": "string",
+			"defaultValue": "https://teclake.azuredatalakestore.net/webhdfs/v1"
+		},
+		"linkedService4_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "c038161c-8af4-42d6-a627-a13aaf999634"
+		},
+		"linkedService4_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "6e5433e0-76fc-44b7-b71b-0e5446a3fa94"
+		},
+		"linkedService4_properties_typeProperties_subscriptionId": {
+			"type": "string",
+			"defaultValue": "34ba1e1c-f8c4-4630-b179-c38b99516873"
+		},
+		"linkedService4_properties_typeProperties_resourceGroupName": {
+			"type": "string",
+			"defaultValue": "TEC"
+		},
+		"ADLSGen2_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://sapoctec.dfs.core.windows.net"
+		},
+		"ADLSGen2_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "6e5433e0-76fc-44b7-b71b-0e5446a3fa94"
+		},
+		"ADLSGen2_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "b4537ba3-1639-42cb-9143-8bfbcb683e79"
+		},
+		"SQLPocTec_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "b4537ba3-1639-42cb-9143-8bfbcb683e79"
+		},
+		"SQLPocTec_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "6e5433e0-76fc-44b7-b71b-0e5446a3fa94"
+		},
+		"TecDevCRM_properties_typeProperties_username": {
+			"type": "string",
+			"defaultValue": "Bhargav.Parchuri@letec.be"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/ATLASEIS779_DataflowSplits')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy CSV to SQL Table",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false,
+							"parallelCopies": 50,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"type": "String",
+											"ordinal": 1
+										},
+										"sink": {
+											"name": "Code_segment"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "ADLSCSV",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "SQLEIS779",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Send data to CRM",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Copy data_Using Joins",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "AzureSqlSource",
+								"sqlReaderQuery": "SELECT TOP (100000) [Code_segment]\n      ,[Poste_segment]\n      ,[Id_transaction]\n      ,[Num_serie]\n      ,[Id_entreprise]\n      ,[Id_paiement]\n      ,[Code_moyen_paiement]\n      ,[Sens_paiement]\n      ,[Montant]\n      ,[Type_equipement]\n      ,[Date_ope]\n      ,[Name]\n      ,[Guid]\n  FROM [dbo].[EIS779_atlas]",
+								"queryTimeout": "02:00:00"
+							},
+							"sink": {
+								"type": "DynamicsCrmSink",
+								"writeBatchSize": 10,
+								"writeBehavior": "upsert",
+								"ignoreNullValues": false
+							},
+							"enableStaging": false,
+							"parallelCopies": 50,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "Name",
+											"type": "String"
+										},
+										"sink": {
+											"name": "tec_name",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Code_segment",
+											"type": "String"
+										},
+										"sink": {
+											"name": "tec_codesegment",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Sens_paiement",
+											"type": "String"
+										},
+										"sink": {
+											"name": "tec_senspaiement",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Num_serie",
+											"type": "String"
+										},
+										"sink": {
+											"name": "tec_numserie",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Id_paiement",
+											"type": "String"
+										},
+										"sink": {
+											"name": "tec_idpaiement",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Guid",
+											"type": "Guid"
+										},
+										"sink": {
+											"name": "tec_eis779atlasid",
+											"type": "Guid"
+										}
+									},
+									{
+										"source": {
+											"name": "Code_moyen_paiement",
+											"type": "String"
+										},
+										"sink": {
+											"name": "tec_codemoyenpaiement",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Poste_segment",
+											"type": "String"
+										},
+										"sink": {
+											"name": "tec_postesegment",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Id_entreprise",
+											"type": "String"
+										},
+										"sink": {
+											"name": "tec_identreprise",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Date_ope",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "tec_dateope",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "Id_transaction",
+											"type": "String"
+										},
+										"sink": {
+											"name": "tec_idtransaction",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Type_equipement"
+										},
+										"sink": {
+											"name": "tec_typeequipment"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "SQLAtlasCRM",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "tecdevcrmconnection",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "dataflowusingsplittoSegments",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [
+							{
+								"activity": "Copy CSV to SQL Table",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "dataflowSegments",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"dataflowSource": {},
+									"SQLSegment0": {},
+									"SQLSegment1": {},
+									"SQLSegment2": {},
+									"SQLSegment3": {},
+									"SQLSegment4": {},
+									"SQLSegment5": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							}
+						}
+					},
+					{
+						"name": "Copy data_Using Joins",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "dataflowusingsplittoSegments",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "AzureSqlSource",
+								"sqlReaderQuery": "  SELECT Top(100)\n     E003.Code_segment\n    ,E003.Poste_segment\n    ,E003.Id_transaction\n    ,E001.Num_serie\n    ,E002.Id_entreprise\n    ,E003.Id_paiement\n    ,E003.Code_moyen_paiement\n    ,E003.Sens_paiement\n    ,E003.Montant\n    ,10 AS Type_Eqiupment\n    ,E001.Date_ope\n    ,E000.Plateforme\n\t,NEWID() AS Unique_Id\n  FROM [dbo].[EIS779_SEGMENT_001] E001\n  LEFT JOIN [dbo].[EIS779_SEGMENT_002] E002\n    ON E001.Id_transaction = E002.Id_transaction\n  JOIN [dbo].[EIS779_SEGMENT_003] E003\n    ON E001.Id_transaction = E003.Id_transaction\n  JOIN [dbo].[EIS779_SEGMENT_000] E000\n    ON E000.Code_segment = '000'\n  ORDER by E001.id_transaction",
+								"queryTimeout": "02:00:00"
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false,
+							"parallelCopies": 50,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "Code_segment",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Code_segment",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Poste_segment",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Poste_segment",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Id_transaction",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Id_transaction",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Num_serie",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Num_serie",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Id_entreprise",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Id_entreprise",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Id_paiement",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Id_paiement",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Code_moyen_paiement",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Code_moyen_paiement",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Sens_paiement",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Sens_paiement",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Montant",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "Montant",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"name": "Type_Eqiupment",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "Type_equipement",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Date_ope",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "Date_ope",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "Plateforme",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Name",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Unique_Id",
+											"type": "Guid"
+										},
+										"sink": {
+											"name": "Guid",
+											"type": "Guid"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "SQLJoin",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "SQLEIS779ATLAS",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/ADLSCSV')]",
+				"[concat(variables('factoryId'), '/datasets/SQLEIS779')]",
+				"[concat(variables('factoryId'), '/datasets/SQLAtlasCRM')]",
+				"[concat(variables('factoryId'), '/datasets/tecdevcrmconnection')]",
+				"[concat(variables('factoryId'), '/dataflows/dataflowSegments')]",
+				"[concat(variables('factoryId'), '/datasets/SQLJoin')]",
+				"[concat(variables('factoryId'), '/datasets/SQLEIS779ATLAS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Unzip 7z file to Blob')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "WebHook",
+						"type": "WebHook",
+						"dependsOn": [
+							{
+								"activity": "Set variable of unzip foldername",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "https://73b5abb6-b245-4036-a400-b70e2ee719cd.webhook.ne.azure-automation.net/webhooks?token=8LyOr5IWcaX0XlNXtAVn4%2bBho02rNT9g5unFl2cEnR4%3d",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"value": "@json(\nconcat(\n'\n{\n\"connectionName\":\"',variables('varConnectionName'),'\",\"storageAccountKey\":\"',variables('storageAccountKey'),'\",\"fileName\":\"',variables('fileName'),'\"\n,\"zipfolder\":\"',variables('zipfolder'),'\"\n,\"Unzipfolder\":\"',variables('Unzipfolder'),'\"\n,\"extractfolder\":\"',variables('extractfolder'),'\"\n,\"dataLakeStorageGen1Name\":\"',variables('dataLakeStorageGen1Name'),'\"\n}'))",
+								"type": "Expression"
+							},
+							"timeout": "00:10:00",
+							"reportStatusOnCallBack": true
+						}
+					},
+					{
+						"name": "Copy Zip file to ADLS",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [
+							{
+								"name": "Source",
+								"value": "Datatest/"
+							},
+							{
+								"name": "Destination",
+								"value": "tec-zip//"
+							}
+						],
+						"typeProperties": {
+							"source": {
+								"type": "BinarySource",
+								"storeSettings": {
+									"type": "AzureDataLakeStoreReadSettings",
+									"recursive": false
+								}
+							},
+							"sink": {
+								"type": "BinarySink",
+								"storeSettings": {
+									"type": "AzureDataLakeStoreWriteSettings"
+								}
+							},
+							"enableStaging": false,
+							"validateDataConsistency": false
+						},
+						"inputs": [
+							{
+								"referenceName": "ZipFile",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "UnzipFile",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Get Metadata of Zip File",
+						"type": "GetMetadata",
+						"dependsOn": [
+							{
+								"activity": "Copy Zip file to ADLS",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "ZipFile",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"fieldList": [
+								"childItems",
+								"itemName"
+							],
+							"storeSettings": {
+								"type": "AzureDataLakeStoreReadSettings",
+								"recursive": true,
+								"wildcardFolderPath": "Datatest",
+								"wildcardFileName": "*.7z"
+							},
+							"formatSettings": {
+								"type": "BinaryReadSettings"
+							}
+						}
+					},
+					{
+						"name": "Filter 7z files",
+						"type": "Filter",
+						"dependsOn": [
+							{
+								"activity": "Get Metadata of Unzip File",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@activity('Get Metadata of Zip File').output.childItems",
+								"type": "Expression"
+							},
+							"condition": {
+								"value": "@endswith(item().name,'.7z')",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "Set variable of zip file name",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "Filter 7z files",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "fileName",
+							"value": {
+								"value": "@string(activity('Filter 7z files').output.value[0].name)",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "Set variable of zip folder name",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "Set variable of zip file name",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "zipfolder",
+							"value": {
+								"value": "@activity('Get Metadata of Zip File').output.itemName",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "Set variable of unzip foldername",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "Set variable of zip folder name",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "Unzipfolder",
+							"value": {
+								"value": "@activity('Get Metadata of Unzip File').output.itemName",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "Get Metadata of Unzip File",
+						"type": "GetMetadata",
+						"dependsOn": [
+							{
+								"activity": "Get Metadata of Zip File",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "UnzipFile",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"fieldList": [
+								"itemName"
+							],
+							"storeSettings": {
+								"type": "AzureDataLakeStoreReadSettings",
+								"recursive": true
+							},
+							"formatSettings": {
+								"type": "BinaryReadSettings"
+							}
+						}
+					}
+				],
+				"variables": {
+					"varConnectionName": {
+						"type": "String",
+						"defaultValue": "AzureRunAsConnection"
+					},
+					"storageAccountKey": {
+						"type": "String",
+						"defaultValue": " YDuDqj7C2A+fWSpmuibYXlDAsVRyIXQpgZcCtm23kUEFTsYFMvZbxhUmBHmbgHEeNcCmukz6O1Iji7H6deZPiw=="
+					},
+					"fileName": {
+						"type": "String",
+						"defaultValue": "TECValidation.7z"
+					},
+					"zipfolder": {
+						"type": "String",
+						"defaultValue": "tec-zip"
+					},
+					"Unzipfolder": {
+						"type": "String",
+						"defaultValue": "tec-unzip"
+					},
+					"extractfolder": {
+						"type": "String",
+						"defaultValue": "7Zfiles"
+					},
+					"dataLakeStorageGen1Name": {
+						"type": "String",
+						"defaultValue": "dlspoctec"
+					}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/ZipFile')]",
+				"[concat(variables('factoryId'), '/datasets/UnzipFile')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Validations_DLS_SQLValidations_SQLPowerAPP')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy Data to SQL Table",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "CSVtoSQLtable",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "AzureSqlSource",
+								"sqlReaderQuery": "SELECT TOP (1000) [FaultId]\n      ,[FaultDesc]\n      ,[FaultCustomerNumber]\n      ,[Date]\n  FROM [dbo].[TECData]",
+								"queryTimeout": "02:00:00"
+							},
+							"sink": {
+								"type": "AzureSqlSink"
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "FaultId",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "FaultId",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "FaultDesc",
+											"type": "String"
+										},
+										"sink": {
+											"name": "FaultDesc",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "FaultCustomerNumber",
+											"type": "String"
+										},
+										"sink": {
+											"name": "FaultCustomerNumber",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Date",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "Date",
+											"type": "DateTime"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "SQLTEC",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "SQLValidations",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "CSVtoSQLtable",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink"
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "FaultId",
+											"type": "String"
+										},
+										"sink": {
+											"name": "FaultId",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "FaultDesc",
+											"type": "String"
+										},
+										"sink": {
+											"name": "FaultDesc",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "FaultCustomerName",
+											"type": "String"
+										},
+										"sink": {
+											"name": "FaultCustomerNumber",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Date",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "Date",
+											"type": "DateTime"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "ADLSV2CSV",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "SQLTECData",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/SQLTEC')]",
+				"[concat(variables('factoryId'), '/datasets/SQLValidations')]",
+				"[concat(variables('factoryId'), '/datasets/ADLSV2CSV')]",
+				"[concat(variables('factoryId'), '/datasets/SQLTECData')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SQLEIS779')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SQLPocTec",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Code_segment",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EIS779"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SQLPocTec')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTable10')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase15",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Code_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Poste_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_transaction",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_paiement",
+						"type": "nchar"
+					},
+					{
+						"name": "Code_moyen_paiement",
+						"type": "nchar"
+					},
+					{
+						"name": "Sens_paiement",
+						"type": "varchar"
+					},
+					{
+						"name": "Montant",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Hardware_type",
+						"type": "nchar"
+					},
+					{
+						"name": "Mode_TPV",
+						"type": "nchar"
+					},
+					{
+						"name": "Brand_id",
+						"type": "varchar"
+					},
+					{
+						"name": "Machine_number",
+						"type": "nchar"
+					},
+					{
+						"name": "Pdv_clct_nr",
+						"type": "nchar"
+					},
+					{
+						"name": "Pdv_gen_tx_nb",
+						"type": "varchar"
+					},
+					{
+						"name": "Transaction_identifier",
+						"type": "varchar"
+					},
+					{
+						"name": "Dateh_tpe",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Auth_code",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EIS779_SEGMENT_004"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase15')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTable11')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase17",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EIS779_SEGMENT_000"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase17')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTable12')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase18",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Code_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Poste_segment",
+						"type": "varchar"
+					},
+					{
+						"name": "Id_transaction",
+						"type": "varchar"
+					},
+					{
+						"name": "Date_ope",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Type_equipement",
+						"type": "varchar"
+					},
+					{
+						"name": "Num_syst_emetteur",
+						"type": "nchar"
+					},
+					{
+						"name": "CEB",
+						"type": "varchar"
+					},
+					{
+						"name": "Num_serie",
+						"type": "nchar"
+					},
+					{
+						"name": "Num_service",
+						"type": "varchar"
+					},
+					{
+						"name": "Code_user",
+						"type": "nchar"
+					},
+					{
+						"name": "Compagnie_agent",
+						"type": "nchar"
+					},
+					{
+						"name": "Type_emplacement",
+						"type": "char"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EIS779_SEGMENT_001"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase18')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTable13')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase19",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Code_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Plateforme",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EIS779_SEGMENT_000"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase19')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTable14')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase20",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Code_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Poste_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_transaction",
+						"type": "nchar"
+					},
+					{
+						"name": "Num_serie",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_entreprise",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_paiement",
+						"type": "nchar"
+					},
+					{
+						"name": "Code_moyen_paiement",
+						"type": "nchar"
+					},
+					{
+						"name": "Sens_paiement",
+						"type": "varchar"
+					},
+					{
+						"name": "Montant",
+						"type": "varchar"
+					},
+					{
+						"name": "Type_equipement",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Date_ope",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Name",
+						"type": "varchar"
+					},
+					{
+						"name": "Guid",
+						"type": "uniqueidentifier"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EIS779_atlas"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase20')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTable15')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase21",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Code_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Poste_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_transaction",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_oper_vente",
+						"type": "nchar"
+					},
+					{
+						"name": "Type_mvt",
+						"type": "nchar"
+					},
+					{
+						"name": "Categ_produit",
+						"type": "nchar"
+					},
+					{
+						"name": "Num_produit",
+						"type": "nchar"
+					},
+					{
+						"name": "Num_article",
+						"type": "nchar"
+					},
+					{
+						"name": "Num_unicite",
+						"type": "nchar"
+					},
+					{
+						"name": "Num_serie",
+						"type": "nchar"
+					},
+					{
+						"name": "Num_contrat",
+						"type": "nchar"
+					},
+					{
+						"name": "Num_serie_prev",
+						"type": "nchar"
+					},
+					{
+						"name": "Date_Debut",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Date_Fin",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Id_entreprise",
+						"type": "nchar"
+					},
+					{
+						"name": "Montant_part_tiers",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Quantité",
+						"type": "nchar"
+					},
+					{
+						"name": "TauxTVA_an",
+						"type": "nchar"
+					},
+					{
+						"name": "Montant_global_vente",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Nb_jetons",
+						"type": "nchar"
+					},
+					{
+						"name": "Nb_jetons_avant",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_convention",
+						"type": "nchar"
+					},
+					{
+						"name": "Libelle_convention",
+						"type": "varchar"
+					},
+					{
+						"name": "Num_mobib",
+						"type": "nchar"
+					},
+					{
+						"name": "Code_article",
+						"type": "varchar"
+					},
+					{
+						"name": "Num_reseau_produit",
+						"type": "nchar"
+					},
+					{
+						"name": "Num_contrat_prev",
+						"type": "nchar"
+					},
+					{
+						"name": "Num_commande",
+						"type": "varchar"
+					},
+					{
+						"name": "Num_elt_commande",
+						"type": "varchar"
+					},
+					{
+						"name": "Type_elt_commande",
+						"type": "nchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EIS779_SEGMENT_002"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase21')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTable16')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase22",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Code_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Poste_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_transaction",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_paiement",
+						"type": "nchar"
+					},
+					{
+						"name": "Code_moyen_paiement",
+						"type": "nchar"
+					},
+					{
+						"name": "Sens_paiement",
+						"type": "varchar"
+					},
+					{
+						"name": "Montant",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Id_entreprise",
+						"type": "nchar"
+					},
+					{
+						"name": "Comm_struct",
+						"type": "char"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EIS779_SEGMENT_003"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase22')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTable17')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase23",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Code_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Poste_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_transaction",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_paiement",
+						"type": "nchar"
+					},
+					{
+						"name": "Code_moyen_paiement",
+						"type": "nchar"
+					},
+					{
+						"name": "Sens_paiement",
+						"type": "varchar"
+					},
+					{
+						"name": "Montant",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Hardware_type",
+						"type": "nchar"
+					},
+					{
+						"name": "Mode_TPV",
+						"type": "nchar"
+					},
+					{
+						"name": "Brand_id",
+						"type": "varchar"
+					},
+					{
+						"name": "Machine_number",
+						"type": "nchar"
+					},
+					{
+						"name": "Pdv_clct_nr",
+						"type": "nchar"
+					},
+					{
+						"name": "Pdv_gen_tx_nb",
+						"type": "varchar"
+					},
+					{
+						"name": "Transaction_identifier",
+						"type": "varchar"
+					},
+					{
+						"name": "Dateh_tpe",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Auth_code",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EIS779_SEGMENT_004"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase23')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTable18')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase25",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Code_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Poste_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_transaction",
+						"type": "nchar"
+					},
+					{
+						"name": "Num_serie",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_entreprise",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_paiement",
+						"type": "nchar"
+					},
+					{
+						"name": "Code_moyen_paiement",
+						"type": "nchar"
+					},
+					{
+						"name": "Sens_paiement",
+						"type": "varchar"
+					},
+					{
+						"name": "Montant",
+						"type": "varchar"
+					},
+					{
+						"name": "Type_equipement",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Date_ope",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Name",
+						"type": "varchar"
+					},
+					{
+						"name": "Guid",
+						"type": "uniqueidentifier"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EIS779_atlas"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase25')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTable19')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase26",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Code_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Poste_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_transaction",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_paiement",
+						"type": "nchar"
+					},
+					{
+						"name": "TransactionReference",
+						"type": "varchar"
+					},
+					{
+						"name": "TransactionDateTime",
+						"type": "varchar"
+					},
+					{
+						"name": "Sens_paiement",
+						"type": "varchar"
+					},
+					{
+						"name": "StatementReference",
+						"type": "varchar"
+					},
+					{
+						"name": "PaymentMeanBrand",
+						"type": "varchar"
+					},
+					{
+						"name": "ValueDate",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Amount",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "AuthorizationId",
+						"type": "varchar"
+					},
+					{
+						"name": "MerchantId",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EIS779_SEGMENT_005"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase26')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SQLAtlasCRM')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SQLPocTec",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Code_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Poste_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_transaction",
+						"type": "nchar"
+					},
+					{
+						"name": "Num_serie",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_entreprise",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_paiement",
+						"type": "nchar"
+					},
+					{
+						"name": "Code_moyen_paiement",
+						"type": "nchar"
+					},
+					{
+						"name": "Sens_paiement",
+						"type": "varchar"
+					},
+					{
+						"name": "Montant",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Type_equipement",
+						"type": "nchar"
+					},
+					{
+						"name": "Date_ope",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Name",
+						"type": "varchar"
+					},
+					{
+						"name": "Guid",
+						"type": "uniqueidentifier"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EIS779_atlas"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SQLPocTec')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SQLJoin')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SQLPocTec",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EIS779_atlas"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SQLPocTec')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SQLEIS779ATLAS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SQLPocTec",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Code_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Poste_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_transaction",
+						"type": "nchar"
+					},
+					{
+						"name": "Num_serie",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_entreprise",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_paiement",
+						"type": "nchar"
+					},
+					{
+						"name": "Code_moyen_paiement",
+						"type": "nchar"
+					},
+					{
+						"name": "Sens_paiement",
+						"type": "varchar"
+					},
+					{
+						"name": "Montant",
+						"type": "varchar"
+					},
+					{
+						"name": "Type_equipement",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Date_ope",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Name",
+						"type": "varchar"
+					},
+					{
+						"name": "Guid",
+						"type": "uniqueidentifier"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EIS779_atlas"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SQLPocTec')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SQLTECData')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SQLPocTec",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "FaultId",
+						"type": "varchar"
+					},
+					{
+						"name": "FaultCustomerName",
+						"type": "varchar"
+					},
+					{
+						"name": "FaultDesc",
+						"type": "varchar"
+					},
+					{
+						"name": "Date",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "TECData"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SQLPocTec')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SQLTEC')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SQLPocTec",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "FaultId",
+						"type": "varchar"
+					},
+					{
+						"name": "FaultCustomerName",
+						"type": "varchar"
+					},
+					{
+						"name": "FaultDesc",
+						"type": "varchar"
+					},
+					{
+						"name": "Date",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "TECData"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SQLPocTec')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SQLValidations')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SQLPocTec",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "FaultId",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "FaultDesc",
+						"type": "varchar"
+					},
+					{
+						"name": "FaultCustomerNumber",
+						"type": "varchar"
+					},
+					{
+						"name": "Date",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Validations"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SQLPocTec')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DataflowSQLEIS779')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SQLPocTec",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Code_segment",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EIS779"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SQLPocTec')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SQLSegment0')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SQLPocTec",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Code_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Plateforme",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EIS779_SEGMENT_000"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SQLPocTec')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SQLSegment1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SQLPocTec",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Code_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Poste_segment",
+						"type": "varchar"
+					},
+					{
+						"name": "Id_transaction",
+						"type": "varchar"
+					},
+					{
+						"name": "Date_ope",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Type_equipement",
+						"type": "varchar"
+					},
+					{
+						"name": "Num_syst_emetteur",
+						"type": "nchar"
+					},
+					{
+						"name": "CEB",
+						"type": "varchar"
+					},
+					{
+						"name": "Num_serie",
+						"type": "nchar"
+					},
+					{
+						"name": "Num_service",
+						"type": "varchar"
+					},
+					{
+						"name": "Code_user",
+						"type": "nchar"
+					},
+					{
+						"name": "Compagnie_agent",
+						"type": "nchar"
+					},
+					{
+						"name": "Type_emplacement",
+						"type": "char"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EIS779_SEGMENT_001"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SQLPocTec')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SQLSegment2')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SQLPocTec",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Code_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Poste_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_transaction",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_oper_vente",
+						"type": "nchar"
+					},
+					{
+						"name": "Type_mvt",
+						"type": "nchar"
+					},
+					{
+						"name": "Categ_produit",
+						"type": "nchar"
+					},
+					{
+						"name": "Num_produit",
+						"type": "nchar"
+					},
+					{
+						"name": "Num_article",
+						"type": "nchar"
+					},
+					{
+						"name": "Num_unicite",
+						"type": "nchar"
+					},
+					{
+						"name": "Num_serie",
+						"type": "nchar"
+					},
+					{
+						"name": "Num_contrat",
+						"type": "nchar"
+					},
+					{
+						"name": "Num_serie_prev",
+						"type": "nchar"
+					},
+					{
+						"name": "Date_Debut",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Date_Fin",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Id_entreprise",
+						"type": "nchar"
+					},
+					{
+						"name": "Montant_part_tiers",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Quantité",
+						"type": "nchar"
+					},
+					{
+						"name": "TauxTVA_an",
+						"type": "nchar"
+					},
+					{
+						"name": "Montant_global_vente",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Nb_jetons",
+						"type": "nchar"
+					},
+					{
+						"name": "Nb_jetons_avant",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_convention",
+						"type": "nchar"
+					},
+					{
+						"name": "Libelle_convention",
+						"type": "varchar"
+					},
+					{
+						"name": "Num_mobib",
+						"type": "nchar"
+					},
+					{
+						"name": "Code_article",
+						"type": "varchar"
+					},
+					{
+						"name": "Num_reseau_produit",
+						"type": "nchar"
+					},
+					{
+						"name": "Num_contrat_prev",
+						"type": "nchar"
+					},
+					{
+						"name": "Num_commande",
+						"type": "varchar"
+					},
+					{
+						"name": "Num_elt_commande",
+						"type": "varchar"
+					},
+					{
+						"name": "Type_elt_commande",
+						"type": "nchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EIS779_SEGMENT_002"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SQLPocTec')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SQLSegment3')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SQLPocTec",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Code_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Poste_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_transaction",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_paiement",
+						"type": "nchar"
+					},
+					{
+						"name": "Code_moyen_paiement",
+						"type": "nchar"
+					},
+					{
+						"name": "Sens_paiement",
+						"type": "varchar"
+					},
+					{
+						"name": "Montant",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Id_entreprise",
+						"type": "nchar"
+					},
+					{
+						"name": "Comm_struct",
+						"type": "char"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EIS779_SEGMENT_003"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SQLPocTec')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTable3')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase8",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Code_segment",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EIS779"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase8')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SQLSegment4')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SQLPocTec",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Code_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Poste_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_transaction",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_paiement",
+						"type": "nchar"
+					},
+					{
+						"name": "Code_moyen_paiement",
+						"type": "nchar"
+					},
+					{
+						"name": "Sens_paiement",
+						"type": "varchar"
+					},
+					{
+						"name": "Montant",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Hardware_type",
+						"type": "nchar"
+					},
+					{
+						"name": "Mode_TPV",
+						"type": "nchar"
+					},
+					{
+						"name": "Brand_id",
+						"type": "varchar"
+					},
+					{
+						"name": "Machine_number",
+						"type": "nchar"
+					},
+					{
+						"name": "Pdv_clct_nr",
+						"type": "nchar"
+					},
+					{
+						"name": "Pdv_gen_tx_nb",
+						"type": "varchar"
+					},
+					{
+						"name": "Transaction_identifier",
+						"type": "varchar"
+					},
+					{
+						"name": "Dateh_tpe",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Auth_code",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EIS779_SEGMENT_004"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SQLPocTec')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SQLSegment5')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SQLPocTec",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Code_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Poste_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_transaction",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_paiement",
+						"type": "nchar"
+					},
+					{
+						"name": "TransactionReference",
+						"type": "varchar"
+					},
+					{
+						"name": "TransactionDateTime",
+						"type": "varchar"
+					},
+					{
+						"name": "Sens_paiement",
+						"type": "varchar"
+					},
+					{
+						"name": "StatementReference",
+						"type": "varchar"
+					},
+					{
+						"name": "PaymentMeanBrand",
+						"type": "varchar"
+					},
+					{
+						"name": "ValueDate",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Amount",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "AuthorizationId",
+						"type": "varchar"
+					},
+					{
+						"name": "MerchantId",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EIS779_SEGMENT_005"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SQLPocTec')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTable4')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase9",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Code_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Plateforme",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EIS779_SEGMENT_000"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase9')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTable5')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase10",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EIS779_SEGMENT_001"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase10')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTable6')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase11",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Code_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Poste_segment",
+						"type": "varchar"
+					},
+					{
+						"name": "Id_transaction",
+						"type": "varchar"
+					},
+					{
+						"name": "Date_ope",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Type_equipement",
+						"type": "varchar"
+					},
+					{
+						"name": "Num_syst_emetteur",
+						"type": "nchar"
+					},
+					{
+						"name": "CEB",
+						"type": "varchar"
+					},
+					{
+						"name": "Num_serie",
+						"type": "nchar"
+					},
+					{
+						"name": "Num_service",
+						"type": "varchar"
+					},
+					{
+						"name": "Code_user",
+						"type": "nchar"
+					},
+					{
+						"name": "Compagnie_agent",
+						"type": "nchar"
+					},
+					{
+						"name": "Type_emplacement",
+						"type": "char"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EIS779_SEGMENT_001"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase11')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTable7')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase12",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Code_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Poste_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_transaction",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_oper_vente",
+						"type": "nchar"
+					},
+					{
+						"name": "Type_mvt",
+						"type": "nchar"
+					},
+					{
+						"name": "Categ_produit",
+						"type": "nchar"
+					},
+					{
+						"name": "Num_produit",
+						"type": "nchar"
+					},
+					{
+						"name": "Num_article",
+						"type": "nchar"
+					},
+					{
+						"name": "Num_unicite",
+						"type": "nchar"
+					},
+					{
+						"name": "Num_serie",
+						"type": "nchar"
+					},
+					{
+						"name": "Num_contrat",
+						"type": "nchar"
+					},
+					{
+						"name": "Num_serie_prev",
+						"type": "nchar"
+					},
+					{
+						"name": "Date_Debut",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Date_Fin",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Id_entreprise",
+						"type": "nchar"
+					},
+					{
+						"name": "Montant_part_tiers",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Quantité",
+						"type": "nchar"
+					},
+					{
+						"name": "TauxTVA_an",
+						"type": "nchar"
+					},
+					{
+						"name": "Montant_global_vente",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Nb_jetons",
+						"type": "nchar"
+					},
+					{
+						"name": "Nb_jetons_avant",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_convention",
+						"type": "nchar"
+					},
+					{
+						"name": "Libelle_convention",
+						"type": "varchar"
+					},
+					{
+						"name": "Num_mobib",
+						"type": "nchar"
+					},
+					{
+						"name": "Code_article",
+						"type": "varchar"
+					},
+					{
+						"name": "Num_reseau_produit",
+						"type": "nchar"
+					},
+					{
+						"name": "Num_contrat_prev",
+						"type": "nchar"
+					},
+					{
+						"name": "Num_commande",
+						"type": "varchar"
+					},
+					{
+						"name": "Num_elt_commande",
+						"type": "varchar"
+					},
+					{
+						"name": "Type_elt_commande",
+						"type": "nchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EIS779_SEGMENT_002"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase12')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTable8')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase13",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Code_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Poste_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_transaction",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_paiement",
+						"type": "nchar"
+					},
+					{
+						"name": "Code_moyen_paiement",
+						"type": "nchar"
+					},
+					{
+						"name": "Sens_paiement",
+						"type": "varchar"
+					},
+					{
+						"name": "Montant",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Id_entreprise",
+						"type": "nchar"
+					},
+					{
+						"name": "Comm_struct",
+						"type": "char"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EIS779_SEGMENT_003"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase13')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTable9')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase14",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Code_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Poste_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_transaction",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_paiement",
+						"type": "nchar"
+					},
+					{
+						"name": "TransactionReference",
+						"type": "varchar"
+					},
+					{
+						"name": "TransactionDateTime",
+						"type": "varchar"
+					},
+					{
+						"name": "Sens_paiement",
+						"type": "varchar"
+					},
+					{
+						"name": "StatementReference",
+						"type": "varchar"
+					},
+					{
+						"name": "PaymentMeanBrand",
+						"type": "varchar"
+					},
+					{
+						"name": "ValueDate",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Amount",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "AuthorizationId",
+						"type": "varchar"
+					},
+					{
+						"name": "MerchantId",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EIS779_SEGMENT_005"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase14')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Binary1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Sftp1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "SftpLocation",
+						"fileName": "KeyGeneratorSmall.png",
+						"folderPath": "/pub/example"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Sftp1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Binary2')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage4",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "tec-unzip"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage4')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Binary3')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage4",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "004_REC_20200319_00001_04.csv",
+						"container": "tec-unzip"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage4')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Binary4')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage4",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "004_REC.7z",
+						"folderPath": "Validation/Zip",
+						"container": "tec-zip"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage4')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Binary6')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureDataLakeStore1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureDataLakeStoreLocation",
+						"fileName": "004_REC.7z",
+						"folderPath": "Datatest"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStore1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Binary8')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage4",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "tec-unzip"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage4')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Binary9')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureDataLakeStore3",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureDataLakeStoreLocation",
+						"folderPath": "Datatest"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStore3')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Contact')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Dynamics POC2",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DynamicsEntity",
+				"schema": [],
+				"typeProperties": {
+					"entityName": "contact"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Dynamics POC2')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ADLSCSV')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ADLSGen2",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "004_REC_20200319_00001_04.csv",
+						"folderPath": "7Zfiles",
+						"fileSystem": "poc-tec"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ADLSGen2')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ADLSV2CSV')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ADLSGen2",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "TECSourceData.csv",
+						"folderPath": "Validations",
+						"fileSystem": "poc-tec"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ADLSGen2')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DestinationDataset_45e')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage4",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "test.7z",
+						"container": "tec-unzip"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage4')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DestinationDataset_4bj')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage3",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "test",
+						"container": "tec-zip"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage3')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DestinationDataset_a7r')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase2",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "FaultId",
+						"type": "int",
+						"precision": 10,
+						"scale": 0
+					},
+					{
+						"name": "FaultDesc",
+						"type": "varchar",
+						"precision": 0,
+						"scale": 0
+					},
+					{
+						"name": "FaultCustomerNumber",
+						"type": "varchar",
+						"precision": 0,
+						"scale": 0
+					},
+					{
+						"name": "Date",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "TECData"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase2')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DestinationDataset_acb')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage4",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "test",
+						"container": "tec-zip"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage4')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DestinationDataset_fqt')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage3",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": "Validation",
+						"container": "tec-zip"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage3')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DestinationDataset_ji6')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage4",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "004_REC_20200319_00001_04.7z",
+						"container": "tec-zip"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage4')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DestinationDataset_rpo')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureDataLakeStore3",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureDataLakeStoreLocation"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStore3')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DestinationDataset_u7p')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Dynamics POC2",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DynamicsEntity",
+				"schema": [],
+				"typeProperties": {
+					"entityName": "contact"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Dynamics POC2')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DestinationDataset_z8h')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage4",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "tec-zip"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage4')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/tecdevcrmconnection')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "TecDevCRM",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DynamicsCrmEntity",
+				"schema": [],
+				"typeProperties": {
+					"entityName": "tec_eis779atlas"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/TecDevCRM')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SourceDataset_45e')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Sftp2",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "SftpLocation",
+						"fileName": "WinFormClient.png",
+						"folderPath": "/pub/example"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Sftp2')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SourceDataset_4bj')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Sftp1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "SftpLocation",
+						"fileName": "pop3-console-client.png",
+						"folderPath": "/pub/example"
+					},
+					"columnDelimiter": ",",
+					"rowDelimiter": "\n",
+					"escapeChar": "\\",
+					"firstRowAsHeader": false,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Sftp1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SourceDataset_a7r')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "linkedService1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureDataLakeStoreLocation",
+						"fileName": "TECData.csv",
+						"folderPath": "Outputs"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": false,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/linkedService1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SourceDataset_acb')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Sftp1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "SftpLocation",
+						"fileName": "ResumableTransfer.png",
+						"folderPath": "/pub/example"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Sftp1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SourceDataset_fqt')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage2",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "004_REC_20200319_00001_04.7z",
+						"folderPath": "Validation/Zip",
+						"container": "tec-zip"
+					},
+					"columnDelimiter": ",",
+					"rowDelimiter": "\n",
+					"escapeChar": "\\",
+					"firstRowAsHeader": false,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage2')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SourceDataset_ji6')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureDataLakeStore3",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureDataLakeStoreLocation",
+						"fileName": "004_REC.7z",
+						"folderPath": "Datatest"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStore3')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SourceDataset_rpo')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage4",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "004_REC_20200319_00001_04.7z",
+						"container": "tec-zip"
+					},
+					"columnDelimiter": ",",
+					"rowDelimiter": "\n",
+					"escapeChar": "\\",
+					"firstRowAsHeader": false,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage4')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SourceDataset_u7p')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase2",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "FaultId",
+						"type": "int",
+						"precision": 10,
+						"scale": 0
+					},
+					{
+						"name": "FaultDesc",
+						"type": "varchar",
+						"precision": 0,
+						"scale": 0
+					},
+					{
+						"name": "FaultCustomerNumber",
+						"type": "varchar",
+						"precision": 0,
+						"scale": 0
+					},
+					{
+						"name": "Date",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "TECData"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase2')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SourceDataset_z8h')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Sftp1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "SftpLocation",
+						"fileName": "WinFormClient.png",
+						"folderPath": "/pub/example"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Sftp1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/UnzipFile')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ADLS_Poc_Tec",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureDataLakeStoreLocation",
+						"folderPath": "PocTecUnzip"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ADLS_Poc_Tec')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ZipFile')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ADLS_Poc_Tec",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureDataLakeStoreLocation",
+						"folderPath": "PocTecZip"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ADLS_Poc_Tec')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ADLS_Poc_Tec')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureDataLakeStore",
+				"typeProperties": {
+					"dataLakeStoreUri": "[parameters('ADLS_Poc_Tec_properties_typeProperties_dataLakeStoreUri')]",
+					"servicePrincipalId": "[parameters('ADLS_Poc_Tec_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('ADLS_Poc_Tec_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('ADLS_Poc_Tec_properties_typeProperties_tenant')]",
+					"subscriptionId": "[parameters('ADLS_Poc_Tec_properties_typeProperties_subscriptionId')]",
+					"resourceGroupName": "[parameters('ADLS_Poc_Tec_properties_typeProperties_resourceGroupName')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage2')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureBlobStorage2_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage3')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureBlobStorage3_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage4')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureBlobStorage4_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureDataLakeAnalytics1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureDataLakeAnalytics",
+				"typeProperties": {
+					"accountName": "[parameters('AzureDataLakeAnalytics1_properties_typeProperties_accountName')]",
+					"servicePrincipalId": "[parameters('AzureDataLakeAnalytics1_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureDataLakeAnalytics1_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('AzureDataLakeAnalytics1_properties_typeProperties_tenant')]",
+					"subscriptionId": "[parameters('AzureDataLakeAnalytics1_properties_typeProperties_subscriptionId')]",
+					"resourceGroupName": "[parameters('AzureDataLakeAnalytics1_properties_typeProperties_resourceGroupName')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureDataLakeStore1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureDataLakeStore",
+				"typeProperties": {
+					"dataLakeStoreUri": "[parameters('AzureDataLakeStore1_properties_typeProperties_dataLakeStoreUri')]",
+					"servicePrincipalId": "[parameters('AzureDataLakeStore1_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureDataLakeStore1_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('AzureDataLakeStore1_properties_typeProperties_tenant')]",
+					"subscriptionId": "[parameters('AzureDataLakeStore1_properties_typeProperties_subscriptionId')]",
+					"resourceGroupName": "[parameters('AzureDataLakeStore1_properties_typeProperties_resourceGroupName')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureDataLakeStore2')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureDataLakeStore",
+				"typeProperties": {
+					"dataLakeStoreUri": "[parameters('AzureDataLakeStore2_properties_typeProperties_dataLakeStoreUri')]",
+					"servicePrincipalId": "[parameters('AzureDataLakeStore2_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureDataLakeStore2_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('AzureDataLakeStore2_properties_typeProperties_tenant')]",
+					"subscriptionId": "[parameters('AzureDataLakeStore2_properties_typeProperties_subscriptionId')]",
+					"resourceGroupName": "[parameters('AzureDataLakeStore2_properties_typeProperties_resourceGroupName')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureDataLakeStore3')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureDataLakeStore",
+				"typeProperties": {
+					"dataLakeStoreUri": "[parameters('AzureDataLakeStore3_properties_typeProperties_dataLakeStoreUri')]",
+					"servicePrincipalId": "[parameters('AzureDataLakeStore3_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureDataLakeStore3_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('AzureDataLakeStore3_properties_typeProperties_tenant')]",
+					"subscriptionId": "[parameters('AzureDataLakeStore3_properties_typeProperties_subscriptionId')]",
+					"resourceGroupName": "[parameters('AzureDataLakeStore3_properties_typeProperties_resourceGroupName')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureDataLakeStore4')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureDataLakeStore",
+				"typeProperties": {
+					"dataLakeStoreUri": "[parameters('AzureDataLakeStore4_properties_typeProperties_dataLakeStoreUri')]",
+					"servicePrincipalId": "[parameters('AzureDataLakeStore4_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureDataLakeStore4_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('AzureDataLakeStore4_properties_typeProperties_tenant')]",
+					"subscriptionId": "[parameters('AzureDataLakeStore4_properties_typeProperties_subscriptionId')]",
+					"resourceGroupName": "[parameters('AzureDataLakeStore4_properties_typeProperties_resourceGroupName')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureDataLakeStore5')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureDataLakeStore",
+				"typeProperties": {
+					"dataLakeStoreUri": "[parameters('AzureDataLakeStore5_properties_typeProperties_dataLakeStoreUri')]",
+					"servicePrincipalId": "[parameters('AzureDataLakeStore5_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureDataLakeStore5_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('AzureDataLakeStore5_properties_typeProperties_tenant')]",
+					"subscriptionId": "[parameters('AzureDataLakeStore5_properties_typeProperties_subscriptionId')]",
+					"resourceGroupName": "[parameters('AzureDataLakeStore5_properties_typeProperties_resourceGroupName')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase10')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase10_connectionString')]",
+					"servicePrincipalId": "[parameters('AzureSqlDatabase10_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureSqlDatabase10_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('AzureSqlDatabase10_properties_typeProperties_tenant')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase11')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase11_connectionString')]",
+					"servicePrincipalId": "[parameters('AzureSqlDatabase11_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureSqlDatabase11_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('AzureSqlDatabase11_properties_typeProperties_tenant')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase12')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase12_connectionString')]",
+					"servicePrincipalId": "[parameters('AzureSqlDatabase12_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureSqlDatabase12_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('AzureSqlDatabase12_properties_typeProperties_tenant')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase13')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase13_connectionString')]",
+					"servicePrincipalId": "[parameters('AzureSqlDatabase13_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureSqlDatabase13_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('AzureSqlDatabase13_properties_typeProperties_tenant')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase14')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase14_connectionString')]",
+					"servicePrincipalId": "[parameters('AzureSqlDatabase14_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureSqlDatabase14_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('AzureSqlDatabase14_properties_typeProperties_tenant')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase15')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase15_connectionString')]",
+					"servicePrincipalId": "[parameters('AzureSqlDatabase15_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureSqlDatabase15_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('AzureSqlDatabase15_properties_typeProperties_tenant')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase16')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase16_connectionString')]",
+					"servicePrincipalId": "[parameters('AzureSqlDatabase16_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureSqlDatabase16_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('AzureSqlDatabase16_properties_typeProperties_tenant')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase17')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase17_connectionString')]",
+					"servicePrincipalId": "[parameters('AzureSqlDatabase17_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureSqlDatabase17_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('AzureSqlDatabase17_properties_typeProperties_tenant')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase18')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase18_connectionString')]",
+					"servicePrincipalId": "[parameters('AzureSqlDatabase18_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureSqlDatabase18_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('AzureSqlDatabase18_properties_typeProperties_tenant')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase19')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase19_connectionString')]",
+					"servicePrincipalId": "[parameters('AzureSqlDatabase19_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureSqlDatabase19_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('AzureSqlDatabase19_properties_typeProperties_tenant')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase2')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase2_connectionString')]",
+					"servicePrincipalId": "[parameters('AzureSqlDatabase2_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureSqlDatabase2_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('AzureSqlDatabase2_properties_typeProperties_tenant')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase20')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase20_connectionString')]",
+					"servicePrincipalId": "[parameters('AzureSqlDatabase20_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureSqlDatabase20_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('AzureSqlDatabase20_properties_typeProperties_tenant')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase21')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase21_connectionString')]",
+					"servicePrincipalId": "[parameters('AzureSqlDatabase21_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureSqlDatabase21_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('AzureSqlDatabase21_properties_typeProperties_tenant')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase22')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase22_connectionString')]",
+					"servicePrincipalId": "[parameters('AzureSqlDatabase22_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureSqlDatabase22_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('AzureSqlDatabase22_properties_typeProperties_tenant')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase23')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase23_connectionString')]",
+					"servicePrincipalId": "[parameters('AzureSqlDatabase23_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureSqlDatabase23_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('AzureSqlDatabase23_properties_typeProperties_tenant')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase24')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase24_connectionString')]",
+					"servicePrincipalId": "[parameters('AzureSqlDatabase24_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureSqlDatabase24_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('AzureSqlDatabase24_properties_typeProperties_tenant')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase25')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase25_connectionString')]",
+					"servicePrincipalId": "[parameters('AzureSqlDatabase25_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureSqlDatabase25_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('AzureSqlDatabase25_properties_typeProperties_tenant')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase26')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase26_connectionString')]",
+					"servicePrincipalId": "[parameters('AzureSqlDatabase26_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureSqlDatabase26_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('AzureSqlDatabase26_properties_typeProperties_tenant')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase27')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase27_connectionString')]",
+					"servicePrincipalId": "[parameters('AzureSqlDatabase27_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureSqlDatabase27_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('AzureSqlDatabase27_properties_typeProperties_tenant')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase28')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase28_connectionString')]",
+					"servicePrincipalId": "[parameters('AzureSqlDatabase28_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureSqlDatabase28_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('AzureSqlDatabase28_properties_typeProperties_tenant')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase29')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase29_connectionString')]",
+					"servicePrincipalId": "[parameters('AzureSqlDatabase29_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureSqlDatabase29_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('AzureSqlDatabase29_properties_typeProperties_tenant')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase3')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase3_connectionString')]",
+					"servicePrincipalId": "[parameters('AzureSqlDatabase3_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureSqlDatabase3_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('AzureSqlDatabase3_properties_typeProperties_tenant')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase30')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase30_connectionString')]",
+					"servicePrincipalId": "[parameters('AzureSqlDatabase30_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureSqlDatabase30_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('AzureSqlDatabase30_properties_typeProperties_tenant')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase31')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase31_connectionString')]",
+					"servicePrincipalId": "[parameters('AzureSqlDatabase31_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureSqlDatabase31_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('AzureSqlDatabase31_properties_typeProperties_tenant')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase32')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase32_connectionString')]",
+					"servicePrincipalId": "[parameters('AzureSqlDatabase32_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureSqlDatabase32_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('AzureSqlDatabase32_properties_typeProperties_tenant')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase33')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase33_connectionString')]",
+					"servicePrincipalId": "[parameters('AzureSqlDatabase33_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureSqlDatabase33_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('AzureSqlDatabase33_properties_typeProperties_tenant')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase34')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase34_connectionString')]",
+					"servicePrincipalId": "[parameters('AzureSqlDatabase34_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureSqlDatabase34_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('AzureSqlDatabase34_properties_typeProperties_tenant')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase35')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase35_connectionString')]",
+					"servicePrincipalId": "[parameters('AzureSqlDatabase35_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureSqlDatabase35_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('AzureSqlDatabase35_properties_typeProperties_tenant')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase36')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase36_connectionString')]",
+					"servicePrincipalId": "[parameters('AzureSqlDatabase36_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureSqlDatabase36_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('AzureSqlDatabase36_properties_typeProperties_tenant')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase37')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase37_connectionString')]",
+					"servicePrincipalId": "[parameters('AzureSqlDatabase37_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureSqlDatabase37_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('AzureSqlDatabase37_properties_typeProperties_tenant')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase38')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase38_connectionString')]",
+					"servicePrincipalId": "[parameters('AzureSqlDatabase38_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureSqlDatabase38_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('AzureSqlDatabase38_properties_typeProperties_tenant')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase5')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase5_connectionString')]",
+					"servicePrincipalId": "[parameters('AzureSqlDatabase5_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureSqlDatabase5_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('AzureSqlDatabase5_properties_typeProperties_tenant')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase6')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase6_connectionString')]",
+					"servicePrincipalId": "[parameters('AzureSqlDatabase6_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureSqlDatabase6_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('AzureSqlDatabase6_properties_typeProperties_tenant')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase7')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase7_connectionString')]",
+					"servicePrincipalId": "[parameters('AzureSqlDatabase7_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureSqlDatabase7_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('AzureSqlDatabase7_properties_typeProperties_tenant')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase8')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase8_connectionString')]",
+					"servicePrincipalId": "[parameters('AzureSqlDatabase8_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureSqlDatabase8_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('AzureSqlDatabase8_properties_typeProperties_tenant')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase9')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase9_connectionString')]",
+					"servicePrincipalId": "[parameters('AzureSqlDatabase9_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureSqlDatabase9_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('AzureSqlDatabase9_properties_typeProperties_tenant')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Dynamics POC2')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "Dynamics",
+				"typeProperties": {
+					"deploymentType": "Online",
+					"serviceUri": "https://bdlabx-poc2.crm4.dynamics.com/",
+					"authenticationType": "Office365",
+					"username": "[parameters('Dynamics POC2_properties_typeProperties_username')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('Dynamics POC2_password')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DynamicsCrm1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "DynamicsCrm",
+				"typeProperties": {
+					"deploymentType": "Online",
+					"serviceUri": "https://tec-crm-dev.crm4.dynamics.com/",
+					"authenticationType": "Office365",
+					"username": "[parameters('DynamicsCrm1_properties_typeProperties_username')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('DynamicsCrm1_password')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Sftp1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "Sftp",
+				"typeProperties": {
+					"host": "[parameters('Sftp1_properties_typeProperties_host')]",
+					"port": 22,
+					"skipHostKeyValidation": true,
+					"authenticationType": "Basic",
+					"userName": "[parameters('Sftp1_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('Sftp1_password')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Sftp2')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "Sftp",
+				"typeProperties": {
+					"host": "[parameters('Sftp2_properties_typeProperties_host')]",
+					"port": 22,
+					"skipHostKeyValidation": true,
+					"authenticationType": "Basic",
+					"userName": "[parameters('Sftp2_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('Sftp2_password')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SqlServer1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"connectionString": "[parameters('SqlServer1_connectionString')]",
+					"userName": "[parameters('SqlServer1_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('SqlServer1_password')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "integrationRuntime7",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntime7')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/linkedService1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureDataLakeStore",
+				"typeProperties": {
+					"dataLakeStoreUri": "[parameters('linkedService1_properties_typeProperties_dataLakeStoreUri')]",
+					"servicePrincipalId": "[parameters('linkedService1_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('linkedService1_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('linkedService1_properties_typeProperties_tenant')]",
+					"subscriptionId": "[parameters('linkedService1_properties_typeProperties_subscriptionId')]",
+					"resourceGroupName": "[parameters('linkedService1_properties_typeProperties_resourceGroupName')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/linkedService3')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('linkedService3_connectionString')]",
+					"servicePrincipalId": "[parameters('linkedService3_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('linkedService3_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('linkedService3_properties_typeProperties_tenant')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/linkedService4')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureDataLakeStore",
+				"typeProperties": {
+					"dataLakeStoreUri": "[parameters('linkedService4_properties_typeProperties_dataLakeStoreUri')]",
+					"servicePrincipalId": "[parameters('linkedService4_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('linkedService4_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('linkedService4_properties_typeProperties_tenant')]",
+					"subscriptionId": "[parameters('linkedService4_properties_typeProperties_subscriptionId')]",
+					"resourceGroupName": "[parameters('linkedService4_properties_typeProperties_resourceGroupName')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/integrationRuntime1')]",
+			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "SelfHosted",
+				"typeProperties": {}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/integrationRuntime2')]",
+			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "SelfHosted",
+				"typeProperties": {}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/integrationRuntime3')]",
+			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "Managed",
+				"typeProperties": {
+					"computeProperties": {
+						"location": "North Europe",
+						"dataFlowProperties": {
+							"computeType": "General",
+							"coreCount": 8,
+							"timeToLive": 0
+						}
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/integrationRuntime4')]",
+			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "SelfHosted",
+				"typeProperties": {}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/integrationRuntime5')]",
+			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "SelfHosted",
+				"typeProperties": {}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/integrationRuntime6')]",
+			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "SelfHosted",
+				"typeProperties": {}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/integrationRuntime7')]",
+			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "SelfHosted",
+				"typeProperties": {}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/dataflowSegments')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "DataflowSQLEIS779",
+								"type": "DatasetReference"
+							},
+							"name": "dataflowSource"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "SQLSegment0",
+								"type": "DatasetReference"
+							},
+							"name": "SQLSegment0"
+						},
+						{
+							"dataset": {
+								"referenceName": "SQLSegment1",
+								"type": "DatasetReference"
+							},
+							"name": "SQLSegment1"
+						},
+						{
+							"dataset": {
+								"referenceName": "SQLSegment2",
+								"type": "DatasetReference"
+							},
+							"name": "SQLSegment2"
+						},
+						{
+							"dataset": {
+								"referenceName": "SQLSegment3",
+								"type": "DatasetReference"
+							},
+							"name": "SQLSegment3"
+						},
+						{
+							"dataset": {
+								"referenceName": "SQLSegment4",
+								"type": "DatasetReference"
+							},
+							"name": "SQLSegment4"
+						},
+						{
+							"dataset": {
+								"referenceName": "SQLSegment5",
+								"type": "DatasetReference"
+							},
+							"name": "SQLSegment5"
+						}
+					],
+					"transformations": [
+						{
+							"name": "ConditionalSplit"
+						},
+						{
+							"name": "DerivedColumnSeg0"
+						},
+						{
+							"name": "DerivedColumnSeg1"
+						},
+						{
+							"name": "DerivedColumnSeg2"
+						},
+						{
+							"name": "DerivedColumnSeg3"
+						},
+						{
+							"name": "DerivedColumnseg5"
+						},
+						{
+							"name": "DerivedColumnSeg4"
+						}
+					],
+					"script": "source(output(\n\t\tCode_segment as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> dataflowSource\ndataflowSource split(like(Code_segment,'000%'),\n\tlike(Code_segment,'005%'),\n\tlike(Code_segment,'004%'),\n\tlike(Code_segment,'003%'),\n\tlike(Code_segment,'002%'),\n\tlike(Code_segment,'001%'),\n\tdisjoint: true,\n\tpartitionBy('roundRobin', 2)) ~> ConditionalSplit@(Segment0, Segment5, Segment4, Segment3, Segment2, Segment1, Others)\nConditionalSplit@Segment0 derive(Column1 = split(Code_segment,';')[1],\n\t\tColumn2 = split(Code_segment,';')[2]) ~> DerivedColumnSeg0\nConditionalSplit@Segment1 derive(Column1 = split(Code_segment,';')[1],\n\t\tColumn2 = split(Code_segment,';')[2],\n\t\tColumn3 = split(Code_segment,';')[3],\n\t\tColumn4 = currentUTC(),\n\t\tColumn5 = split(Code_segment,';')[5],\n\t\tColumn6 = split(Code_segment,';')[6],\n\t\tColumn7 = split(Code_segment,';')[7],\n\t\tColumn8 = split(Code_segment,';')[8],\n\t\tColumn9 = split(Code_segment,';')[9],\n\t\tColumn10 = split(Code_segment,';')[10],\n\t\tColumn11 = split(Code_segment,';')[11],\n\t\tColumn12 = split(Code_segment,';')[12]) ~> DerivedColumnSeg1\nConditionalSplit@Segment2 derive(Column1 = split(Code_segment,';')[1],\n\t\tColumn2 = split(Code_segment,';')[2],\n\t\tColumn3 = split(Code_segment,';')[3],\n\t\tColumn4 = split(Code_segment,';')[4],\n\t\tColumn5 = split(Code_segment,';')[5],\n\t\tColumn6 = split(Code_segment,';')[6],\n\t\tColumn7 = split(Code_segment,';')[7],\n\t\tColumn8 = split(Code_segment,';')[8],\n\t\tColumn9 = split(Code_segment,';')[9],\n\t\tColumn10 = split(Code_segment,';')[10],\n\t\tColumn11 = split(Code_segment,';')[11],\n\t\tColumn12 = split(Code_segment,';')[12],\n\t\tColumn13 = currentUTC(),\n\t\tColumn14 = currentUTC(),\n\t\tColumn15 = split(Code_segment,';')[15],\n\t\tColumn16 = split(Code_segment,';')[16],\n\t\tColumn17 = split(Code_segment,';')[17],\n\t\tColumn18 = split(Code_segment,';')[18],\n\t\tColumn19 = split(Code_segment,';')[19],\n\t\tColumn20 = split(Code_segment,';')[20],\n\t\tColumn21 = split(Code_segment,';')[21],\n\t\tColumn22 = split(Code_segment,';')[22],\n\t\tColumn23 = split(Code_segment,';')[23],\n\t\tColumn24 = split(Code_segment,';')[24],\n\t\tColumn25 = split(Code_segment,';')[25],\n\t\tColumn26 = split(Code_segment,';')[26],\n\t\tColumn27 = split(Code_segment,';')[27],\n\t\tColumn28 = split(Code_segment,';')[28],\n\t\tColumn29 = split(Code_segment,';')[29],\n\t\tColumn30 = split(Code_segment,';')[30]) ~> DerivedColumnSeg2\nConditionalSplit@Segment3 derive(Column1 = split(Code_segment,';')[1],\n\t\tColumn2 = split(Code_segment,';')[2],\n\t\tColumn3 = split(Code_segment,';')[3],\n\t\tColumn4 = split(Code_segment,';')[4],\n\t\tColumn5 = split(Code_segment,';')[5],\n\t\tColumn6 = split(Code_segment,';')[6],\n\t\tColumn7 = split(Code_segment,';')[7],\n\t\tColumn8 = split(Code_segment,';')[8],\n\t\tColumn9 = split(Code_segment,';')[9]) ~> DerivedColumnSeg3\nConditionalSplit@Segment5 derive(Column1 = split(Code_segment,';')[1],\n\t\tColumn2 = split(Code_segment,';')[2],\n\t\tColumn3 = split(Code_segment,';')[3],\n\t\tColumn4 = split(Code_segment,';')[4],\n\t\tColumn5 = split(Code_segment,';')[5],\n\t\tColumn6 = split(Code_segment,';')[6],\n\t\tColumn7 = split(Code_segment,';')[7],\n\t\tColumn8 = split(Code_segment,';')[8],\n\t\tColumn9 = split(Code_segment,';')[9],\n\t\tColumn10 = currentUTC(),\n\t\tColumn11 = split(Code_segment,';')[11],\n\t\tColumn12 = split(Code_segment,';')[12],\n\t\tColumn13 = split(Code_segment,';')[13]) ~> DerivedColumnseg5\nConditionalSplit@Segment4 derive(Column1 = split(Code_segment,';')[1],\n\t\tColumn2 = split(Code_segment,';')[2],\n\t\tColumn3 = split(Code_segment,';')[3],\n\t\tColumn4 = split(Code_segment,';')[4],\n\t\tColumn5 = split(Code_segment,';')[5],\n\t\tColumn6 = split(Code_segment,';')[6],\n\t\tColumn7 = split(Code_segment,';')[7],\n\t\tColumn8 = split(Code_segment,';')[8],\n\t\tColumn9 = split(Code_segment,';')[9],\n\t\tColumn10 = split(Code_segment,';')[10],\n\t\tColumn11 = split(Code_segment,';')[11],\n\t\tColumn12 = split(Code_segment,';')[12],\n\t\tColumn13 = split(Code_segment,';')[13],\n\t\tColumn14 = split(Code_segment,';')[14],\n\t\tColumn15 = currentUTC(),\n\t\tColumn16 = split(Code_segment,';')[16]) ~> DerivedColumnSeg4\nDerivedColumnSeg0 sink(input(\n\t\tCode_segment as string,\n\t\tPlateforme as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tmapColumn(\n\t\tCode_segment = Column1,\n\t\tPlateforme = Column2\n\t)) ~> SQLSegment0\nDerivedColumnSeg1 sink(input(\n\t\tCode_segment as string,\n\t\tPoste_segment as string,\n\t\tId_transaction as string,\n\t\tDate_ope as timestamp,\n\t\tType_equipement as string,\n\t\tNum_syst_emetteur as string,\n\t\tCEB as string,\n\t\tNum_serie as string,\n\t\tNum_service as string,\n\t\tCode_user as string,\n\t\tCompagnie_agent as string,\n\t\tType_emplacement as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tmapColumn(\n\t\tCode_segment = Column1,\n\t\tPoste_segment = Column2,\n\t\tId_transaction = Column3,\n\t\tDate_ope = Column4,\n\t\tType_equipement = Column5,\n\t\tNum_syst_emetteur = Column6,\n\t\tCEB = Column7,\n\t\tNum_serie = Column8,\n\t\tNum_service = Column9,\n\t\tCode_user = Column10,\n\t\tCompagnie_agent = Column11,\n\t\tType_emplacement = Column12\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SQLSegment1\nDerivedColumnSeg2 sink(input(\n\t\tCode_segment as string,\n\t\tPoste_segment as string,\n\t\tId_transaction as string,\n\t\tId_oper_vente as string,\n\t\tType_mvt as string,\n\t\tCateg_produit as string,\n\t\tNum_produit as string,\n\t\tNum_article as string,\n\t\tNum_unicite as string,\n\t\tNum_serie as string,\n\t\tNum_contrat as string,\n\t\tNum_serie_prev as string,\n\t\tDate_Debut as timestamp,\n\t\tDate_Fin as timestamp,\n\t\tId_entreprise as string,\n\t\tMontant_part_tiers as double,\n\t\t{Quantité} as string,\n\t\tTauxTVA_an as string,\n\t\tMontant_global_vente as double,\n\t\tNb_jetons as string,\n\t\tNb_jetons_avant as string,\n\t\tId_convention as string,\n\t\tLibelle_convention as string,\n\t\tNum_mobib as string,\n\t\tCode_article as string,\n\t\tNum_reseau_produit as string,\n\t\tNum_contrat_prev as string,\n\t\tNum_commande as string,\n\t\tNum_elt_commande as string,\n\t\tType_elt_commande as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tmapColumn(\n\t\tCode_segment = Column1,\n\t\tPoste_segment = Column2,\n\t\tId_transaction = Column3,\n\t\tId_oper_vente = Column4,\n\t\tType_mvt = Column5,\n\t\tCateg_produit = Column6,\n\t\tNum_produit = Column7,\n\t\tNum_article = Column8,\n\t\tNum_unicite = Column9,\n\t\tNum_serie = Column10,\n\t\tNum_contrat = Column11,\n\t\tNum_serie_prev = Column12,\n\t\tDate_Debut = Column13,\n\t\tDate_Fin = Column14,\n\t\tId_entreprise = Column15,\n\t\tMontant_part_tiers = Column16,\n\t\t{Quantité} = Column17,\n\t\tTauxTVA_an = Column18,\n\t\tMontant_global_vente = Column19,\n\t\tNb_jetons = Column20,\n\t\tNb_jetons_avant = Column21,\n\t\tId_convention = Column22,\n\t\tLibelle_convention = Column23,\n\t\tNum_mobib = Column24,\n\t\tCode_article = Column25,\n\t\tNum_reseau_produit = Column26,\n\t\tNum_contrat_prev = Column27,\n\t\tNum_commande = Column28,\n\t\tNum_elt_commande = Column29,\n\t\tType_elt_commande = Column30\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SQLSegment2\nDerivedColumnSeg3 sink(input(\n\t\tCode_segment as string,\n\t\tPoste_segment as string,\n\t\tId_transaction as string,\n\t\tId_paiement as string,\n\t\tCode_moyen_paiement as string,\n\t\tSens_paiement as string,\n\t\tMontant as double,\n\t\tId_entreprise as string,\n\t\tComm_struct as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tmapColumn(\n\t\tCode_segment = Column1,\n\t\tPoste_segment = Column2,\n\t\tId_transaction = Column3,\n\t\tId_paiement = Column4,\n\t\tCode_moyen_paiement = Column5,\n\t\tSens_paiement = Column6,\n\t\tMontant = Column7,\n\t\tId_entreprise = Column8,\n\t\tComm_struct = Column9\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SQLSegment3\nDerivedColumnSeg4 sink(input(\n\t\tCode_segment as string,\n\t\tPoste_segment as string,\n\t\tId_transaction as string,\n\t\tId_paiement as string,\n\t\tCode_moyen_paiement as string,\n\t\tSens_paiement as string,\n\t\tMontant as double,\n\t\tHardware_type as string,\n\t\tMode_TPV as string,\n\t\tBrand_id as string,\n\t\tMachine_number as string,\n\t\tPdv_clct_nr as string,\n\t\tPdv_gen_tx_nb as string,\n\t\tTransaction_identifier as string,\n\t\tDateh_tpe as timestamp,\n\t\tAuth_code as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tmapColumn(\n\t\tCode_segment = Column1,\n\t\tPoste_segment = Column2,\n\t\tId_transaction = Column3,\n\t\tId_paiement = Column4,\n\t\tCode_moyen_paiement = Column5,\n\t\tSens_paiement = Column6,\n\t\tMontant = Column7,\n\t\tHardware_type = Column8,\n\t\tMode_TPV = Column9,\n\t\tBrand_id = Column10,\n\t\tMachine_number = Column11,\n\t\tPdv_clct_nr = Column12,\n\t\tPdv_gen_tx_nb = Column13,\n\t\tTransaction_identifier = Column14,\n\t\tDateh_tpe = Column15,\n\t\tAuth_code = Column16\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SQLSegment4\nDerivedColumnseg5 sink(input(\n\t\tCode_segment as string,\n\t\tPoste_segment as string,\n\t\tId_transaction as string,\n\t\tId_paiement as string,\n\t\tTransactionReference as string,\n\t\tTransactionDateTime as string,\n\t\tSens_paiement as string,\n\t\tStatementReference as string,\n\t\tPaymentMeanBrand as string,\n\t\tValueDate as timestamp,\n\t\tAmount as double,\n\t\tAuthorizationId as string,\n\t\tMerchantId as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tmapColumn(\n\t\tCode_segment = Column1,\n\t\tPoste_segment = Column2,\n\t\tId_transaction = Column3,\n\t\tId_paiement = Column4,\n\t\tTransactionReference = Column5,\n\t\tTransactionDateTime = Column6,\n\t\tSens_paiement = Column7,\n\t\tStatementReference = Column8,\n\t\tPaymentMeanBrand = Column9,\n\t\tValueDate = Column10,\n\t\tAmount = Column11,\n\t\tAuthorizationId = Column12,\n\t\tMerchantId = Column13\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SQLSegment5"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/DataflowSQLEIS779')]",
+				"[concat(variables('factoryId'), '/datasets/SQLSegment0')]",
+				"[concat(variables('factoryId'), '/datasets/SQLSegment1')]",
+				"[concat(variables('factoryId'), '/datasets/SQLSegment2')]",
+				"[concat(variables('factoryId'), '/datasets/SQLSegment3')]",
+				"[concat(variables('factoryId'), '/datasets/SQLSegment4')]",
+				"[concat(variables('factoryId'), '/datasets/SQLSegment5')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ADLSGen2')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('ADLSGen2_properties_typeProperties_url')]",
+					"tenant": "[parameters('ADLSGen2_properties_typeProperties_tenant')]",
+					"servicePrincipalId": "[parameters('ADLSGen2_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('ADLSGen2_servicePrincipalKey')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SQLPocTec')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('SQLPocTec_connectionString')]",
+					"servicePrincipalId": "[parameters('SQLPocTec_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('SQLPocTec_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('SQLPocTec_properties_typeProperties_tenant')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/TecDevCRM')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "DynamicsCrm",
+				"typeProperties": {
+					"deploymentType": "Online",
+					"serviceUri": "https://tec-crm-dev.crm4.dynamics.com",
+					"authenticationType": "Office365",
+					"username": "[parameters('TecDevCRM_properties_typeProperties_username')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('TecDevCRM_password')]"
+					}
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}

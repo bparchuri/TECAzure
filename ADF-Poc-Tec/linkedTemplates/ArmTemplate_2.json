@@ -1,0 +1,552 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "ADF-Poc-Tec"
+		},
+		"AzureSqlDatabase38_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase38'"
+		},
+		"AzureSqlDatabase38_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureSqlDatabase38'"
+		},
+		"AzureSqlDatabase5_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase5'"
+		},
+		"AzureSqlDatabase5_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureSqlDatabase5'"
+		},
+		"AzureSqlDatabase6_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase6'"
+		},
+		"AzureSqlDatabase6_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureSqlDatabase6'"
+		},
+		"AzureSqlDatabase7_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase7'"
+		},
+		"AzureSqlDatabase7_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureSqlDatabase7'"
+		},
+		"AzureSqlDatabase8_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase8'"
+		},
+		"AzureSqlDatabase8_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureSqlDatabase8'"
+		},
+		"AzureSqlDatabase9_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase9'"
+		},
+		"AzureSqlDatabase9_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureSqlDatabase9'"
+		},
+		"Dynamics POC2_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'Dynamics POC2'"
+		},
+		"DynamicsCrm1_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'DynamicsCrm1'"
+		},
+		"Sftp1_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'Sftp1'"
+		},
+		"Sftp2_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'Sftp2'"
+		},
+		"linkedService1_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'linkedService1'"
+		},
+		"linkedService3_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'linkedService3'"
+		},
+		"linkedService3_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'linkedService3'"
+		},
+		"linkedService4_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'linkedService4'"
+		},
+		"AzureSqlDatabase38_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase38_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase5_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase5_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase6_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "af815f86-c897-49ea-9d16-d7448dfe5007"
+		},
+		"AzureSqlDatabase6_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase7_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase7_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase8_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase8_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase9_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase9_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"Dynamics POC2_properties_typeProperties_username": {
+			"type": "string",
+			"defaultValue": "dev01@labx.bdbelux.be"
+		},
+		"DynamicsCrm1_properties_typeProperties_username": {
+			"type": "string",
+			"defaultValue": "Bhargav.Parchuri@letec.be"
+		},
+		"Sftp1_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "test.rebex.net"
+		},
+		"Sftp1_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "demo"
+		},
+		"Sftp2_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "test.rebex.net"
+		},
+		"Sftp2_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "demo"
+		},
+		"linkedService1_properties_typeProperties_dataLakeStoreUri": {
+			"type": "string",
+			"defaultValue": "https://tecdatalakestore.azuredatalakestore.net/webhdfs/v1"
+		},
+		"linkedService1_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "af815f86-c897-49ea-9d16-d7448dfe5007"
+		},
+		"linkedService1_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"linkedService1_properties_typeProperties_subscriptionId": {
+			"type": "string",
+			"defaultValue": "fc5231d7-a1db-4a65-99a6-f6fbdb8c40fa"
+		},
+		"linkedService1_properties_typeProperties_resourceGroupName": {
+			"type": "string",
+			"defaultValue": "DataLake"
+		},
+		"linkedService3_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"linkedService3_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"linkedService4_properties_typeProperties_dataLakeStoreUri": {
+			"type": "string",
+			"defaultValue": "https://teclake.azuredatalakestore.net/webhdfs/v1"
+		},
+		"linkedService4_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "c038161c-8af4-42d6-a627-a13aaf999634"
+		},
+		"linkedService4_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "6e5433e0-76fc-44b7-b71b-0e5446a3fa94"
+		},
+		"linkedService4_properties_typeProperties_subscriptionId": {
+			"type": "string",
+			"defaultValue": "34ba1e1c-f8c4-4630-b179-c38b99516873"
+		},
+		"linkedService4_properties_typeProperties_resourceGroupName": {
+			"type": "string",
+			"defaultValue": "TEC"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase38')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase38_connectionString')]",
+					"servicePrincipalId": "[parameters('AzureSqlDatabase38_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureSqlDatabase38_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('AzureSqlDatabase38_properties_typeProperties_tenant')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase5')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase5_connectionString')]",
+					"servicePrincipalId": "[parameters('AzureSqlDatabase5_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureSqlDatabase5_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('AzureSqlDatabase5_properties_typeProperties_tenant')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase6')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase6_connectionString')]",
+					"servicePrincipalId": "[parameters('AzureSqlDatabase6_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureSqlDatabase6_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('AzureSqlDatabase6_properties_typeProperties_tenant')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase7')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase7_connectionString')]",
+					"servicePrincipalId": "[parameters('AzureSqlDatabase7_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureSqlDatabase7_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('AzureSqlDatabase7_properties_typeProperties_tenant')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase8')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase8_connectionString')]",
+					"servicePrincipalId": "[parameters('AzureSqlDatabase8_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureSqlDatabase8_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('AzureSqlDatabase8_properties_typeProperties_tenant')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase9')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase9_connectionString')]",
+					"servicePrincipalId": "[parameters('AzureSqlDatabase9_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureSqlDatabase9_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('AzureSqlDatabase9_properties_typeProperties_tenant')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Dynamics POC2')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "Dynamics",
+				"typeProperties": {
+					"deploymentType": "Online",
+					"serviceUri": "https://bdlabx-poc2.crm4.dynamics.com/",
+					"authenticationType": "Office365",
+					"username": "[parameters('Dynamics POC2_properties_typeProperties_username')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('Dynamics POC2_password')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DynamicsCrm1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "DynamicsCrm",
+				"typeProperties": {
+					"deploymentType": "Online",
+					"serviceUri": "https://tec-crm-dev.crm4.dynamics.com/",
+					"authenticationType": "Office365",
+					"username": "[parameters('DynamicsCrm1_properties_typeProperties_username')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('DynamicsCrm1_password')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Sftp1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "Sftp",
+				"typeProperties": {
+					"host": "[parameters('Sftp1_properties_typeProperties_host')]",
+					"port": 22,
+					"skipHostKeyValidation": true,
+					"authenticationType": "Basic",
+					"userName": "[parameters('Sftp1_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('Sftp1_password')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Sftp2')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "Sftp",
+				"typeProperties": {
+					"host": "[parameters('Sftp2_properties_typeProperties_host')]",
+					"port": 22,
+					"skipHostKeyValidation": true,
+					"authenticationType": "Basic",
+					"userName": "[parameters('Sftp2_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('Sftp2_password')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/linkedService1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureDataLakeStore",
+				"typeProperties": {
+					"dataLakeStoreUri": "[parameters('linkedService1_properties_typeProperties_dataLakeStoreUri')]",
+					"servicePrincipalId": "[parameters('linkedService1_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('linkedService1_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('linkedService1_properties_typeProperties_tenant')]",
+					"subscriptionId": "[parameters('linkedService1_properties_typeProperties_subscriptionId')]",
+					"resourceGroupName": "[parameters('linkedService1_properties_typeProperties_resourceGroupName')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/linkedService3')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('linkedService3_connectionString')]",
+					"servicePrincipalId": "[parameters('linkedService3_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('linkedService3_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('linkedService3_properties_typeProperties_tenant')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/linkedService4')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureDataLakeStore",
+				"typeProperties": {
+					"dataLakeStoreUri": "[parameters('linkedService4_properties_typeProperties_dataLakeStoreUri')]",
+					"servicePrincipalId": "[parameters('linkedService4_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('linkedService4_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('linkedService4_properties_typeProperties_tenant')]",
+					"subscriptionId": "[parameters('linkedService4_properties_typeProperties_subscriptionId')]",
+					"resourceGroupName": "[parameters('linkedService4_properties_typeProperties_resourceGroupName')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/integrationRuntime1')]",
+			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "SelfHosted",
+				"typeProperties": {}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/integrationRuntime2')]",
+			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "SelfHosted",
+				"typeProperties": {}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/integrationRuntime3')]",
+			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "Managed",
+				"typeProperties": {
+					"computeProperties": {
+						"location": "North Europe",
+						"dataFlowProperties": {
+							"computeType": "General",
+							"coreCount": 8,
+							"timeToLive": 0
+						}
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/integrationRuntime4')]",
+			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "SelfHosted",
+				"typeProperties": {}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/integrationRuntime5')]",
+			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "SelfHosted",
+				"typeProperties": {}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/integrationRuntime6')]",
+			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "SelfHosted",
+				"typeProperties": {}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/integrationRuntime7')]",
+			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "SelfHosted",
+				"typeProperties": {}
+			},
+			"dependsOn": []
+		}
+	]
+}

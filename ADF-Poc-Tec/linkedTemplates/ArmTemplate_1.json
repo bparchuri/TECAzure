@@ -1,0 +1,716 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "ADF-Poc-Tec"
+		},
+		"AzureSqlDatabase2_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase2'"
+		},
+		"AzureSqlDatabase2_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureSqlDatabase2'"
+		},
+		"AzureSqlDatabase20_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase20'"
+		},
+		"AzureSqlDatabase20_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureSqlDatabase20'"
+		},
+		"AzureSqlDatabase21_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase21'"
+		},
+		"AzureSqlDatabase21_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureSqlDatabase21'"
+		},
+		"AzureSqlDatabase22_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase22'"
+		},
+		"AzureSqlDatabase22_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureSqlDatabase22'"
+		},
+		"AzureSqlDatabase23_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase23'"
+		},
+		"AzureSqlDatabase23_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureSqlDatabase23'"
+		},
+		"AzureSqlDatabase24_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase24'"
+		},
+		"AzureSqlDatabase24_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureSqlDatabase24'"
+		},
+		"AzureSqlDatabase25_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase25'"
+		},
+		"AzureSqlDatabase25_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureSqlDatabase25'"
+		},
+		"AzureSqlDatabase26_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase26'"
+		},
+		"AzureSqlDatabase26_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureSqlDatabase26'"
+		},
+		"AzureSqlDatabase27_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase27'"
+		},
+		"AzureSqlDatabase27_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureSqlDatabase27'"
+		},
+		"AzureSqlDatabase28_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase28'"
+		},
+		"AzureSqlDatabase28_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureSqlDatabase28'"
+		},
+		"AzureSqlDatabase29_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase29'"
+		},
+		"AzureSqlDatabase29_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureSqlDatabase29'"
+		},
+		"AzureSqlDatabase3_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase3'"
+		},
+		"AzureSqlDatabase3_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureSqlDatabase3'"
+		},
+		"AzureSqlDatabase30_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase30'"
+		},
+		"AzureSqlDatabase30_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureSqlDatabase30'"
+		},
+		"AzureSqlDatabase31_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase31'"
+		},
+		"AzureSqlDatabase31_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureSqlDatabase31'"
+		},
+		"AzureSqlDatabase32_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase32'"
+		},
+		"AzureSqlDatabase32_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureSqlDatabase32'"
+		},
+		"AzureSqlDatabase33_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase33'"
+		},
+		"AzureSqlDatabase33_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureSqlDatabase33'"
+		},
+		"AzureSqlDatabase34_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase34'"
+		},
+		"AzureSqlDatabase34_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureSqlDatabase34'"
+		},
+		"AzureSqlDatabase35_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase35'"
+		},
+		"AzureSqlDatabase35_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureSqlDatabase35'"
+		},
+		"AzureSqlDatabase36_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase36'"
+		},
+		"AzureSqlDatabase36_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureSqlDatabase36'"
+		},
+		"AzureSqlDatabase37_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase37'"
+		},
+		"AzureSqlDatabase37_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureSqlDatabase37'"
+		},
+		"AzureSqlDatabase2_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase2_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase20_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase20_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase21_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase21_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase22_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase22_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase23_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase23_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase24_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase24_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase25_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase25_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase26_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase26_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase27_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase27_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase28_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase28_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase29_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase29_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase3_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase3_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase30_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase30_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase31_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase31_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase32_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase32_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase33_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase33_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase34_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase34_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase35_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase35_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase36_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase36_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		},
+		"AzureSqlDatabase37_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "40b38216-d5e8-4157-81c8-dfbd2ce3085c"
+		},
+		"AzureSqlDatabase37_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "4b2e8189-3e18-4366-8fed-dd43943ff501"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase2')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase2_connectionString')]",
+					"servicePrincipalId": "[parameters('AzureSqlDatabase2_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureSqlDatabase2_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('AzureSqlDatabase2_properties_typeProperties_tenant')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase20')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase20_connectionString')]",
+					"servicePrincipalId": "[parameters('AzureSqlDatabase20_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureSqlDatabase20_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('AzureSqlDatabase20_properties_typeProperties_tenant')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase21')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase21_connectionString')]",
+					"servicePrincipalId": "[parameters('AzureSqlDatabase21_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureSqlDatabase21_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('AzureSqlDatabase21_properties_typeProperties_tenant')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase22')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase22_connectionString')]",
+					"servicePrincipalId": "[parameters('AzureSqlDatabase22_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureSqlDatabase22_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('AzureSqlDatabase22_properties_typeProperties_tenant')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase23')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase23_connectionString')]",
+					"servicePrincipalId": "[parameters('AzureSqlDatabase23_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureSqlDatabase23_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('AzureSqlDatabase23_properties_typeProperties_tenant')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase24')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase24_connectionString')]",
+					"servicePrincipalId": "[parameters('AzureSqlDatabase24_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureSqlDatabase24_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('AzureSqlDatabase24_properties_typeProperties_tenant')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase25')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase25_connectionString')]",
+					"servicePrincipalId": "[parameters('AzureSqlDatabase25_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureSqlDatabase25_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('AzureSqlDatabase25_properties_typeProperties_tenant')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase26')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase26_connectionString')]",
+					"servicePrincipalId": "[parameters('AzureSqlDatabase26_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureSqlDatabase26_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('AzureSqlDatabase26_properties_typeProperties_tenant')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase27')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase27_connectionString')]",
+					"servicePrincipalId": "[parameters('AzureSqlDatabase27_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureSqlDatabase27_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('AzureSqlDatabase27_properties_typeProperties_tenant')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase28')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase28_connectionString')]",
+					"servicePrincipalId": "[parameters('AzureSqlDatabase28_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureSqlDatabase28_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('AzureSqlDatabase28_properties_typeProperties_tenant')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase29')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase29_connectionString')]",
+					"servicePrincipalId": "[parameters('AzureSqlDatabase29_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureSqlDatabase29_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('AzureSqlDatabase29_properties_typeProperties_tenant')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase3')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase3_connectionString')]",
+					"servicePrincipalId": "[parameters('AzureSqlDatabase3_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureSqlDatabase3_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('AzureSqlDatabase3_properties_typeProperties_tenant')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase30')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase30_connectionString')]",
+					"servicePrincipalId": "[parameters('AzureSqlDatabase30_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureSqlDatabase30_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('AzureSqlDatabase30_properties_typeProperties_tenant')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase31')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase31_connectionString')]",
+					"servicePrincipalId": "[parameters('AzureSqlDatabase31_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureSqlDatabase31_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('AzureSqlDatabase31_properties_typeProperties_tenant')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase32')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase32_connectionString')]",
+					"servicePrincipalId": "[parameters('AzureSqlDatabase32_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureSqlDatabase32_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('AzureSqlDatabase32_properties_typeProperties_tenant')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase33')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase33_connectionString')]",
+					"servicePrincipalId": "[parameters('AzureSqlDatabase33_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureSqlDatabase33_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('AzureSqlDatabase33_properties_typeProperties_tenant')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase34')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase34_connectionString')]",
+					"servicePrincipalId": "[parameters('AzureSqlDatabase34_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureSqlDatabase34_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('AzureSqlDatabase34_properties_typeProperties_tenant')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase35')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase35_connectionString')]",
+					"servicePrincipalId": "[parameters('AzureSqlDatabase35_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureSqlDatabase35_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('AzureSqlDatabase35_properties_typeProperties_tenant')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase36')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase36_connectionString')]",
+					"servicePrincipalId": "[parameters('AzureSqlDatabase36_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureSqlDatabase36_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('AzureSqlDatabase36_properties_typeProperties_tenant')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase37')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase37_connectionString')]",
+					"servicePrincipalId": "[parameters('AzureSqlDatabase37_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureSqlDatabase37_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('AzureSqlDatabase37_properties_typeProperties_tenant')]"
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}

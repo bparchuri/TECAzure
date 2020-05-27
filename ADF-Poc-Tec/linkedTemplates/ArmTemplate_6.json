@@ -1,0 +1,1214 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "ADF-Poc-Tec"
+		},
+		"SqlServer1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SqlServer1'"
+		},
+		"SqlServer1_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'SqlServer1'"
+		},
+		"SqlServer1_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "adflux\\bparchuri"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/SourceDataset_rpo')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage4",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "004_REC_20200319_00001_04.7z",
+						"container": "tec-zip"
+					},
+					"columnDelimiter": ",",
+					"rowDelimiter": "\n",
+					"escapeChar": "\\",
+					"firstRowAsHeader": false,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SourceDataset_u7p')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase2",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "FaultId",
+						"type": "int",
+						"precision": 10,
+						"scale": 0
+					},
+					{
+						"name": "FaultDesc",
+						"type": "varchar",
+						"precision": 0,
+						"scale": 0
+					},
+					{
+						"name": "FaultCustomerNumber",
+						"type": "varchar",
+						"precision": 0,
+						"scale": 0
+					},
+					{
+						"name": "Date",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "TECData"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SourceDataset_z8h')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Sftp1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "SftpLocation",
+						"fileName": "WinFormClient.png",
+						"folderPath": "/pub/example"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/UnzipFile')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ADLS_Poc_Tec",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureDataLakeStoreLocation",
+						"folderPath": "PocTecUnzip"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ZipFile')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ADLS_Poc_Tec",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureDataLakeStoreLocation",
+						"folderPath": "PocTecZip"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SqlServer1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"connectionString": "[parameters('SqlServer1_connectionString')]",
+					"userName": "[parameters('SqlServer1_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('SqlServer1_password')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "integrationRuntime7",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Unzip 7z file to Blob')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "WebHook",
+						"type": "WebHook",
+						"dependsOn": [
+							{
+								"activity": "Set variable of unzip foldername",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "https://73b5abb6-b245-4036-a400-b70e2ee719cd.webhook.ne.azure-automation.net/webhooks?token=8LyOr5IWcaX0XlNXtAVn4%2bBho02rNT9g5unFl2cEnR4%3d",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"value": "@json(\nconcat(\n'\n{\n\"connectionName\":\"',variables('varConnectionName'),'\",\"storageAccountKey\":\"',variables('storageAccountKey'),'\",\"fileName\":\"',variables('fileName'),'\"\n,\"zipfolder\":\"',variables('zipfolder'),'\"\n,\"Unzipfolder\":\"',variables('Unzipfolder'),'\"\n,\"extractfolder\":\"',variables('extractfolder'),'\"\n,\"dataLakeStorageGen1Name\":\"',variables('dataLakeStorageGen1Name'),'\"\n}'))",
+								"type": "Expression"
+							},
+							"timeout": "00:10:00",
+							"reportStatusOnCallBack": true
+						}
+					},
+					{
+						"name": "Copy Zip file to ADLS",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [
+							{
+								"name": "Source",
+								"value": "Datatest/"
+							},
+							{
+								"name": "Destination",
+								"value": "tec-zip//"
+							}
+						],
+						"typeProperties": {
+							"source": {
+								"type": "BinarySource",
+								"storeSettings": {
+									"type": "AzureDataLakeStoreReadSettings",
+									"recursive": false
+								}
+							},
+							"sink": {
+								"type": "BinarySink",
+								"storeSettings": {
+									"type": "AzureDataLakeStoreWriteSettings"
+								}
+							},
+							"enableStaging": false,
+							"validateDataConsistency": false
+						},
+						"inputs": [
+							{
+								"referenceName": "ZipFile",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "UnzipFile",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Get Metadata of Zip File",
+						"type": "GetMetadata",
+						"dependsOn": [
+							{
+								"activity": "Copy Zip file to ADLS",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "ZipFile",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"fieldList": [
+								"childItems",
+								"itemName"
+							],
+							"storeSettings": {
+								"type": "AzureDataLakeStoreReadSettings",
+								"recursive": true,
+								"wildcardFolderPath": "Datatest",
+								"wildcardFileName": "*.7z"
+							},
+							"formatSettings": {
+								"type": "BinaryReadSettings"
+							}
+						}
+					},
+					{
+						"name": "Filter 7z files",
+						"type": "Filter",
+						"dependsOn": [
+							{
+								"activity": "Get Metadata of Unzip File",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@activity('Get Metadata of Zip File').output.childItems",
+								"type": "Expression"
+							},
+							"condition": {
+								"value": "@endswith(item().name,'.7z')",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "Set variable of zip file name",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "Filter 7z files",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "fileName",
+							"value": {
+								"value": "@string(activity('Filter 7z files').output.value[0].name)",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "Set variable of zip folder name",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "Set variable of zip file name",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "zipfolder",
+							"value": {
+								"value": "@activity('Get Metadata of Zip File').output.itemName",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "Set variable of unzip foldername",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "Set variable of zip folder name",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "Unzipfolder",
+							"value": {
+								"value": "@activity('Get Metadata of Unzip File').output.itemName",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "Get Metadata of Unzip File",
+						"type": "GetMetadata",
+						"dependsOn": [
+							{
+								"activity": "Get Metadata of Zip File",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "UnzipFile",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"fieldList": [
+								"itemName"
+							],
+							"storeSettings": {
+								"type": "AzureDataLakeStoreReadSettings",
+								"recursive": true
+							},
+							"formatSettings": {
+								"type": "BinaryReadSettings"
+							}
+						}
+					}
+				],
+				"variables": {
+					"varConnectionName": {
+						"type": "String",
+						"defaultValue": "AzureRunAsConnection"
+					},
+					"storageAccountKey": {
+						"type": "String",
+						"defaultValue": " YDuDqj7C2A+fWSpmuibYXlDAsVRyIXQpgZcCtm23kUEFTsYFMvZbxhUmBHmbgHEeNcCmukz6O1Iji7H6deZPiw=="
+					},
+					"fileName": {
+						"type": "String",
+						"defaultValue": "TECValidation.7z"
+					},
+					"zipfolder": {
+						"type": "String",
+						"defaultValue": "tec-zip"
+					},
+					"Unzipfolder": {
+						"type": "String",
+						"defaultValue": "tec-unzip"
+					},
+					"extractfolder": {
+						"type": "String",
+						"defaultValue": "7Zfiles"
+					},
+					"dataLakeStorageGen1Name": {
+						"type": "String",
+						"defaultValue": "dlspoctec"
+					}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/ZipFile')]",
+				"[concat(variables('factoryId'), '/datasets/UnzipFile')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Validations_DLS_SQLValidations_SQLPowerAPP')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy Data to SQL Table",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "CSVtoSQLtable",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "AzureSqlSource",
+								"sqlReaderQuery": "SELECT TOP (1000) [FaultId]\n      ,[FaultDesc]\n      ,[FaultCustomerNumber]\n      ,[Date]\n  FROM [dbo].[TECData]",
+								"queryTimeout": "02:00:00"
+							},
+							"sink": {
+								"type": "AzureSqlSink"
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "FaultId",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "FaultId",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "FaultDesc",
+											"type": "String"
+										},
+										"sink": {
+											"name": "FaultDesc",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "FaultCustomerNumber",
+											"type": "String"
+										},
+										"sink": {
+											"name": "FaultCustomerNumber",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Date",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "Date",
+											"type": "DateTime"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "SQLTEC",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "SQLValidations",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "CSVtoSQLtable",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink"
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "FaultId",
+											"type": "String"
+										},
+										"sink": {
+											"name": "FaultId",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "FaultDesc",
+											"type": "String"
+										},
+										"sink": {
+											"name": "FaultDesc",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "FaultCustomerName",
+											"type": "String"
+										},
+										"sink": {
+											"name": "FaultCustomerNumber",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Date",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "Date",
+											"type": "DateTime"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "ADLSV2CSV",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "SQLTECData",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/dataflowSegments')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "DataflowSQLEIS779",
+								"type": "DatasetReference"
+							},
+							"name": "dataflowSource"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "SQLSegment0",
+								"type": "DatasetReference"
+							},
+							"name": "SQLSegment0"
+						},
+						{
+							"dataset": {
+								"referenceName": "SQLSegment1",
+								"type": "DatasetReference"
+							},
+							"name": "SQLSegment1"
+						},
+						{
+							"dataset": {
+								"referenceName": "SQLSegment2",
+								"type": "DatasetReference"
+							},
+							"name": "SQLSegment2"
+						},
+						{
+							"dataset": {
+								"referenceName": "SQLSegment3",
+								"type": "DatasetReference"
+							},
+							"name": "SQLSegment3"
+						},
+						{
+							"dataset": {
+								"referenceName": "SQLSegment4",
+								"type": "DatasetReference"
+							},
+							"name": "SQLSegment4"
+						},
+						{
+							"dataset": {
+								"referenceName": "SQLSegment5",
+								"type": "DatasetReference"
+							},
+							"name": "SQLSegment5"
+						}
+					],
+					"transformations": [
+						{
+							"name": "ConditionalSplit"
+						},
+						{
+							"name": "DerivedColumnSeg0"
+						},
+						{
+							"name": "DerivedColumnSeg1"
+						},
+						{
+							"name": "DerivedColumnSeg2"
+						},
+						{
+							"name": "DerivedColumnSeg3"
+						},
+						{
+							"name": "DerivedColumnseg5"
+						},
+						{
+							"name": "DerivedColumnSeg4"
+						}
+					],
+					"script": "source(output(\n\t\tCode_segment as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> dataflowSource\ndataflowSource split(like(Code_segment,'000%'),\n\tlike(Code_segment,'005%'),\n\tlike(Code_segment,'004%'),\n\tlike(Code_segment,'003%'),\n\tlike(Code_segment,'002%'),\n\tlike(Code_segment,'001%'),\n\tdisjoint: true,\n\tpartitionBy('roundRobin', 2)) ~> ConditionalSplit@(Segment0, Segment5, Segment4, Segment3, Segment2, Segment1, Others)\nConditionalSplit@Segment0 derive(Column1 = split(Code_segment,';')[1],\n\t\tColumn2 = split(Code_segment,';')[2]) ~> DerivedColumnSeg0\nConditionalSplit@Segment1 derive(Column1 = split(Code_segment,';')[1],\n\t\tColumn2 = split(Code_segment,';')[2],\n\t\tColumn3 = split(Code_segment,';')[3],\n\t\tColumn4 = currentUTC(),\n\t\tColumn5 = split(Code_segment,';')[5],\n\t\tColumn6 = split(Code_segment,';')[6],\n\t\tColumn7 = split(Code_segment,';')[7],\n\t\tColumn8 = split(Code_segment,';')[8],\n\t\tColumn9 = split(Code_segment,';')[9],\n\t\tColumn10 = split(Code_segment,';')[10],\n\t\tColumn11 = split(Code_segment,';')[11],\n\t\tColumn12 = split(Code_segment,';')[12]) ~> DerivedColumnSeg1\nConditionalSplit@Segment2 derive(Column1 = split(Code_segment,';')[1],\n\t\tColumn2 = split(Code_segment,';')[2],\n\t\tColumn3 = split(Code_segment,';')[3],\n\t\tColumn4 = split(Code_segment,';')[4],\n\t\tColumn5 = split(Code_segment,';')[5],\n\t\tColumn6 = split(Code_segment,';')[6],\n\t\tColumn7 = split(Code_segment,';')[7],\n\t\tColumn8 = split(Code_segment,';')[8],\n\t\tColumn9 = split(Code_segment,';')[9],\n\t\tColumn10 = split(Code_segment,';')[10],\n\t\tColumn11 = split(Code_segment,';')[11],\n\t\tColumn12 = split(Code_segment,';')[12],\n\t\tColumn13 = currentUTC(),\n\t\tColumn14 = currentUTC(),\n\t\tColumn15 = split(Code_segment,';')[15],\n\t\tColumn16 = split(Code_segment,';')[16],\n\t\tColumn17 = split(Code_segment,';')[17],\n\t\tColumn18 = split(Code_segment,';')[18],\n\t\tColumn19 = split(Code_segment,';')[19],\n\t\tColumn20 = split(Code_segment,';')[20],\n\t\tColumn21 = split(Code_segment,';')[21],\n\t\tColumn22 = split(Code_segment,';')[22],\n\t\tColumn23 = split(Code_segment,';')[23],\n\t\tColumn24 = split(Code_segment,';')[24],\n\t\tColumn25 = split(Code_segment,';')[25],\n\t\tColumn26 = split(Code_segment,';')[26],\n\t\tColumn27 = split(Code_segment,';')[27],\n\t\tColumn28 = split(Code_segment,';')[28],\n\t\tColumn29 = split(Code_segment,';')[29],\n\t\tColumn30 = split(Code_segment,';')[30]) ~> DerivedColumnSeg2\nConditionalSplit@Segment3 derive(Column1 = split(Code_segment,';')[1],\n\t\tColumn2 = split(Code_segment,';')[2],\n\t\tColumn3 = split(Code_segment,';')[3],\n\t\tColumn4 = split(Code_segment,';')[4],\n\t\tColumn5 = split(Code_segment,';')[5],\n\t\tColumn6 = split(Code_segment,';')[6],\n\t\tColumn7 = split(Code_segment,';')[7],\n\t\tColumn8 = split(Code_segment,';')[8],\n\t\tColumn9 = split(Code_segment,';')[9]) ~> DerivedColumnSeg3\nConditionalSplit@Segment5 derive(Column1 = split(Code_segment,';')[1],\n\t\tColumn2 = split(Code_segment,';')[2],\n\t\tColumn3 = split(Code_segment,';')[3],\n\t\tColumn4 = split(Code_segment,';')[4],\n\t\tColumn5 = split(Code_segment,';')[5],\n\t\tColumn6 = split(Code_segment,';')[6],\n\t\tColumn7 = split(Code_segment,';')[7],\n\t\tColumn8 = split(Code_segment,';')[8],\n\t\tColumn9 = split(Code_segment,';')[9],\n\t\tColumn10 = currentUTC(),\n\t\tColumn11 = split(Code_segment,';')[11],\n\t\tColumn12 = split(Code_segment,';')[12],\n\t\tColumn13 = split(Code_segment,';')[13]) ~> DerivedColumnseg5\nConditionalSplit@Segment4 derive(Column1 = split(Code_segment,';')[1],\n\t\tColumn2 = split(Code_segment,';')[2],\n\t\tColumn3 = split(Code_segment,';')[3],\n\t\tColumn4 = split(Code_segment,';')[4],\n\t\tColumn5 = split(Code_segment,';')[5],\n\t\tColumn6 = split(Code_segment,';')[6],\n\t\tColumn7 = split(Code_segment,';')[7],\n\t\tColumn8 = split(Code_segment,';')[8],\n\t\tColumn9 = split(Code_segment,';')[9],\n\t\tColumn10 = split(Code_segment,';')[10],\n\t\tColumn11 = split(Code_segment,';')[11],\n\t\tColumn12 = split(Code_segment,';')[12],\n\t\tColumn13 = split(Code_segment,';')[13],\n\t\tColumn14 = split(Code_segment,';')[14],\n\t\tColumn15 = currentUTC(),\n\t\tColumn16 = split(Code_segment,';')[16]) ~> DerivedColumnSeg4\nDerivedColumnSeg0 sink(input(\n\t\tCode_segment as string,\n\t\tPlateforme as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tmapColumn(\n\t\tCode_segment = Column1,\n\t\tPlateforme = Column2\n\t)) ~> SQLSegment0\nDerivedColumnSeg1 sink(input(\n\t\tCode_segment as string,\n\t\tPoste_segment as string,\n\t\tId_transaction as string,\n\t\tDate_ope as timestamp,\n\t\tType_equipement as string,\n\t\tNum_syst_emetteur as string,\n\t\tCEB as string,\n\t\tNum_serie as string,\n\t\tNum_service as string,\n\t\tCode_user as string,\n\t\tCompagnie_agent as string,\n\t\tType_emplacement as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tmapColumn(\n\t\tCode_segment = Column1,\n\t\tPoste_segment = Column2,\n\t\tId_transaction = Column3,\n\t\tDate_ope = Column4,\n\t\tType_equipement = Column5,\n\t\tNum_syst_emetteur = Column6,\n\t\tCEB = Column7,\n\t\tNum_serie = Column8,\n\t\tNum_service = Column9,\n\t\tCode_user = Column10,\n\t\tCompagnie_agent = Column11,\n\t\tType_emplacement = Column12\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SQLSegment1\nDerivedColumnSeg2 sink(input(\n\t\tCode_segment as string,\n\t\tPoste_segment as string,\n\t\tId_transaction as string,\n\t\tId_oper_vente as string,\n\t\tType_mvt as string,\n\t\tCateg_produit as string,\n\t\tNum_produit as string,\n\t\tNum_article as string,\n\t\tNum_unicite as string,\n\t\tNum_serie as string,\n\t\tNum_contrat as string,\n\t\tNum_serie_prev as string,\n\t\tDate_Debut as timestamp,\n\t\tDate_Fin as timestamp,\n\t\tId_entreprise as string,\n\t\tMontant_part_tiers as double,\n\t\t{Quantité} as string,\n\t\tTauxTVA_an as string,\n\t\tMontant_global_vente as double,\n\t\tNb_jetons as string,\n\t\tNb_jetons_avant as string,\n\t\tId_convention as string,\n\t\tLibelle_convention as string,\n\t\tNum_mobib as string,\n\t\tCode_article as string,\n\t\tNum_reseau_produit as string,\n\t\tNum_contrat_prev as string,\n\t\tNum_commande as string,\n\t\tNum_elt_commande as string,\n\t\tType_elt_commande as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tmapColumn(\n\t\tCode_segment = Column1,\n\t\tPoste_segment = Column2,\n\t\tId_transaction = Column3,\n\t\tId_oper_vente = Column4,\n\t\tType_mvt = Column5,\n\t\tCateg_produit = Column6,\n\t\tNum_produit = Column7,\n\t\tNum_article = Column8,\n\t\tNum_unicite = Column9,\n\t\tNum_serie = Column10,\n\t\tNum_contrat = Column11,\n\t\tNum_serie_prev = Column12,\n\t\tDate_Debut = Column13,\n\t\tDate_Fin = Column14,\n\t\tId_entreprise = Column15,\n\t\tMontant_part_tiers = Column16,\n\t\t{Quantité} = Column17,\n\t\tTauxTVA_an = Column18,\n\t\tMontant_global_vente = Column19,\n\t\tNb_jetons = Column20,\n\t\tNb_jetons_avant = Column21,\n\t\tId_convention = Column22,\n\t\tLibelle_convention = Column23,\n\t\tNum_mobib = Column24,\n\t\tCode_article = Column25,\n\t\tNum_reseau_produit = Column26,\n\t\tNum_contrat_prev = Column27,\n\t\tNum_commande = Column28,\n\t\tNum_elt_commande = Column29,\n\t\tType_elt_commande = Column30\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SQLSegment2\nDerivedColumnSeg3 sink(input(\n\t\tCode_segment as string,\n\t\tPoste_segment as string,\n\t\tId_transaction as string,\n\t\tId_paiement as string,\n\t\tCode_moyen_paiement as string,\n\t\tSens_paiement as string,\n\t\tMontant as double,\n\t\tId_entreprise as string,\n\t\tComm_struct as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tmapColumn(\n\t\tCode_segment = Column1,\n\t\tPoste_segment = Column2,\n\t\tId_transaction = Column3,\n\t\tId_paiement = Column4,\n\t\tCode_moyen_paiement = Column5,\n\t\tSens_paiement = Column6,\n\t\tMontant = Column7,\n\t\tId_entreprise = Column8,\n\t\tComm_struct = Column9\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SQLSegment3\nDerivedColumnSeg4 sink(input(\n\t\tCode_segment as string,\n\t\tPoste_segment as string,\n\t\tId_transaction as string,\n\t\tId_paiement as string,\n\t\tCode_moyen_paiement as string,\n\t\tSens_paiement as string,\n\t\tMontant as double,\n\t\tHardware_type as string,\n\t\tMode_TPV as string,\n\t\tBrand_id as string,\n\t\tMachine_number as string,\n\t\tPdv_clct_nr as string,\n\t\tPdv_gen_tx_nb as string,\n\t\tTransaction_identifier as string,\n\t\tDateh_tpe as timestamp,\n\t\tAuth_code as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tmapColumn(\n\t\tCode_segment = Column1,\n\t\tPoste_segment = Column2,\n\t\tId_transaction = Column3,\n\t\tId_paiement = Column4,\n\t\tCode_moyen_paiement = Column5,\n\t\tSens_paiement = Column6,\n\t\tMontant = Column7,\n\t\tHardware_type = Column8,\n\t\tMode_TPV = Column9,\n\t\tBrand_id = Column10,\n\t\tMachine_number = Column11,\n\t\tPdv_clct_nr = Column12,\n\t\tPdv_gen_tx_nb = Column13,\n\t\tTransaction_identifier = Column14,\n\t\tDateh_tpe = Column15,\n\t\tAuth_code = Column16\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SQLSegment4\nDerivedColumnseg5 sink(input(\n\t\tCode_segment as string,\n\t\tPoste_segment as string,\n\t\tId_transaction as string,\n\t\tId_paiement as string,\n\t\tTransactionReference as string,\n\t\tTransactionDateTime as string,\n\t\tSens_paiement as string,\n\t\tStatementReference as string,\n\t\tPaymentMeanBrand as string,\n\t\tValueDate as timestamp,\n\t\tAmount as double,\n\t\tAuthorizationId as string,\n\t\tMerchantId as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tmapColumn(\n\t\tCode_segment = Column1,\n\t\tPoste_segment = Column2,\n\t\tId_transaction = Column3,\n\t\tId_paiement = Column4,\n\t\tTransactionReference = Column5,\n\t\tTransactionDateTime = Column6,\n\t\tSens_paiement = Column7,\n\t\tStatementReference = Column8,\n\t\tPaymentMeanBrand = Column9,\n\t\tValueDate = Column10,\n\t\tAmount = Column11,\n\t\tAuthorizationId = Column12,\n\t\tMerchantId = Column13\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SQLSegment5"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ATLASEIS779_DataflowSplits')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy CSV to SQL Table",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false,
+							"parallelCopies": 50,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"type": "String",
+											"ordinal": 1
+										},
+										"sink": {
+											"name": "Code_segment"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "ADLSCSV",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "SQLEIS779",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Send data to CRM",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Copy data_Using Joins",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "AzureSqlSource",
+								"sqlReaderQuery": "SELECT TOP (100000) [Code_segment]\n      ,[Poste_segment]\n      ,[Id_transaction]\n      ,[Num_serie]\n      ,[Id_entreprise]\n      ,[Id_paiement]\n      ,[Code_moyen_paiement]\n      ,[Sens_paiement]\n      ,[Montant]\n      ,[Type_equipement]\n      ,[Date_ope]\n      ,[Name]\n      ,[Guid]\n  FROM [dbo].[EIS779_atlas]",
+								"queryTimeout": "02:00:00"
+							},
+							"sink": {
+								"type": "DynamicsCrmSink",
+								"writeBatchSize": 10,
+								"writeBehavior": "upsert",
+								"ignoreNullValues": false
+							},
+							"enableStaging": false,
+							"parallelCopies": 50,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "Name",
+											"type": "String"
+										},
+										"sink": {
+											"name": "tec_name",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Code_segment",
+											"type": "String"
+										},
+										"sink": {
+											"name": "tec_codesegment",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Sens_paiement",
+											"type": "String"
+										},
+										"sink": {
+											"name": "tec_senspaiement",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Num_serie",
+											"type": "String"
+										},
+										"sink": {
+											"name": "tec_numserie",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Id_paiement",
+											"type": "String"
+										},
+										"sink": {
+											"name": "tec_idpaiement",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Guid",
+											"type": "Guid"
+										},
+										"sink": {
+											"name": "tec_eis779atlasid",
+											"type": "Guid"
+										}
+									},
+									{
+										"source": {
+											"name": "Code_moyen_paiement",
+											"type": "String"
+										},
+										"sink": {
+											"name": "tec_codemoyenpaiement",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Poste_segment",
+											"type": "String"
+										},
+										"sink": {
+											"name": "tec_postesegment",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Id_entreprise",
+											"type": "String"
+										},
+										"sink": {
+											"name": "tec_identreprise",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Date_ope",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "tec_dateope",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "Id_transaction",
+											"type": "String"
+										},
+										"sink": {
+											"name": "tec_idtransaction",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Type_equipement"
+										},
+										"sink": {
+											"name": "tec_typeequipment"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "SQLAtlasCRM",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "tecdevcrmconnection",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "dataflowusingsplittoSegments",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [
+							{
+								"activity": "Copy CSV to SQL Table",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "dataflowSegments",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"dataflowSource": {},
+									"SQLSegment0": {},
+									"SQLSegment1": {},
+									"SQLSegment2": {},
+									"SQLSegment3": {},
+									"SQLSegment4": {},
+									"SQLSegment5": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							}
+						}
+					},
+					{
+						"name": "Copy data_Using Joins",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "dataflowusingsplittoSegments",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "AzureSqlSource",
+								"sqlReaderQuery": "  SELECT Top(100)\n     E003.Code_segment\n    ,E003.Poste_segment\n    ,E003.Id_transaction\n    ,E001.Num_serie\n    ,E002.Id_entreprise\n    ,E003.Id_paiement\n    ,E003.Code_moyen_paiement\n    ,E003.Sens_paiement\n    ,E003.Montant\n    ,10 AS Type_Eqiupment\n    ,E001.Date_ope\n    ,E000.Plateforme\n\t,NEWID() AS Unique_Id\n  FROM [dbo].[EIS779_SEGMENT_001] E001\n  LEFT JOIN [dbo].[EIS779_SEGMENT_002] E002\n    ON E001.Id_transaction = E002.Id_transaction\n  JOIN [dbo].[EIS779_SEGMENT_003] E003\n    ON E001.Id_transaction = E003.Id_transaction\n  JOIN [dbo].[EIS779_SEGMENT_000] E000\n    ON E000.Code_segment = '000'\n  ORDER by E001.id_transaction",
+								"queryTimeout": "02:00:00"
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false,
+							"parallelCopies": 50,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "Code_segment",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Code_segment",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Poste_segment",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Poste_segment",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Id_transaction",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Id_transaction",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Num_serie",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Num_serie",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Id_entreprise",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Id_entreprise",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Id_paiement",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Id_paiement",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Code_moyen_paiement",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Code_moyen_paiement",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Sens_paiement",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Sens_paiement",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Montant",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "Montant",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"name": "Type_Eqiupment",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "Type_equipement",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Date_ope",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "Date_ope",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "Plateforme",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Name",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Unique_Id",
+											"type": "Guid"
+										},
+										"sink": {
+											"name": "Guid",
+											"type": "Guid"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "SQLJoin",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "SQLEIS779ATLAS",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/dataflows/dataflowSegments')]"
+			]
+		}
+	]
+}
