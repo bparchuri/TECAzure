@@ -2,7 +2,7 @@
 	"name": "SQLJoin",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureSqlDatabase27",
+			"referenceName": "SQLPocTec",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
