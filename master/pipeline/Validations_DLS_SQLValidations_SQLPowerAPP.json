@@ -7,7 +7,7 @@
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "CSVtoLakestore",
+						"activity": "CSVtoSQLtable",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -91,7 +91,7 @@
 				]
 			},
 			{
-				"name": "CSVtoLakestore",
+				"name": "CSVtoSQLtable",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -106,7 +106,7 @@
 					"source": {
 						"type": "DelimitedTextSource",
 						"storeSettings": {
-							"type": "AzureDataLakeStoreReadSettings",
+							"type": "AzureBlobFSReadSettings",
 							"recursive": true
 						},
 						"formatSettings": {
@@ -165,13 +165,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "DelimitedText2",
+						"referenceName": "ADLSV2CSV",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "AzureSqlTable22",
+						"referenceName": "SQLTECData",
 						"type": "DatasetReference"
 					}
 				]
