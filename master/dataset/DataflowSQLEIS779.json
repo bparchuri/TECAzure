@@ -1,8 +1,8 @@
 {
-	"name": "AzureSqlTable25",
+	"name": "DataflowSQLEIS779",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureSqlDatabase32",
+			"referenceName": "SQLPocTec",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
