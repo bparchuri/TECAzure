@@ -1,5 +1,5 @@
 {
-	"name": "AzureSqlTable20",
+	"name": "SQLJoin",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureSqlDatabase27",
