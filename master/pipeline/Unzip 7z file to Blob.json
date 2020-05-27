@@ -228,8 +228,7 @@
 						"itemName"
 					],
 					"storeSettings": {
-						"type": "AzureDataLakeStoreReadSettings",
-						"recursive": true
+						"type": "AzureBlobFSReadSettings"
 					},
 					"formatSettings": {
 						"type": "BinaryReadSettings"
