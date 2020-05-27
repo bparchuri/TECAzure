@@ -53,8 +53,8 @@
 					"source": {
 						"type": "BinarySource",
 						"storeSettings": {
-							"type": "AzureDataLakeStoreReadSettings",
-							"recursive": false
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true
 						}
 					},
 					"sink": {
@@ -64,6 +64,9 @@
 						}
 					},
 					"enableStaging": false,
+					"skipErrorFile": {
+						"fileMissing": true
+					},
 					"validateDataConsistency": false
 				},
 				"inputs": [
@@ -104,7 +107,6 @@
 						"type": "DatasetReference"
 					},
 					"fieldList": [
-						"childItems",
 						"itemName"
 					],
 					"storeSettings": {
