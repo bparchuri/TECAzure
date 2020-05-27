@@ -1,8 +1,8 @@
 {
-	"name": "AzureSqlTable2",
+	"name": "SQLAtlasCRM",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureSqlDatabase5",
+			"referenceName": "SQLPocTec",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
