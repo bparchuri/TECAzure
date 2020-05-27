@@ -1,17 +1,18 @@
 {
-	"name": "DelimitedText2",
+	"name": "ADLSV2CSV",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureDataLakeStore5",
+			"referenceName": "ADLSGen2",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
-				"type": "AzureDataLakeStoreLocation",
+				"type": "AzureBlobFSLocation",
 				"fileName": "TECSourceData.csv",
-				"folderPath": "Datatest"
+				"folderPath": "Validations",
+				"fileSystem": "poc-tec"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
