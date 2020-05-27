@@ -7,13 +7,13 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "ADF-Poc-Tec"
 		},
-		"ADLS_Poc_Tec_servicePrincipalKey": {
-			"type": "secureString",
-			"metadata": "Secure string for 'servicePrincipalKey' of 'ADLS_Poc_Tec'"
-		},
 		"ADLSGen2_servicePrincipalKey": {
 			"type": "secureString",
 			"metadata": "Secure string for 'servicePrincipalKey' of 'ADLSGen2'"
+		},
+		"ADLS_Poc_Tec_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'ADLS_Poc_Tec'"
 		},
 		"SQLPocTec_connectionString": {
 			"type": "secureString",
@@ -26,6 +26,18 @@
 		"TecDevCRM_password": {
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'TecDevCRM'"
+		},
+		"ADLSGen2_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://sapoctec.dfs.core.windows.net"
+		},
+		"ADLSGen2_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "6e5433e0-76fc-44b7-b71b-0e5446a3fa94"
+		},
+		"ADLSGen2_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "b4537ba3-1639-42cb-9143-8bfbcb683e79"
 		},
 		"ADLS_Poc_Tec_properties_typeProperties_dataLakeStoreUri": {
 			"type": "string",
@@ -47,18 +59,6 @@
 			"type": "string",
 			"defaultValue": "rs-poctec"
 		},
-		"ADLSGen2_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://sapoctec.dfs.core.windows.net"
-		},
-		"ADLSGen2_properties_typeProperties_tenant": {
-			"type": "string",
-			"defaultValue": "6e5433e0-76fc-44b7-b71b-0e5446a3fa94"
-		},
-		"ADLSGen2_properties_typeProperties_servicePrincipalId": {
-			"type": "string",
-			"defaultValue": "b4537ba3-1639-42cb-9143-8bfbcb683e79"
-		},
 		"SQLPocTec_properties_typeProperties_servicePrincipalId": {
 			"type": "string",
 			"defaultValue": "b4537ba3-1639-42cb-9143-8bfbcb683e79"
@@ -77,6 +77,25 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/ADLSGen2')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('ADLSGen2_properties_typeProperties_url')]",
+					"tenant": "[parameters('ADLSGen2_properties_typeProperties_tenant')]",
+					"servicePrincipalId": "[parameters('ADLSGen2_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('ADLSGen2_servicePrincipalKey')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/ADLS_Poc_Tec')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -93,6 +112,45 @@
 					"tenant": "[parameters('ADLS_Poc_Tec_properties_typeProperties_tenant')]",
 					"subscriptionId": "[parameters('ADLS_Poc_Tec_properties_typeProperties_subscriptionId')]",
 					"resourceGroupName": "[parameters('ADLS_Poc_Tec_properties_typeProperties_resourceGroupName')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SQLPocTec')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('SQLPocTec_connectionString')]",
+					"servicePrincipalId": "[parameters('SQLPocTec_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('SQLPocTec_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('SQLPocTec_properties_typeProperties_tenant')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/TecDevCRM')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "DynamicsCrm",
+				"typeProperties": {
+					"deploymentType": "Online",
+					"serviceUri": "https://tec-crm-dev.crm4.dynamics.com",
+					"authenticationType": "Office365",
+					"username": "[parameters('TecDevCRM_properties_typeProperties_username')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('TecDevCRM_password')]"
+					}
 				}
 			},
 			"dependsOn": []
@@ -177,65 +235,81 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/ADLSGen2')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"name": "[concat(parameters('factoryName'), '/ADLSCSV')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ADLSGen2",
+					"type": "LinkedServiceReference"
+				},
 				"annotations": [],
-				"type": "AzureBlobFS",
+				"type": "DelimitedText",
 				"typeProperties": {
-					"url": "[parameters('ADLSGen2_properties_typeProperties_url')]",
-					"tenant": "[parameters('ADLSGen2_properties_typeProperties_tenant')]",
-					"servicePrincipalId": "[parameters('ADLSGen2_properties_typeProperties_servicePrincipalId')]",
-					"servicePrincipalKey": {
-						"type": "SecureString",
-						"value": "[parameters('ADLSGen2_servicePrincipalKey')]"
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/SQLPocTec')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureSqlDatabase",
-				"typeProperties": {
-					"connectionString": "[parameters('SQLPocTec_connectionString')]",
-					"servicePrincipalId": "[parameters('SQLPocTec_properties_typeProperties_servicePrincipalId')]",
-					"servicePrincipalKey": {
-						"type": "SecureString",
-						"value": "[parameters('SQLPocTec_servicePrincipalKey')]"
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "004_REC_20200319_00001_04.csv",
+						"folderPath": "7Zfiles",
+						"fileSystem": "poc-tec"
 					},
-					"tenant": "[parameters('SQLPocTec_properties_typeProperties_tenant')]"
-				}
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"type": "String"
+					}
+				]
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ADLSGen2')]"
+			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/TecDevCRM')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"name": "[concat(parameters('factoryName'), '/ADLSV2CSV')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ADLSGen2",
+					"type": "LinkedServiceReference"
+				},
 				"annotations": [],
-				"type": "DynamicsCrm",
+				"type": "DelimitedText",
 				"typeProperties": {
-					"deploymentType": "Online",
-					"serviceUri": "https://tec-crm-dev.crm4.dynamics.com",
-					"authenticationType": "Office365",
-					"username": "[parameters('TecDevCRM_properties_typeProperties_username')]",
-					"password": {
-						"type": "SecureString",
-						"value": "[parameters('TecDevCRM_password')]"
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "TECSourceData.csv",
+						"folderPath": "Validations",
+						"fileSystem": "poc-tec"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
 					}
-				}
+				]
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ADLSGen2')]"
+			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/SQLEIS779')]",
+			"name": "[concat(parameters('factoryName'), '/DataflowSQLEIS779')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -338,7 +412,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/SQLJoin')]",
+			"name": "[concat(parameters('factoryName'), '/SQLEIS779')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -348,10 +422,15 @@
 				},
 				"annotations": [],
 				"type": "AzureSqlTable",
-				"schema": [],
+				"schema": [
+					{
+						"name": "Code_segment",
+						"type": "varchar"
+					}
+				],
 				"typeProperties": {
 					"schema": "dbo",
-					"table": "EIS779_atlas"
+					"table": "EIS779"
 				}
 			},
 			"dependsOn": [
@@ -436,7 +515,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/SQLTECData')]",
+			"name": "[concat(parameters('factoryName'), '/SQLJoin')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -446,136 +525,10 @@
 				},
 				"annotations": [],
 				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "FaultId",
-						"type": "varchar"
-					},
-					{
-						"name": "FaultCustomerName",
-						"type": "varchar"
-					},
-					{
-						"name": "FaultDesc",
-						"type": "varchar"
-					},
-					{
-						"name": "Date",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					}
-				],
+				"schema": [],
 				"typeProperties": {
 					"schema": "dbo",
-					"table": "TECData"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/SQLPocTec')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/SQLTEC')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "SQLPocTec",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "FaultId",
-						"type": "varchar"
-					},
-					{
-						"name": "FaultCustomerName",
-						"type": "varchar"
-					},
-					{
-						"name": "FaultDesc",
-						"type": "varchar"
-					},
-					{
-						"name": "Date",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "TECData"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/SQLPocTec')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/SQLValidations')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "SQLPocTec",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "FaultId",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "FaultDesc",
-						"type": "varchar"
-					},
-					{
-						"name": "FaultCustomerNumber",
-						"type": "varchar"
-					},
-					{
-						"name": "Date",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "Validations"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/SQLPocTec')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/DataflowSQLEIS779')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "SQLPocTec",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "Code_segment",
-						"type": "varchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "EIS779"
+					"table": "EIS779_atlas"
 				}
 			},
 			"dependsOn": [
@@ -606,6 +559,78 @@
 				"typeProperties": {
 					"schema": "dbo",
 					"table": "EIS779_SEGMENT_000"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SQLPocTec')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SQLSegment1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SQLPocTec",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Code_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Poste_segment",
+						"type": "varchar"
+					},
+					{
+						"name": "Id_transaction",
+						"type": "varchar"
+					},
+					{
+						"name": "Date_ope",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Type_equipement",
+						"type": "varchar"
+					},
+					{
+						"name": "Num_syst_emetteur",
+						"type": "nchar"
+					},
+					{
+						"name": "CEB",
+						"type": "varchar"
+					},
+					{
+						"name": "Num_serie",
+						"type": "nchar"
+					},
+					{
+						"name": "Num_service",
+						"type": "varchar"
+					},
+					{
+						"name": "Code_user",
+						"type": "nchar"
+					},
+					{
+						"name": "Compagnie_agent",
+						"type": "nchar"
+					},
+					{
+						"name": "Type_emplacement",
+						"type": "char"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EIS779_SEGMENT_001"
 				}
 			},
 			"dependsOn": [
