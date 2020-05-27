@@ -1,8 +1,8 @@
 {
-	"name": "AzureSqlTable24",
+	"name": "SQLValidations",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureSqlDatabase31",
+			"referenceName": "SQLPocTec",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
@@ -30,7 +30,7 @@
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "TECData"
+			"table": "Validations"
 		}
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"
