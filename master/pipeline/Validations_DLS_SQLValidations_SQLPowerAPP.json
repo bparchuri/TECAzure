@@ -24,7 +24,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "SELECT TOP (100000) [FaultId]\n      ,[FaultCustomerName]\n      ,[FaultDesc]\n      ,[Date]\n  FROM [dbo].[Validations]",
+						"sqlReaderQuery": "SELECT TOP (1000) [FaultId]\n      ,[FaultDesc]\n      ,[FaultCustomerNumber]\n      ,[Date]\n  FROM [dbo].[TECData]",
 						"queryTimeout": "02:00:00"
 					},
 					"sink": {
