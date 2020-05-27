@@ -1,5 +1,5 @@
 {
-	"name": "AzureSqlTable1",
+	"name": "SQLEIS779",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "SQLPocTec",
