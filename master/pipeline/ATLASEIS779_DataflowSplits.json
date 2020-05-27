@@ -25,7 +25,7 @@
 					"source": {
 						"type": "DelimitedTextSource",
 						"storeSettings": {
-							"type": "AzureDataLakeStoreReadSettings",
+							"type": "AzureBlobFSReadSettings",
 							"recursive": true
 						},
 						"formatSettings": {
@@ -55,13 +55,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "DelimitedText1",
+						"referenceName": "ADLSCSV",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "AzureSqlTable1",
+						"referenceName": "SQLEIS779",
 						"type": "DatasetReference"
 					}
 				]
@@ -288,7 +288,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "  SELECT Top(100000)\n     E003.Code_segment\n    ,E003.Poste_segment\n    ,E003.Id_transaction\n    ,E001.Num_serie\n    ,E002.Id_entreprise\n    ,E003.Id_paiement\n    ,E003.Code_moyen_paiement\n    ,E003.Sens_paiement\n    ,E003.Montant\n    ,10 AS Type_Eqiupment\n    ,E001.Date_ope\n    ,E000.Plateforme\n\t,NEWID() AS Unique_Id\n  FROM [TECIntegration].[dbo].[EIS779_SEGMENT_001] E001\n  LEFT JOIN [TECIntegration].[dbo].[EIS779_SEGMENT_002] E002\n    ON E001.Id_transaction = E002.Id_transaction\n  JOIN [TECIntegration].[dbo].[EIS779_SEGMENT_003] E003\n    ON E001.Id_transaction = E003.Id_transaction\n  JOIN [TECIntegration].[dbo].[EIS779_SEGMENT_000] E000\n    ON E000.Code_segment = '000'\n  ORDER by E001.id_transaction",
+						"sqlReaderQuery": "  SELECT Top(100)\n     E003.Code_segment\n    ,E003.Poste_segment\n    ,E003.Id_transaction\n    ,E001.Num_serie\n    ,E002.Id_entreprise\n    ,E003.Id_paiement\n    ,E003.Code_moyen_paiement\n    ,E003.Sens_paiement\n    ,E003.Montant\n    ,10 AS Type_Eqiupment\n    ,E001.Date_ope\n    ,E000.Plateforme\n\t,NEWID() AS Unique_Id\n  FROM [dbo].[EIS779_SEGMENT_001] E001\n  LEFT JOIN [dbo].[EIS779_SEGMENT_002] E002\n    ON E001.Id_transaction = E002.Id_transaction\n  JOIN [dbo].[EIS779_SEGMENT_003] E003\n    ON E001.Id_transaction = E003.Id_transaction\n  JOIN [dbo].[EIS779_SEGMENT_000] E000\n    ON E000.Code_segment = '000'\n  ORDER by E001.id_transaction",
 						"queryTimeout": "02:00:00"
 					},
 					"sink": {
@@ -296,152 +296,17 @@
 						"disableMetricsCollection": false
 					},
 					"enableStaging": false,
-					"parallelCopies": 50,
-					"translator": {
-						"type": "TabularTranslator",
-						"mappings": [
-							{
-								"source": {
-									"name": "Code_segment",
-									"type": "String"
-								},
-								"sink": {
-									"name": "Code_segment",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "Poste_segment",
-									"type": "String"
-								},
-								"sink": {
-									"name": "Poste_segment",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "Id_transaction",
-									"type": "String"
-								},
-								"sink": {
-									"name": "Id_transaction",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "Num_serie",
-									"type": "String"
-								},
-								"sink": {
-									"name": "Num_serie",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "Id_entreprise",
-									"type": "String"
-								},
-								"sink": {
-									"name": "Id_entreprise",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "Id_paiement",
-									"type": "String"
-								},
-								"sink": {
-									"name": "Id_paiement",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "Code_moyen_paiement",
-									"type": "String"
-								},
-								"sink": {
-									"name": "Code_moyen_paiement",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "Sens_paiement",
-									"type": "String"
-								},
-								"sink": {
-									"name": "Sens_paiement",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "Montant",
-									"type": "Double"
-								},
-								"sink": {
-									"name": "Montant",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "Type_Eqiupment",
-									"type": "Int32"
-								},
-								"sink": {
-									"name": "Type_equipement",
-									"type": "Int32"
-								}
-							},
-							{
-								"source": {
-									"name": "Date_ope",
-									"type": "DateTime"
-								},
-								"sink": {
-									"name": "Date_ope",
-									"type": "DateTime"
-								}
-							},
-							{
-								"source": {
-									"name": "Plateforme",
-									"type": "String"
-								},
-								"sink": {
-									"name": "Name",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "Unique_Id",
-									"type": "Guid"
-								},
-								"sink": {
-									"name": "Guid",
-									"type": "Guid"
-								}
-							}
-						]
-					}
+					"parallelCopies": 50
 				},
 				"inputs": [
 					{
-						"referenceName": "AzureSqlTable20",
+						"referenceName": "SQLJoin",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "AzureSqlTable21",
+						"referenceName": "SQLEIS779ATLAS",
 						"type": "DatasetReference"
 					}
 				]
