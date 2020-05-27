@@ -2,15 +2,16 @@
 	"name": "ZipFile",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "ADLS_Poc_Tec",
+			"referenceName": "ADLSGen2",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
 		"type": "Binary",
 		"typeProperties": {
 			"location": {
-				"type": "AzureDataLakeStoreLocation",
-				"folderPath": "PocTecZip"
+				"type": "AzureBlobFSLocation",
+				"folderPath": "PocTecZip",
+				"fileSystem": "poc-tec"
 			}
 		}
 	},
