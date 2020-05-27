@@ -127,17 +127,7 @@
 								},
 								"sink": {
 									"name": "FaultId",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"name": "FaultCustomerName",
-									"type": "String"
-								},
-								"sink": {
-									"name": "FaultCustomerName",
-									"type": "String"
+									"type": "Int32"
 								}
 							},
 							{
@@ -147,6 +137,16 @@
 								},
 								"sink": {
 									"name": "FaultDesc",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "FaultCustomerName",
+									"type": "String"
+								},
+								"sink": {
+									"name": "FaultCustomerNumber",
 									"type": "String"
 								}
 							},
