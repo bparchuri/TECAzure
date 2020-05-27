@@ -225,13 +225,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "AzureSqlTable2",
+						"referenceName": "SQLAtlasCRM",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "DynamicsCrmEntity2",
+						"referenceName": "tecdevcrmconnection",
 						"type": "DatasetReference"
 					}
 				]
