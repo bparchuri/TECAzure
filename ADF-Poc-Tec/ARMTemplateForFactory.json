@@ -2848,6 +2848,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureDataLakeStoreLocation",
+						"fileName": "004_REC_20200319_00001_04.7z",
 						"folderPath": "PocTecZip"
 					}
 				}
