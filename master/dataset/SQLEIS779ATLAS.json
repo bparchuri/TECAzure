@@ -1,8 +1,8 @@
 {
-	"name": "AzureSqlTable21",
+	"name": "SQLEIS779ATLAS",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureSqlDatabase28",
+			"referenceName": "SQLPocTec",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
