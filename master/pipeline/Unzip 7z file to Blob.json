@@ -60,7 +60,7 @@
 					"sink": {
 						"type": "BinarySink",
 						"storeSettings": {
-							"type": "AzureDataLakeStoreWriteSettings"
+							"type": "AzureBlobFSWriteSettings"
 						}
 					},
 					"enableStaging": false,
@@ -110,10 +110,7 @@
 						"itemName"
 					],
 					"storeSettings": {
-						"type": "AzureDataLakeStoreReadSettings",
-						"recursive": true,
-						"wildcardFolderPath": "Datatest",
-						"wildcardFileName": "*.7z"
+						"type": "AzureBlobFSReadSettings"
 					},
 					"formatSettings": {
 						"type": "BinaryReadSettings"

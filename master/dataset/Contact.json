@@ -1,10 +1,6 @@
 {
 	"name": "Contact",
 	"properties": {
-		"linkedServiceName": {
-			"referenceName": "Dynamics POC2",
-			"type": "LinkedServiceReference"
-		},
 		"annotations": [],
 		"type": "DynamicsEntity",
 		"schema": [],
