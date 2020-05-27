@@ -1,5 +1,5 @@
 {
-	"name": "AzureSqlTable22",
+	"name": "SQLTECData",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "SQLPocTec",
