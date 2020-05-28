@@ -1,0 +1,26 @@
+{
+	"name": "SQLSegment0",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SQLPocTec",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Code_segment",
+				"type": "nchar"
+			},
+			{
+				"name": "Plateforme",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "EIS779_SEGMENT_000"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
