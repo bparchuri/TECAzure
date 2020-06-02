@@ -697,7 +697,8 @@
 								"type": "BinarySource",
 								"storeSettings": {
 									"type": "HttpReadSettings",
-									"requestMethod": "GET"
+									"requestMethod": "POST",
+									"requestTimeout": ""
 								},
 								"formatSettings": {
 									"type": "BinaryReadSettings"
@@ -706,7 +707,8 @@
 							"sink": {
 								"type": "BinarySink",
 								"storeSettings": {
-									"type": "AzureBlobFSWriteSettings"
+									"type": "AzureBlobFSWriteSettings",
+									"copyBehavior": "FlattenHierarchy"
 								}
 							},
 							"enableStaging": false
