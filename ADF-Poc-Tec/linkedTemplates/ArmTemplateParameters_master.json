@@ -36,7 +36,7 @@
 			"value": "Bhargav.Parchuri@letec.be"
 		},
 		"HttpServer1_properties_typeProperties_url": {
-			"value": "http://opendata.tec-wl.be/Current%20GTFS/"
+			"value": "http://opendata.tec-wl.be/Current%20GTFS/TEC-GTFS.zip"
 		},
 		"containerUri": {
 			"value": ""

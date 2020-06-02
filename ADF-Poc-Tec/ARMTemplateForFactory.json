@@ -49,7 +49,7 @@
 		},
 		"HttpServer1_properties_typeProperties_url": {
 			"type": "string",
-			"defaultValue": "http://opendata.tec-wl.be/Current%20GTFS/"
+			"defaultValue": "http://opendata.tec-wl.be/Current%20GTFS/TEC-GTFS.zip"
 		}
 	},
 	"variables": {
@@ -2148,11 +2148,14 @@
 								"type": "BinarySource",
 								"storeSettings": {
 									"type": "HttpReadSettings",
-									"requestMethod": "POST",
+									"requestMethod": "GET",
 									"requestTimeout": ""
 								},
 								"formatSettings": {
-									"type": "BinaryReadSettings"
+									"type": "BinaryReadSettings",
+									"compressionProperties": {
+										"type": "ZipDeflateReadSettings"
+									}
 								}
 							},
 							"sink": {
@@ -2216,6 +2219,10 @@
 				"typeProperties": {
 					"location": {
 						"type": "HttpServerLocation"
+					},
+					"compression": {
+						"type": "ZipDeflate",
+						"level": "Fastest"
 					}
 				}
 			},

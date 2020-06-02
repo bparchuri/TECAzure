@@ -86,6 +86,10 @@
 				"typeProperties": {
 					"location": {
 						"type": "HttpServerLocation"
+					},
+					"compression": {
+						"type": "ZipDeflate",
+						"level": "Fastest"
 					}
 				}
 			},
@@ -697,11 +701,14 @@
 								"type": "BinarySource",
 								"storeSettings": {
 									"type": "HttpReadSettings",
-									"requestMethod": "POST",
+									"requestMethod": "GET",
 									"requestTimeout": ""
 								},
 								"formatSettings": {
-									"type": "BinaryReadSettings"
+									"type": "BinaryReadSettings",
+									"compressionProperties": {
+										"type": "ZipDeflateReadSettings"
+									}
 								}
 							},
 							"sink": {
