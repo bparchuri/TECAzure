@@ -2151,10 +2151,7 @@
 									"requestMethod": "GET"
 								},
 								"formatSettings": {
-									"type": "BinaryReadSettings",
-									"compressionProperties": {
-										"type": "ZipDeflateReadSettings"
-									}
+									"type": "BinaryReadSettings"
 								}
 							},
 							"sink": {
@@ -2217,9 +2214,6 @@
 				"typeProperties": {
 					"location": {
 						"type": "HttpServerLocation"
-					},
-					"compression": {
-						"type": "ZipDeflate"
 					}
 				}
 			},
