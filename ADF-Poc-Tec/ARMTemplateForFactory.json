@@ -11,10 +11,6 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'servicePrincipalKey' of 'ADLSGen2'"
 		},
-		"ADLS_Poc_Tec_servicePrincipalKey": {
-			"type": "secureString",
-			"metadata": "Secure string for 'servicePrincipalKey' of 'ADLS_Poc_Tec'"
-		},
 		"SQLPocTec_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'SQLPocTec'"
@@ -39,26 +35,6 @@
 			"type": "string",
 			"defaultValue": "b4537ba3-1639-42cb-9143-8bfbcb683e79"
 		},
-		"ADLS_Poc_Tec_properties_typeProperties_dataLakeStoreUri": {
-			"type": "string",
-			"defaultValue": "https://dlspoctec.azuredatalakestore.net/webhdfs/v1"
-		},
-		"ADLS_Poc_Tec_properties_typeProperties_servicePrincipalId": {
-			"type": "string",
-			"defaultValue": "b4537ba3-1639-42cb-9143-8bfbcb683e79"
-		},
-		"ADLS_Poc_Tec_properties_typeProperties_tenant": {
-			"type": "string",
-			"defaultValue": "6e5433e0-76fc-44b7-b71b-0e5446a3fa94"
-		},
-		"ADLS_Poc_Tec_properties_typeProperties_subscriptionId": {
-			"type": "string",
-			"defaultValue": "17bfcc0a-bd44-4775-9fae-38640875d0f6"
-		},
-		"ADLS_Poc_Tec_properties_typeProperties_resourceGroupName": {
-			"type": "string",
-			"defaultValue": "rs-poctec"
-		},
 		"SQLPocTec_properties_typeProperties_servicePrincipalId": {
 			"type": "string",
 			"defaultValue": "b4537ba3-1639-42cb-9143-8bfbcb683e79"
@@ -70,6 +46,10 @@
 		"TecDevCRM_properties_typeProperties_username": {
 			"type": "string",
 			"defaultValue": "Bhargav.Parchuri@letec.be"
+		},
+		"HttpServer1_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "http://opendata.tec-wl.be/Current%20GTFS/"
 		}
 	},
 	"variables": {
@@ -128,7 +108,7 @@
 						},
 						"inputs": [
 							{
-								"referenceName": "ADLSCSV",
+								"referenceName": "ADLSGen2CSV",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -540,7 +520,7 @@
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/ADLSCSV')]",
+				"[concat(variables('factoryId'), '/datasets/ADLSGen2CSV')]",
 				"[concat(variables('factoryId'), '/datasets/SQLEIS779')]",
 				"[concat(variables('factoryId'), '/datasets/SQLAtlasCRM')]",
 				"[concat(variables('factoryId'), '/datasets/tecdevcrmconnection')]",
@@ -1029,7 +1009,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/ADLSCSV')]",
+			"name": "[concat(parameters('factoryName'), '/ADLSGen2CSV')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -2011,27 +1991,6 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/ADLS_Poc_Tec')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureDataLakeStore",
-				"typeProperties": {
-					"dataLakeStoreUri": "[parameters('ADLS_Poc_Tec_properties_typeProperties_dataLakeStoreUri')]",
-					"servicePrincipalId": "[parameters('ADLS_Poc_Tec_properties_typeProperties_servicePrincipalId')]",
-					"servicePrincipalKey": {
-						"type": "SecureString",
-						"value": "[parameters('ADLS_Poc_Tec_servicePrincipalKey')]"
-					},
-					"tenant": "[parameters('ADLS_Poc_Tec_properties_typeProperties_tenant')]",
-					"subscriptionId": "[parameters('ADLS_Poc_Tec_properties_typeProperties_subscriptionId')]",
-					"resourceGroupName": "[parameters('ADLS_Poc_Tec_properties_typeProperties_resourceGroupName')]"
-				}
-			},
-			"dependsOn": []
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/SQLPocTec')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -2067,85 +2026,6 @@
 						"value": "[parameters('TecDevCRM_password')]"
 					}
 				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/integrationRuntime1')]",
-			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"type": "SelfHosted",
-				"typeProperties": {}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/integrationRuntime2')]",
-			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"type": "SelfHosted",
-				"typeProperties": {}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/integrationRuntime3')]",
-			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"type": "Managed",
-				"typeProperties": {
-					"computeProperties": {
-						"location": "North Europe",
-						"dataFlowProperties": {
-							"computeType": "General",
-							"coreCount": 8,
-							"timeToLive": 0
-						}
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/integrationRuntime4')]",
-			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"type": "SelfHosted",
-				"typeProperties": {}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/integrationRuntime5')]",
-			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"type": "SelfHosted",
-				"typeProperties": {}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/integrationRuntime6')]",
-			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"type": "SelfHosted",
-				"typeProperties": {}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/integrationRuntime7')]",
-			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"type": "SelfHosted",
-				"typeProperties": {}
 			},
 			"dependsOn": []
 		},
@@ -2243,6 +2123,131 @@
 				"[concat(variables('factoryId'), '/datasets/SQLSegment3')]",
 				"[concat(variables('factoryId'), '/datasets/SQLSegment4')]",
 				"[concat(variables('factoryId'), '/datasets/SQLSegment5')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/GTFS')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "GTFSZipfilestoDLS",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "BinarySource",
+								"storeSettings": {
+									"type": "HttpReadSettings",
+									"requestMethod": "GET"
+								},
+								"formatSettings": {
+									"type": "BinaryReadSettings",
+									"compressionProperties": {
+										"type": "ZipDeflateReadSettings"
+									}
+								}
+							},
+							"sink": {
+								"type": "BinarySink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								}
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "ZipFileGTFS",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DLSV2GTFS",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/ZipFileGTFS')]",
+				"[concat(variables('factoryId'), '/datasets/DLSV2GTFS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/HttpServer1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "HttpServer",
+				"typeProperties": {
+					"url": "[parameters('HttpServer1_properties_typeProperties_url')]",
+					"enableServerCertificateValidation": true,
+					"authenticationType": "Anonymous"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ZipFileGTFS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "HttpServer1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "HttpServerLocation"
+					},
+					"compression": {
+						"type": "ZipDeflate"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/HttpServer1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DLSV2GTFS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ADLSGen2",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": "GTFS",
+						"fileSystem": "poc-tec"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ADLSGen2')]"
 			]
 		}
 	]

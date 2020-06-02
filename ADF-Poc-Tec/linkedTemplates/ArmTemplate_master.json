@@ -11,10 +11,6 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'servicePrincipalKey' of 'ADLSGen2'"
 		},
-		"ADLS_Poc_Tec_servicePrincipalKey": {
-			"type": "secureString",
-			"metadata": "Secure string for 'servicePrincipalKey' of 'ADLS_Poc_Tec'"
-		},
 		"SQLPocTec_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'SQLPocTec'"
@@ -39,26 +35,6 @@
 			"type": "string",
 			"defaultValue": "b4537ba3-1639-42cb-9143-8bfbcb683e79"
 		},
-		"ADLS_Poc_Tec_properties_typeProperties_dataLakeStoreUri": {
-			"type": "string",
-			"defaultValue": "https://dlspoctec.azuredatalakestore.net/webhdfs/v1"
-		},
-		"ADLS_Poc_Tec_properties_typeProperties_servicePrincipalId": {
-			"type": "string",
-			"defaultValue": "b4537ba3-1639-42cb-9143-8bfbcb683e79"
-		},
-		"ADLS_Poc_Tec_properties_typeProperties_tenant": {
-			"type": "string",
-			"defaultValue": "6e5433e0-76fc-44b7-b71b-0e5446a3fa94"
-		},
-		"ADLS_Poc_Tec_properties_typeProperties_subscriptionId": {
-			"type": "string",
-			"defaultValue": "17bfcc0a-bd44-4775-9fae-38640875d0f6"
-		},
-		"ADLS_Poc_Tec_properties_typeProperties_resourceGroupName": {
-			"type": "string",
-			"defaultValue": "rs-poctec"
-		},
 		"SQLPocTec_properties_typeProperties_servicePrincipalId": {
 			"type": "string",
 			"defaultValue": "b4537ba3-1639-42cb-9143-8bfbcb683e79"
@@ -70,6 +46,10 @@
 		"TecDevCRM_properties_typeProperties_username": {
 			"type": "string",
 			"defaultValue": "Bhargav.Parchuri@letec.be"
+		},
+		"HttpServer1_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "http://opendata.tec-wl.be/Current%20GTFS/"
 		},
 		"containerUri": {
 			"type": "string",
@@ -101,9 +81,6 @@
 					"ADLSGen2_servicePrincipalKey": {
 						"value": "[parameters('ADLSGen2_servicePrincipalKey')]"
 					},
-					"ADLS_Poc_Tec_servicePrincipalKey": {
-						"value": "[parameters('ADLS_Poc_Tec_servicePrincipalKey')]"
-					},
 					"SQLPocTec_connectionString": {
 						"value": "[parameters('SQLPocTec_connectionString')]"
 					},
@@ -122,21 +99,6 @@
 					"ADLSGen2_properties_typeProperties_servicePrincipalId": {
 						"value": "[parameters('ADLSGen2_properties_typeProperties_servicePrincipalId')]"
 					},
-					"ADLS_Poc_Tec_properties_typeProperties_dataLakeStoreUri": {
-						"value": "[parameters('ADLS_Poc_Tec_properties_typeProperties_dataLakeStoreUri')]"
-					},
-					"ADLS_Poc_Tec_properties_typeProperties_servicePrincipalId": {
-						"value": "[parameters('ADLS_Poc_Tec_properties_typeProperties_servicePrincipalId')]"
-					},
-					"ADLS_Poc_Tec_properties_typeProperties_tenant": {
-						"value": "[parameters('ADLS_Poc_Tec_properties_typeProperties_tenant')]"
-					},
-					"ADLS_Poc_Tec_properties_typeProperties_subscriptionId": {
-						"value": "[parameters('ADLS_Poc_Tec_properties_typeProperties_subscriptionId')]"
-					},
-					"ADLS_Poc_Tec_properties_typeProperties_resourceGroupName": {
-						"value": "[parameters('ADLS_Poc_Tec_properties_typeProperties_resourceGroupName')]"
-					},
 					"SQLPocTec_properties_typeProperties_servicePrincipalId": {
 						"value": "[parameters('SQLPocTec_properties_typeProperties_servicePrincipalId')]"
 					},
@@ -145,6 +107,9 @@
 					},
 					"TecDevCRM_properties_typeProperties_username": {
 						"value": "[parameters('TecDevCRM_properties_typeProperties_username')]"
+					},
+					"HttpServer1_properties_typeProperties_url": {
+						"value": "[parameters('HttpServer1_properties_typeProperties_url')]"
 					}
 				}
 			},
