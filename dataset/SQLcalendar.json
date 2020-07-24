@@ -1,0 +1,58 @@
+{
+	"name": "SQLcalendar",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SQLPocTec",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Service_id",
+				"type": "varchar"
+			},
+			{
+				"name": "Monday",
+				"type": "varchar"
+			},
+			{
+				"name": "Tuesday",
+				"type": "varchar"
+			},
+			{
+				"name": "Wednesday",
+				"type": "varchar"
+			},
+			{
+				"name": "Thursday",
+				"type": "varchar"
+			},
+			{
+				"name": "Friday",
+				"type": "varchar"
+			},
+			{
+				"name": "Saturday",
+				"type": "varchar"
+			},
+			{
+				"name": "Sunday",
+				"type": "varchar"
+			},
+			{
+				"name": "Start_date",
+				"type": "date"
+			},
+			{
+				"name": "End_date",
+				"type": "date"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "CalendarUpdate"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

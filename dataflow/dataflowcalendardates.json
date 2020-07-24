@@ -1,0 +1,32 @@
+{
+	"name": "dataflowcalendardates",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "GTFScalendar_dates",
+						"type": "DatasetReference"
+					},
+					"name": "dataflowcalendardatessource"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "SQLcalendar_dates",
+						"type": "DatasetReference"
+					},
+					"name": "sinktocalendardatesSQLtable"
+				}
+			],
+			"transformations": [
+				{
+					"name": "DerivedColumntoconvertstringtodate"
+				}
+			],
+			"script": "source(output(\n\t\tservice_id as string,\n\t\tdate as string,\n\t\texception_type as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinferDriftedColumnTypes: true) ~> dataflowcalendardatessource\ndataflowcalendardatessource derive(date = toDate(substring(date,1,4)+\"-\"+substring(date,5,2)+\"-\"+substring(date,7,2))) ~> DerivedColumntoconvertstringtodate\nDerivedColumntoconvertstringtodate sink(input(\n\t\tService_id as string,\n\t\tDate as date,\n\t\tException_type as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tmapColumn(\n\t\tService_id = service_id,\n\t\tDate = date,\n\t\tException_type = exception_type\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> sinktocalendardatesSQLtable"
+		}
+	}
+}

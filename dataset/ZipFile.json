@@ -1,0 +1,19 @@
+{
+	"name": "ZipFile",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ADLSGen2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "PocTecZip",
+				"fileSystem": "poc-tec"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

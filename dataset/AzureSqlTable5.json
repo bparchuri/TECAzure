@@ -1,0 +1,78 @@
+{
+	"name": "AzureSqlTable5",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SQLPocTec",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "RegistrationID",
+				"type": "varchar"
+			},
+			{
+				"name": "ArticleCode",
+				"type": "varchar"
+			},
+			{
+				"name": "Sequencenumber",
+				"type": "varchar"
+			},
+			{
+				"name": "Retailnumber",
+				"type": "varchar"
+			},
+			{
+				"name": "Communication",
+				"type": "varchar"
+			},
+			{
+				"name": "Customerreference",
+				"type": "varchar"
+			},
+			{
+				"name": "BIC",
+				"type": "varchar"
+			},
+			{
+				"name": "BlankColumn1",
+				"type": "varchar"
+			},
+			{
+				"name": "Transactiontype",
+				"type": "varchar"
+			},
+			{
+				"name": "ISOCode",
+				"type": "varchar"
+			},
+			{
+				"name": "CategoryPurpose",
+				"type": "varchar"
+			},
+			{
+				"name": "Purpose",
+				"type": "varchar"
+			},
+			{
+				"name": "MoreCode",
+				"type": "varchar"
+			},
+			{
+				"name": "BlankColumn2",
+				"type": "varchar"
+			},
+			{
+				"name": "Linkcode",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "COD-22"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

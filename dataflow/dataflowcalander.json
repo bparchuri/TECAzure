@@ -1,0 +1,32 @@
+{
+	"name": "dataflowcalander",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "GTFScalendar",
+						"type": "DatasetReference"
+					},
+					"name": "DataFlowCalendersource"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "SQLcalendar",
+						"type": "DatasetReference"
+					},
+					"name": "sinktoSQLCalendar"
+				}
+			],
+			"transformations": [
+				{
+					"name": "DerivedColumntoconvertstringtodate"
+				}
+			],
+			"script": "source(output(\n\t\tservice_id as string,\n\t\tmonday as string,\n\t\ttuesday as string,\n\t\twednesday as string,\n\t\tthursday as string,\n\t\tfriday as string,\n\t\tsaturday as string,\n\t\tsunday as string,\n\t\tstart_date as string,\n\t\tend_date as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> DataFlowCalendersource\nDataFlowCalendersource derive(start_date = toDate(substring(start_date,1,4)+\"-\"+substring(start_date,5,2)+\"-\"+substring(start_date,7,2)),\n\t\tend_date = toDate(substring(end_date,1,4)+\"-\"+substring(end_date,5,2)+\"-\"+substring(end_date,7,2))) ~> DerivedColumntoconvertstringtodate\nDerivedColumntoconvertstringtodate sink(input(\n\t\tService_id as string,\n\t\tMonday as string,\n\t\tTuesday as string,\n\t\tWednesday as string,\n\t\tThursday as string,\n\t\tFriday as string,\n\t\tSaturday as string,\n\t\tSunday as string,\n\t\tStart_date as date,\n\t\tEnd_date as date\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tmapColumn(\n\t\tService_id = service_id,\n\t\tMonday = monday,\n\t\tTuesday = tuesday,\n\t\tWednesday = wednesday,\n\t\tThursday = thursday,\n\t\tFriday = friday,\n\t\tSaturday = saturday,\n\t\tSunday = sunday,\n\t\tStart_date = start_date,\n\t\tEnd_date = end_date\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> sinktoSQLCalendar"
+		}
+	}
+}

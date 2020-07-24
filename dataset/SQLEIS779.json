@@ -1,0 +1,22 @@
+{
+	"name": "SQLEIS779",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SQLPocTec",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Code_segment",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "EIS779"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

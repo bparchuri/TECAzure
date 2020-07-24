@@ -1,0 +1,22 @@
+{
+	"name": "TecDevCRM",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "DynamicsCrm",
+		"typeProperties": {
+			"deploymentType": "Online",
+			"serviceUri": "https://tec-crm-dev.crm4.dynamics.com",
+			"authenticationType": "Office365",
+			"username": "Bhargav.Parchuri@letec.be",
+			"password": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "KeyVaultPoc",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "crmpwd"
+			}
+		}
+	}
+}

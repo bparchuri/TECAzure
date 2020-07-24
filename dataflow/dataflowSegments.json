@@ -1,0 +1,85 @@
+{
+	"name": "dataflowSegments",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "DataflowSQLEIS779",
+						"type": "DatasetReference"
+					},
+					"name": "dataflowSource"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "SQLSegment0",
+						"type": "DatasetReference"
+					},
+					"name": "SQLSegment0"
+				},
+				{
+					"dataset": {
+						"referenceName": "SQLSegment1",
+						"type": "DatasetReference"
+					},
+					"name": "SQLSegment1"
+				},
+				{
+					"dataset": {
+						"referenceName": "SQLSegment2",
+						"type": "DatasetReference"
+					},
+					"name": "SQLSegment2"
+				},
+				{
+					"dataset": {
+						"referenceName": "SQLSegment3",
+						"type": "DatasetReference"
+					},
+					"name": "SQLSegment3"
+				},
+				{
+					"dataset": {
+						"referenceName": "SQLSegment4",
+						"type": "DatasetReference"
+					},
+					"name": "SQLSegment4"
+				},
+				{
+					"dataset": {
+						"referenceName": "SQLSegment5",
+						"type": "DatasetReference"
+					},
+					"name": "SQLSegment5"
+				}
+			],
+			"transformations": [
+				{
+					"name": "ConditionalSplit"
+				},
+				{
+					"name": "DerivedColumnSeg0"
+				},
+				{
+					"name": "DerivedColumnSeg1"
+				},
+				{
+					"name": "DerivedColumnSeg2"
+				},
+				{
+					"name": "DerivedColumnSeg3"
+				},
+				{
+					"name": "DerivedColumnseg5"
+				},
+				{
+					"name": "DerivedColumnSeg4"
+				}
+			],
+			"script": "source(output(\n\t\tCode_segment as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> dataflowSource\ndataflowSource split(like(Code_segment,'000%'),\n\tlike(Code_segment,'005%'),\n\tlike(Code_segment,'004%'),\n\tlike(Code_segment,'003%'),\n\tlike(Code_segment,'002%'),\n\tlike(Code_segment,'001%'),\n\tdisjoint: true,\n\tpartitionBy('roundRobin', 2)) ~> ConditionalSplit@(Segment0, Segment5, Segment4, Segment3, Segment2, Segment1, Others)\nConditionalSplit@Segment0 derive(Column1 = split(Code_segment,';')[1],\n\t\tColumn2 = split(Code_segment,';')[2]) ~> DerivedColumnSeg0\nConditionalSplit@Segment1 derive(Column1 = split(Code_segment,';')[1],\n\t\tColumn2 = split(Code_segment,';')[2],\n\t\tColumn3 = split(Code_segment,';')[3],\n\t\tColumn4 = currentUTC(),\n\t\tColumn5 = split(Code_segment,';')[5],\n\t\tColumn6 = split(Code_segment,';')[6],\n\t\tColumn7 = split(Code_segment,';')[7],\n\t\tColumn8 = split(Code_segment,';')[8],\n\t\tColumn9 = split(Code_segment,';')[9],\n\t\tColumn10 = split(Code_segment,';')[10],\n\t\tColumn11 = split(Code_segment,';')[11],\n\t\tColumn12 = split(Code_segment,';')[12]) ~> DerivedColumnSeg1\nConditionalSplit@Segment2 derive(Column1 = split(Code_segment,';')[1],\n\t\tColumn2 = split(Code_segment,';')[2],\n\t\tColumn3 = split(Code_segment,';')[3],\n\t\tColumn4 = split(Code_segment,';')[4],\n\t\tColumn5 = split(Code_segment,';')[5],\n\t\tColumn6 = split(Code_segment,';')[6],\n\t\tColumn7 = split(Code_segment,';')[7],\n\t\tColumn8 = split(Code_segment,';')[8],\n\t\tColumn9 = split(Code_segment,';')[9],\n\t\tColumn10 = split(Code_segment,';')[10],\n\t\tColumn11 = split(Code_segment,';')[11],\n\t\tColumn12 = split(Code_segment,';')[12],\n\t\tColumn13 = currentUTC(),\n\t\tColumn14 = currentUTC(),\n\t\tColumn15 = split(Code_segment,';')[15],\n\t\tColumn16 = split(Code_segment,';')[16],\n\t\tColumn17 = split(Code_segment,';')[17],\n\t\tColumn18 = split(Code_segment,';')[18],\n\t\tColumn19 = split(Code_segment,';')[19],\n\t\tColumn20 = split(Code_segment,';')[20],\n\t\tColumn21 = split(Code_segment,';')[21],\n\t\tColumn22 = split(Code_segment,';')[22],\n\t\tColumn23 = split(Code_segment,';')[23],\n\t\tColumn24 = split(Code_segment,';')[24],\n\t\tColumn25 = split(Code_segment,';')[25],\n\t\tColumn26 = split(Code_segment,';')[26],\n\t\tColumn27 = split(Code_segment,';')[27],\n\t\tColumn28 = split(Code_segment,';')[28],\n\t\tColumn29 = split(Code_segment,';')[29],\n\t\tColumn30 = split(Code_segment,';')[30]) ~> DerivedColumnSeg2\nConditionalSplit@Segment3 derive(Column1 = split(Code_segment,';')[1],\n\t\tColumn2 = split(Code_segment,';')[2],\n\t\tColumn3 = split(Code_segment,';')[3],\n\t\tColumn4 = split(Code_segment,';')[4],\n\t\tColumn5 = split(Code_segment,';')[5],\n\t\tColumn6 = split(Code_segment,';')[6],\n\t\tColumn7 = split(Code_segment,';')[7],\n\t\tColumn8 = split(Code_segment,';')[8],\n\t\tColumn9 = split(Code_segment,';')[9]) ~> DerivedColumnSeg3\nConditionalSplit@Segment5 derive(Column1 = split(Code_segment,';')[1],\n\t\tColumn2 = split(Code_segment,';')[2],\n\t\tColumn3 = split(Code_segment,';')[3],\n\t\tColumn4 = split(Code_segment,';')[4],\n\t\tColumn5 = split(Code_segment,';')[5],\n\t\tColumn6 = split(Code_segment,';')[6],\n\t\tColumn7 = split(Code_segment,';')[7],\n\t\tColumn8 = split(Code_segment,';')[8],\n\t\tColumn9 = split(Code_segment,';')[9],\n\t\tColumn10 = currentUTC(),\n\t\tColumn11 = split(Code_segment,';')[11],\n\t\tColumn12 = split(Code_segment,';')[12],\n\t\tColumn13 = split(Code_segment,';')[13]) ~> DerivedColumnseg5\nConditionalSplit@Segment4 derive(Column1 = split(Code_segment,';')[1],\n\t\tColumn2 = split(Code_segment,';')[2],\n\t\tColumn3 = split(Code_segment,';')[3],\n\t\tColumn4 = split(Code_segment,';')[4],\n\t\tColumn5 = split(Code_segment,';')[5],\n\t\tColumn6 = split(Code_segment,';')[6],\n\t\tColumn7 = split(Code_segment,';')[7],\n\t\tColumn8 = split(Code_segment,';')[8],\n\t\tColumn9 = split(Code_segment,';')[9],\n\t\tColumn10 = split(Code_segment,';')[10],\n\t\tColumn11 = split(Code_segment,';')[11],\n\t\tColumn12 = split(Code_segment,';')[12],\n\t\tColumn13 = split(Code_segment,';')[13],\n\t\tColumn14 = split(Code_segment,';')[14],\n\t\tColumn15 = currentUTC(),\n\t\tColumn16 = split(Code_segment,';')[16]) ~> DerivedColumnSeg4\nDerivedColumnSeg0 sink(input(\n\t\tCode_segment as string,\n\t\tPlateforme as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tmapColumn(\n\t\tCode_segment = Column1,\n\t\tPlateforme = Column2\n\t)) ~> SQLSegment0\nDerivedColumnSeg1 sink(input(\n\t\tCode_segment as string,\n\t\tPoste_segment as string,\n\t\tId_transaction as string,\n\t\tDate_ope as timestamp,\n\t\tType_equipement as string,\n\t\tNum_syst_emetteur as string,\n\t\tCEB as string,\n\t\tNum_serie as string,\n\t\tNum_service as string,\n\t\tCode_user as string,\n\t\tCompagnie_agent as string,\n\t\tType_emplacement as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tmapColumn(\n\t\tCode_segment = Column1,\n\t\tPoste_segment = Column2,\n\t\tId_transaction = Column3,\n\t\tDate_ope = Column4,\n\t\tType_equipement = Column5,\n\t\tNum_syst_emetteur = Column6,\n\t\tCEB = Column7,\n\t\tNum_serie = Column8,\n\t\tNum_service = Column9,\n\t\tCode_user = Column10,\n\t\tCompagnie_agent = Column11,\n\t\tType_emplacement = Column12\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SQLSegment1\nDerivedColumnSeg2 sink(input(\n\t\tCode_segment as string,\n\t\tPoste_segment as string,\n\t\tId_transaction as string,\n\t\tId_oper_vente as string,\n\t\tType_mvt as string,\n\t\tCateg_produit as string,\n\t\tNum_produit as string,\n\t\tNum_article as string,\n\t\tNum_unicite as string,\n\t\tNum_serie as string,\n\t\tNum_contrat as string,\n\t\tNum_serie_prev as string,\n\t\tDate_Debut as timestamp,\n\t\tDate_Fin as timestamp,\n\t\tId_entreprise as string,\n\t\tMontant_part_tiers as double,\n\t\t{Quantité} as string,\n\t\tTauxTVA_an as string,\n\t\tMontant_global_vente as double,\n\t\tNb_jetons as string,\n\t\tNb_jetons_avant as string,\n\t\tId_convention as string,\n\t\tLibelle_convention as string,\n\t\tNum_mobib as string,\n\t\tCode_article as string,\n\t\tNum_reseau_produit as string,\n\t\tNum_contrat_prev as string,\n\t\tNum_commande as string,\n\t\tNum_elt_commande as string,\n\t\tType_elt_commande as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tmapColumn(\n\t\tCode_segment = Column1,\n\t\tPoste_segment = Column2,\n\t\tId_transaction = Column3,\n\t\tId_oper_vente = Column4,\n\t\tType_mvt = Column5,\n\t\tCateg_produit = Column6,\n\t\tNum_produit = Column7,\n\t\tNum_article = Column8,\n\t\tNum_unicite = Column9,\n\t\tNum_serie = Column10,\n\t\tNum_contrat = Column11,\n\t\tNum_serie_prev = Column12,\n\t\tDate_Debut = Column13,\n\t\tDate_Fin = Column14,\n\t\tId_entreprise = Column15,\n\t\tMontant_part_tiers = Column16,\n\t\t{Quantité} = Column17,\n\t\tTauxTVA_an = Column18,\n\t\tMontant_global_vente = Column19,\n\t\tNb_jetons = Column20,\n\t\tNb_jetons_avant = Column21,\n\t\tId_convention = Column22,\n\t\tLibelle_convention = Column23,\n\t\tNum_mobib = Column24,\n\t\tCode_article = Column25,\n\t\tNum_reseau_produit = Column26,\n\t\tNum_contrat_prev = Column27,\n\t\tNum_commande = Column28,\n\t\tNum_elt_commande = Column29,\n\t\tType_elt_commande = Column30\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SQLSegment2\nDerivedColumnSeg3 sink(input(\n\t\tCode_segment as string,\n\t\tPoste_segment as string,\n\t\tId_transaction as string,\n\t\tId_paiement as string,\n\t\tCode_moyen_paiement as string,\n\t\tSens_paiement as string,\n\t\tMontant as double,\n\t\tId_entreprise as string,\n\t\tComm_struct as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tmapColumn(\n\t\tCode_segment = Column1,\n\t\tPoste_segment = Column2,\n\t\tId_transaction = Column3,\n\t\tId_paiement = Column4,\n\t\tCode_moyen_paiement = Column5,\n\t\tSens_paiement = Column6,\n\t\tMontant = Column7,\n\t\tId_entreprise = Column8,\n\t\tComm_struct = Column9\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SQLSegment3\nDerivedColumnSeg4 sink(input(\n\t\tCode_segment as string,\n\t\tPoste_segment as string,\n\t\tId_transaction as string,\n\t\tId_paiement as string,\n\t\tCode_moyen_paiement as string,\n\t\tSens_paiement as string,\n\t\tMontant as double,\n\t\tHardware_type as string,\n\t\tMode_TPV as string,\n\t\tBrand_id as string,\n\t\tMachine_number as string,\n\t\tPdv_clct_nr as string,\n\t\tPdv_gen_tx_nb as string,\n\t\tTransaction_identifier as string,\n\t\tDateh_tpe as timestamp,\n\t\tAuth_code as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tmapColumn(\n\t\tCode_segment = Column1,\n\t\tPoste_segment = Column2,\n\t\tId_transaction = Column3,\n\t\tId_paiement = Column4,\n\t\tCode_moyen_paiement = Column5,\n\t\tSens_paiement = Column6,\n\t\tMontant = Column7,\n\t\tHardware_type = Column8,\n\t\tMode_TPV = Column9,\n\t\tBrand_id = Column10,\n\t\tMachine_number = Column11,\n\t\tPdv_clct_nr = Column12,\n\t\tPdv_gen_tx_nb = Column13,\n\t\tTransaction_identifier = Column14,\n\t\tDateh_tpe = Column15,\n\t\tAuth_code = Column16\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SQLSegment4\nDerivedColumnseg5 sink(input(\n\t\tCode_segment as string,\n\t\tPoste_segment as string,\n\t\tId_transaction as string,\n\t\tId_paiement as string,\n\t\tTransactionReference as string,\n\t\tTransactionDateTime as string,\n\t\tSens_paiement as string,\n\t\tStatementReference as string,\n\t\tPaymentMeanBrand as string,\n\t\tValueDate as timestamp,\n\t\tAmount as double,\n\t\tAuthorizationId as string,\n\t\tMerchantId as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tmapColumn(\n\t\tCode_segment = Column1,\n\t\tPoste_segment = Column2,\n\t\tId_transaction = Column3,\n\t\tId_paiement = Column4,\n\t\tTransactionReference = Column5,\n\t\tTransactionDateTime = Column6,\n\t\tSens_paiement = Column7,\n\t\tStatementReference = Column8,\n\t\tPaymentMeanBrand = Column9,\n\t\tValueDate = Column10,\n\t\tAmount = Column11,\n\t\tAuthorizationId = Column12,\n\t\tMerchantId = Column13\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SQLSegment5"
+		}
+	}
+}

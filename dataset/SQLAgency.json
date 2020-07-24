@@ -1,0 +1,42 @@
+{
+	"name": "SQLAgency",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SQLPocTec",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Agency_id",
+				"type": "varchar"
+			},
+			{
+				"name": "Agency_name",
+				"type": "varchar"
+			},
+			{
+				"name": "Agency_url",
+				"type": "varchar"
+			},
+			{
+				"name": "Agency_timezone",
+				"type": "varchar"
+			},
+			{
+				"name": "Agency_lang",
+				"type": "varchar"
+			},
+			{
+				"name": "Agency_phone",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Agency"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

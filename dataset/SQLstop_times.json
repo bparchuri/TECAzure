@@ -1,0 +1,46 @@
+{
+	"name": "SQLstop_times",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SQLPocTec",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Trip_id",
+				"type": "varchar"
+			},
+			{
+				"name": "Arrival_time",
+				"type": "varchar"
+			},
+			{
+				"name": "Departure_time",
+				"type": "varchar"
+			},
+			{
+				"name": "Stop_id",
+				"type": "varchar"
+			},
+			{
+				"name": "Stop_sequence",
+				"type": "varchar"
+			},
+			{
+				"name": "Pickup_type",
+				"type": "varchar"
+			},
+			{
+				"name": "Drop_off_type",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Stop_Times"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

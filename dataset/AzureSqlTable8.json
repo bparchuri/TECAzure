@@ -1,0 +1,54 @@
+{
+	"name": "AzureSqlTable8",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SQLPocTec",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "RegistrationID",
+				"type": "varchar"
+			},
+			{
+				"name": "ArticleCode",
+				"type": "varchar"
+			},
+			{
+				"name": "Sequencenumber",
+				"type": "varchar"
+			},
+			{
+				"name": "Retailnumber",
+				"type": "varchar"
+			},
+			{
+				"name": "Communication",
+				"type": "varchar"
+			},
+			{
+				"name": "BlankColumn1",
+				"type": "varchar"
+			},
+			{
+				"name": "Codesuite",
+				"type": "varchar"
+			},
+			{
+				"name": "BlankColumn2",
+				"type": "varchar"
+			},
+			{
+				"name": "LinkCode",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "COD-33"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
