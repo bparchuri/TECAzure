@@ -1,0 +1,38 @@
+{
+	"name": "integrationRuntime1",
+	"properties": {
+		"type": "Managed",
+		"typeProperties": {
+			"computeProperties": {
+				"location": "North Europe",
+				"nodeSize": "Standard_D2_v3",
+				"numberOfNodes": 1,
+				"maxParallelExecutionsPerNode": 2,
+				"vNetProperties": {
+					"vNetId": "/subscriptions/5d5e2d67-4aa7-4698-aa6e-48bdb423d69a/resourceGroups/rs-networking/providers/Microsoft.Network/virtualNetworks/vn-linkedtotec",
+					"subnet": "sn-01"
+				}
+			},
+			"ssisProperties": {
+				"catalogInfo": {
+					"catalogServerEndpoint": "sqlpcrmpdev01.database.windows.net",
+					"catalogAdminUserName": "Groot",
+					"catalogAdminPassword": {
+						"type": "SecureString",
+						"value": "**********"
+					},
+					"catalogPricingTier": "S0"
+				},
+				"customSetupScriptProperties": {
+					"blobContainerUri": "https://sapcrmcommon01.blob.core.windows.net/kingswaysoft",
+					"sasToken": {
+						"type": "SecureString",
+						"value": "**********"
+					}
+				},
+				"edition": "Standard",
+				"licenseType": "BasePrice"
+			}
+		}
+	}
+}
