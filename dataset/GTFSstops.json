@@ -1,0 +1,62 @@
+{
+	"name": "GTFSstops",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ADLSGen2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "stops.txt",
+				"folderPath": "GTFS",
+				"fileSystem": "poc-tec"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "stop_id",
+				"type": "String"
+			},
+			{
+				"name": "stop_code",
+				"type": "String"
+			},
+			{
+				"name": "stop_name",
+				"type": "String"
+			},
+			{
+				"name": "stop_desc",
+				"type": "String"
+			},
+			{
+				"name": "stop_lat",
+				"type": "String"
+			},
+			{
+				"name": "stop_lon",
+				"type": "String"
+			},
+			{
+				"name": "zone_id",
+				"type": "String"
+			},
+			{
+				"name": "stop_url",
+				"type": "String"
+			},
+			{
+				"name": "location_type",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

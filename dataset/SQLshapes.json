@@ -1,0 +1,34 @@
+{
+	"name": "SQLshapes",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SQLPocTec",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "shape_id",
+				"type": "varchar"
+			},
+			{
+				"name": "shape_pt_lat",
+				"type": "varchar"
+			},
+			{
+				"name": "shape_pt_lon",
+				"type": "varchar"
+			},
+			{
+				"name": "shape_pt_sequence",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Shapes"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

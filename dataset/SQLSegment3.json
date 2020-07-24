@@ -1,0 +1,55 @@
+{
+	"name": "SQLSegment3",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SQLPocTec",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Code_segment",
+				"type": "nchar"
+			},
+			{
+				"name": "Poste_segment",
+				"type": "nchar"
+			},
+			{
+				"name": "Id_transaction",
+				"type": "nchar"
+			},
+			{
+				"name": "Id_paiement",
+				"type": "nchar"
+			},
+			{
+				"name": "Code_moyen_paiement",
+				"type": "nchar"
+			},
+			{
+				"name": "Sens_paiement",
+				"type": "varchar"
+			},
+			{
+				"name": "Montant",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "Id_entreprise",
+				"type": "nchar"
+			},
+			{
+				"name": "Comm_struct",
+				"type": "char"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "EIS779_SEGMENT_003"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

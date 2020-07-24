@@ -1,0 +1,46 @@
+{
+	"name": "SQLroutes",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SQLPocTec",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Route_id",
+				"type": "varchar"
+			},
+			{
+				"name": "Agency_id",
+				"type": "varchar"
+			},
+			{
+				"name": "Route_short_name",
+				"type": "varchar"
+			},
+			{
+				"name": "Route_long_name",
+				"type": "varchar"
+			},
+			{
+				"name": "Route_desc",
+				"type": "varchar"
+			},
+			{
+				"name": "Route_type",
+				"type": "varchar"
+			},
+			{
+				"name": "Route_url",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Routes"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

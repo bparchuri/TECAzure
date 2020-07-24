@@ -1,0 +1,16 @@
+{
+	"name": "TECDevCRM",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "TecDevCRM",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DynamicsCrmEntity",
+		"schema": [],
+		"typeProperties": {
+			"entityName": "bd_lignes"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,54 @@
+{
+	"name": "SQLstops",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SQLPocTec",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Stop_id",
+				"type": "varchar"
+			},
+			{
+				"name": "Stop_code",
+				"type": "varchar"
+			},
+			{
+				"name": "Stop_name",
+				"type": "varchar"
+			},
+			{
+				"name": "Stop_desc",
+				"type": "varchar"
+			},
+			{
+				"name": "Stop_lat",
+				"type": "varchar"
+			},
+			{
+				"name": "Stop_lon",
+				"type": "varchar"
+			},
+			{
+				"name": "Zone_id",
+				"type": "varchar"
+			},
+			{
+				"name": "Stop_url",
+				"type": "varchar"
+			},
+			{
+				"name": "Location_type",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Stops"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,17 @@
+{
+	"name": "SQLJoin",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SQLPocTec",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "EIS779_atlas"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,42 @@
+{
+	"name": "GTFSshapes",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ADLSGen2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "shapes.txt",
+				"folderPath": "GTFS",
+				"fileSystem": "poc-tec"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "shape_id",
+				"type": "String"
+			},
+			{
+				"name": "shape_pt_lat",
+				"type": "String"
+			},
+			{
+				"name": "shape_pt_lon",
+				"type": "String"
+			},
+			{
+				"name": "shape_pt_sequence",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
