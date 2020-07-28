@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy Coda file",
+				"name": "pipeline_CODAIntegration",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -35,7 +35,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "Binary1",
+						"referenceName": "binary_CODAFile",
 						"type": "DatasetReference"
 					}
 				],
@@ -51,7 +51,7 @@
 				"type": "ExecuteDataFlow",
 				"dependsOn": [
 					{
-						"activity": "Copy Coda file",
+						"activity": "pipeline_CODAIntegration",
 						"dependencyConditions": [
 							"Succeeded"
 						]
