@@ -41,7 +41,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "CODFile",
+						"referenceName": "binary_CODAcsv",
 						"type": "DatasetReference"
 					}
 				]
