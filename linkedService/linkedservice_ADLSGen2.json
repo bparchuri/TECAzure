@@ -1,0 +1,21 @@
+{
+	"name": "linkedservice_ADLSGen2",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobFS",
+		"typeProperties": {
+			"url": "https://sapcrmdev01.dfs.core.windows.net",
+			"tenant": "2291afd2-1191-4bcb-9906-c1406010941b",
+			"servicePrincipalId": "b74b5688-5ee7-4c50-8364-ddd607f525ac",
+			"servicePrincipalKey": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "keyvault_TEC",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "tec-dev-prinicipalkey",
+				"secretVersion": "ea7baf49a5774322b0ca7dc1d9b5f923"
+			}
+		}
+	}
+}
