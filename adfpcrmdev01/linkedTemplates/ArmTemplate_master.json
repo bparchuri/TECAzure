@@ -79,6 +79,22 @@
 			"type": "string",
 			"defaultValue": "Bhargav.Parchuri@letec.be"
 		},
+		"keyvault_TEC_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://kvpcrm01.vault.azure.net/"
+		},
+		"linkedservice_ADLSGen2_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://sapcrmdev01.dfs.core.windows.net"
+		},
+		"linkedservice_ADLSGen2_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "2291afd2-1191-4bcb-9906-c1406010941b"
+		},
+		"linkedservice_ADLSGen2_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "b74b5688-5ee7-4c50-8364-ddd607f525ac"
+		},
 		"integrationRuntime1_properties_typeProperties_ssisProperties_catalogInfo_catalogServerEndpoint": {
 			"type": "string",
 			"defaultValue": "sqlpcrmpdev01.database.windows.net"
@@ -144,6 +160,9 @@
 					"KeyVaultPoc_properties_typeProperties_baseUrl": {
 						"value": "[parameters('KeyVaultPoc_properties_typeProperties_baseUrl')]"
 					},
+					"keyvault_TEC_properties_typeProperties_baseUrl": {
+						"value": "[parameters('keyvault_TEC_properties_typeProperties_baseUrl')]"
+					},
 					"integrationRuntime1_properties_typeProperties_ssisProperties_catalogInfo_catalogServerEndpoint": {
 						"value": "[parameters('integrationRuntime1_properties_typeProperties_ssisProperties_catalogInfo_catalogServerEndpoint')]"
 					},
@@ -185,6 +204,15 @@
 					},
 					"TecDevCRM_properties_typeProperties_username": {
 						"value": "[parameters('TecDevCRM_properties_typeProperties_username')]"
+					},
+					"linkedservice_ADLSGen2_properties_typeProperties_url": {
+						"value": "[parameters('linkedservice_ADLSGen2_properties_typeProperties_url')]"
+					},
+					"linkedservice_ADLSGen2_properties_typeProperties_tenant": {
+						"value": "[parameters('linkedservice_ADLSGen2_properties_typeProperties_tenant')]"
+					},
+					"linkedservice_ADLSGen2_properties_typeProperties_servicePrincipalId": {
+						"value": "[parameters('linkedservice_ADLSGen2_properties_typeProperties_servicePrincipalId')]"
 					}
 				}
 			},

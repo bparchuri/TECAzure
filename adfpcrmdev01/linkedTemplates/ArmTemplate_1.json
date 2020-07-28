@@ -13,6 +13,148 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTable12')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SQLPocTec",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "RegistrationID",
+						"type": "varchar"
+					},
+					{
+						"name": "BankAccountType",
+						"type": "varchar"
+					},
+					{
+						"name": "Sequencenumberofpaperaccount",
+						"type": "varchar"
+					},
+					{
+						"name": "Accountnumber",
+						"type": "varchar"
+					},
+					{
+						"name": "Oldbalance",
+						"type": "varchar"
+					},
+					{
+						"name": "Oldpay",
+						"type": "decimal",
+						"precision": 15,
+						"scale": 3
+					},
+					{
+						"name": "Dateofoldbalance",
+						"type": "date"
+					},
+					{
+						"name": "Accountholdername",
+						"type": "varchar"
+					},
+					{
+						"name": "Accounttagged",
+						"type": "varchar"
+					},
+					{
+						"name": "Sequencenumberofthecodified",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "COD-1"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTable13')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SQLPocTec",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "RegistrationID",
+						"type": "varchar"
+					},
+					{
+						"name": "ArticleCode",
+						"type": "varchar"
+					},
+					{
+						"name": "Sequencenumber",
+						"type": "varchar"
+					},
+					{
+						"name": "Retailnumber",
+						"type": "varchar"
+					},
+					{
+						"name": "Communication",
+						"type": "varchar"
+					},
+					{
+						"name": "Customerreference",
+						"type": "varchar"
+					},
+					{
+						"name": "BIC",
+						"type": "varchar"
+					},
+					{
+						"name": "BlankColumn1",
+						"type": "varchar"
+					},
+					{
+						"name": "Transactiontype",
+						"type": "varchar"
+					},
+					{
+						"name": "ISOCode",
+						"type": "varchar"
+					},
+					{
+						"name": "CategoryPurpose",
+						"type": "varchar"
+					},
+					{
+						"name": "Purpose",
+						"type": "varchar"
+					},
+					{
+						"name": "MoreCode",
+						"type": "varchar"
+					},
+					{
+						"name": "BlankColumn2",
+						"type": "varchar"
+					},
+					{
+						"name": "Linkcode",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "COD-22"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/AzureSqlTable14')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -1108,102 +1250,6 @@
 					},
 					{
 						"name": "end_date",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/GTFScalendar_dates')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "ADLSGen2",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"fileName": "calendar_dates.txt",
-						"folderPath": "GTFS",
-						"fileSystem": "poc-tec"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"name": "service_id",
-						"type": "String"
-					},
-					{
-						"name": "date",
-						"type": "String"
-					},
-					{
-						"name": "exception_type",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/GTFSroutes')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "ADLSGen2",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"fileName": "routes.txt",
-						"folderPath": "GTFS",
-						"fileSystem": "poc-tec"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"name": "route_id",
-						"type": "String"
-					},
-					{
-						"name": "agency_id",
-						"type": "String"
-					},
-					{
-						"name": "route_short_name",
-						"type": "String"
-					},
-					{
-						"name": "route_long_name",
-						"type": "String"
-					},
-					{
-						"name": "route_desc",
-						"type": "String"
-					},
-					{
-						"name": "route_type",
-						"type": "String"
-					},
-					{
-						"name": "route_url",
 						"type": "String"
 					}
 				]
