@@ -1,0 +1,75 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "adfpcrmdev01"
+		},
+		"AzureDataLakeStorage1_accountKey": {
+			"value": ""
+		},
+		"AzureDatabricks1_accessToken": {
+			"value": ""
+		},
+		"AzureFileStorage1_password": {
+			"value": ""
+		},
+		"ADLSCOD_properties_typeProperties_url": {
+			"value": "https://sapoctec.dfs.core.windows.net"
+		},
+		"ADLSCOD_properties_typeProperties_tenant": {
+			"value": "6e5433e0-76fc-44b7-b71b-0e5446a3fa94"
+		},
+		"ADLSCOD_properties_typeProperties_servicePrincipalId": {
+			"value": "b4537ba3-1639-42cb-9143-8bfbcb683e79"
+		},
+		"ADLSGen2_properties_typeProperties_url": {
+			"value": "https://sapoctec.dfs.core.windows.net"
+		},
+		"ADLSGen2_properties_typeProperties_tenant": {
+			"value": "6e5433e0-76fc-44b7-b71b-0e5446a3fa94"
+		},
+		"ADLSGen2_properties_typeProperties_servicePrincipalId": {
+			"value": "b4537ba3-1639-42cb-9143-8bfbcb683e79"
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"value": "https://sapoctec.dfs.core.windows.net"
+		},
+		"AzureFileStorage1_properties_typeProperties_host": {
+			"value": "\\\\sapoctec.file.core.windows.net\\adls-poc"
+		},
+		"AzureFileStorage1_properties_typeProperties_userId": {
+			"value": "Azure\\sapoctec"
+		},
+		"HttpServer1_properties_typeProperties_url": {
+			"value": "http://opendata.tec-wl.be/Current%20GTFS/TEC-GTFS.zip"
+		},
+		"KeyVaultPoc_properties_typeProperties_baseUrl": {
+			"value": "https://keyvault-Poc-tec.vault.azure.net/"
+		},
+		"SQLPocTec_properties_typeProperties_connectionString_secretName": {
+			"value": "SQL19"
+		},
+		"SQLPocTec_properties_typeProperties_servicePrincipalId": {
+			"value": "b4537ba3-1639-42cb-9143-8bfbcb683e79"
+		},
+		"SQLPocTec_properties_typeProperties_tenant": {
+			"value": "6e5433e0-76fc-44b7-b71b-0e5446a3fa94"
+		},
+		"TecDevCRM_properties_typeProperties_username": {
+			"value": "Bhargav.Parchuri@letec.be"
+		},
+		"integrationRuntime1_properties_typeProperties_ssisProperties_catalogInfo_catalogServerEndpoint": {
+			"value": "sqlpcrmpdev01.database.windows.net"
+		},
+		"integrationRuntime1_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminUserName": {
+			"value": "Groot"
+		},
+		"integrationRuntime1_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminPassword": {
+			"value": ""
+		},
+		"integrationRuntime1_properties_typeProperties_ssisProperties_customSetupScriptProperties_sasToken": {
+			"value": ""
+		}
+	}
+}
