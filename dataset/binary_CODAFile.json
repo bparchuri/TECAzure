@@ -11,7 +11,7 @@
 			"location": {
 				"type": "AzureBlobFSLocation",
 				"fileName": "BelfiusCDA20200625_212325_582_OS1TMGH25F_235242590.COD",
-				"folderPath": "CODA",
+				"folderPath": "CODA/Source",
 				"fileSystem": "datalakestore-tec"
 			}
 		}
