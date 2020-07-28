@@ -1,0 +1,10 @@
+{
+	"name": "keyvault_TEC",
+	"properties": {
+		"annotations": [],
+		"type": "AzureKeyVault",
+		"typeProperties": {
+			"baseUrl": "https://kvpcrm01.vault.azure.net/"
+		}
+	}
+}
