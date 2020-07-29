@@ -3,7 +3,7 @@
 	"contentVersion": "1.0.0.0",
 	"parameters": {
 		"factoryName": {
-			"value": "ADF-Poc-Tec-Deployment"
+			"value": "adfpcrmtecpoc"
 		},
 		"AzureDataLakeStorage1_accountKey": {
 			"value": ""
