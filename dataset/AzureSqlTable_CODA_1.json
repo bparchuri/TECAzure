@@ -1,0 +1,59 @@
+{
+	"name": "AzureSqlTable_CODA_1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase_PCRM",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "RegistrationID",
+				"type": "varchar"
+			},
+			{
+				"name": "BankAccountType",
+				"type": "varchar"
+			},
+			{
+				"name": "Sequencenumberofpaperaccount",
+				"type": "varchar"
+			},
+			{
+				"name": "Accountnumber",
+				"type": "varchar"
+			},
+			{
+				"name": "Oldbalance",
+				"type": "varchar"
+			},
+			{
+				"name": "Oldpay",
+				"type": "decimal",
+				"precision": 15,
+				"scale": 3
+			},
+			{
+				"name": "Dateofoldbalance",
+				"type": "date"
+			},
+			{
+				"name": "Accountholdername",
+				"type": "varchar"
+			},
+			{
+				"name": "Accounttagged",
+				"type": "varchar"
+			},
+			{
+				"name": "Sequencenumberofthecodified",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "COD-1"
+		}
+	}
+}
