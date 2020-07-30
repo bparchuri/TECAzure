@@ -21,7 +21,7 @@
 						"type": "SecureString",
 						"value": "**********"
 					},
-					"catalogPricingTier": "S0"
+					"catalogPricingTier": "S1"
 				},
 				"customSetupScriptProperties": {
 					"blobContainerUri": "https://sapcrmcommon01.blob.core.windows.net/kingswaysoft",
