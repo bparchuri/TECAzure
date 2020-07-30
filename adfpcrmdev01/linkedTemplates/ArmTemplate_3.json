@@ -13,6 +13,942 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/GTFSshapes')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ADLSGen2",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "shapes.txt",
+						"folderPath": "GTFS",
+						"fileSystem": "poc-tec"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "shape_id",
+						"type": "String"
+					},
+					{
+						"name": "shape_pt_lat",
+						"type": "String"
+					},
+					{
+						"name": "shape_pt_lon",
+						"type": "String"
+					},
+					{
+						"name": "shape_pt_sequence",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/GTFSstop_times')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ADLSGen2",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "stop_times.txt",
+						"folderPath": "GTFS",
+						"fileSystem": "poc-tec"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "trip_id",
+						"type": "String"
+					},
+					{
+						"name": "arrival_time",
+						"type": "String"
+					},
+					{
+						"name": "departure_time",
+						"type": "String"
+					},
+					{
+						"name": "stop_id",
+						"type": "String"
+					},
+					{
+						"name": "stop_sequence",
+						"type": "String"
+					},
+					{
+						"name": "pickup_type",
+						"type": "String"
+					},
+					{
+						"name": "drop_off_type",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/GTFSstops')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ADLSGen2",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "stops.txt",
+						"folderPath": "GTFS",
+						"fileSystem": "poc-tec"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "stop_id",
+						"type": "String"
+					},
+					{
+						"name": "stop_code",
+						"type": "String"
+					},
+					{
+						"name": "stop_name",
+						"type": "String"
+					},
+					{
+						"name": "stop_desc",
+						"type": "String"
+					},
+					{
+						"name": "stop_lat",
+						"type": "String"
+					},
+					{
+						"name": "stop_lon",
+						"type": "String"
+					},
+					{
+						"name": "zone_id",
+						"type": "String"
+					},
+					{
+						"name": "stop_url",
+						"type": "String"
+					},
+					{
+						"name": "location_type",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/GTFStrips')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ADLSGen2",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "trips.txt",
+						"folderPath": "GTFS",
+						"fileSystem": "poc-tec"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "route_id",
+						"type": "String"
+					},
+					{
+						"name": "service_id",
+						"type": "String"
+					},
+					{
+						"name": "trip_id",
+						"type": "String"
+					},
+					{
+						"name": "trip_short_name",
+						"type": "String"
+					},
+					{
+						"name": "direction_id",
+						"type": "String"
+					},
+					{
+						"name": "block_id",
+						"type": "String"
+					},
+					{
+						"name": "shape_id",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SQLAgency')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SQLPocTec",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Agency_id",
+						"type": "varchar"
+					},
+					{
+						"name": "Agency_name",
+						"type": "varchar"
+					},
+					{
+						"name": "Agency_url",
+						"type": "varchar"
+					},
+					{
+						"name": "Agency_timezone",
+						"type": "varchar"
+					},
+					{
+						"name": "Agency_lang",
+						"type": "varchar"
+					},
+					{
+						"name": "Agency_phone",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Agency"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SQLAtlasCRM')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SQLPocTec",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Code_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Poste_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_transaction",
+						"type": "nchar"
+					},
+					{
+						"name": "Num_serie",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_entreprise",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_paiement",
+						"type": "nchar"
+					},
+					{
+						"name": "Code_moyen_paiement",
+						"type": "nchar"
+					},
+					{
+						"name": "Sens_paiement",
+						"type": "varchar"
+					},
+					{
+						"name": "Montant",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Type_equipement",
+						"type": "nchar"
+					},
+					{
+						"name": "Date_ope",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Name",
+						"type": "varchar"
+					},
+					{
+						"name": "Guid",
+						"type": "uniqueidentifier"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EIS779_atlas"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SQLEIS779')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SQLPocTec",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Code_segment",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EIS779"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SQLEIS779ATLAS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SQLPocTec",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Code_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Poste_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_transaction",
+						"type": "nchar"
+					},
+					{
+						"name": "Num_serie",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_entreprise",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_paiement",
+						"type": "nchar"
+					},
+					{
+						"name": "Code_moyen_paiement",
+						"type": "nchar"
+					},
+					{
+						"name": "Sens_paiement",
+						"type": "varchar"
+					},
+					{
+						"name": "Montant",
+						"type": "varchar"
+					},
+					{
+						"name": "Type_equipement",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Date_ope",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Name",
+						"type": "varchar"
+					},
+					{
+						"name": "Guid",
+						"type": "uniqueidentifier"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EIS779_atlas"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SQLGTFSTableConnection')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SQLPocTec",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SQLJoin')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SQLPocTec",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EIS779_atlas"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SQLSegment0')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SQLPocTec",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Code_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Plateforme",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EIS779_SEGMENT_000"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SQLSegment1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SQLPocTec",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Code_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Poste_segment",
+						"type": "varchar"
+					},
+					{
+						"name": "Id_transaction",
+						"type": "varchar"
+					},
+					{
+						"name": "Date_ope",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Type_equipement",
+						"type": "varchar"
+					},
+					{
+						"name": "Num_syst_emetteur",
+						"type": "nchar"
+					},
+					{
+						"name": "CEB",
+						"type": "varchar"
+					},
+					{
+						"name": "Num_serie",
+						"type": "nchar"
+					},
+					{
+						"name": "Num_service",
+						"type": "varchar"
+					},
+					{
+						"name": "Code_user",
+						"type": "nchar"
+					},
+					{
+						"name": "Compagnie_agent",
+						"type": "nchar"
+					},
+					{
+						"name": "Type_emplacement",
+						"type": "char"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EIS779_SEGMENT_001"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SQLSegment2')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SQLPocTec",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Code_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Poste_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_transaction",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_oper_vente",
+						"type": "nchar"
+					},
+					{
+						"name": "Type_mvt",
+						"type": "nchar"
+					},
+					{
+						"name": "Categ_produit",
+						"type": "nchar"
+					},
+					{
+						"name": "Num_produit",
+						"type": "nchar"
+					},
+					{
+						"name": "Num_article",
+						"type": "nchar"
+					},
+					{
+						"name": "Num_unicite",
+						"type": "nchar"
+					},
+					{
+						"name": "Num_serie",
+						"type": "nchar"
+					},
+					{
+						"name": "Num_contrat",
+						"type": "nchar"
+					},
+					{
+						"name": "Num_serie_prev",
+						"type": "nchar"
+					},
+					{
+						"name": "Date_Debut",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Date_Fin",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Id_entreprise",
+						"type": "nchar"
+					},
+					{
+						"name": "Montant_part_tiers",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Quantité",
+						"type": "nchar"
+					},
+					{
+						"name": "TauxTVA_an",
+						"type": "nchar"
+					},
+					{
+						"name": "Montant_global_vente",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Nb_jetons",
+						"type": "nchar"
+					},
+					{
+						"name": "Nb_jetons_avant",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_convention",
+						"type": "nchar"
+					},
+					{
+						"name": "Libelle_convention",
+						"type": "varchar"
+					},
+					{
+						"name": "Num_mobib",
+						"type": "nchar"
+					},
+					{
+						"name": "Code_article",
+						"type": "varchar"
+					},
+					{
+						"name": "Num_reseau_produit",
+						"type": "nchar"
+					},
+					{
+						"name": "Num_contrat_prev",
+						"type": "nchar"
+					},
+					{
+						"name": "Num_commande",
+						"type": "varchar"
+					},
+					{
+						"name": "Num_elt_commande",
+						"type": "varchar"
+					},
+					{
+						"name": "Type_elt_commande",
+						"type": "nchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EIS779_SEGMENT_002"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SQLSegment3')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SQLPocTec",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Code_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Poste_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_transaction",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_paiement",
+						"type": "nchar"
+					},
+					{
+						"name": "Code_moyen_paiement",
+						"type": "nchar"
+					},
+					{
+						"name": "Sens_paiement",
+						"type": "varchar"
+					},
+					{
+						"name": "Montant",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Id_entreprise",
+						"type": "nchar"
+					},
+					{
+						"name": "Comm_struct",
+						"type": "char"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EIS779_SEGMENT_003"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SQLSegment4')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SQLPocTec",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Code_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Poste_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_transaction",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_paiement",
+						"type": "nchar"
+					},
+					{
+						"name": "Code_moyen_paiement",
+						"type": "nchar"
+					},
+					{
+						"name": "Sens_paiement",
+						"type": "varchar"
+					},
+					{
+						"name": "Montant",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Hardware_type",
+						"type": "nchar"
+					},
+					{
+						"name": "Mode_TPV",
+						"type": "nchar"
+					},
+					{
+						"name": "Brand_id",
+						"type": "varchar"
+					},
+					{
+						"name": "Machine_number",
+						"type": "nchar"
+					},
+					{
+						"name": "Pdv_clct_nr",
+						"type": "nchar"
+					},
+					{
+						"name": "Pdv_gen_tx_nb",
+						"type": "varchar"
+					},
+					{
+						"name": "Transaction_identifier",
+						"type": "varchar"
+					},
+					{
+						"name": "Dateh_tpe",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Auth_code",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EIS779_SEGMENT_004"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SQLSegment5')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SQLPocTec",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Code_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Poste_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_transaction",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_paiement",
+						"type": "nchar"
+					},
+					{
+						"name": "TransactionReference",
+						"type": "varchar"
+					},
+					{
+						"name": "TransactionDateTime",
+						"type": "varchar"
+					},
+					{
+						"name": "Sens_paiement",
+						"type": "varchar"
+					},
+					{
+						"name": "StatementReference",
+						"type": "varchar"
+					},
+					{
+						"name": "PaymentMeanBrand",
+						"type": "varchar"
+					},
+					{
+						"name": "ValueDate",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Amount",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "AuthorizationId",
+						"type": "varchar"
+					},
+					{
+						"name": "MerchantId",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EIS779_SEGMENT_005"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/SQLTEC')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -186,1961 +1122,6 @@
 				}
 			},
 			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/SQLcalendar_dates')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "SQLPocTec",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "Service_id",
-						"type": "varchar"
-					},
-					{
-						"name": "Date",
-						"type": "date"
-					},
-					{
-						"name": "Exception_type",
-						"type": "varchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "calendar_dates_update"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/SQLroutes')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "SQLPocTec",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "Route_id",
-						"type": "varchar"
-					},
-					{
-						"name": "Agency_id",
-						"type": "varchar"
-					},
-					{
-						"name": "Route_short_name",
-						"type": "varchar"
-					},
-					{
-						"name": "Route_long_name",
-						"type": "varchar"
-					},
-					{
-						"name": "Route_desc",
-						"type": "varchar"
-					},
-					{
-						"name": "Route_type",
-						"type": "varchar"
-					},
-					{
-						"name": "Route_url",
-						"type": "varchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "Routes"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/SQLshapes')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "SQLPocTec",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "shape_id",
-						"type": "varchar"
-					},
-					{
-						"name": "shape_pt_lat",
-						"type": "varchar"
-					},
-					{
-						"name": "shape_pt_lon",
-						"type": "varchar"
-					},
-					{
-						"name": "shape_pt_sequence",
-						"type": "varchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "Shapes"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/SQLstop_times')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "SQLPocTec",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "Trip_id",
-						"type": "varchar"
-					},
-					{
-						"name": "Arrival_time",
-						"type": "varchar"
-					},
-					{
-						"name": "Departure_time",
-						"type": "varchar"
-					},
-					{
-						"name": "Stop_id",
-						"type": "varchar"
-					},
-					{
-						"name": "Stop_sequence",
-						"type": "varchar"
-					},
-					{
-						"name": "Pickup_type",
-						"type": "varchar"
-					},
-					{
-						"name": "Drop_off_type",
-						"type": "varchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "Stop_Times"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/SQLstops')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "SQLPocTec",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "Stop_id",
-						"type": "varchar"
-					},
-					{
-						"name": "Stop_code",
-						"type": "varchar"
-					},
-					{
-						"name": "Stop_name",
-						"type": "varchar"
-					},
-					{
-						"name": "Stop_desc",
-						"type": "varchar"
-					},
-					{
-						"name": "Stop_lat",
-						"type": "varchar"
-					},
-					{
-						"name": "Stop_lon",
-						"type": "varchar"
-					},
-					{
-						"name": "Zone_id",
-						"type": "varchar"
-					},
-					{
-						"name": "Stop_url",
-						"type": "varchar"
-					},
-					{
-						"name": "Location_type",
-						"type": "varchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "Stops"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/SQLtrips')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "SQLPocTec",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "Route_id",
-						"type": "varchar"
-					},
-					{
-						"name": "Service_id",
-						"type": "varchar"
-					},
-					{
-						"name": "Trip_id",
-						"type": "varchar"
-					},
-					{
-						"name": "Trip_short_name",
-						"type": "varchar"
-					},
-					{
-						"name": "Direction_id",
-						"type": "varchar"
-					},
-					{
-						"name": "Block_id",
-						"type": "varchar"
-					},
-					{
-						"name": "Shape_id",
-						"type": "varchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "Trips"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/TECDevCRM')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "TecDevCRM",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DynamicsCrmEntity",
-				"schema": [],
-				"typeProperties": {
-					"entityName": "bd_lignes"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/UnzipFile')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "ADLSGen2",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Binary",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"folderPath": "PocTecUnzip",
-						"fileSystem": "poc-tec"
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ZipFile')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "ADLSGen2",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Binary",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"folderPath": "PocTecZip",
-						"fileSystem": "poc-tec"
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/binary_CODAFile')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "linkedService_ADLS",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Binary",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"fileName": "BelfiusCDA20200625_212325_582_OS1TMGH25F_235242590.COD",
-						"folderPath": "CODA/Source",
-						"fileSystem": "integrations-tec"
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/binary_CODAcsv')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "linkedService_ADLS",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Binary",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"fileName": "coda.csv",
-						"folderPath": "CODA/CSV",
-						"fileSystem": "integrations-tec"
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/tecdevcrmconnection')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "TecDevCRM",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DynamicsCrmEntity",
-				"schema": [],
-				"typeProperties": {
-					"entityName": "tec_eis779atlas"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/CODA File_copy1')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "pipeline_CODAIntegration",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "BinarySource",
-								"storeSettings": {
-									"type": "AzureBlobFSReadSettings",
-									"recursive": true
-								},
-								"formatSettings": {
-									"type": "BinaryReadSettings"
-								}
-							},
-							"sink": {
-								"type": "BinarySink",
-								"storeSettings": {
-									"type": "AzureBlobFSWriteSettings"
-								}
-							},
-							"enableStaging": false
-						},
-						"inputs": [
-							{
-								"referenceName": "binary_CODAFile",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "binary_CODAcsv",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					}
-				],
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/binary_CODAFile')]",
-				"[concat(variables('factoryId'), '/datasets/binary_CODAcsv')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/CODAIntegration')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Copy SQL Join to CODA Integration",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "AzureSqlSource",
-								"sqlReaderQuery": "select \nNine.RegistrationID AS Nine_RegistrationId,\nNine.Numberofrecords AS Nine_Numberofrecords,\nNine.DebitRevenue AS Nine_DebitRevenue,\nNine.CreditSales AS Nine_CreditSales,\nNine.Multiplefilecode AS Nine_Multiplefilecode,\nEight.RegistrationID AS Eight_RegistrationId,\nEight.Accountnumber AS Eight_Accountnumber,\nEight.NewBalance AS Eight_NewBalance ,\nEight.Dateofnewbalance AS Eight_Dateofnewbalance,\nOne.RegistrationID AS One_RegistrationId,\nOne.BankAccountType AS One_BankAccountType,\nOne.Sequencenumberofpaperaccount AS One_Sequencenumberofpaperaccount,\nOne.Accountnumber AS One_Accountnumber,\nOne.Oldbalance AS One_Oldbalance,\nOne.Oldpay AS One_Oldpay ,\nOne.Dateofoldbalance AS One_Dateofoldbalance,\nOne.Accountholdername AS One_Accountholdername,\nTwoOne.RegistrationID AS TwoOne_RegistrationId,\nTwoOne.Sequencenumber AS TwoOne_Sequencenumber,\nTwoOne.Amount AS TwoOne_Amount,\nTwoOne.Valuedate AS TwoOne_Valuedate,\nTwoOne.Accountdate AS TwoOne_Accountdate,\nTwoTwo.RegistrationID AS TwoTwo_RegistrationId,\nTwoTwo.Customerreference AS TwoTwo_Customerreference,\nTwoTwo.BIC AS TwoTwo_BIC,\nTwoTwo.Linkcode AS TwoTwo_Linkcode,\nTwoThree.RegistrationID AS TwoThree_RegistrationId,\nTwoThree.ArticleCode AS TwoThree_ArticleCode,\nTwoThree.Counterpartyaccountnumber AS TwoThree_Counterpartyaccountnumber,\nTwoThree.Nameofcounterparty AS TwoThree_Nameofcounterparty,\nTwoThree.SuiteCode AS TwoThree_SuiteCode,\nThreeOne.RegistrationID AS ThreeOne_RegistrationId,\nThreeOne.ArticleCode AS ThreeOne_ArticleCode,\nThreeOne.CommunicationCode AS ThreeOne_CommunicationCode,\nThreeOne.MoreCode AS ThreeOne_MoreCode,\nThreeTwo.RegistrationID AS ThreeTwo_RegistrationId,\nThreeTwo.Sequencenumber AS ThreeTwo_Sequencenumber ,\nThreeTwo.ArticleCode AS ThreeTwo_ArticleCode,\nThreeTwo.Communication AS ThreeTwo_Communication,\nZero.RecordIdentification AS Zero_RecordIdentification,\nZero.CreationDate AS Zero_CreationDate ,\nZero.BankIdentificationNumber AS Zero_BankIdentificationNumber,\nZero.ApplicationCode AS Zero_ApplicationCode,\nZero.BIC AS Zero_BIC,\nZero.IdentificationNumberofBelgium AS Zero_IdentificationNumberofBelgium\nfrom \n(SELECT * , ROW_NUMBER() OVER (ORDER BY RegistrationID) AS row_num FROM [dbo].[COD-21]) TwoOne \nJoin\n(SELECT * , ROW_NUMBER() OVER (ORDER BY RegistrationID) AS row_num FROM [dbo].[COD-22]) TwoTwo on TwoOne.row_num = TwoTwo.row_num\nLeft OUTER Join\n(SELECT * , ROW_NUMBER() OVER (ORDER BY RegistrationID) AS row_num FROM [dbo].[COD-23]) TwoThree on TwoThree.row_num = TwoTwo.row_num\nLEFT OUTER Join\n(SELECT * , ROW_NUMBER() OVER (ORDER BY RegistrationID) AS row_num FROM [dbo].[COD-31]) ThreeOne on ThreeOne.row_num = TwoTwo.row_num\nLEFT OUTER Join\n(SELECT * , ROW_NUMBER() OVER (ORDER BY RegistrationID) AS row_num FROM [dbo].[COD-32]) ThreeTwo on ThreeTwo.row_num = TwoTwo.row_num\nLEFT OUTER Join\n(SELECT * , ROW_NUMBER() OVER (ORDER BY RegistrationID) AS row_num FROM [dbo].[COD-33]) ThreeThree on ThreeThree.row_num = TwoTwo.row_num\nLEFT OUTER Join\n(SELECT * , ROW_NUMBER() OVER (ORDER BY RegistrationID) AS row_num FROM [dbo].[COD-1]) One on One.row_num = TwoTwo.row_num\nLEFT OUTER Join\n(SELECT * , ROW_NUMBER() OVER (ORDER BY RegistrationID) AS row_num FROM [dbo].[COD-8]) Eight on Eight.row_num = TwoTwo.row_num\nLEFT OUTER Join\n(SELECT * , ROW_NUMBER() OVER (ORDER BY RegistrationID) AS row_num FROM [dbo].[COD-9]) Nine on Nine.row_num = TwoTwo.row_num\nLEFT OUTER Join\n(SELECT * , ROW_NUMBER() OVER (ORDER BY RecordIdentification) AS row_num FROM [dbo].[COD-0]) Zero on Zero.row_num = TwoTwo.row_num",
-								"queryTimeout": "02:00:00"
-							},
-							"sink": {
-								"type": "AzureSqlSink"
-							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"name": "Nine_RegistrationId",
-											"type": "String",
-											"physicalType": "varchar"
-										},
-										"sink": {
-											"name": "Nine_RegistrationID",
-											"type": "String",
-											"physicalType": "varchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Nine_Numberofrecords",
-											"type": "String",
-											"physicalType": "varchar"
-										},
-										"sink": {
-											"name": "Nine_Numberofrecords",
-											"type": "String",
-											"physicalType": "varchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Nine_DebitRevenue",
-											"type": "Decimal",
-											"physicalType": "decimal"
-										},
-										"sink": {
-											"name": "Nine_DebitRevenue",
-											"type": "Decimal",
-											"physicalType": "decimal"
-										}
-									},
-									{
-										"source": {
-											"name": "Nine_CreditSales",
-											"type": "Decimal",
-											"physicalType": "decimal"
-										},
-										"sink": {
-											"name": "Nine_CreditSales",
-											"type": "Decimal",
-											"physicalType": "decimal"
-										}
-									},
-									{
-										"source": {
-											"name": "Nine_Multiplefilecode",
-											"type": "String",
-											"physicalType": "varchar"
-										},
-										"sink": {
-											"name": "Nine_Multiplefilecode",
-											"type": "String",
-											"physicalType": "varchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Eight_RegistrationId",
-											"type": "String",
-											"physicalType": "varchar"
-										},
-										"sink": {
-											"name": "Eight_RegistrationID",
-											"type": "String",
-											"physicalType": "varchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Eight_Accountnumber",
-											"type": "String",
-											"physicalType": "varchar"
-										},
-										"sink": {
-											"name": "Eight_Accountnumber",
-											"type": "String",
-											"physicalType": "varchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Eight_NewBalance",
-											"type": "Decimal",
-											"physicalType": "decimal"
-										},
-										"sink": {
-											"name": "Eight_NewBalance",
-											"type": "Decimal",
-											"physicalType": "decimal"
-										}
-									},
-									{
-										"source": {
-											"name": "Eight_Dateofnewbalance",
-											"type": "DateTime",
-											"physicalType": "date"
-										},
-										"sink": {
-											"name": "Eight_Dateofnewbalance",
-											"type": "DateTime",
-											"physicalType": "date"
-										}
-									},
-									{
-										"source": {
-											"name": "One_RegistrationId",
-											"type": "String",
-											"physicalType": "varchar"
-										},
-										"sink": {
-											"name": "One_RegistrationID",
-											"type": "String",
-											"physicalType": "varchar"
-										}
-									},
-									{
-										"source": {
-											"name": "One_BankAccountType",
-											"type": "String",
-											"physicalType": "varchar"
-										},
-										"sink": {
-											"name": "One_BankAccountType",
-											"type": "String",
-											"physicalType": "varchar"
-										}
-									},
-									{
-										"source": {
-											"name": "One_Sequencenumberofpaperaccount",
-											"type": "String",
-											"physicalType": "varchar"
-										},
-										"sink": {
-											"name": "One_Sequencenumberofpaperaccount",
-											"type": "String",
-											"physicalType": "varchar"
-										}
-									},
-									{
-										"source": {
-											"name": "One_Accountnumber",
-											"type": "String",
-											"physicalType": "varchar"
-										},
-										"sink": {
-											"name": "One_Accountnumber",
-											"type": "String",
-											"physicalType": "varchar"
-										}
-									},
-									{
-										"source": {
-											"name": "One_Oldbalance",
-											"type": "String",
-											"physicalType": "varchar"
-										},
-										"sink": {
-											"name": "One_Oldbalance",
-											"type": "String",
-											"physicalType": "varchar"
-										}
-									},
-									{
-										"source": {
-											"name": "One_Oldpay",
-											"type": "Decimal",
-											"physicalType": "decimal"
-										},
-										"sink": {
-											"name": "One_Oldpay",
-											"type": "Decimal",
-											"physicalType": "decimal"
-										}
-									},
-									{
-										"source": {
-											"name": "One_Dateofoldbalance",
-											"type": "DateTime",
-											"physicalType": "date"
-										},
-										"sink": {
-											"name": "One_Dateofoldbalance",
-											"type": "DateTime",
-											"physicalType": "date"
-										}
-									},
-									{
-										"source": {
-											"name": "One_Accountholdername",
-											"type": "String",
-											"physicalType": "varchar"
-										},
-										"sink": {
-											"name": "One_Accountholdername",
-											"type": "String",
-											"physicalType": "varchar"
-										}
-									},
-									{
-										"source": {
-											"name": "TwoOne_RegistrationId",
-											"type": "String",
-											"physicalType": "varchar"
-										},
-										"sink": {
-											"name": "TwoOne_RegistrationID",
-											"type": "String",
-											"physicalType": "varchar"
-										}
-									},
-									{
-										"source": {
-											"name": "TwoOne_Sequencenumber",
-											"type": "String",
-											"physicalType": "varchar"
-										},
-										"sink": {
-											"name": "TwoOne_Sequencenumber",
-											"type": "String",
-											"physicalType": "varchar"
-										}
-									},
-									{
-										"source": {
-											"name": "TwoOne_Amount",
-											"type": "Decimal",
-											"physicalType": "decimal"
-										},
-										"sink": {
-											"name": "TwoOne_Amount",
-											"type": "Decimal",
-											"physicalType": "decimal"
-										}
-									},
-									{
-										"source": {
-											"name": "TwoOne_Valuedate",
-											"type": "DateTime",
-											"physicalType": "date"
-										},
-										"sink": {
-											"name": "TwoOne_Valuedate",
-											"type": "DateTime",
-											"physicalType": "date"
-										}
-									},
-									{
-										"source": {
-											"name": "TwoOne_Accountdate",
-											"type": "DateTime",
-											"physicalType": "date"
-										},
-										"sink": {
-											"name": "TwoOne_Accountdate",
-											"type": "DateTime",
-											"physicalType": "date"
-										}
-									},
-									{
-										"source": {
-											"name": "TwoTwo_RegistrationId",
-											"type": "String",
-											"physicalType": "varchar"
-										},
-										"sink": {
-											"name": "TwoTwo_RegistrationID",
-											"type": "String",
-											"physicalType": "varchar"
-										}
-									},
-									{
-										"source": {
-											"name": "TwoTwo_Customerreference",
-											"type": "String",
-											"physicalType": "varchar"
-										},
-										"sink": {
-											"name": "TwoTwo_Customerreference",
-											"type": "String",
-											"physicalType": "varchar"
-										}
-									},
-									{
-										"source": {
-											"name": "TwoTwo_BIC",
-											"type": "String",
-											"physicalType": "varchar"
-										},
-										"sink": {
-											"name": "TwoTwo_BIC",
-											"type": "String",
-											"physicalType": "varchar"
-										}
-									},
-									{
-										"source": {
-											"name": "TwoTwo_Linkcode",
-											"type": "String",
-											"physicalType": "varchar"
-										},
-										"sink": {
-											"name": "TwoTwo_Linkcode",
-											"type": "String",
-											"physicalType": "varchar"
-										}
-									},
-									{
-										"source": {
-											"name": "TwoThree_RegistrationId",
-											"type": "String",
-											"physicalType": "varchar"
-										},
-										"sink": {
-											"name": "TwoThird_RegistrationID",
-											"type": "String",
-											"physicalType": "varchar"
-										}
-									},
-									{
-										"source": {
-											"name": "TwoThree_ArticleCode",
-											"type": "String",
-											"physicalType": "varchar"
-										},
-										"sink": {
-											"name": "TwoThird_ArticleCode",
-											"type": "String",
-											"physicalType": "varchar"
-										}
-									},
-									{
-										"source": {
-											"name": "TwoThree_Counterpartyaccountnumber",
-											"type": "String",
-											"physicalType": "varchar"
-										},
-										"sink": {
-											"name": "TwoThird_Counterpartyaccountnumber",
-											"type": "String",
-											"physicalType": "varchar"
-										}
-									},
-									{
-										"source": {
-											"name": "TwoThree_Nameofcounterparty",
-											"type": "String",
-											"physicalType": "varchar"
-										},
-										"sink": {
-											"name": "TwoThird_Nameofcounterparty",
-											"type": "String",
-											"physicalType": "varchar"
-										}
-									},
-									{
-										"source": {
-											"name": "TwoThree_SuiteCode",
-											"type": "String",
-											"physicalType": "varchar"
-										},
-										"sink": {
-											"name": "TwoThird_SuiteCode",
-											"type": "String",
-											"physicalType": "varchar"
-										}
-									},
-									{
-										"source": {
-											"name": "ThreeOne_RegistrationId",
-											"type": "String",
-											"physicalType": "varchar"
-										},
-										"sink": {
-											"name": "ThirdOne_RegistrationID",
-											"type": "String",
-											"physicalType": "varchar"
-										}
-									},
-									{
-										"source": {
-											"name": "ThreeOne_ArticleCode",
-											"type": "String",
-											"physicalType": "varchar"
-										},
-										"sink": {
-											"name": "ThirdOne_ArticleCode",
-											"type": "String",
-											"physicalType": "varchar"
-										}
-									},
-									{
-										"source": {
-											"name": "ThreeOne_CommunicationCode",
-											"type": "String",
-											"physicalType": "varchar"
-										},
-										"sink": {
-											"name": "ThirdOne_CommunicationCode",
-											"type": "String",
-											"physicalType": "varchar"
-										}
-									},
-									{
-										"source": {
-											"name": "ThreeOne_MoreCode",
-											"type": "String",
-											"physicalType": "varchar"
-										},
-										"sink": {
-											"name": "ThirdOne_MoreCode",
-											"type": "String",
-											"physicalType": "varchar"
-										}
-									},
-									{
-										"source": {
-											"name": "ThreeTwo_RegistrationId",
-											"type": "String",
-											"physicalType": "varchar"
-										},
-										"sink": {
-											"name": "ThirdTwo_RegistrationID",
-											"type": "String",
-											"physicalType": "varchar"
-										}
-									},
-									{
-										"source": {
-											"name": "ThreeTwo_Sequencenumber",
-											"type": "String",
-											"physicalType": "varchar"
-										},
-										"sink": {
-											"name": "ThirdTwo_Sequencenumber",
-											"type": "String",
-											"physicalType": "varchar"
-										}
-									},
-									{
-										"source": {
-											"name": "ThreeTwo_ArticleCode",
-											"type": "String",
-											"physicalType": "varchar"
-										},
-										"sink": {
-											"name": "ThirdTwo_ArticleCode",
-											"type": "String",
-											"physicalType": "varchar"
-										}
-									},
-									{
-										"source": {
-											"name": "ThreeTwo_Communication",
-											"type": "String",
-											"physicalType": "varchar"
-										},
-										"sink": {
-											"name": "ThirdTwo_Communication",
-											"type": "String",
-											"physicalType": "varchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Zero_RecordIdentification",
-											"type": "String",
-											"physicalType": "varchar"
-										},
-										"sink": {
-											"name": "Zero_RecordIdentification",
-											"type": "String",
-											"physicalType": "varchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Zero_CreationDate",
-											"type": "DateTime",
-											"physicalType": "date"
-										},
-										"sink": {
-											"name": "Zero_CreationDate",
-											"type": "DateTime",
-											"physicalType": "date"
-										}
-									},
-									{
-										"source": {
-											"name": "Zero_BankIdentificationNumber",
-											"type": "String",
-											"physicalType": "varchar"
-										},
-										"sink": {
-											"name": "Zero_BankIdentificationNumber",
-											"type": "String",
-											"physicalType": "varchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Zero_ApplicationCode",
-											"type": "String",
-											"physicalType": "varchar"
-										},
-										"sink": {
-											"name": "Zero_ApplicationCode",
-											"type": "String",
-											"physicalType": "varchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Zero_BIC",
-											"type": "String",
-											"physicalType": "varchar"
-										},
-										"sink": {
-											"name": "Zero_BIC",
-											"type": "String",
-											"physicalType": "varchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Zero_IdentificationNumberofBelgium",
-											"type": "String",
-											"physicalType": "varchar"
-										},
-										"sink": {
-											"name": "Zero_IdentificationNumberofBelgium",
-											"type": "String",
-											"physicalType": "varchar"
-										}
-									}
-								],
-								"typeConversion": true,
-								"typeConversionSettings": {
-									"allowDataTruncation": true,
-									"treatBooleanAsNumber": false
-								}
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "AzureSqlTable14",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "AzureSqlTable15",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					}
-				],
-				"annotations": []
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/SQLtoGTFS')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "CopyallSQLtablestoGTFS",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "AzureSqlSource",
-								"sqlReaderQuery": "delete from GTFS\nSELECT TOP(10) Agencies.Agency_name,\n      10 AS Agency_id,\n      Agencies.Agency_url,\n      Agencies.Agency_timezone,\n      Agencies.Agency_lang,\n      Agencies.Agency_phone,\n\t  Route.Route_id,\n\t  Route.Route_short_name,\n\t  Route.Route_long_name,\n\t  Route.Route_desc,\n\t  10 AS Route_type,\n\t  Route.Route_url,\n\t  trip.Trip_id,\n\t  CONVERT(int, trip.Trip_short_name) AS Trip_short_name,\n\t  10 AS Direction_id,\n\t  trip.Block_id,\n\t  Cal.Service_id,\t  \n          case when Cal.Monday = '0' \n            then 0 \n            else 1 \n          end as Monday,   \n\t\t  case when Cal.Tuesday = '0' \n            then 0 \n            else 1 \n          end as Tuesday, \n\t\t  case when Cal.Wednesday = '0' \n            then 0 \n            else 1 \n          end as Wednesday, \n\t\t  case when Cal.Thursday = '0' \n            then 0 \n            else 1 \n          end as Thursday, \n\t\t case when Cal.Friday = '0' \n            then 0 \n            else 1 \n          end as Friday, \n\t\t  case when Cal.Saturday = '0' \n            then 0 \n            else 1 \n          end as Saturday, \n\t\t case when Cal.Sunday = '0' \n            then 0 \n            else 1 \n          end as Sunday, \n\t  Cal.Start_date,\n\t  Cal.End_date,\n\t  CalDate.Date,\n\t  10 AS Exception_type,\n\t  Shape.shape_id,\n\t  CONVERT(DOUBLE PRECISION, Shape.shape_pt_lat) AS shape_pt_lat,\n\t  CONVERT(DOUBLE PRECISION, Shape.shape_pt_lon) AS shape_pt_lon,\n\t  CONVERT(int, Shape.shape_pt_sequence) AS shape_pt_sequence,\n\t  NEWID() as GuId\n  FROM [Routes] Route\n  LEFT JOIN [Agency] Agencies\n    ON Route.Agency_id = Agencies.Agency_id\t\n\tJOIN [Trips] trip\n    ON Route.Route_id = trip.Route_id\n\tJOIN [CalendarUpdate] Cal\n    ON Cal.Service_id=trip.Service_id\n\tJOIN [calendar_dates_update] CalDate\n\t ON Cal.Service_id=CalDate.Service_id\n\tJOIN [Shapes] Shape\n    ON Shape.shape_id = trip.Shape_id\n  ORDER by Agencies.Agency_id",
-								"queryTimeout": "02:00:00"
-							},
-							"sink": {
-								"type": "AzureSqlSink"
-							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"name": "GuId",
-											"type": "Guid"
-										},
-										"sink": {
-											"name": "Guid",
-											"type": "Guid"
-										}
-									},
-									{
-										"source": {
-											"name": "Agency_id",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "Agency_id",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "Agency_name",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Agency_name",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Agency_timezone",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Agency_timezone",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Agency_lang",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Agency_lang",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Agency_phone",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Agency_phone",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Route_id",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Route_id",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Route_short_name",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Route_short_name",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Route_long_name",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Route_long_name",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Route_desc",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Route_desc",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Route_type",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "Route_type",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "Route_url",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Route_url",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Trip_id",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Trip_id",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Trip_short_name",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "Trip_short_name",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "Direction_id",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "Direction_id",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "Block_id",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Block_id",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Service_id",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Service_id",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Monday",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "Monday",
-											"type": "Boolean"
-										}
-									},
-									{
-										"source": {
-											"name": "Tuesday",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "Tuesday",
-											"type": "Boolean"
-										}
-									},
-									{
-										"source": {
-											"name": "Wednesday",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "Wednesday",
-											"type": "Boolean"
-										}
-									},
-									{
-										"source": {
-											"name": "Thursday",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "Thursday",
-											"type": "Boolean"
-										}
-									},
-									{
-										"source": {
-											"name": "Friday",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "Friday",
-											"type": "Boolean"
-										}
-									},
-									{
-										"source": {
-											"name": "Saturday",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "Saturday",
-											"type": "Boolean"
-										}
-									},
-									{
-										"source": {
-											"name": "Sunday",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "Sunday",
-											"type": "Boolean"
-										}
-									},
-									{
-										"source": {
-											"name": "Start_date",
-											"type": "DateTime"
-										},
-										"sink": {
-											"name": "Start_date",
-											"type": "DateTime"
-										}
-									},
-									{
-										"source": {
-											"name": "End_date",
-											"type": "DateTime"
-										},
-										"sink": {
-											"name": "End_date",
-											"type": "DateTime"
-										}
-									},
-									{
-										"source": {
-											"name": "Date",
-											"type": "DateTime"
-										},
-										"sink": {
-											"name": "Date",
-											"type": "DateTime"
-										}
-									},
-									{
-										"source": {
-											"name": "Exception_type",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "Exception_type",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "shape_id",
-											"type": "String"
-										},
-										"sink": {
-											"name": "shape_id",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "shape_pt_lat",
-											"type": "Double"
-										},
-										"sink": {
-											"name": "shape_pt_lat",
-											"type": "Double"
-										}
-									},
-									{
-										"source": {
-											"name": "shape_pt_lon",
-											"type": "Double"
-										},
-										"sink": {
-											"name": "shape_pt_lon",
-											"type": "Double"
-										}
-									},
-									{
-										"source": {
-											"name": "shape_pt_sequence",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "shape_pt_sequence",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "Agency_url",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Agency_url",
-											"type": "String"
-										}
-									}
-								]
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "SQLGTFSTableConnection",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "GTFSSQLSink",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					},
-					{
-						"name": "Copy data from SQL to CRM",
-						"type": "Copy",
-						"dependsOn": [
-							{
-								"activity": "CopyallSQLtablestoGTFS",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "AzureSqlSource",
-								"queryTimeout": "02:00:00"
-							},
-							"sink": {
-								"type": "DynamicsCrmSink",
-								"writeBatchSize": 10,
-								"writeBehavior": "upsert"
-							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"name": "Guid",
-											"type": "Guid"
-										},
-										"sink": {
-											"name": "bd_lignesid",
-											"type": "Guid"
-										}
-									},
-									{
-										"source": {
-											"name": "Agency_id",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "bd_agency_id",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "Agency_name",
-											"type": "String"
-										},
-										"sink": {
-											"name": "bd_agency_name",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Agency_phone",
-											"type": "String"
-										},
-										"sink": {
-											"name": "bd_agency_phone",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Agency_url",
-											"type": "String"
-										},
-										"sink": {
-											"name": "bd_agency_url",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Route_id",
-											"type": "String"
-										},
-										"sink": {
-											"name": "bd_route_id",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Route_type",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "bd_route_type",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "Route_url",
-											"type": "String"
-										},
-										"sink": {
-											"name": "bd_route_url",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Service_id",
-											"type": "String"
-										},
-										"sink": {
-											"name": "bd_services_id",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Thursday",
-											"type": "Boolean"
-										},
-										"sink": {
-											"name": "bd_thursday",
-											"type": "Boolean"
-										}
-									},
-									{
-										"source": {
-											"name": "Friday",
-											"type": "Boolean"
-										},
-										"sink": {
-											"name": "bd_friday",
-											"type": "Boolean"
-										}
-									},
-									{
-										"source": {
-											"name": "Saturday",
-											"type": "Boolean"
-										},
-										"sink": {
-											"name": "bd_saturday",
-											"type": "Boolean"
-										}
-									},
-									{
-										"source": {
-											"name": "Sunday",
-											"type": "Boolean"
-										},
-										"sink": {
-											"name": "bd_sunday",
-											"type": "Boolean"
-										}
-									},
-									{
-										"source": {
-											"name": "Start_date",
-											"type": "DateTime"
-										},
-										"sink": {
-											"name": "bd_start_date",
-											"type": "DateTime"
-										}
-									},
-									{
-										"source": {
-											"name": "End_date",
-											"type": "DateTime"
-										},
-										"sink": {
-											"name": "bd_end_date",
-											"type": "DateTime"
-										}
-									},
-									{
-										"source": {
-											"name": "Exception_type",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "bd_exception_type",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "shape_id",
-											"type": "String"
-										},
-										"sink": {
-											"name": "bd_shape_id",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Direction_id",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "bd_direction_id",
-											"type": "Int32"
-										}
-									}
-								]
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "GTFSSQLSink",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "TECDevCRM",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					}
-				],
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/TECDevCRM')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Unzip 7z file to Blob')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "WebHook",
-						"type": "WebHook",
-						"dependsOn": [
-							{
-								"activity": "Set variable of unzip foldername",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"url": {
-								"value": "https://73b5abb6-b245-4036-a400-b70e2ee719cd.webhook.ne.azure-automation.net/webhooks?token=8LyOr5IWcaX0XlNXtAVn4%2bBho02rNT9g5unFl2cEnR4%3d",
-								"type": "Expression"
-							},
-							"method": "POST",
-							"headers": {},
-							"body": {
-								"value": "@json(\nconcat(\n'\n{\n\"connectionName\":\"',variables('varConnectionName'),'\",\"storageAccountKey\":\"',variables('storageAccountKey'),'\",\"fileName\":\"',variables('fileName'),'\"\n,\"zipfolder\":\"',variables('zipfolder'),'\"\n,\"Unzipfolder\":\"',variables('Unzipfolder'),'\"\n,\"extractfolder\":\"',variables('extractfolder'),'\"\n,\"dataLakeStorageGen1Name\":\"',variables('dataLakeStorageGen1Name'),'\"\n}'))",
-								"type": "Expression"
-							},
-							"timeout": "00:10:00",
-							"reportStatusOnCallBack": true
-						}
-					},
-					{
-						"name": "Copy Zip file to ADLS",
-						"description": "t",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [
-							{
-								"name": "Source",
-								"value": "Datatest/"
-							},
-							{
-								"name": "Destination",
-								"value": "tec-zip//"
-							}
-						],
-						"typeProperties": {
-							"source": {
-								"type": "BinarySource",
-								"storeSettings": {
-									"type": "AzureBlobFSReadSettings",
-									"recursive": true
-								},
-								"formatSettings": {
-									"type": "BinaryReadSettings"
-								}
-							},
-							"sink": {
-								"type": "BinarySink",
-								"storeSettings": {
-									"type": "AzureBlobFSWriteSettings"
-								}
-							},
-							"enableStaging": false,
-							"skipErrorFile": {
-								"fileMissing": true
-							},
-							"validateDataConsistency": false
-						},
-						"inputs": [
-							{
-								"referenceName": "ZipFile",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "UnzipFile",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					},
-					{
-						"name": "Get Metadata of Zip File",
-						"type": "GetMetadata",
-						"dependsOn": [
-							{
-								"activity": "Copy Zip file to ADLS",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataset": {
-								"referenceName": "ZipFile",
-								"type": "DatasetReference",
-								"parameters": {}
-							},
-							"fieldList": [
-								"childItems",
-								"itemName"
-							],
-							"storeSettings": {
-								"type": "AzureBlobFSReadSettings",
-								"recursive": true
-							},
-							"formatSettings": {
-								"type": "BinaryReadSettings"
-							}
-						}
-					},
-					{
-						"name": "Filter 7z files",
-						"type": "Filter",
-						"dependsOn": [
-							{
-								"activity": "Get Metadata of Unzip File",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"items": {
-								"value": "@activity('Get Metadata of Zip File').output.childItems",
-								"type": "Expression"
-							},
-							"condition": {
-								"value": "@endswith(item().name,'.7z')",
-								"type": "Expression"
-							}
-						}
-					},
-					{
-						"name": "Set variable of zip file name",
-						"type": "SetVariable",
-						"dependsOn": [
-							{
-								"activity": "Filter 7z files",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"variableName": "fileName",
-							"value": {
-								"value": "@string(activity('Filter 7z files').output.value[0].name)",
-								"type": "Expression"
-							}
-						}
-					},
-					{
-						"name": "Set variable of zip folder name",
-						"type": "SetVariable",
-						"dependsOn": [
-							{
-								"activity": "Set variable of zip file name",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"variableName": "zipfolder",
-							"value": {
-								"value": "@activity('Get Metadata of Zip File').output.itemName",
-								"type": "Expression"
-							}
-						}
-					},
-					{
-						"name": "Set variable of unzip foldername",
-						"type": "SetVariable",
-						"dependsOn": [
-							{
-								"activity": "Set variable of zip folder name",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"variableName": "Unzipfolder",
-							"value": {
-								"value": "@activity('Get Metadata of Unzip File').output.itemName",
-								"type": "Expression"
-							}
-						}
-					},
-					{
-						"name": "Get Metadata of Unzip File",
-						"type": "GetMetadata",
-						"dependsOn": [
-							{
-								"activity": "Get Metadata of Zip File",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataset": {
-								"referenceName": "UnzipFile",
-								"type": "DatasetReference",
-								"parameters": {}
-							},
-							"fieldList": [
-								"itemName"
-							],
-							"storeSettings": {
-								"type": "AzureBlobFSReadSettings",
-								"recursive": true
-							},
-							"formatSettings": {
-								"type": "BinaryReadSettings"
-							}
-						}
-					}
-				],
-				"variables": {
-					"varConnectionName": {
-						"type": "String",
-						"defaultValue": "AzureRunAsConnection"
-					},
-					"storageAccountKey": {
-						"type": "String",
-						"defaultValue": " YDuDqj7C2A+fWSpmuibYXlDAsVRyIXQpgZcCtm23kUEFTsYFMvZbxhUmBHmbgHEeNcCmukz6O1Iji7H6deZPiw=="
-					},
-					"fileName": {
-						"type": "String",
-						"defaultValue": "TECValidation.7z"
-					},
-					"zipfolder": {
-						"type": "String",
-						"defaultValue": "PocTecZip"
-					},
-					"Unzipfolder": {
-						"type": "String",
-						"defaultValue": "PocTecUnzip"
-					},
-					"extractfolder": {
-						"type": "String",
-						"defaultValue": "7Zfiles"
-					},
-					"dataLakeStorageGen1Name": {
-						"type": "String",
-						"defaultValue": "dlspoctec"
-					}
-				},
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/ZipFile')]",
-				"[concat(variables('factoryId'), '/datasets/UnzipFile')]"
-			]
 		}
 	]
 }

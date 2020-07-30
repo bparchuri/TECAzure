@@ -55,9 +55,25 @@
 			"type": "string",
 			"defaultValue": "Azure\\sapoctec"
 		},
+		"AzureKeyVault1_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://kvpcrm01.vault.azure.net/"
+		},
 		"AzureKeyVault_Dev_properties_typeProperties_baseUrl": {
 			"type": "string",
 			"defaultValue": "https://kvpcrm01.vault.azure.net/"
+		},
+		"AzureSqlDatabase_PCRM_properties_typeProperties_connectionString_secretName": {
+			"type": "string",
+			"defaultValue": "tec-dev-sqlconnectionprincipal"
+		},
+		"AzureSqlDatabase_PCRM_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "b74b5688-5ee7-4c50-8364-ddd607f525ac"
+		},
+		"AzureSqlDatabase_PCRM_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "2291afd2-1191-4bcb-9906-c1406010941b"
 		},
 		"HttpServer1_properties_typeProperties_url": {
 			"type": "string",
@@ -170,6 +186,9 @@
 					"AzureFileStorage1_properties_typeProperties_userId": {
 						"value": "[parameters('AzureFileStorage1_properties_typeProperties_userId')]"
 					},
+					"AzureKeyVault1_properties_typeProperties_baseUrl": {
+						"value": "[parameters('AzureKeyVault1_properties_typeProperties_baseUrl')]"
+					},
 					"AzureKeyVault_Dev_properties_typeProperties_baseUrl": {
 						"value": "[parameters('AzureKeyVault_Dev_properties_typeProperties_baseUrl')]"
 					},
@@ -211,6 +230,15 @@
 					},
 					"ADLSGen2_properties_typeProperties_servicePrincipalId": {
 						"value": "[parameters('ADLSGen2_properties_typeProperties_servicePrincipalId')]"
+					},
+					"AzureSqlDatabase_PCRM_properties_typeProperties_connectionString_secretName": {
+						"value": "[parameters('AzureSqlDatabase_PCRM_properties_typeProperties_connectionString_secretName')]"
+					},
+					"AzureSqlDatabase_PCRM_properties_typeProperties_servicePrincipalId": {
+						"value": "[parameters('AzureSqlDatabase_PCRM_properties_typeProperties_servicePrincipalId')]"
+					},
+					"AzureSqlDatabase_PCRM_properties_typeProperties_tenant": {
+						"value": "[parameters('AzureSqlDatabase_PCRM_properties_typeProperties_tenant')]"
 					},
 					"SQLPocTec_properties_typeProperties_connectionString_secretName": {
 						"value": "[parameters('SQLPocTec_properties_typeProperties_connectionString_secretName')]"
@@ -324,6 +352,26 @@
 			},
 			"dependsOn": [
 				"[resourceId('Microsoft.Resources/deployments', 'ArmTemplate_3')]"
+			]
+		},
+		{
+			"name": "ArmTemplate_5",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_5.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'ArmTemplate_4')]"
 			]
 		}
 	]

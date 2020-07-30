@@ -41,8 +41,20 @@
 		"AzureFileStorage1_properties_typeProperties_userId": {
 			"value": "Azure\\sapoctec"
 		},
+		"AzureKeyVault1_properties_typeProperties_baseUrl": {
+			"value": "https://kvpcrm01.vault.azure.net/"
+		},
 		"AzureKeyVault_Dev_properties_typeProperties_baseUrl": {
 			"value": "https://kvpcrm01.vault.azure.net/"
+		},
+		"AzureSqlDatabase_PCRM_properties_typeProperties_connectionString_secretName": {
+			"value": "tec-dev-sqlconnectionprincipal"
+		},
+		"AzureSqlDatabase_PCRM_properties_typeProperties_servicePrincipalId": {
+			"value": "b74b5688-5ee7-4c50-8364-ddd607f525ac"
+		},
+		"AzureSqlDatabase_PCRM_properties_typeProperties_tenant": {
+			"value": "2291afd2-1191-4bcb-9906-c1406010941b"
 		},
 		"HttpServer1_properties_typeProperties_url": {
 			"value": "http://opendata.tec-wl.be/Current%20GTFS/TEC-GTFS.zip"

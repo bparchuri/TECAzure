@@ -31,6 +31,10 @@
 			"type": "string",
 			"defaultValue": "Azure\\sapoctec"
 		},
+		"AzureKeyVault1_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://kvpcrm01.vault.azure.net/"
+		},
 		"AzureKeyVault_Dev_properties_typeProperties_baseUrl": {
 			"type": "string",
 			"defaultValue": "https://kvpcrm01.vault.azure.net/"
@@ -84,6 +88,18 @@
 		"ADLSGen2_properties_typeProperties_servicePrincipalId": {
 			"type": "string",
 			"defaultValue": "b4537ba3-1639-42cb-9143-8bfbcb683e79"
+		},
+		"AzureSqlDatabase_PCRM_properties_typeProperties_connectionString_secretName": {
+			"type": "string",
+			"defaultValue": "tec-dev-sqlconnectionprincipal"
+		},
+		"AzureSqlDatabase_PCRM_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "b74b5688-5ee7-4c50-8364-ddd607f525ac"
+		},
+		"AzureSqlDatabase_PCRM_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "2291afd2-1191-4bcb-9906-c1406010941b"
 		},
 		"SQLPocTec_properties_typeProperties_connectionString_secretName": {
 			"type": "string",
@@ -199,6 +215,19 @@
 						"type": "SecureString",
 						"value": "[parameters('AzureFileStorage1_password')]"
 					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureKeyVault1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureKeyVault",
+				"typeProperties": {
+					"baseUrl": "[parameters('AzureKeyVault1_properties_typeProperties_baseUrl')]"
 				}
 			},
 			"dependsOn": []
@@ -407,6 +436,40 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase_PCRM')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "AzureKeyVault_Dev",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "[parameters('AzureSqlDatabase_PCRM_properties_typeProperties_connectionString_secretName')]",
+						"secretVersion": "fe72a966c4d640f1af00a886103ed09f"
+					},
+					"servicePrincipalId": "[parameters('AzureSqlDatabase_PCRM_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "AzureKeyVault_Dev",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "tec-dev-prinicipalkey",
+						"secretVersion": "ea7baf49a5774322b0ca7dc1d9b5f923"
+					},
+					"tenant": "[parameters('AzureSqlDatabase_PCRM_properties_typeProperties_tenant')]"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureKeyVault_Dev')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/SQLPocTec')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -546,138 +609,6 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/ADLSGen2')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ADLSV2CSV')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "ADLSGen2",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"fileName": "TECSourceData.csv",
-						"folderPath": "Validations",
-						"fileSystem": "poc-tec"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/ADLSGen2')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureSqlTable1')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "SQLPocTec",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "RecordIdentification",
-						"type": "varchar"
-					},
-					{
-						"name": "Zeros",
-						"type": "varchar"
-					},
-					{
-						"name": "CreationDate",
-						"type": "date"
-					},
-					{
-						"name": "BankIdentificationNumber",
-						"type": "varchar"
-					},
-					{
-						"name": "ApplicationCode",
-						"type": "varchar"
-					},
-					{
-						"name": "Duplicate",
-						"type": "varchar"
-					},
-					{
-						"name": "BlankColumn1",
-						"type": "varchar"
-					},
-					{
-						"name": "FileReference",
-						"type": "varchar"
-					},
-					{
-						"name": "NameAddressee",
-						"type": "varchar"
-					},
-					{
-						"name": "BIC",
-						"type": "varchar"
-					},
-					{
-						"name": "IdentificationNumberofBelgium",
-						"type": "varchar"
-					},
-					{
-						"name": "BlankColumn2",
-						"type": "varchar"
-					},
-					{
-						"name": "CodeSeperateApplication",
-						"type": "varchar"
-					},
-					{
-						"name": "TransactionReferrence",
-						"type": "varchar"
-					},
-					{
-						"name": "RelatedReferrence",
-						"type": "varchar"
-					},
-					{
-						"name": "BlankColumn3",
-						"type": "varchar"
-					},
-					{
-						"name": "VersionCode",
-						"type": "varchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "COD-0"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/SQLPocTec')]"
 			]
 		}
 	]
