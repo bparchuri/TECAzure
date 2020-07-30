@@ -15,7 +15,7 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "AzureSqlTable1",
+						"referenceName": "AzureSqlTable_CODA0",
 						"type": "DatasetReference"
 					},
 					"name": "SQLCODA0"

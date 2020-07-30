@@ -1,0 +1,85 @@
+{
+	"name": "AzureSqlTable_CODA0",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase_PCRM",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "RecordIdentification",
+				"type": "varchar"
+			},
+			{
+				"name": "Zeros",
+				"type": "varchar"
+			},
+			{
+				"name": "CreationDate",
+				"type": "date"
+			},
+			{
+				"name": "BankIdentificationNumber",
+				"type": "varchar"
+			},
+			{
+				"name": "ApplicationCode",
+				"type": "varchar"
+			},
+			{
+				"name": "Duplicate",
+				"type": "varchar"
+			},
+			{
+				"name": "BlankColumn1",
+				"type": "varchar"
+			},
+			{
+				"name": "FileReference",
+				"type": "varchar"
+			},
+			{
+				"name": "NameAddressee",
+				"type": "varchar"
+			},
+			{
+				"name": "BIC",
+				"type": "varchar"
+			},
+			{
+				"name": "IdentificationNumberofBelgium",
+				"type": "varchar"
+			},
+			{
+				"name": "BlankColumn2",
+				"type": "varchar"
+			},
+			{
+				"name": "CodeSeperateApplication",
+				"type": "varchar"
+			},
+			{
+				"name": "TransactionReferrence",
+				"type": "varchar"
+			},
+			{
+				"name": "RelatedReferrence",
+				"type": "varchar"
+			},
+			{
+				"name": "BlankColumn3",
+				"type": "varchar"
+			},
+			{
+				"name": "VersionCode",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "COD-0"
+		}
+	}
+}
