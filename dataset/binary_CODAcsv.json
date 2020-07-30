@@ -15,5 +15,6 @@
 				"fileSystem": "integrations-tec"
 			}
 		}
-	}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
 }
