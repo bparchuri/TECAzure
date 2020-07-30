@@ -1,0 +1,29 @@
+{
+	"name": "AzureSqlDatabase_PCRM",
+	"properties": {
+		"annotations": [],
+		"type": "AzureSqlDatabase",
+		"typeProperties": {
+			"connectionString": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "AzureKeyVault_Dev",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "tec-dev-sqlconnectionprincipal",
+				"secretVersion": "fe72a966c4d640f1af00a886103ed09f"
+			},
+			"servicePrincipalId": "b74b5688-5ee7-4c50-8364-ddd607f525ac",
+			"servicePrincipalKey": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "AzureKeyVault_Dev",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "tec-dev-prinicipalkey",
+				"secretVersion": "ea7baf49a5774322b0ca7dc1d9b5f923"
+			},
+			"tenant": "2291afd2-1191-4bcb-9906-c1406010941b"
+		}
+	}
+}
