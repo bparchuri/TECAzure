@@ -1,0 +1,87 @@
+{
+	"name": "AzureSqlTable_CODA_21",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase_PCRM",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "RegistrationID",
+				"type": "varchar"
+			},
+			{
+				"name": "ArticleCode",
+				"type": "varchar"
+			},
+			{
+				"name": "Sequencenumber",
+				"type": "varchar"
+			},
+			{
+				"name": "Retailnumber",
+				"type": "varchar"
+			},
+			{
+				"name": "bankreferencenumber",
+				"type": "varchar"
+			},
+			{
+				"name": "Movementsign",
+				"type": "varchar"
+			},
+			{
+				"name": "Amount",
+				"type": "decimal",
+				"precision": 15,
+				"scale": 3
+			},
+			{
+				"name": "Valuedate",
+				"type": "date"
+			},
+			{
+				"name": "OperationCode",
+				"type": "varchar"
+			},
+			{
+				"name": "communicationtype",
+				"type": "varchar"
+			},
+			{
+				"name": "Communicationzone",
+				"type": "varchar"
+			},
+			{
+				"name": "Accountdate",
+				"type": "date"
+			},
+			{
+				"name": "Sequencenumberofpaperaccount",
+				"type": "varchar"
+			},
+			{
+				"name": "Codeglobalization",
+				"type": "varchar"
+			},
+			{
+				"name": "Codesuite",
+				"type": "varchar"
+			},
+			{
+				"name": "BlankColumn",
+				"type": "varchar"
+			},
+			{
+				"name": "Linkcode",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "COD-21"
+		}
+	}
+}
