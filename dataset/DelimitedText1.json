@@ -2,7 +2,7 @@
 	"name": "DelimitedText1",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "ADLSCOD",
+			"referenceName": "linkedService_ADLS",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
@@ -10,9 +10,9 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "Belfius.csv",
-				"folderPath": "CODFile/CSV",
-				"fileSystem": "poc-tec"
+				"fileName": "coda.csv",
+				"folderPath": "CODA/CSV",
+				"fileSystem": "integrations-tec"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
