@@ -2,7 +2,7 @@
 	"name": "binary_CODAFile",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "linkedservice_ADLSGen2",
+			"referenceName": "linkedService_ADLS",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
