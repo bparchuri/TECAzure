@@ -78,7 +78,7 @@
 				},
 				{
 					"dataset": {
-						"referenceName": "AzureSqlTable10",
+						"referenceName": "AzureSqlTable_CODA_9",
 						"type": "DatasetReference"
 					},
 					"name": "sinkCODA9"

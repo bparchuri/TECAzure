@@ -1,0 +1,49 @@
+{
+	"name": "AzureSqlTable_CODA_9",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase_PCRM",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "RegistrationID",
+				"type": "varchar"
+			},
+			{
+				"name": "BlankColumn1",
+				"type": "varchar"
+			},
+			{
+				"name": "Numberofrecords",
+				"type": "varchar"
+			},
+			{
+				"name": "DebitRevenue",
+				"type": "decimal",
+				"precision": 15,
+				"scale": 3
+			},
+			{
+				"name": "CreditSales",
+				"type": "decimal",
+				"precision": 15,
+				"scale": 3
+			},
+			{
+				"name": "BlankColumn2",
+				"type": "varchar"
+			},
+			{
+				"name": "Multiplefilecode",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "COD-9"
+		}
+	}
+}
