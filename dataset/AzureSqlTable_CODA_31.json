@@ -1,0 +1,65 @@
+{
+	"name": "AzureSqlTable_CODA_31",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase_PCRM",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "RegistrationID",
+				"type": "varchar"
+			},
+			{
+				"name": "ArticleCode",
+				"type": "varchar"
+			},
+			{
+				"name": "Sequencenumber",
+				"type": "varchar"
+			},
+			{
+				"name": "Retailnumber",
+				"type": "varchar"
+			},
+			{
+				"name": "AdditionalInformation",
+				"type": "varchar"
+			},
+			{
+				"name": "OperationCode",
+				"type": "varchar"
+			},
+			{
+				"name": "CommunicationCode",
+				"type": "varchar"
+			},
+			{
+				"name": "Communication",
+				"type": "varchar"
+			},
+			{
+				"name": "BlankColumn1",
+				"type": "varchar"
+			},
+			{
+				"name": "MoreCode",
+				"type": "varchar"
+			},
+			{
+				"name": "BlankColumn2",
+				"type": "varchar"
+			},
+			{
+				"name": "LinkCode",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "COD-31"
+		}
+	}
+}
