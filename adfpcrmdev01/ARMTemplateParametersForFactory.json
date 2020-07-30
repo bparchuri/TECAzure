@@ -41,6 +41,9 @@
 		"AzureFileStorage1_properties_typeProperties_userId": {
 			"value": "Azure\\sapoctec"
 		},
+		"AzureKeyVault_Dev_properties_typeProperties_baseUrl": {
+			"value": "https://kvpcrm01.vault.azure.net/"
+		},
 		"HttpServer1_properties_typeProperties_url": {
 			"value": "http://opendata.tec-wl.be/Current%20GTFS/TEC-GTFS.zip"
 		},
@@ -61,6 +64,15 @@
 		},
 		"keyvault_TEC_properties_typeProperties_baseUrl": {
 			"value": "https://kvpcrm01.vault.azure.net/"
+		},
+		"linkedService_ADLS_properties_typeProperties_url": {
+			"value": "https://sapcrmdev01.dfs.core.windows.net"
+		},
+		"linkedService_ADLS_properties_typeProperties_tenant": {
+			"value": "2291afd2-1191-4bcb-9906-c1406010941b"
+		},
+		"linkedService_ADLS_properties_typeProperties_servicePrincipalId": {
+			"value": "b74b5688-5ee7-4c50-8364-ddd607f525ac"
 		},
 		"linkedservice_ADLSGen2_properties_typeProperties_url": {
 			"value": "https://sapcrmdev01.dfs.core.windows.net"

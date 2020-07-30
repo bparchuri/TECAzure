@@ -13,6 +13,226 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/GTFSSQLSink')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SQLPocTec",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Guid",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "Agency_id",
+						"type": "varchar"
+					},
+					{
+						"name": "Agency_name",
+						"type": "varchar"
+					},
+					{
+						"name": "rgency_url",
+						"type": "varchar"
+					},
+					{
+						"name": "Agency_timezone",
+						"type": "varchar"
+					},
+					{
+						"name": "Agency_lang",
+						"type": "varchar"
+					},
+					{
+						"name": "Agency_phone",
+						"type": "varchar"
+					},
+					{
+						"name": "Route_id",
+						"type": "varchar"
+					},
+					{
+						"name": "Route_short_name",
+						"type": "varchar"
+					},
+					{
+						"name": "Route_long_name",
+						"type": "varchar"
+					},
+					{
+						"name": "Route_desc",
+						"type": "varchar"
+					},
+					{
+						"name": "Route_type",
+						"type": "varchar"
+					},
+					{
+						"name": "Route_url",
+						"type": "varchar"
+					},
+					{
+						"name": "Trip_id",
+						"type": "varchar"
+					},
+					{
+						"name": "Trip_short_name",
+						"type": "varchar"
+					},
+					{
+						"name": "Direction_id",
+						"type": "varchar"
+					},
+					{
+						"name": "Block_id",
+						"type": "varchar"
+					},
+					{
+						"name": "Service_id",
+						"type": "varchar"
+					},
+					{
+						"name": "Monday",
+						"type": "varchar"
+					},
+					{
+						"name": "Tuesday",
+						"type": "varchar"
+					},
+					{
+						"name": "Wednesday",
+						"type": "varchar"
+					},
+					{
+						"name": "Thursday",
+						"type": "varchar"
+					},
+					{
+						"name": "Friday",
+						"type": "varchar"
+					},
+					{
+						"name": "Saturday",
+						"type": "varchar"
+					},
+					{
+						"name": "Sunday",
+						"type": "varchar"
+					},
+					{
+						"name": "Start_date",
+						"type": "date"
+					},
+					{
+						"name": "End_date",
+						"type": "date"
+					},
+					{
+						"name": "Date",
+						"type": "date"
+					},
+					{
+						"name": "Exception_type",
+						"type": "varchar"
+					},
+					{
+						"name": "shape_id",
+						"type": "varchar"
+					},
+					{
+						"name": "shape_pt_lat",
+						"type": "varchar"
+					},
+					{
+						"name": "shape_pt_lon",
+						"type": "varchar"
+					},
+					{
+						"name": "shape_pt_sequence",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "GTFS"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/GTFScalendar')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ADLSGen2",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "calendar.txt",
+						"folderPath": "GTFS",
+						"fileSystem": "poc-tec"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "service_id",
+						"type": "String"
+					},
+					{
+						"name": "monday",
+						"type": "String"
+					},
+					{
+						"name": "tuesday",
+						"type": "String"
+					},
+					{
+						"name": "wednesday",
+						"type": "String"
+					},
+					{
+						"name": "thursday",
+						"type": "String"
+					},
+					{
+						"name": "friday",
+						"type": "String"
+					},
+					{
+						"name": "saturday",
+						"type": "String"
+					},
+					{
+						"name": "sunday",
+						"type": "String"
+					},
+					{
+						"name": "start_date",
+						"type": "String"
+					},
+					{
+						"name": "end_date",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/GTFScalendar_dates')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -1040,82 +1260,6 @@
 				"typeProperties": {
 					"schema": "dbo",
 					"table": "EIS779_SEGMENT_005"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/SQLTEC')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "SQLPocTec",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "FaultId",
-						"type": "varchar"
-					},
-					{
-						"name": "FaultCustomerName",
-						"type": "varchar"
-					},
-					{
-						"name": "FaultDesc",
-						"type": "varchar"
-					},
-					{
-						"name": "Date",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "TECData"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/SQLTECData')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "SQLPocTec",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "FaultId",
-						"type": "varchar"
-					},
-					{
-						"name": "FaultCustomerName",
-						"type": "varchar"
-					},
-					{
-						"name": "FaultDesc",
-						"type": "varchar"
-					},
-					{
-						"name": "Date",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "TECData"
 				}
 			},
 			"dependsOn": []

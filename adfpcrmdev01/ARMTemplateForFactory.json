@@ -55,6 +55,10 @@
 			"type": "string",
 			"defaultValue": "Azure\\sapoctec"
 		},
+		"AzureKeyVault_Dev_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://kvpcrm01.vault.azure.net/"
+		},
 		"HttpServer1_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "http://opendata.tec-wl.be/Current%20GTFS/TEC-GTFS.zip"
@@ -82,6 +86,18 @@
 		"keyvault_TEC_properties_typeProperties_baseUrl": {
 			"type": "string",
 			"defaultValue": "https://kvpcrm01.vault.azure.net/"
+		},
+		"linkedService_ADLS_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://sapcrmdev01.dfs.core.windows.net"
+		},
+		"linkedService_ADLS_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "2291afd2-1191-4bcb-9906-c1406010941b"
+		},
+		"linkedService_ADLS_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "b74b5688-5ee7-4c50-8364-ddd607f525ac"
 		},
 		"linkedservice_ADLSGen2_properties_typeProperties_url": {
 			"type": "string",
@@ -6876,7 +6892,7 @@
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "linkedservice_ADLSGen2",
+					"referenceName": "linkedService_ADLS",
 					"type": "LinkedServiceReference"
 				},
 				"annotations": [],
@@ -6886,12 +6902,12 @@
 						"type": "AzureBlobFSLocation",
 						"fileName": "BelfiusCDA20200625_212325_582_OS1TMGH25F_235242590.COD",
 						"folderPath": "CODA/Source",
-						"fileSystem": "datalakestore-tec"
+						"fileSystem": "integrations-tec"
 					}
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/linkedservice_ADLSGen2')]"
+				"[concat(variables('factoryId'), '/linkedServices/linkedService_ADLS')]"
 			]
 		},
 		{
@@ -6900,7 +6916,7 @@
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "linkedservice_ADLSGen2",
+					"referenceName": "linkedService_ADLS",
 					"type": "LinkedServiceReference"
 				},
 				"annotations": [],
@@ -6910,12 +6926,12 @@
 						"type": "AzureBlobFSLocation",
 						"fileName": "coda.csv",
 						"folderPath": "CODA/CSV",
-						"fileSystem": "datalakestore-tec"
+						"fileSystem": "integrations-tec"
 					}
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/linkedservice_ADLSGen2')]"
+				"[concat(variables('factoryId'), '/linkedServices/linkedService_ADLS')]"
 			]
 		},
 		{
@@ -7042,6 +7058,19 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/AzureKeyVault_Dev')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureKeyVault",
+				"typeProperties": {
+					"baseUrl": "[parameters('AzureKeyVault_Dev_properties_typeProperties_baseUrl')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/HttpServer1')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -7141,6 +7170,32 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/linkedService_ADLS')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('linkedService_ADLS_properties_typeProperties_url')]",
+					"tenant": "[parameters('linkedService_ADLS_properties_typeProperties_tenant')]",
+					"servicePrincipalId": "[parameters('linkedService_ADLS_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "AzureKeyVault_Dev",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "tec-dev-prinicipalkey",
+						"secretVersion": "ea7baf49a5774322b0ca7dc1d9b5f923"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureKeyVault_Dev')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/linkedservice_ADLSGen2')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -7191,7 +7246,7 @@
 								"type": "SecureString",
 								"value": "[parameters('integrationRuntime1_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminPassword')]"
 							},
-							"catalogPricingTier": "S0"
+							"catalogPricingTier": "S1"
 						},
 						"customSetupScriptProperties": {
 							"blobContainerUri": "https://sapcrmcommon01.blob.core.windows.net/kingswaysoft",
