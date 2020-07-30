@@ -6,7 +6,7 @@
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "Delimited_CODACSV",
+						"referenceName": "Delimited_Coda_csv",
 						"type": "DatasetReference"
 					},
 					"name": "codacsvfromadls"

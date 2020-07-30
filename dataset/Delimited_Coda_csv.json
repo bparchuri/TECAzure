@@ -1,0 +1,27 @@
+{
+	"name": "Delimited_Coda_csv",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "linkedService_ADLS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "coda.csv",
+				"folderPath": "CODA/CSV",
+				"fileSystem": "integrations-tec"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"type": "String"
+			}
+		]
+	}
+}
