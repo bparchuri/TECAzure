@@ -12,7 +12,7 @@
 				"type": "AzureBlobFSLocation",
 				"fileName": "coda.csv",
 				"folderPath": "CODA/CSV",
-				"fileSystem": "datalakestore-tec"
+				"fileSystem": "integrations-tec"
 			}
 		}
 	}
