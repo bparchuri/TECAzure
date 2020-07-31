@@ -1,0 +1,481 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "adfpcrmdev01"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/CODAIntegration_copy1')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy SQL Join to CODA Integration",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "AzureSqlSource",
+								"sqlReaderQuery": "select\nNEWID() AS GUID,\nZero.RecordIdentification AS Zero_RecordIdentification,\nZero.CreationDate AS Zero_CreationDate,\nZero.BankIdentificationNumber AS Zero_BankIdentificationNumber,\nZero.ApplicationCode AS Zero_ApplicationCode,\nZero.Duplicate AS Zero_Duplicate,\nZero.FileReference AS Zero_FileReference,\nZero.NameAddressee AS Zero_NameAddressee,\nZero.BIC AS Zero_BIC,\nZero.IdentificationNumberofBelgium AS Zero_IdentificationNumberofBelgium,\nZero.CodeSeperateApplication AS Zero_CodeSeperateApplication,\nZero.TransactionReferrence AS Zero_TransactionReferrence,\nZero.RelatedReferrence AS Zero_RelatedReferrence,\nOne.RegistrationID AS One_RegistrationId,\ncase One.BankAccountType\n     when '0' then 899240000\n     when '1' then 899240001\n     when '2' then 899240002\n     when '3' then 899240003\n     end AS One_BankAccountType,\nOne.Sequencenumberofpaperaccount AS One_Sequencenumberofpaperaccount,\nOne.Accountnumber AS One_Accountnumber,\ncase One.Oldbalance\n     when '0' then 899240000\n     when '1' then 899240001\n     end AS One_Oldbalance,\nOne.Oldpay AS One_Oldpay,\nOne.Dateofoldbalance AS One_Dateofoldbalance,\nOne.Accountholdername AS One_Accountholdername,\nOne.Accounttagged AS One_Accounttagged,\nOne.Sequencenumberofthecodified AS One_Sequencenumberofthecodified,\nFour.RegistrationID AS Four_RegistrationID,\nFour.Textofthefreemessage AS Four_Textofthefreemessage,\nEight.RegistrationID AS Eight_RegistrationId,\nEight.Sequencenumber AS Eight_Sequencenumber,\nEight.Accountnumber AS Eight_Accountnumber,\ncase Eight.SignCode\n     when '0' then 899240000\n     when '1' then 899240001\n     end AS Eight_SignCode,\nEight.NewBalance AS Eight_NewBalance ,\nEight.Dateofnewbalance AS Eight_Dateofnewbalance,\nNine.RegistrationID AS Nine_RegistrationId,\nNine.Numberofrecords AS Nine_Numberofrecords,\nNine.DebitRevenue AS Nine_DebitRevenue,\nNine.CreditSales AS Nine_CreditSales\nfrom [dbo].[COD-21] TwoOne\nleft join [dbo].[COD-22] TwoTwo on TwoOne.[Sequencenumber] = TwoTwo.[Sequencenumber]\nleft join [dbo].[COD-23] TwoThree on TwoOne.[Sequencenumber] = TwoThree.[Sequencenumber]\nleft join [dbo].[COD-31] ThreeOne on TwoOne.[Sequencenumber] = ThreeOne.[Sequencenumber]\nleft join [dbo].[COD-32] ThreeTwo on TwoOne.[Sequencenumber] = ThreeTwo.[Sequencenumber]\nleft join [dbo].[COD-33] ThreeThree on TwoOne.[Sequencenumber] = ThreeThree.[Sequencenumber]\nleft join [dbo].[COD-0] Zero on 1=1 and TwoOne.[Sequencenumber] = '0001'\nleft join [dbo].[COD-1] One on 1=1 and TwoOne.[Sequencenumber] = '0001' \nleft join [dbo].[COD-4] Four on 1=1 and TwoOne.[Sequencenumber] = '0001' \nleft join [dbo].[COD-8] Eight on 1=1 and TwoOne.[Sequencenumber] = '0001'\nleft join [dbo].[COD-9] Nine on 1=1 and TwoOne.[Sequencenumber] = '0001' ",
+								"queryTimeout": "02:00:00"
+							},
+							"sink": {
+								"type": "AzureSqlSink"
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "Zero_RecordIdentification",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "Zero_RecordIdentification",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Zero_CreationDate",
+											"type": "DateTime",
+											"physicalType": "date"
+										},
+										"sink": {
+											"name": "Zero_CreationDate",
+											"type": "DateTime",
+											"physicalType": "date"
+										}
+									},
+									{
+										"source": {
+											"name": "Zero_BankIdentificationNumber",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "Zero_BankIdentificationNumber",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Zero_ApplicationCode",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "Zero_ApplicationCode",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Zero_Duplicate",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "Zero_Duplicate",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Zero_FileReference",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "Zero_FileReference",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Zero_NameAddressee",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "Zero_NameAddressee",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Zero_BIC",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "Zero_BIC",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Zero_IdentificationNumberofBelgium",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "Zero_IdentificationNumberofBelgium",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Zero_CodeSeperateApplication",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "Zero_CodeSeperateApplication",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Zero_TransactionReferrence",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "Zero_TransactionReferrence",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Zero_RelatedReferrence",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "Zero_RelatedReferrence",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "One_RegistrationId",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "One_RegistrationId",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "One_BankAccountType",
+											"type": "Int32",
+											"physicalType": "int"
+										},
+										"sink": {
+											"name": "One_BankAccountType",
+											"type": "Int32",
+											"physicalType": "int"
+										}
+									},
+									{
+										"source": {
+											"name": "One_Sequencenumberofpaperaccount",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "One_Sequencenumberofpaperaccount",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "One_Accountnumber",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "One_Accountnumber",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "One_Oldbalance",
+											"type": "Int32",
+											"physicalType": "int"
+										},
+										"sink": {
+											"name": "One_Oldbalance",
+											"type": "Int32",
+											"physicalType": "int"
+										}
+									},
+									{
+										"source": {
+											"name": "One_Oldpay",
+											"type": "Decimal",
+											"physicalType": "decimal"
+										},
+										"sink": {
+											"name": "One_Oldpay",
+											"type": "Decimal",
+											"physicalType": "decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "One_Dateofoldbalance",
+											"type": "DateTime",
+											"physicalType": "date"
+										},
+										"sink": {
+											"name": "One_Dateofoldbalance",
+											"type": "DateTime",
+											"physicalType": "date"
+										}
+									},
+									{
+										"source": {
+											"name": "One_Accountholdername",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "One_Accountholdername",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "One_Accounttagged",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "One_Accounttagged",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "One_Sequencenumberofthecodified",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "One_Sequencenumberofthecodified",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Four_RegistrationID",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "Four_RegistrationID",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Four_Textofthefreemessage",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "Four_Textofthefreemessage",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Eight_RegistrationId",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "Eight_RegistrationId",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Eight_Sequencenumber",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "Eight_Sequencenumber",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Eight_Accountnumber",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "Eight_Accountnumber",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Eight_SignCode",
+											"type": "Int32",
+											"physicalType": "int"
+										},
+										"sink": {
+											"name": "Eight_SignCode",
+											"type": "Int32",
+											"physicalType": "int"
+										}
+									},
+									{
+										"source": {
+											"name": "Eight_NewBalance",
+											"type": "Decimal",
+											"physicalType": "decimal"
+										},
+										"sink": {
+											"name": "Eight_NewBalance",
+											"type": "Decimal",
+											"physicalType": "decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "Eight_Dateofnewbalance",
+											"type": "DateTime",
+											"physicalType": "date"
+										},
+										"sink": {
+											"name": "Eight_Dateofnewbalance",
+											"type": "DateTime",
+											"physicalType": "date"
+										}
+									},
+									{
+										"source": {
+											"name": "Nine_RegistrationId",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "Nine_RegistrationId",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Nine_Numberofrecords",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "Nine_Numberofrecords",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Nine_DebitRevenue",
+											"type": "Decimal",
+											"physicalType": "decimal"
+										},
+										"sink": {
+											"name": "Nine_DebitRevenue",
+											"type": "Decimal",
+											"physicalType": "decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "Nine_CreditSales",
+											"type": "Decimal",
+											"physicalType": "decimal"
+										},
+										"sink": {
+											"name": "Nine_CreditSales",
+											"type": "Decimal",
+											"physicalType": "decimal"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "AzureSqlTable_CODAIntegration",
+								"type": "DatasetReference"
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AzureSqlTable_CODAJoin",
+								"type": "DatasetReference"
+							}
+						]
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": []
+		}
+	]
+}
