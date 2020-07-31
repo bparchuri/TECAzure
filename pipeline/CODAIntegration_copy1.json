@@ -761,7 +761,8 @@
 									"name": "bd_identification_number",
 									"type": "String"
 								}
-							}
+							},
+							null
 						]
 					}
 				},
