@@ -1279,6 +1279,18 @@
 								"mappings": [
 									{
 										"source": {
+											"name": "GUID",
+											"type": "Guid",
+											"physicalType": "uniqueidentifier"
+										},
+										"sink": {
+											"name": "GUID",
+											"type": "Guid",
+											"physicalType": "uniqueidentifier"
+										}
+									},
+									{
+										"source": {
 											"name": "Zero_RecordIdentification",
 											"type": "String",
 											"physicalType": "varchar"
@@ -1711,7 +1723,14 @@
 					{
 						"name": "Copy CODA to CRM",
 						"type": "Copy",
-						"dependsOn": [],
+						"dependsOn": [
+							{
+								"activity": "Copy SQL Join to CODA Integration",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
 						"policy": {
 							"timeout": "7.00:00:00",
 							"retry": 0,
@@ -1734,6 +1753,16 @@
 							"translator": {
 								"type": "TabularTranslator",
 								"mappings": [
+									{
+										"source": {
+											"name": "GUID",
+											"type": "Guid"
+										},
+										"sink": {
+											"name": "bd_codaid",
+											"type": "Guid"
+										}
+									},
 									{
 										"source": {
 											"name": "Zero_CreationDate",
@@ -1791,6 +1820,26 @@
 										},
 										"sink": {
 											"name": "bd_name_addressee",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Zero_BIC",
+											"type": "String"
+										},
+										"sink": {
+											"name": "bd_bic",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Zero_IdentificationNumberofBelgium",
+											"type": "String"
+										},
+										"sink": {
+											"name": "bd_identification_number",
 											"type": "String"
 										}
 									},
@@ -1946,16 +1995,6 @@
 									},
 									{
 										"source": {
-											"name": "Eight_SignCode",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "bd_new_balance_sign",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
 											"name": "Eight_NewBalance",
 											"type": "Decimal"
 										},
@@ -2006,12 +2045,12 @@
 									},
 									{
 										"source": {
-											"name": "Zero_IdentificationNumberofBelgium",
-											"type": "String"
+											"name": "Eight_SignCode",
+											"type": "Int32"
 										},
 										"sink": {
-											"name": "bd_identification_number",
-											"type": "String"
+											"name": "bd_new_balance_sign",
+											"type": "Int32"
 										}
 									}
 								]
