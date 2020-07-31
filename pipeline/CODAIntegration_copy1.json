@@ -783,6 +783,16 @@
 									"name": "bd_credit_movement",
 									"type": "Decimal"
 								}
+							},
+							{
+								"source": {
+									"name": "Eight_SignCode",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "bd_new_balance_sign",
+									"type": "Int32"
+								}
 							}
 						]
 					}
