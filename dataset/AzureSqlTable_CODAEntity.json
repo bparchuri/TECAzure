@@ -1,0 +1,164 @@
+{
+	"name": "AzureSqlTable_CODAEntity",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase_PCRM",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Zero_RecordIdentification",
+				"type": "varchar"
+			},
+			{
+				"name": "Zero_CreationDate",
+				"type": "date"
+			},
+			{
+				"name": "Zero_BankIdentificationNumber",
+				"type": "varchar"
+			},
+			{
+				"name": "Zero_ApplicationCode",
+				"type": "varchar"
+			},
+			{
+				"name": "Zero_Duplicate",
+				"type": "varchar"
+			},
+			{
+				"name": "Zero_FileReference",
+				"type": "varchar"
+			},
+			{
+				"name": "Zero_NameAddressee",
+				"type": "varchar"
+			},
+			{
+				"name": "Zero_BIC",
+				"type": "varchar"
+			},
+			{
+				"name": "Zero_IdentificationNumberofBelgium",
+				"type": "varchar"
+			},
+			{
+				"name": "Zero_CodeSeperateApplication",
+				"type": "varchar"
+			},
+			{
+				"name": "Zero_TransactionReferrence",
+				"type": "varchar"
+			},
+			{
+				"name": "Zero_RelatedReferrence",
+				"type": "varchar"
+			},
+			{
+				"name": "One_RegistrationId",
+				"type": "varchar"
+			},
+			{
+				"name": "One_BankAccountType",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "One_Sequencenumberofpaperaccount",
+				"type": "varchar"
+			},
+			{
+				"name": "One_Accountnumber",
+				"type": "varchar"
+			},
+			{
+				"name": "One_Oldbalance",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "One_Oldpay",
+				"type": "decimal",
+				"precision": 15,
+				"scale": 3
+			},
+			{
+				"name": "One_Dateofoldbalance",
+				"type": "date"
+			},
+			{
+				"name": "One_Accountholdername",
+				"type": "varchar"
+			},
+			{
+				"name": "One_Accounttagged",
+				"type": "varchar"
+			},
+			{
+				"name": "One_Sequencenumberofthecodified",
+				"type": "varchar"
+			},
+			{
+				"name": "Four_RegistrationID",
+				"type": "varchar"
+			},
+			{
+				"name": "Four_Textofthefreemessage",
+				"type": "varchar"
+			},
+			{
+				"name": "Eight_RegistrationId",
+				"type": "varchar"
+			},
+			{
+				"name": "Eight_Sequencenumber",
+				"type": "varchar"
+			},
+			{
+				"name": "Eight_Accountnumber",
+				"type": "varchar"
+			},
+			{
+				"name": "Eight_SignCode",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Eight_NewBalance",
+				"type": "decimal",
+				"precision": 15,
+				"scale": 3
+			},
+			{
+				"name": "Eight_Dateofnewbalance",
+				"type": "date"
+			},
+			{
+				"name": "Nine_RegistrationId",
+				"type": "varchar"
+			},
+			{
+				"name": "Nine_Numberofrecords",
+				"type": "varchar"
+			},
+			{
+				"name": "Nine_DebitRevenue",
+				"type": "decimal",
+				"precision": 15,
+				"scale": 3
+			},
+			{
+				"name": "Nine_CreditSales",
+				"type": "decimal",
+				"precision": 15,
+				"scale": 3
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "CODAIntegration"
+		}
+	}
+}
