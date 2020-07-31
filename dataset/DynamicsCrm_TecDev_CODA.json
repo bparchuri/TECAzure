@@ -1,0 +1,12 @@
+{
+	"name": "DynamicsCrm_TecDev_CODA",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DynamicsCrm_TECDev",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DynamicsCrmEntity",
+		"schema": []
+	}
+}
