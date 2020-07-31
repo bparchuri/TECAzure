@@ -1216,6 +1216,173 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTable_CODAEntity')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase_PCRM",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Zero_RecordIdentification",
+						"type": "varchar"
+					},
+					{
+						"name": "Zero_CreationDate",
+						"type": "date"
+					},
+					{
+						"name": "Zero_BankIdentificationNumber",
+						"type": "varchar"
+					},
+					{
+						"name": "Zero_ApplicationCode",
+						"type": "varchar"
+					},
+					{
+						"name": "Zero_Duplicate",
+						"type": "varchar"
+					},
+					{
+						"name": "Zero_FileReference",
+						"type": "varchar"
+					},
+					{
+						"name": "Zero_NameAddressee",
+						"type": "varchar"
+					},
+					{
+						"name": "Zero_BIC",
+						"type": "varchar"
+					},
+					{
+						"name": "Zero_IdentificationNumberofBelgium",
+						"type": "varchar"
+					},
+					{
+						"name": "Zero_CodeSeperateApplication",
+						"type": "varchar"
+					},
+					{
+						"name": "Zero_TransactionReferrence",
+						"type": "varchar"
+					},
+					{
+						"name": "Zero_RelatedReferrence",
+						"type": "varchar"
+					},
+					{
+						"name": "One_RegistrationId",
+						"type": "varchar"
+					},
+					{
+						"name": "One_BankAccountType",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "One_Sequencenumberofpaperaccount",
+						"type": "varchar"
+					},
+					{
+						"name": "One_Accountnumber",
+						"type": "varchar"
+					},
+					{
+						"name": "One_Oldbalance",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "One_Oldpay",
+						"type": "decimal",
+						"precision": 15,
+						"scale": 3
+					},
+					{
+						"name": "One_Dateofoldbalance",
+						"type": "date"
+					},
+					{
+						"name": "One_Accountholdername",
+						"type": "varchar"
+					},
+					{
+						"name": "One_Accounttagged",
+						"type": "varchar"
+					},
+					{
+						"name": "One_Sequencenumberofthecodified",
+						"type": "varchar"
+					},
+					{
+						"name": "Four_RegistrationID",
+						"type": "varchar"
+					},
+					{
+						"name": "Four_Textofthefreemessage",
+						"type": "varchar"
+					},
+					{
+						"name": "Eight_RegistrationId",
+						"type": "varchar"
+					},
+					{
+						"name": "Eight_Sequencenumber",
+						"type": "varchar"
+					},
+					{
+						"name": "Eight_Accountnumber",
+						"type": "varchar"
+					},
+					{
+						"name": "Eight_SignCode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Eight_NewBalance",
+						"type": "decimal",
+						"precision": 15,
+						"scale": 3
+					},
+					{
+						"name": "Eight_Dateofnewbalance",
+						"type": "date"
+					},
+					{
+						"name": "Nine_RegistrationId",
+						"type": "varchar"
+					},
+					{
+						"name": "Nine_Numberofrecords",
+						"type": "varchar"
+					},
+					{
+						"name": "Nine_DebitRevenue",
+						"type": "decimal",
+						"precision": 15,
+						"scale": 3
+					},
+					{
+						"name": "Nine_CreditSales",
+						"type": "decimal",
+						"precision": 15,
+						"scale": 3
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "CODAIntegration"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/AzureSqlTable_CODAIntegration')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -1419,216 +1586,6 @@
 					}
 				],
 				"typeProperties": {}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureSqlTable_CODAJoin')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase_PCRM",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "Nine_RegistrationID",
-						"type": "varchar"
-					},
-					{
-						"name": "Nine_Numberofrecords",
-						"type": "varchar"
-					},
-					{
-						"name": "Nine_DebitRevenue",
-						"type": "decimal",
-						"precision": 15,
-						"scale": 3
-					},
-					{
-						"name": "Nine_CreditSales",
-						"type": "decimal",
-						"precision": 15,
-						"scale": 3
-					},
-					{
-						"name": "Nine_Multiplefilecode",
-						"type": "varchar"
-					},
-					{
-						"name": "Eight_RegistrationID",
-						"type": "varchar"
-					},
-					{
-						"name": "Eight_Accountnumber",
-						"type": "varchar"
-					},
-					{
-						"name": "Eight_NewBalance",
-						"type": "decimal",
-						"precision": 15,
-						"scale": 3
-					},
-					{
-						"name": "Eight_Dateofnewbalance",
-						"type": "date"
-					},
-					{
-						"name": "One_RegistrationID",
-						"type": "varchar"
-					},
-					{
-						"name": "One_BankAccountType",
-						"type": "varchar"
-					},
-					{
-						"name": "One_Sequencenumberofpaperaccount",
-						"type": "varchar"
-					},
-					{
-						"name": "One_Accountnumber",
-						"type": "varchar"
-					},
-					{
-						"name": "One_Oldbalance",
-						"type": "varchar"
-					},
-					{
-						"name": "One_Oldpay",
-						"type": "decimal",
-						"precision": 15,
-						"scale": 3
-					},
-					{
-						"name": "One_Dateofoldbalance",
-						"type": "date"
-					},
-					{
-						"name": "One_Accountholdername",
-						"type": "varchar"
-					},
-					{
-						"name": "TwoOne_RegistrationID",
-						"type": "varchar"
-					},
-					{
-						"name": "TwoOne_Sequencenumber",
-						"type": "varchar"
-					},
-					{
-						"name": "TwoOne_Amount",
-						"type": "decimal",
-						"precision": 15,
-						"scale": 3
-					},
-					{
-						"name": "TwoOne_Valuedate",
-						"type": "date"
-					},
-					{
-						"name": "TwoOne_Accountdate",
-						"type": "date"
-					},
-					{
-						"name": "TwoTwo_RegistrationID",
-						"type": "varchar"
-					},
-					{
-						"name": "TwoTwo_Customerreference",
-						"type": "varchar"
-					},
-					{
-						"name": "TwoTwo_BIC",
-						"type": "varchar"
-					},
-					{
-						"name": "TwoTwo_Linkcode",
-						"type": "varchar"
-					},
-					{
-						"name": "TwoThird_RegistrationID",
-						"type": "varchar"
-					},
-					{
-						"name": "TwoThird_ArticleCode",
-						"type": "varchar"
-					},
-					{
-						"name": "TwoThird_Counterpartyaccountnumber",
-						"type": "varchar"
-					},
-					{
-						"name": "TwoThird_Nameofcounterparty",
-						"type": "varchar"
-					},
-					{
-						"name": "TwoThird_SuiteCode",
-						"type": "varchar"
-					},
-					{
-						"name": "ThirdOne_RegistrationID",
-						"type": "varchar"
-					},
-					{
-						"name": "ThirdOne_ArticleCode",
-						"type": "varchar"
-					},
-					{
-						"name": "ThirdOne_CommunicationCode",
-						"type": "varchar"
-					},
-					{
-						"name": "ThirdOne_MoreCode",
-						"type": "varchar"
-					},
-					{
-						"name": "ThirdTwo_RegistrationID",
-						"type": "varchar"
-					},
-					{
-						"name": "ThirdTwo_Sequencenumber",
-						"type": "varchar"
-					},
-					{
-						"name": "ThirdTwo_ArticleCode",
-						"type": "varchar"
-					},
-					{
-						"name": "ThirdTwo_Communication",
-						"type": "varchar"
-					},
-					{
-						"name": "Zero_RecordIdentification",
-						"type": "varchar"
-					},
-					{
-						"name": "Zero_CreationDate",
-						"type": "date"
-					},
-					{
-						"name": "Zero_BankIdentificationNumber",
-						"type": "varchar"
-					},
-					{
-						"name": "Zero_ApplicationCode",
-						"type": "varchar"
-					},
-					{
-						"name": "Zero_BIC",
-						"type": "varchar"
-					},
-					{
-						"name": "Zero_IdentificationNumberofBelgium",
-						"type": "varchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "CODAIntegration"
-				}
 			},
 			"dependsOn": []
 		}

@@ -75,6 +75,10 @@
 			"type": "string",
 			"defaultValue": "2291afd2-1191-4bcb-9906-c1406010941b"
 		},
+		"DynamicsCrm_TECDev_properties_typeProperties_username": {
+			"type": "string",
+			"defaultValue": "Bhargav.Parchuri@letec.be"
+		},
 		"HttpServer1_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "http://opendata.tec-wl.be/Current%20GTFS/TEC-GTFS.zip"
@@ -140,10 +144,6 @@
 		},
 		"integrationRuntime1_properties_typeProperties_ssisProperties_customSetupScriptProperties_sasToken": {
 			"type": "secureString"
-		},
-		"DynamicsCrm_TECDev_properties_typeProperties_username": {
-			"type": "string",
-			"defaultValue": "Bhargav.Parchuri@letec.be"
 		},
 		"containerUri": {
 			"type": "string",
@@ -244,6 +244,9 @@
 					"AzureSqlDatabase_PCRM_properties_typeProperties_tenant": {
 						"value": "[parameters('AzureSqlDatabase_PCRM_properties_typeProperties_tenant')]"
 					},
+					"DynamicsCrm_TECDev_properties_typeProperties_username": {
+						"value": "[parameters('DynamicsCrm_TECDev_properties_typeProperties_username')]"
+					},
 					"SQLPocTec_properties_typeProperties_connectionString_secretName": {
 						"value": "[parameters('SQLPocTec_properties_typeProperties_connectionString_secretName')]"
 					},
@@ -273,9 +276,6 @@
 					},
 					"linkedservice_ADLSGen2_properties_typeProperties_servicePrincipalId": {
 						"value": "[parameters('linkedservice_ADLSGen2_properties_typeProperties_servicePrincipalId')]"
-					},
-					"DynamicsCrm_TECDev_properties_typeProperties_username": {
-						"value": "[parameters('DynamicsCrm_TECDev_properties_typeProperties_username')]"
 					}
 				}
 			},

@@ -13,6 +13,216 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTable_CODAJoin')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase_PCRM",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Nine_RegistrationID",
+						"type": "varchar"
+					},
+					{
+						"name": "Nine_Numberofrecords",
+						"type": "varchar"
+					},
+					{
+						"name": "Nine_DebitRevenue",
+						"type": "decimal",
+						"precision": 15,
+						"scale": 3
+					},
+					{
+						"name": "Nine_CreditSales",
+						"type": "decimal",
+						"precision": 15,
+						"scale": 3
+					},
+					{
+						"name": "Nine_Multiplefilecode",
+						"type": "varchar"
+					},
+					{
+						"name": "Eight_RegistrationID",
+						"type": "varchar"
+					},
+					{
+						"name": "Eight_Accountnumber",
+						"type": "varchar"
+					},
+					{
+						"name": "Eight_NewBalance",
+						"type": "decimal",
+						"precision": 15,
+						"scale": 3
+					},
+					{
+						"name": "Eight_Dateofnewbalance",
+						"type": "date"
+					},
+					{
+						"name": "One_RegistrationID",
+						"type": "varchar"
+					},
+					{
+						"name": "One_BankAccountType",
+						"type": "varchar"
+					},
+					{
+						"name": "One_Sequencenumberofpaperaccount",
+						"type": "varchar"
+					},
+					{
+						"name": "One_Accountnumber",
+						"type": "varchar"
+					},
+					{
+						"name": "One_Oldbalance",
+						"type": "varchar"
+					},
+					{
+						"name": "One_Oldpay",
+						"type": "decimal",
+						"precision": 15,
+						"scale": 3
+					},
+					{
+						"name": "One_Dateofoldbalance",
+						"type": "date"
+					},
+					{
+						"name": "One_Accountholdername",
+						"type": "varchar"
+					},
+					{
+						"name": "TwoOne_RegistrationID",
+						"type": "varchar"
+					},
+					{
+						"name": "TwoOne_Sequencenumber",
+						"type": "varchar"
+					},
+					{
+						"name": "TwoOne_Amount",
+						"type": "decimal",
+						"precision": 15,
+						"scale": 3
+					},
+					{
+						"name": "TwoOne_Valuedate",
+						"type": "date"
+					},
+					{
+						"name": "TwoOne_Accountdate",
+						"type": "date"
+					},
+					{
+						"name": "TwoTwo_RegistrationID",
+						"type": "varchar"
+					},
+					{
+						"name": "TwoTwo_Customerreference",
+						"type": "varchar"
+					},
+					{
+						"name": "TwoTwo_BIC",
+						"type": "varchar"
+					},
+					{
+						"name": "TwoTwo_Linkcode",
+						"type": "varchar"
+					},
+					{
+						"name": "TwoThird_RegistrationID",
+						"type": "varchar"
+					},
+					{
+						"name": "TwoThird_ArticleCode",
+						"type": "varchar"
+					},
+					{
+						"name": "TwoThird_Counterpartyaccountnumber",
+						"type": "varchar"
+					},
+					{
+						"name": "TwoThird_Nameofcounterparty",
+						"type": "varchar"
+					},
+					{
+						"name": "TwoThird_SuiteCode",
+						"type": "varchar"
+					},
+					{
+						"name": "ThirdOne_RegistrationID",
+						"type": "varchar"
+					},
+					{
+						"name": "ThirdOne_ArticleCode",
+						"type": "varchar"
+					},
+					{
+						"name": "ThirdOne_CommunicationCode",
+						"type": "varchar"
+					},
+					{
+						"name": "ThirdOne_MoreCode",
+						"type": "varchar"
+					},
+					{
+						"name": "ThirdTwo_RegistrationID",
+						"type": "varchar"
+					},
+					{
+						"name": "ThirdTwo_Sequencenumber",
+						"type": "varchar"
+					},
+					{
+						"name": "ThirdTwo_ArticleCode",
+						"type": "varchar"
+					},
+					{
+						"name": "ThirdTwo_Communication",
+						"type": "varchar"
+					},
+					{
+						"name": "Zero_RecordIdentification",
+						"type": "varchar"
+					},
+					{
+						"name": "Zero_CreationDate",
+						"type": "date"
+					},
+					{
+						"name": "Zero_BankIdentificationNumber",
+						"type": "varchar"
+					},
+					{
+						"name": "Zero_ApplicationCode",
+						"type": "varchar"
+					},
+					{
+						"name": "Zero_BIC",
+						"type": "varchar"
+					},
+					{
+						"name": "Zero_IdentificationNumberofBelgium",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "CODAIntegration"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/AzureSqlTable_CODA_1')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -792,6 +1002,24 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/DynamicsCrm_TecDev_CODA')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "DynamicsCrm_TECDev",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DynamicsCrmEntity",
+				"schema": [],
+				"typeProperties": {
+					"entityName": "bd_coda"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/GTFSAgency')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -992,114 +1220,6 @@
 					"schema": "dbo",
 					"table": "GTFS"
 				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/GTFScalendar')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "ADLSGen2",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"fileName": "calendar.txt",
-						"folderPath": "GTFS",
-						"fileSystem": "poc-tec"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"name": "service_id",
-						"type": "String"
-					},
-					{
-						"name": "monday",
-						"type": "String"
-					},
-					{
-						"name": "tuesday",
-						"type": "String"
-					},
-					{
-						"name": "wednesday",
-						"type": "String"
-					},
-					{
-						"name": "thursday",
-						"type": "String"
-					},
-					{
-						"name": "friday",
-						"type": "String"
-					},
-					{
-						"name": "saturday",
-						"type": "String"
-					},
-					{
-						"name": "sunday",
-						"type": "String"
-					},
-					{
-						"name": "start_date",
-						"type": "String"
-					},
-					{
-						"name": "end_date",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/GTFScalendar_dates')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "ADLSGen2",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"fileName": "calendar_dates.txt",
-						"folderPath": "GTFS",
-						"fileSystem": "poc-tec"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"name": "service_id",
-						"type": "String"
-					},
-					{
-						"name": "date",
-						"type": "String"
-					},
-					{
-						"name": "exception_type",
-						"type": "String"
-					}
-				]
 			},
 			"dependsOn": []
 		}

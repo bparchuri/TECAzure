@@ -101,6 +101,10 @@
 			"type": "string",
 			"defaultValue": "2291afd2-1191-4bcb-9906-c1406010941b"
 		},
+		"DynamicsCrm_TECDev_properties_typeProperties_username": {
+			"type": "string",
+			"defaultValue": "Bhargav.Parchuri@letec.be"
+		},
 		"SQLPocTec_properties_typeProperties_connectionString_secretName": {
 			"type": "string",
 			"defaultValue": "SQL19"
@@ -140,10 +144,6 @@
 		"linkedservice_ADLSGen2_properties_typeProperties_servicePrincipalId": {
 			"type": "string",
 			"defaultValue": "b74b5688-5ee7-4c50-8364-ddd607f525ac"
-		},
-		"DynamicsCrm_TECDev_properties_typeProperties_username": {
-			"type": "string",
-			"defaultValue": "Bhargav.Parchuri@letec.be"
 		}
 	},
 	"variables": {
@@ -474,6 +474,33 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/DynamicsCrm_TECDev')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "DynamicsCrm",
+				"typeProperties": {
+					"deploymentType": "Online",
+					"serviceUri": "https://tec-crm-dev.crm4.dynamics.com",
+					"authenticationType": "Office365",
+					"username": "[parameters('DynamicsCrm_TECDev_properties_typeProperties_username')]",
+					"password": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "AzureKeyVault_Dev",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "tec-dev-dynamicscrmpwd",
+						"secretVersion": "7be7b0e7ab794f39b7be5079c1c0314a"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureKeyVault_Dev')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/SQLPocTec')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -581,33 +608,6 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/keyvault_TEC')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/DynamicsCrm_TECDev')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "DynamicsCrm",
-				"typeProperties": {
-					"deploymentType": "Online",
-					"serviceUri": "https://tec-crm-dev.crm4.dynamics.com",
-					"authenticationType": "Office365",
-					"username": "[parameters('DynamicsCrm_TECDev_properties_typeProperties_username')]",
-					"password": {
-						"type": "AzureKeyVaultSecret",
-						"store": {
-							"referenceName": "AzureKeyVault_Dev",
-							"type": "LinkedServiceReference"
-						},
-						"secretName": "tec-dev-dynamicscrmpwd",
-						"secretVersion": "7be7b0e7ab794f39b7be5079c1c0314a"
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureKeyVault_Dev')]"
 			]
 		}
 	]

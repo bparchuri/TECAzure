@@ -13,6 +13,83 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/SQLTECData')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SQLPocTec",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "FaultId",
+						"type": "varchar"
+					},
+					{
+						"name": "FaultCustomerName",
+						"type": "varchar"
+					},
+					{
+						"name": "FaultDesc",
+						"type": "varchar"
+					},
+					{
+						"name": "Date",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "TECData"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SQLValidations')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SQLPocTec",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "FaultId",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "FaultDesc",
+						"type": "varchar"
+					},
+					{
+						"name": "FaultCustomerNumber",
+						"type": "varchar"
+					},
+					{
+						"name": "Date",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Validations"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/SQLcalendar')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -458,191 +535,6 @@
 				"schema": [],
 				"typeProperties": {
 					"entityName": "tec_eis779atlas"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureSqlTable_CODAEntity')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase_PCRM",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "Zero_RecordIdentification",
-						"type": "varchar"
-					},
-					{
-						"name": "Zero_CreationDate",
-						"type": "date"
-					},
-					{
-						"name": "Zero_BankIdentificationNumber",
-						"type": "varchar"
-					},
-					{
-						"name": "Zero_ApplicationCode",
-						"type": "varchar"
-					},
-					{
-						"name": "Zero_Duplicate",
-						"type": "varchar"
-					},
-					{
-						"name": "Zero_FileReference",
-						"type": "varchar"
-					},
-					{
-						"name": "Zero_NameAddressee",
-						"type": "varchar"
-					},
-					{
-						"name": "Zero_BIC",
-						"type": "varchar"
-					},
-					{
-						"name": "Zero_IdentificationNumberofBelgium",
-						"type": "varchar"
-					},
-					{
-						"name": "Zero_CodeSeperateApplication",
-						"type": "varchar"
-					},
-					{
-						"name": "Zero_TransactionReferrence",
-						"type": "varchar"
-					},
-					{
-						"name": "Zero_RelatedReferrence",
-						"type": "varchar"
-					},
-					{
-						"name": "One_RegistrationId",
-						"type": "varchar"
-					},
-					{
-						"name": "One_BankAccountType",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "One_Sequencenumberofpaperaccount",
-						"type": "varchar"
-					},
-					{
-						"name": "One_Accountnumber",
-						"type": "varchar"
-					},
-					{
-						"name": "One_Oldbalance",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "One_Oldpay",
-						"type": "decimal",
-						"precision": 15,
-						"scale": 3
-					},
-					{
-						"name": "One_Dateofoldbalance",
-						"type": "date"
-					},
-					{
-						"name": "One_Accountholdername",
-						"type": "varchar"
-					},
-					{
-						"name": "One_Accounttagged",
-						"type": "varchar"
-					},
-					{
-						"name": "One_Sequencenumberofthecodified",
-						"type": "varchar"
-					},
-					{
-						"name": "Four_RegistrationID",
-						"type": "varchar"
-					},
-					{
-						"name": "Four_Textofthefreemessage",
-						"type": "varchar"
-					},
-					{
-						"name": "Eight_RegistrationId",
-						"type": "varchar"
-					},
-					{
-						"name": "Eight_Sequencenumber",
-						"type": "varchar"
-					},
-					{
-						"name": "Eight_Accountnumber",
-						"type": "varchar"
-					},
-					{
-						"name": "Eight_SignCode",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Eight_NewBalance",
-						"type": "decimal",
-						"precision": 15,
-						"scale": 3
-					},
-					{
-						"name": "Eight_Dateofnewbalance",
-						"type": "date"
-					},
-					{
-						"name": "Nine_RegistrationId",
-						"type": "varchar"
-					},
-					{
-						"name": "Nine_Numberofrecords",
-						"type": "varchar"
-					},
-					{
-						"name": "Nine_DebitRevenue",
-						"type": "decimal",
-						"precision": 15,
-						"scale": 3
-					},
-					{
-						"name": "Nine_CreditSales",
-						"type": "decimal",
-						"precision": 15,
-						"scale": 3
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "CODAIntegration"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/DynamicsCrm_TecDev_CODA')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "DynamicsCrm_TECDev",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DynamicsCrmEntity",
-				"schema": [],
-				"typeProperties": {
-					"entityName": "bd_coda"
 				}
 			},
 			"dependsOn": []
@@ -1267,7 +1159,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "AzureSqlSource",
-								"sqlReaderQuery": "select\nNEWID() AS GUID,\nZero.RecordIdentification AS Zero_RecordIdentification,\nZero.CreationDate AS Zero_CreationDate,\nZero.BankIdentificationNumber AS Zero_BankIdentificationNumber,\nZero.ApplicationCode AS Zero_ApplicationCode,\nZero.Duplicate AS Zero_Duplicate,\nZero.FileReference AS Zero_FileReference,\nZero.NameAddressee AS Zero_NameAddressee,\nZero.BIC AS Zero_BIC,\nZero.IdentificationNumberofBelgium AS Zero_IdentificationNumberofBelgium,\nZero.CodeSeperateApplication AS Zero_CodeSeperateApplication,\nZero.TransactionReferrence AS Zero_TransactionReferrence,\nZero.RelatedReferrence AS Zero_RelatedReferrence,\nOne.RegistrationID AS One_RegistrationId,\ncase One.BankAccountType\n     when '0' then 899240000\n     when '1' then 899240001\n     when '2' then 899240002\n     when '3' then 899240003\n     end AS One_BankAccountType,\nOne.Sequencenumberofpaperaccount AS One_Sequencenumberofpaperaccount,\nOne.Accountnumber AS One_Accountnumber,\ncase One.Oldbalance\n     when '0' then 899240000\n     when '1' then 899240001\n     end AS One_Oldbalance,\nOne.Oldpay AS One_Oldpay,\nOne.Dateofoldbalance AS One_Dateofoldbalance,\nOne.Accountholdername AS One_Accountholdername,\nOne.Accounttagged AS One_Accounttagged,\nOne.Sequencenumberofthecodified AS One_Sequencenumberofthecodified,\nFour.RegistrationID AS Four_RegistrationID,\nFour.Textofthefreemessage AS Four_Textofthefreemessage,\nEight.RegistrationID AS Eight_RegistrationId,\nEight.Sequencenumber AS Eight_Sequencenumber,\nEight.Accountnumber AS Eight_Accountnumber,\ncase Eight.SignCode\n     when '0' then 899240000\n     when '1' then 899240001\n     end AS Eight_SignCode,\nEight.NewBalance AS Eight_NewBalance ,\nEight.Dateofnewbalance AS Eight_Dateofnewbalance,\nNine.RegistrationID AS Nine_RegistrationId,\nNine.Numberofrecords AS Nine_Numberofrecords,\nNine.DebitRevenue AS Nine_DebitRevenue,\nNine.CreditSales AS Nine_CreditSales\nfrom [dbo].[COD-21] TwoOne\nleft join [dbo].[COD-22] TwoTwo on TwoOne.[Sequencenumber] = TwoTwo.[Sequencenumber]\nleft join [dbo].[COD-23] TwoThree on TwoOne.[Sequencenumber] = TwoThree.[Sequencenumber]\nleft join [dbo].[COD-31] ThreeOne on TwoOne.[Sequencenumber] = ThreeOne.[Sequencenumber]\nleft join [dbo].[COD-32] ThreeTwo on TwoOne.[Sequencenumber] = ThreeTwo.[Sequencenumber]\nleft join [dbo].[COD-33] ThreeThree on TwoOne.[Sequencenumber] = ThreeThree.[Sequencenumber]\nleft join [dbo].[COD-0] Zero on 1=1 and TwoOne.[Sequencenumber] = '0001'\nleft join [dbo].[COD-1] One on 1=1 and TwoOne.[Sequencenumber] = '0001' \nleft join [dbo].[COD-4] Four on 1=1 and TwoOne.[Sequencenumber] = '0001' \nleft join [dbo].[COD-8] Eight on 1=1 and TwoOne.[Sequencenumber] = '0001'\nleft join [dbo].[COD-9] Nine on 1=1 and TwoOne.[Sequencenumber] = '0001' ",
+								"sqlReaderQuery": "select\nNEWID() AS GUID,\nZero.RecordIdentification AS Zero_RecordIdentification,\nZero.CreationDate AS Zero_CreationDate,\nZero.BankIdentificationNumber AS Zero_BankIdentificationNumber,\nZero.ApplicationCode AS Zero_ApplicationCode,\nZero.Duplicate AS Zero_Duplicate,\nZero.FileReference AS Zero_FileReference,\nZero.NameAddressee AS Zero_NameAddressee,\nZero.BIC AS Zero_BIC,\nZero.IdentificationNumberofBelgium AS Zero_IdentificationNumberofBelgium,\nZero.CodeSeperateApplication AS Zero_CodeSeperateApplication,\nZero.TransactionReferrence AS Zero_TransactionReferrence,\nZero.RelatedReferrence AS Zero_RelatedReferrence,\nOne.RegistrationID AS One_RegistrationId,\ncase One.BankAccountType\n     when '0' then 899240000\n     when '1' then 899240001\n     when '2' then 899240002\n     when '3' then 899240003\n     end AS One_BankAccountType,\nOne.Sequencenumberofpaperaccount AS One_Sequencenumberofpaperaccount,\nOne.Accountnumber AS One_Accountnumber,\ncase One.Oldbalance\n     when '0' then 899240000\n     when '1' then 899240001\n     end AS One_Oldbalance,\nOne.Oldpay AS One_Oldpay,\nOne.Dateofoldbalance AS One_Dateofoldbalance,\nOne.Accountholdername AS One_Accountholdername,\nOne.Accounttagged AS One_Accounttagged,\nOne.Sequencenumberofthecodified AS One_Sequencenumberofthecodified,\nFour.RegistrationID AS Four_RegistrationID,\nFour.Textofthefreemessage AS Four_Textofthefreemessage,\nEight.RegistrationID AS Eight_RegistrationId,\nEight.Sequencenumber AS Eight_Sequencenumber,\nEight.Accountnumber AS Eight_Accountnumber,\ncase Eight.SignCode\n     when '0' then 899240000\n     when '1' then 899240001\n     end AS Eight_SignCode,\nEight.NewBalance AS Eight_NewBalance ,\nEight.Dateofnewbalance AS Eight_Dateofnewbalance,\nNine.RegistrationID AS Nine_RegistrationId,\nNine.Numberofrecords AS Nine_Numberofrecords,\nNine.DebitRevenue AS Nine_DebitRevenue,\nNine.CreditSales AS Nine_CreditSales\nfrom [dbo].[COD-0] Zero\nleft join [dbo].[COD-1] One on 1=1 \nleft join [dbo].[COD-4] Four on 1=1 \nleft join [dbo].[COD-8] Eight on 1=1 \nleft join [dbo].[COD-9] Nine on 1=1 ",
 								"queryTimeout": "02:00:00"
 							},
 							"sink": {
@@ -2074,10 +1966,7 @@
 				],
 				"annotations": []
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/AzureSqlTable_CODAEntity')]",
-				"[concat(variables('factoryId'), '/datasets/DynamicsCrm_TecDev_CODA')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/SQLtoGTFS')]",
@@ -3173,7 +3062,10 @@
 				],
 				"annotations": []
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/SQLValidations')]",
+				"[concat(variables('factoryId'), '/datasets/SQLTECData')]"
+			]
 		}
 	]
 }

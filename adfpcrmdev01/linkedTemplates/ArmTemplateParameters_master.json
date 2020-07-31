@@ -56,6 +56,9 @@
 		"AzureSqlDatabase_PCRM_properties_typeProperties_tenant": {
 			"value": "2291afd2-1191-4bcb-9906-c1406010941b"
 		},
+		"DynamicsCrm_TECDev_properties_typeProperties_username": {
+			"value": "Bhargav.Parchuri@letec.be"
+		},
 		"HttpServer1_properties_typeProperties_url": {
 			"value": "http://opendata.tec-wl.be/Current%20GTFS/TEC-GTFS.zip"
 		},
@@ -106,9 +109,6 @@
 		},
 		"integrationRuntime1_properties_typeProperties_ssisProperties_customSetupScriptProperties_sasToken": {
 			"value": ""
-		},
-		"DynamicsCrm_TECDev_properties_typeProperties_username": {
-			"value": "Bhargav.Parchuri@letec.be"
 		},
 		"containerUri": {
 			"value": ""
