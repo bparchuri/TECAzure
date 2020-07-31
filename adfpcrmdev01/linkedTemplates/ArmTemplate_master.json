@@ -141,6 +141,10 @@
 		"integrationRuntime1_properties_typeProperties_ssisProperties_customSetupScriptProperties_sasToken": {
 			"type": "secureString"
 		},
+		"DynamicsCrm_TECDev_properties_typeProperties_username": {
+			"type": "string",
+			"defaultValue": "Bhargav.Parchuri@letec.be"
+		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -269,6 +273,9 @@
 					},
 					"linkedservice_ADLSGen2_properties_typeProperties_servicePrincipalId": {
 						"value": "[parameters('linkedservice_ADLSGen2_properties_typeProperties_servicePrincipalId')]"
+					},
+					"DynamicsCrm_TECDev_properties_typeProperties_username": {
+						"value": "[parameters('DynamicsCrm_TECDev_properties_typeProperties_username')]"
 					}
 				}
 			},

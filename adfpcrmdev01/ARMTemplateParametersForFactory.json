@@ -106,6 +106,9 @@
 		},
 		"integrationRuntime1_properties_typeProperties_ssisProperties_customSetupScriptProperties_sasToken": {
 			"value": ""
+		},
+		"DynamicsCrm_TECDev_properties_typeProperties_username": {
+			"value": "Bhargav.Parchuri@letec.be"
 		}
 	}
 }

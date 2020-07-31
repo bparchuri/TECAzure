@@ -140,6 +140,10 @@
 		"linkedservice_ADLSGen2_properties_typeProperties_servicePrincipalId": {
 			"type": "string",
 			"defaultValue": "b74b5688-5ee7-4c50-8364-ddd607f525ac"
+		},
+		"DynamicsCrm_TECDev_properties_typeProperties_username": {
+			"type": "string",
+			"defaultValue": "Bhargav.Parchuri@letec.be"
 		}
 	},
 	"variables": {
@@ -580,35 +584,30 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/ADLSGen2CSV')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
+			"name": "[concat(parameters('factoryName'), '/DynamicsCrm_TECDev')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"linkedServiceName": {
-					"referenceName": "ADLSGen2",
-					"type": "LinkedServiceReference"
-				},
 				"annotations": [],
-				"type": "DelimitedText",
+				"type": "DynamicsCrm",
 				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"fileName": "004_REC_20200319_00001_04.csv",
-						"folderPath": "7Zfiles",
-						"fileSystem": "poc-tec"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"type": "String"
+					"deploymentType": "Online",
+					"serviceUri": "https://tec-crm-dev.crm4.dynamics.com",
+					"authenticationType": "Office365",
+					"username": "[parameters('DynamicsCrm_TECDev_properties_typeProperties_username')]",
+					"password": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "AzureKeyVault_Dev",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "tec-dev-dynamicscrmpwd",
+						"secretVersion": "7be7b0e7ab794f39b7be5079c1c0314a"
 					}
-				]
+				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/ADLSGen2')]"
+				"[concat(variables('factoryId'), '/linkedServices/AzureKeyVault_Dev')]"
 			]
 		}
 	]
