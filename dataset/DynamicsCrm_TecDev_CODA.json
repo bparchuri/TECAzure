@@ -7,6 +7,9 @@
 		},
 		"annotations": [],
 		"type": "DynamicsCrmEntity",
-		"schema": []
+		"schema": [],
+		"typeProperties": {
+			"entityName": "bd_coda"
+		}
 	}
 }
