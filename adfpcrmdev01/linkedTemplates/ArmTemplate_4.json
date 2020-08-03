@@ -13,6 +13,81 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/SQLSegment5')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SQLPocTec",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Code_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Poste_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_transaction",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_paiement",
+						"type": "nchar"
+					},
+					{
+						"name": "TransactionReference",
+						"type": "varchar"
+					},
+					{
+						"name": "TransactionDateTime",
+						"type": "varchar"
+					},
+					{
+						"name": "Sens_paiement",
+						"type": "varchar"
+					},
+					{
+						"name": "StatementReference",
+						"type": "varchar"
+					},
+					{
+						"name": "PaymentMeanBrand",
+						"type": "varchar"
+					},
+					{
+						"name": "ValueDate",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Amount",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "AuthorizationId",
+						"type": "varchar"
+					},
+					{
+						"name": "MerchantId",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EIS779_SEGMENT_005"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/SQLTEC')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -1673,6 +1748,350 @@
 								"parameters": {}
 							}
 						]
+					},
+					{
+						"name": "Copy Payment To CRM",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "AzureSqlSource",
+								"queryTimeout": "02:00:00"
+							},
+							"sink": {
+								"type": "DynamicsCrmSink",
+								"writeBatchSize": 10,
+								"writeBehavior": "upsert"
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "GUID",
+											"type": "Guid"
+										},
+										"sink": {
+											"name": "bd_paymentid",
+											"type": "Guid"
+										}
+									},
+									{
+										"source": {
+											"name": "CODA_Guid",
+											"type": "Guid"
+										},
+										"sink": {
+											"name": "bd_paymentreferenceid",
+											"type": "Guid"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoOne_Sequencenumber",
+											"type": "String"
+										},
+										"sink": {
+											"name": "bd_sequence_number",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoOne_Retailnumber",
+											"type": "String"
+										},
+										"sink": {
+											"name": "bd_detail_number",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoOne_bankreferencenumber",
+											"type": "String"
+										},
+										"sink": {
+											"name": "bd_bank_reference_number",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoOne_Movementsign",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "bd_movement_sign",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoOne_Amount",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "bd_amount",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoOne_Valuedate",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "bd_movement_value_date",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoOne_OperationCode",
+											"type": "String"
+										},
+										"sink": {
+											"name": "bd_transaction_code",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoOne_communicationtype",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "bd_communication_type",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoOne_Communicationzone",
+											"type": "String"
+										},
+										"sink": {
+											"name": "bd_communication_zone",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoOne_Accountdate",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "bd_entry_date",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoOne_Sequencenumberofpaperaccount",
+											"type": "String"
+										},
+										"sink": {
+											"name": "bd_sequence_number_statement",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoOne_Codeglobalization",
+											"type": "String"
+										},
+										"sink": {
+											"name": "bd_globalisation_code",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoTwo_Communication",
+											"type": "String"
+										},
+										"sink": {
+											"name": "bd_communication",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoTwo_Customerreference",
+											"type": "String"
+										},
+										"sink": {
+											"name": "bd_customer_reference",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoTwo_BIC",
+											"type": "String"
+										},
+										"sink": {
+											"name": "bd_movement_bic",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoTwo_Transactiontype",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "bd_type_of_rtransaction",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoTwo_ISOCode",
+											"type": "String"
+										},
+										"sink": {
+											"name": "bd_iso_reason_return_code",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoTwo_CategoryPurpose",
+											"type": "String"
+										},
+										"sink": {
+											"name": "bd_category_purpose",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoTwo_Purpose",
+											"type": "String"
+										},
+										"sink": {
+											"name": "bd_purpose",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoThree_Counterpartyaccountnumber",
+											"type": "String"
+										},
+										"sink": {
+											"name": "bd_counterpartys_account_number",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoThree_Nameofcounterparty",
+											"type": "String"
+										},
+										"sink": {
+											"name": "bd_counterpartys_name",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoThree_Communication",
+											"type": "String"
+										},
+										"sink": {
+											"name": "bd_communication_ctd",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ThreeOne_AdditionalInformation",
+											"type": "String"
+										},
+										"sink": {
+											"name": "bd_bank_reference_number_info",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ThreeOne_OperationCode",
+											"type": "String"
+										},
+										"sink": {
+											"name": "bd_transaction_code_info",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ThreeOne_CommunicationCode",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "bd_communication_type_info",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ThreeOne_Communication",
+											"type": "String"
+										},
+										"sink": {
+											"name": "bd_communication_zone_info",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ThreeTwo_Communication",
+											"type": "String"
+										},
+										"sink": {
+											"name": "bd_communication_ctd_info",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ThreeThree_Communication",
+											"type": "String"
+										},
+										"sink": {
+											"name": "bd_communication_ctd_info_2",
+											"type": "String"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "AzureSqlTable_PaymentJoin",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DynamicsCrmEntity_Payment",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
 					}
 				],
 				"annotations": []
@@ -2508,623 +2927,6 @@
 				"annotations": []
 			},
 			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/SQLtoGTFS')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "CopyallSQLtablestoGTFS",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "AzureSqlSource",
-								"sqlReaderQuery": "delete from GTFS\nSELECT TOP(10) Agencies.Agency_name,\n      10 AS Agency_id,\n      Agencies.Agency_url,\n      Agencies.Agency_timezone,\n      Agencies.Agency_lang,\n      Agencies.Agency_phone,\n\t  Route.Route_id,\n\t  Route.Route_short_name,\n\t  Route.Route_long_name,\n\t  Route.Route_desc,\n\t  10 AS Route_type,\n\t  Route.Route_url,\n\t  trip.Trip_id,\n\t  CONVERT(int, trip.Trip_short_name) AS Trip_short_name,\n\t  10 AS Direction_id,\n\t  trip.Block_id,\n\t  Cal.Service_id,\t  \n          case when Cal.Monday = '0' \n            then 0 \n            else 1 \n          end as Monday,   \n\t\t  case when Cal.Tuesday = '0' \n            then 0 \n            else 1 \n          end as Tuesday, \n\t\t  case when Cal.Wednesday = '0' \n            then 0 \n            else 1 \n          end as Wednesday, \n\t\t  case when Cal.Thursday = '0' \n            then 0 \n            else 1 \n          end as Thursday, \n\t\t case when Cal.Friday = '0' \n            then 0 \n            else 1 \n          end as Friday, \n\t\t  case when Cal.Saturday = '0' \n            then 0 \n            else 1 \n          end as Saturday, \n\t\t case when Cal.Sunday = '0' \n            then 0 \n            else 1 \n          end as Sunday, \n\t  Cal.Start_date,\n\t  Cal.End_date,\n\t  CalDate.Date,\n\t  10 AS Exception_type,\n\t  Shape.shape_id,\n\t  CONVERT(DOUBLE PRECISION, Shape.shape_pt_lat) AS shape_pt_lat,\n\t  CONVERT(DOUBLE PRECISION, Shape.shape_pt_lon) AS shape_pt_lon,\n\t  CONVERT(int, Shape.shape_pt_sequence) AS shape_pt_sequence,\n\t  NEWID() as GuId\n  FROM [Routes] Route\n  LEFT JOIN [Agency] Agencies\n    ON Route.Agency_id = Agencies.Agency_id\t\n\tJOIN [Trips] trip\n    ON Route.Route_id = trip.Route_id\n\tJOIN [CalendarUpdate] Cal\n    ON Cal.Service_id=trip.Service_id\n\tJOIN [calendar_dates_update] CalDate\n\t ON Cal.Service_id=CalDate.Service_id\n\tJOIN [Shapes] Shape\n    ON Shape.shape_id = trip.Shape_id\n  ORDER by Agencies.Agency_id",
-								"queryTimeout": "02:00:00"
-							},
-							"sink": {
-								"type": "AzureSqlSink"
-							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"name": "GuId",
-											"type": "Guid"
-										},
-										"sink": {
-											"name": "Guid",
-											"type": "Guid"
-										}
-									},
-									{
-										"source": {
-											"name": "Agency_id",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "Agency_id",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "Agency_name",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Agency_name",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Agency_timezone",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Agency_timezone",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Agency_lang",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Agency_lang",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Agency_phone",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Agency_phone",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Route_id",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Route_id",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Route_short_name",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Route_short_name",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Route_long_name",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Route_long_name",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Route_desc",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Route_desc",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Route_type",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "Route_type",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "Route_url",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Route_url",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Trip_id",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Trip_id",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Trip_short_name",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "Trip_short_name",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "Direction_id",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "Direction_id",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "Block_id",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Block_id",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Service_id",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Service_id",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Monday",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "Monday",
-											"type": "Boolean"
-										}
-									},
-									{
-										"source": {
-											"name": "Tuesday",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "Tuesday",
-											"type": "Boolean"
-										}
-									},
-									{
-										"source": {
-											"name": "Wednesday",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "Wednesday",
-											"type": "Boolean"
-										}
-									},
-									{
-										"source": {
-											"name": "Thursday",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "Thursday",
-											"type": "Boolean"
-										}
-									},
-									{
-										"source": {
-											"name": "Friday",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "Friday",
-											"type": "Boolean"
-										}
-									},
-									{
-										"source": {
-											"name": "Saturday",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "Saturday",
-											"type": "Boolean"
-										}
-									},
-									{
-										"source": {
-											"name": "Sunday",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "Sunday",
-											"type": "Boolean"
-										}
-									},
-									{
-										"source": {
-											"name": "Start_date",
-											"type": "DateTime"
-										},
-										"sink": {
-											"name": "Start_date",
-											"type": "DateTime"
-										}
-									},
-									{
-										"source": {
-											"name": "End_date",
-											"type": "DateTime"
-										},
-										"sink": {
-											"name": "End_date",
-											"type": "DateTime"
-										}
-									},
-									{
-										"source": {
-											"name": "Date",
-											"type": "DateTime"
-										},
-										"sink": {
-											"name": "Date",
-											"type": "DateTime"
-										}
-									},
-									{
-										"source": {
-											"name": "Exception_type",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "Exception_type",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "shape_id",
-											"type": "String"
-										},
-										"sink": {
-											"name": "shape_id",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "shape_pt_lat",
-											"type": "Double"
-										},
-										"sink": {
-											"name": "shape_pt_lat",
-											"type": "Double"
-										}
-									},
-									{
-										"source": {
-											"name": "shape_pt_lon",
-											"type": "Double"
-										},
-										"sink": {
-											"name": "shape_pt_lon",
-											"type": "Double"
-										}
-									},
-									{
-										"source": {
-											"name": "shape_pt_sequence",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "shape_pt_sequence",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "Agency_url",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Agency_url",
-											"type": "String"
-										}
-									}
-								]
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "SQLGTFSTableConnection",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "GTFSSQLSink",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					},
-					{
-						"name": "Copy data from SQL to CRM",
-						"type": "Copy",
-						"dependsOn": [
-							{
-								"activity": "CopyallSQLtablestoGTFS",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "AzureSqlSource",
-								"queryTimeout": "02:00:00"
-							},
-							"sink": {
-								"type": "DynamicsCrmSink",
-								"writeBatchSize": 10,
-								"writeBehavior": "upsert"
-							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"name": "Guid",
-											"type": "Guid"
-										},
-										"sink": {
-											"name": "bd_lignesid",
-											"type": "Guid"
-										}
-									},
-									{
-										"source": {
-											"name": "Agency_id",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "bd_agency_id",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "Agency_name",
-											"type": "String"
-										},
-										"sink": {
-											"name": "bd_agency_name",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Agency_phone",
-											"type": "String"
-										},
-										"sink": {
-											"name": "bd_agency_phone",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Agency_url",
-											"type": "String"
-										},
-										"sink": {
-											"name": "bd_agency_url",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Route_id",
-											"type": "String"
-										},
-										"sink": {
-											"name": "bd_route_id",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Route_type",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "bd_route_type",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "Route_url",
-											"type": "String"
-										},
-										"sink": {
-											"name": "bd_route_url",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Service_id",
-											"type": "String"
-										},
-										"sink": {
-											"name": "bd_services_id",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Thursday",
-											"type": "Boolean"
-										},
-										"sink": {
-											"name": "bd_thursday",
-											"type": "Boolean"
-										}
-									},
-									{
-										"source": {
-											"name": "Friday",
-											"type": "Boolean"
-										},
-										"sink": {
-											"name": "bd_friday",
-											"type": "Boolean"
-										}
-									},
-									{
-										"source": {
-											"name": "Saturday",
-											"type": "Boolean"
-										},
-										"sink": {
-											"name": "bd_saturday",
-											"type": "Boolean"
-										}
-									},
-									{
-										"source": {
-											"name": "Sunday",
-											"type": "Boolean"
-										},
-										"sink": {
-											"name": "bd_sunday",
-											"type": "Boolean"
-										}
-									},
-									{
-										"source": {
-											"name": "Start_date",
-											"type": "DateTime"
-										},
-										"sink": {
-											"name": "bd_start_date",
-											"type": "DateTime"
-										}
-									},
-									{
-										"source": {
-											"name": "End_date",
-											"type": "DateTime"
-										},
-										"sink": {
-											"name": "bd_end_date",
-											"type": "DateTime"
-										}
-									},
-									{
-										"source": {
-											"name": "Exception_type",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "bd_exception_type",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "shape_id",
-											"type": "String"
-										},
-										"sink": {
-											"name": "bd_shape_id",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Direction_id",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "bd_direction_id",
-											"type": "Int32"
-										}
-									}
-								]
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "GTFSSQLSink",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "TECDevCRM",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					}
-				],
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/TECDevCRM')]"
-			]
 		}
 	]
 }

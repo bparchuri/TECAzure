@@ -1829,13 +1829,358 @@
 								"parameters": {}
 							}
 						]
+					},
+					{
+						"name": "Copy Payment To CRM",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "AzureSqlSource",
+								"queryTimeout": "02:00:00"
+							},
+							"sink": {
+								"type": "DynamicsCrmSink",
+								"writeBatchSize": 10,
+								"writeBehavior": "upsert"
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "GUID",
+											"type": "Guid"
+										},
+										"sink": {
+											"name": "bd_paymentid",
+											"type": "Guid"
+										}
+									},
+									{
+										"source": {
+											"name": "CODA_Guid",
+											"type": "Guid"
+										},
+										"sink": {
+											"name": "bd_paymentreferenceid",
+											"type": "Guid"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoOne_Sequencenumber",
+											"type": "String"
+										},
+										"sink": {
+											"name": "bd_sequence_number",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoOne_Retailnumber",
+											"type": "String"
+										},
+										"sink": {
+											"name": "bd_detail_number",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoOne_bankreferencenumber",
+											"type": "String"
+										},
+										"sink": {
+											"name": "bd_bank_reference_number",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoOne_Movementsign",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "bd_movement_sign",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoOne_Amount",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "bd_amount",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoOne_Valuedate",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "bd_movement_value_date",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoOne_OperationCode",
+											"type": "String"
+										},
+										"sink": {
+											"name": "bd_transaction_code",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoOne_communicationtype",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "bd_communication_type",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoOne_Communicationzone",
+											"type": "String"
+										},
+										"sink": {
+											"name": "bd_communication_zone",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoOne_Accountdate",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "bd_entry_date",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoOne_Sequencenumberofpaperaccount",
+											"type": "String"
+										},
+										"sink": {
+											"name": "bd_sequence_number_statement",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoOne_Codeglobalization",
+											"type": "String"
+										},
+										"sink": {
+											"name": "bd_globalisation_code",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoTwo_Communication",
+											"type": "String"
+										},
+										"sink": {
+											"name": "bd_communication",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoTwo_Customerreference",
+											"type": "String"
+										},
+										"sink": {
+											"name": "bd_customer_reference",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoTwo_BIC",
+											"type": "String"
+										},
+										"sink": {
+											"name": "bd_movement_bic",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoTwo_Transactiontype",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "bd_type_of_rtransaction",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoTwo_ISOCode",
+											"type": "String"
+										},
+										"sink": {
+											"name": "bd_iso_reason_return_code",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoTwo_CategoryPurpose",
+											"type": "String"
+										},
+										"sink": {
+											"name": "bd_category_purpose",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoTwo_Purpose",
+											"type": "String"
+										},
+										"sink": {
+											"name": "bd_purpose",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoThree_Counterpartyaccountnumber",
+											"type": "String"
+										},
+										"sink": {
+											"name": "bd_counterpartys_account_number",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoThree_Nameofcounterparty",
+											"type": "String"
+										},
+										"sink": {
+											"name": "bd_counterpartys_name",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoThree_Communication",
+											"type": "String"
+										},
+										"sink": {
+											"name": "bd_communication_ctd",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ThreeOne_AdditionalInformation",
+											"type": "String"
+										},
+										"sink": {
+											"name": "bd_bank_reference_number_info",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ThreeOne_OperationCode",
+											"type": "String"
+										},
+										"sink": {
+											"name": "bd_transaction_code_info",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ThreeOne_CommunicationCode",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "bd_communication_type_info",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "ThreeOne_Communication",
+											"type": "String"
+										},
+										"sink": {
+											"name": "bd_communication_zone_info",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ThreeTwo_Communication",
+											"type": "String"
+										},
+										"sink": {
+											"name": "bd_communication_ctd_info",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ThreeThree_Communication",
+											"type": "String"
+										},
+										"sink": {
+											"name": "bd_communication_ctd_info_2",
+											"type": "String"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "AzureSqlTable_PaymentJoin",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DynamicsCrmEntity_Payment",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
 					}
 				],
 				"annotations": []
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/AzureSqlTable_CODAIntegration')]",
-				"[concat(variables('factoryId'), '/datasets/AzureSqlTable_PaymentJoin')]"
+				"[concat(variables('factoryId'), '/datasets/AzureSqlTable_PaymentJoin')]",
+				"[concat(variables('factoryId'), '/datasets/DynamicsCrmEntity_Payment')]"
 			]
 		},
 		{
@@ -7930,6 +8275,26 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/linkedService_ADLS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DynamicsCrmEntity_Payment')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "DynamicsCrm_TECDev",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DynamicsCrmEntity",
+				"schema": [],
+				"typeProperties": {
+					"entityName": "bd_payment"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/DynamicsCrm_TECDev')]"
 			]
 		},
 		{

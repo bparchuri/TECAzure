@@ -1176,6 +1176,24 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/DynamicsCrmEntity_Payment')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "DynamicsCrm_TECDev",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DynamicsCrmEntity",
+				"schema": [],
+				"typeProperties": {
+					"entityName": "bd_payment"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/DynamicsCrm_TecDev_CODA')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -1190,58 +1208,6 @@
 				"typeProperties": {
 					"entityName": "bd_coda"
 				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/GTFSAgency')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "ADLSGen2",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"fileName": "agency.txt",
-						"folderPath": "GTFS",
-						"fileSystem": "poc-tec"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"name": "agency_id",
-						"type": "String"
-					},
-					{
-						"name": "agency_name",
-						"type": "String"
-					},
-					{
-						"name": "agency_url",
-						"type": "String"
-					},
-					{
-						"name": "agency_timezone",
-						"type": "String"
-					},
-					{
-						"name": "agency_lang",
-						"type": "String"
-					},
-					{
-						"name": "agency_phone",
-						"type": "String"
-					}
-				]
 			},
 			"dependsOn": []
 		}
