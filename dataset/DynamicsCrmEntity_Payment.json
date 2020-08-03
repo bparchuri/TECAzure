@@ -1,5 +1,5 @@
 {
-	"name": "DynamicsCrmEntity1",
+	"name": "DynamicsCrmEntity_Payment",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "DynamicsCrm_TECDev",
