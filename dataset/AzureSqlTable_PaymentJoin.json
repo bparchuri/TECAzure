@@ -1,0 +1,171 @@
+{
+	"name": "AzureSqlTable_PaymentJoin",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase_PCRM",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "GUID",
+				"type": "uniqueidentifier"
+			},
+			{
+				"name": "Zero_FileReference",
+				"type": "varchar"
+			},
+			{
+				"name": "CODA_Guid",
+				"type": "uniqueidentifier"
+			},
+			{
+				"name": "TwoOne_RegistrationId",
+				"type": "varchar"
+			},
+			{
+				"name": "TwoOne_Sequencenumber",
+				"type": "varchar"
+			},
+			{
+				"name": "TwoOne_Retailnumber",
+				"type": "varchar"
+			},
+			{
+				"name": "TwoOne_bankreferencenumber",
+				"type": "varchar"
+			},
+			{
+				"name": "TwoOne_Movementsign",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "TwoOne_Amount",
+				"type": "decimal",
+				"precision": 15,
+				"scale": 3
+			},
+			{
+				"name": "TwoOne_Valuedate",
+				"type": "date"
+			},
+			{
+				"name": "TwoOne_OperationCode",
+				"type": "varchar"
+			},
+			{
+				"name": "TwoOne_communicationtype",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "TwoOne_Communicationzone",
+				"type": "varchar"
+			},
+			{
+				"name": "TwoOne_Accountdate",
+				"type": "date"
+			},
+			{
+				"name": "TwoOne_Sequencenumberofpaperaccount",
+				"type": "varchar"
+			},
+			{
+				"name": "TwoOne_Codeglobalization",
+				"type": "varchar"
+			},
+			{
+				"name": "TwoTwo_RegistrationId",
+				"type": "varchar"
+			},
+			{
+				"name": "TwoTwo_Communication",
+				"type": "varchar"
+			},
+			{
+				"name": "TwoTwo_Customerreference",
+				"type": "varchar"
+			},
+			{
+				"name": "TwoTwo_BIC",
+				"type": "varchar"
+			},
+			{
+				"name": "TwoTwo_Transactiontype",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "TwoTwo_ISOCode",
+				"type": "varchar"
+			},
+			{
+				"name": "TwoTwo_CategoryPurpose",
+				"type": "varchar"
+			},
+			{
+				"name": "TwoTwo_Purpose",
+				"type": "varchar"
+			},
+			{
+				"name": "TwoThree_RegistrationId",
+				"type": "varchar"
+			},
+			{
+				"name": "TwoThree_Counterpartyaccountnumber",
+				"type": "varchar"
+			},
+			{
+				"name": "TwoThree_Nameofcounterparty",
+				"type": "varchar"
+			},
+			{
+				"name": "TwoThree_Communication",
+				"type": "varchar"
+			},
+			{
+				"name": "ThreeOne_RegistrationId",
+				"type": "varchar"
+			},
+			{
+				"name": "ThreeOne_AdditionalInformation",
+				"type": "varchar"
+			},
+			{
+				"name": "ThreeOne_OperationCode",
+				"type": "varchar"
+			},
+			{
+				"name": "ThreeOne_CommunicationCode",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ThreeOne_Communication",
+				"type": "varchar"
+			},
+			{
+				"name": "ThreeTwo_RegistrationId",
+				"type": "varchar"
+			},
+			{
+				"name": "ThreeTwo_Communication",
+				"type": "varchar"
+			},
+			{
+				"name": "ThreeThree_RegistrationId",
+				"type": "varchar"
+			},
+			{
+				"name": "ThreeThree_Communication",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "COD-Payment"
+		}
+	}
+}
