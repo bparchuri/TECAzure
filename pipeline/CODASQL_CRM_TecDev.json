@@ -800,6 +800,11 @@
 									"name": "bd_new_balance_sign",
 									"type": "Int32"
 								}
+							},
+							{
+								"source": {
+									"name": "Zero_FileReference"
+								}
 							}
 						]
 					}
