@@ -1,0 +1,15 @@
+{
+	"name": "DynamicsCrmEntity1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DynamicsCrm_TECDev",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DynamicsCrmEntity",
+		"schema": [],
+		"typeProperties": {
+			"entityName": "bd_payment"
+		}
+	}
+}
