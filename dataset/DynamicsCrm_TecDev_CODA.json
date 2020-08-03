@@ -11,5 +11,6 @@
 		"typeProperties": {
 			"entityName": "bd_coda"
 		}
-	}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
 }
