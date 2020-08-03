@@ -530,16 +530,6 @@
 							},
 							{
 								"source": {
-									"name": "Zero_FileReference",
-									"type": "String"
-								},
-								"sink": {
-									"name": "bd_coda_reference",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
 									"name": "CODA_Guid",
 									"type": "Guid"
 								},
