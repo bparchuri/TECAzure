@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy SQL Join to CODA Integration",
+				"name": "Copy SQL Join to Payment Table",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -469,11 +469,11 @@
 				]
 			},
 			{
-				"name": "Copy CODA to CRM",
+				"name": "Copy Payment to CRM",
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "Copy SQL Join to CODA Integration",
+						"activity": "Copy SQL Join to Payment Table",
 						"dependencyConditions": [
 							"Succeeded"
 						]
