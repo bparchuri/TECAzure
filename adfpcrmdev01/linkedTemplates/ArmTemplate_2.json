@@ -853,6 +853,180 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTable_PaymentJoin')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase_PCRM",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "GUID",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "Zero_FileReference",
+						"type": "varchar"
+					},
+					{
+						"name": "CODA_Guid",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "TwoOne_RegistrationId",
+						"type": "varchar"
+					},
+					{
+						"name": "TwoOne_Sequencenumber",
+						"type": "varchar"
+					},
+					{
+						"name": "TwoOne_Retailnumber",
+						"type": "varchar"
+					},
+					{
+						"name": "TwoOne_bankreferencenumber",
+						"type": "varchar"
+					},
+					{
+						"name": "TwoOne_Movementsign",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "TwoOne_Amount",
+						"type": "decimal",
+						"precision": 15,
+						"scale": 3
+					},
+					{
+						"name": "TwoOne_Valuedate",
+						"type": "date"
+					},
+					{
+						"name": "TwoOne_OperationCode",
+						"type": "varchar"
+					},
+					{
+						"name": "TwoOne_communicationtype",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "TwoOne_Communicationzone",
+						"type": "varchar"
+					},
+					{
+						"name": "TwoOne_Accountdate",
+						"type": "date"
+					},
+					{
+						"name": "TwoOne_Sequencenumberofpaperaccount",
+						"type": "varchar"
+					},
+					{
+						"name": "TwoOne_Codeglobalization",
+						"type": "varchar"
+					},
+					{
+						"name": "TwoTwo_RegistrationId",
+						"type": "varchar"
+					},
+					{
+						"name": "TwoTwo_Communication",
+						"type": "varchar"
+					},
+					{
+						"name": "TwoTwo_Customerreference",
+						"type": "varchar"
+					},
+					{
+						"name": "TwoTwo_BIC",
+						"type": "varchar"
+					},
+					{
+						"name": "TwoTwo_Transactiontype",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "TwoTwo_ISOCode",
+						"type": "varchar"
+					},
+					{
+						"name": "TwoTwo_CategoryPurpose",
+						"type": "varchar"
+					},
+					{
+						"name": "TwoTwo_Purpose",
+						"type": "varchar"
+					},
+					{
+						"name": "TwoThree_RegistrationId",
+						"type": "varchar"
+					},
+					{
+						"name": "TwoThree_Counterpartyaccountnumber",
+						"type": "varchar"
+					},
+					{
+						"name": "TwoThree_Nameofcounterparty",
+						"type": "varchar"
+					},
+					{
+						"name": "TwoThree_Communication",
+						"type": "varchar"
+					},
+					{
+						"name": "ThreeOne_RegistrationId",
+						"type": "varchar"
+					},
+					{
+						"name": "ThreeOne_AdditionalInformation",
+						"type": "varchar"
+					},
+					{
+						"name": "ThreeOne_OperationCode",
+						"type": "varchar"
+					},
+					{
+						"name": "ThreeOne_CommunicationCode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ThreeOne_Communication",
+						"type": "varchar"
+					},
+					{
+						"name": "ThreeTwo_RegistrationId",
+						"type": "varchar"
+					},
+					{
+						"name": "ThreeTwo_Communication",
+						"type": "varchar"
+					},
+					{
+						"name": "ThreeThree_RegistrationId",
+						"type": "varchar"
+					},
+					{
+						"name": "ThreeThree_Communication",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "COD-Payment"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/Binary1')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -1068,158 +1242,6 @@
 						"type": "String"
 					}
 				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/GTFSSQLSink')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "SQLPocTec",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "Guid",
-						"type": "uniqueidentifier"
-					},
-					{
-						"name": "Agency_id",
-						"type": "varchar"
-					},
-					{
-						"name": "Agency_name",
-						"type": "varchar"
-					},
-					{
-						"name": "rgency_url",
-						"type": "varchar"
-					},
-					{
-						"name": "Agency_timezone",
-						"type": "varchar"
-					},
-					{
-						"name": "Agency_lang",
-						"type": "varchar"
-					},
-					{
-						"name": "Agency_phone",
-						"type": "varchar"
-					},
-					{
-						"name": "Route_id",
-						"type": "varchar"
-					},
-					{
-						"name": "Route_short_name",
-						"type": "varchar"
-					},
-					{
-						"name": "Route_long_name",
-						"type": "varchar"
-					},
-					{
-						"name": "Route_desc",
-						"type": "varchar"
-					},
-					{
-						"name": "Route_type",
-						"type": "varchar"
-					},
-					{
-						"name": "Route_url",
-						"type": "varchar"
-					},
-					{
-						"name": "Trip_id",
-						"type": "varchar"
-					},
-					{
-						"name": "Trip_short_name",
-						"type": "varchar"
-					},
-					{
-						"name": "Direction_id",
-						"type": "varchar"
-					},
-					{
-						"name": "Block_id",
-						"type": "varchar"
-					},
-					{
-						"name": "Service_id",
-						"type": "varchar"
-					},
-					{
-						"name": "Monday",
-						"type": "varchar"
-					},
-					{
-						"name": "Tuesday",
-						"type": "varchar"
-					},
-					{
-						"name": "Wednesday",
-						"type": "varchar"
-					},
-					{
-						"name": "Thursday",
-						"type": "varchar"
-					},
-					{
-						"name": "Friday",
-						"type": "varchar"
-					},
-					{
-						"name": "Saturday",
-						"type": "varchar"
-					},
-					{
-						"name": "Sunday",
-						"type": "varchar"
-					},
-					{
-						"name": "Start_date",
-						"type": "date"
-					},
-					{
-						"name": "End_date",
-						"type": "date"
-					},
-					{
-						"name": "Date",
-						"type": "date"
-					},
-					{
-						"name": "Exception_type",
-						"type": "varchar"
-					},
-					{
-						"name": "shape_id",
-						"type": "varchar"
-					},
-					{
-						"name": "shape_pt_lat",
-						"type": "varchar"
-					},
-					{
-						"name": "shape_pt_lon",
-						"type": "varchar"
-					},
-					{
-						"name": "shape_pt_sequence",
-						"type": "varchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "GTFS"
-				}
 			},
 			"dependsOn": []
 		}

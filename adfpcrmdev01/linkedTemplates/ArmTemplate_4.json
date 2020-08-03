@@ -13,6 +13,44 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/SQLTEC')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SQLPocTec",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "FaultId",
+						"type": "varchar"
+					},
+					{
+						"name": "FaultCustomerName",
+						"type": "varchar"
+					},
+					{
+						"name": "FaultDesc",
+						"type": "varchar"
+					},
+					{
+						"name": "Date",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "TECData"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/SQLTECData')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -1139,7 +1177,510 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/CODAIntegration_copy1')]",
+			"name": "[concat(parameters('factoryName'), '/CODAPaymentSQL_CRM_TecDev')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy SQL Join to Payment Table",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "AzureSqlSource",
+								"sqlReaderQuery": "select\nNEWID() AS GUID,\nZero.FileReference AS Zero_FileReference,\nCODA.GUID AS CODA_Guid,\nTwoOne.RegistrationID AS TwoOne_RegistrationId,\nTwoOne.Sequencenumber AS TwoOne_Sequencenumber,\nTwoOne.Retailnumber AS TwoOne_Retailnumber,\nTwoOne.bankreferencenumber AS TwoOne_bankreferencenumber,\ncase TwoOne.Movementsign\n     when '0' then 899240000\n     when '1' then 899240001\n     end AS TwoOne_Movementsign,\nTwoOne.Amount AS TwoOne_Amount,\nTwoOne.Valuedate AS TwoOne_Valuedate,\nTwoOne.OperationCode AS TwoOne_OperationCode,\ncase TwoOne.communicationtype\n     when '0' then 899240000\n     when '1' then 899240001\n     end AS TwoOne_communicationtype,\nTwoOne.Communicationzone AS TwoOne_Communicationzone,\nTwoOne.Accountdate AS TwoOne_Accountdate,\nTwoOne.Sequencenumberofpaperaccount AS TwoOne_Sequencenumberofpaperaccount,\nTwoOne.Codeglobalization AS TwoOne_Codeglobalization,\nTwoTwo.RegistrationID AS TwoTwo_RegistrationId,\nTwoTwo.Communication AS TwoTwo_Communication,\nTwoTwo.Customerreference AS TwoTwo_Customerreference,\nTwoTwo.BIC AS TwoTwo_BIC,\ncase TwoTwo.Transactiontype\n     when '0' then 899240000\n     when '1' then 899240001\n\t when '2' then 899240002\n     when '3' then 899240003\n\t when '4' then 899240004\n     end AS TwoTwo_Transactiontype,\nTwoTwo.ISOCode AS TwoTwo_ISOCode,\nTwoTwo.CategoryPurpose AS TwoTwo_CategoryPurpose,\nTwoTwo.Purpose AS TwoTwo_Purpose,\nTwoThree.RegistrationID AS TwoThree_RegistrationId,\nTwoThree.Counterpartyaccountnumber AS TwoThree_Counterpartyaccountnumber,\nTwoThree.Nameofcounterparty AS TwoThree_Nameofcounterparty,\nTwoThree.Communication AS TwoThree_Communication,\nThreeOne.RegistrationID AS ThreeOne_RegistrationId,\nThreeOne.AdditionalInformation AS ThreeOne_AdditionalInformation,\nThreeOne.OperationCode AS ThreeOne_OperationCode,\ncase ThreeOne.CommunicationCode\n     when '0' then 899240000\n     when '1' then 899240001\n     end AS ThreeOne_CommunicationCode,\nThreeOne.Communication AS ThreeOne_Communication,\nThreeTwo.RegistrationID AS ThreeTwo_RegistrationId,\nThreeTwo.Communication AS ThreeTwo_Communication,\nThreeThree.RegistrationID AS ThreeThree_RegistrationId,\nThreeThree.Communication AS ThreeThree_Communication \nfrom [dbo].[COD-21] TwoOne\nleft join [dbo].[COD-22] TwoTwo on TwoOne.[Sequencenumber] = TwoTwo.[Sequencenumber]\nleft join [dbo].[COD-23] TwoThree on TwoOne.[Sequencenumber] = TwoThree.[Sequencenumber]\nleft join [dbo].[COD-31] ThreeOne on TwoOne.[Sequencenumber] = ThreeOne.[Sequencenumber]\nleft join [dbo].[COD-32] ThreeTwo on TwoOne.[Sequencenumber] = ThreeTwo.[Sequencenumber]\nleft join [dbo].[COD-33] ThreeThree on TwoOne.[Sequencenumber] = ThreeThree.[Sequencenumber]\nleft join [dbo].[COD-0]  Zero       on 1=1 \nleft join [dbo].[CODAIntegration]  CODA  on 1=1",
+								"queryTimeout": "02:00:00"
+							},
+							"sink": {
+								"type": "AzureSqlSink"
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "GUID",
+											"type": "Guid",
+											"physicalType": "uniqueidentifier"
+										},
+										"sink": {
+											"name": "GUID",
+											"type": "Guid",
+											"physicalType": "uniqueidentifier"
+										}
+									},
+									{
+										"source": {
+											"name": "Zero_FileReference",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "Zero_FileReference",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "CODA_Guid",
+											"type": "Guid",
+											"physicalType": "uniqueidentifier"
+										},
+										"sink": {
+											"name": "CODA_Guid",
+											"type": "Guid",
+											"physicalType": "uniqueidentifier"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoOne_RegistrationId",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "TwoOne_RegistrationId",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoOne_Sequencenumber",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "TwoOne_Sequencenumber",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoOne_Retailnumber",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "TwoOne_Retailnumber",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoOne_bankreferencenumber",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "TwoOne_bankreferencenumber",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoOne_Movementsign",
+											"type": "Int32",
+											"physicalType": "int"
+										},
+										"sink": {
+											"name": "TwoOne_Movementsign",
+											"type": "Int32",
+											"physicalType": "int"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoOne_Amount",
+											"type": "Decimal",
+											"physicalType": "decimal"
+										},
+										"sink": {
+											"name": "TwoOne_Amount",
+											"type": "Decimal",
+											"physicalType": "decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoOne_Valuedate",
+											"type": "DateTime",
+											"physicalType": "date"
+										},
+										"sink": {
+											"name": "TwoOne_Valuedate",
+											"type": "DateTime",
+											"physicalType": "date"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoOne_OperationCode",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "TwoOne_OperationCode",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoOne_communicationtype",
+											"type": "Int32",
+											"physicalType": "int"
+										},
+										"sink": {
+											"name": "TwoOne_communicationtype",
+											"type": "Int32",
+											"physicalType": "int"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoOne_Communicationzone",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "TwoOne_Communicationzone",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoOne_Accountdate",
+											"type": "DateTime",
+											"physicalType": "date"
+										},
+										"sink": {
+											"name": "TwoOne_Accountdate",
+											"type": "DateTime",
+											"physicalType": "date"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoOne_Sequencenumberofpaperaccount",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "TwoOne_Sequencenumberofpaperaccount",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoOne_Codeglobalization",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "TwoOne_Codeglobalization",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoTwo_RegistrationId",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "TwoTwo_RegistrationId",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoTwo_Communication",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "TwoTwo_Communication",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoTwo_Customerreference",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "TwoTwo_Customerreference",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoTwo_BIC",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "TwoTwo_BIC",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoTwo_Transactiontype",
+											"type": "Int32",
+											"physicalType": "int"
+										},
+										"sink": {
+											"name": "TwoTwo_Transactiontype",
+											"type": "Int32",
+											"physicalType": "int"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoTwo_ISOCode",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "TwoTwo_ISOCode",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoTwo_CategoryPurpose",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "TwoTwo_CategoryPurpose",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoTwo_Purpose",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "TwoTwo_Purpose",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoThree_RegistrationId",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "TwoThree_RegistrationId",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoThree_Counterpartyaccountnumber",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "TwoThree_Counterpartyaccountnumber",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoThree_Nameofcounterparty",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "TwoThree_Nameofcounterparty",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoThree_Communication",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "TwoThree_Communication",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "ThreeOne_RegistrationId",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "ThreeOne_RegistrationId",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "ThreeOne_AdditionalInformation",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "ThreeOne_AdditionalInformation",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "ThreeOne_OperationCode",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "ThreeOne_OperationCode",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "ThreeOne_CommunicationCode",
+											"type": "Int32",
+											"physicalType": "int"
+										},
+										"sink": {
+											"name": "ThreeOne_CommunicationCode",
+											"type": "Int32",
+											"physicalType": "int"
+										}
+									},
+									{
+										"source": {
+											"name": "ThreeOne_Communication",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "ThreeOne_Communication",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "ThreeTwo_RegistrationId",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "ThreeTwo_RegistrationId",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "ThreeTwo_Communication",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "ThreeTwo_Communication",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "ThreeThree_RegistrationId",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "ThreeThree_RegistrationId",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "ThreeThree_Communication",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "ThreeThree_Communication",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "AzureSqlTable_CODAIntegration",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AzureSqlTable_PaymentJoin",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/CODASQL_CRM_TecDev')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -2583,488 +3124,6 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/TECDevCRM')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Unzip 7z file to Blob')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "WebHook",
-						"type": "WebHook",
-						"dependsOn": [
-							{
-								"activity": "Set variable of unzip foldername",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"url": {
-								"value": "https://73b5abb6-b245-4036-a400-b70e2ee719cd.webhook.ne.azure-automation.net/webhooks?token=8LyOr5IWcaX0XlNXtAVn4%2bBho02rNT9g5unFl2cEnR4%3d",
-								"type": "Expression"
-							},
-							"method": "POST",
-							"headers": {},
-							"body": {
-								"value": "@json(\nconcat(\n'\n{\n\"connectionName\":\"',variables('varConnectionName'),'\",\"storageAccountKey\":\"',variables('storageAccountKey'),'\",\"fileName\":\"',variables('fileName'),'\"\n,\"zipfolder\":\"',variables('zipfolder'),'\"\n,\"Unzipfolder\":\"',variables('Unzipfolder'),'\"\n,\"extractfolder\":\"',variables('extractfolder'),'\"\n,\"dataLakeStorageGen1Name\":\"',variables('dataLakeStorageGen1Name'),'\"\n}'))",
-								"type": "Expression"
-							},
-							"timeout": "00:10:00",
-							"reportStatusOnCallBack": true
-						}
-					},
-					{
-						"name": "Copy Zip file to ADLS",
-						"description": "t",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [
-							{
-								"name": "Source",
-								"value": "Datatest/"
-							},
-							{
-								"name": "Destination",
-								"value": "tec-zip//"
-							}
-						],
-						"typeProperties": {
-							"source": {
-								"type": "BinarySource",
-								"storeSettings": {
-									"type": "AzureBlobFSReadSettings",
-									"recursive": true
-								},
-								"formatSettings": {
-									"type": "BinaryReadSettings"
-								}
-							},
-							"sink": {
-								"type": "BinarySink",
-								"storeSettings": {
-									"type": "AzureBlobFSWriteSettings"
-								}
-							},
-							"enableStaging": false,
-							"skipErrorFile": {
-								"fileMissing": true
-							},
-							"validateDataConsistency": false
-						},
-						"inputs": [
-							{
-								"referenceName": "ZipFile",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "UnzipFile",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					},
-					{
-						"name": "Get Metadata of Zip File",
-						"type": "GetMetadata",
-						"dependsOn": [
-							{
-								"activity": "Copy Zip file to ADLS",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataset": {
-								"referenceName": "ZipFile",
-								"type": "DatasetReference",
-								"parameters": {}
-							},
-							"fieldList": [
-								"childItems",
-								"itemName"
-							],
-							"storeSettings": {
-								"type": "AzureBlobFSReadSettings",
-								"recursive": true
-							},
-							"formatSettings": {
-								"type": "BinaryReadSettings"
-							}
-						}
-					},
-					{
-						"name": "Filter 7z files",
-						"type": "Filter",
-						"dependsOn": [
-							{
-								"activity": "Get Metadata of Unzip File",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"items": {
-								"value": "@activity('Get Metadata of Zip File').output.childItems",
-								"type": "Expression"
-							},
-							"condition": {
-								"value": "@endswith(item().name,'.7z')",
-								"type": "Expression"
-							}
-						}
-					},
-					{
-						"name": "Set variable of zip file name",
-						"type": "SetVariable",
-						"dependsOn": [
-							{
-								"activity": "Filter 7z files",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"variableName": "fileName",
-							"value": {
-								"value": "@string(activity('Filter 7z files').output.value[0].name)",
-								"type": "Expression"
-							}
-						}
-					},
-					{
-						"name": "Set variable of zip folder name",
-						"type": "SetVariable",
-						"dependsOn": [
-							{
-								"activity": "Set variable of zip file name",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"variableName": "zipfolder",
-							"value": {
-								"value": "@activity('Get Metadata of Zip File').output.itemName",
-								"type": "Expression"
-							}
-						}
-					},
-					{
-						"name": "Set variable of unzip foldername",
-						"type": "SetVariable",
-						"dependsOn": [
-							{
-								"activity": "Set variable of zip folder name",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"variableName": "Unzipfolder",
-							"value": {
-								"value": "@activity('Get Metadata of Unzip File').output.itemName",
-								"type": "Expression"
-							}
-						}
-					},
-					{
-						"name": "Get Metadata of Unzip File",
-						"type": "GetMetadata",
-						"dependsOn": [
-							{
-								"activity": "Get Metadata of Zip File",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataset": {
-								"referenceName": "UnzipFile",
-								"type": "DatasetReference",
-								"parameters": {}
-							},
-							"fieldList": [
-								"itemName"
-							],
-							"storeSettings": {
-								"type": "AzureBlobFSReadSettings",
-								"recursive": true
-							},
-							"formatSettings": {
-								"type": "BinaryReadSettings"
-							}
-						}
-					}
-				],
-				"variables": {
-					"varConnectionName": {
-						"type": "String",
-						"defaultValue": "AzureRunAsConnection"
-					},
-					"storageAccountKey": {
-						"type": "String",
-						"defaultValue": " YDuDqj7C2A+fWSpmuibYXlDAsVRyIXQpgZcCtm23kUEFTsYFMvZbxhUmBHmbgHEeNcCmukz6O1Iji7H6deZPiw=="
-					},
-					"fileName": {
-						"type": "String",
-						"defaultValue": "TECValidation.7z"
-					},
-					"zipfolder": {
-						"type": "String",
-						"defaultValue": "PocTecZip"
-					},
-					"Unzipfolder": {
-						"type": "String",
-						"defaultValue": "PocTecUnzip"
-					},
-					"extractfolder": {
-						"type": "String",
-						"defaultValue": "7Zfiles"
-					},
-					"dataLakeStorageGen1Name": {
-						"type": "String",
-						"defaultValue": "dlspoctec"
-					}
-				},
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/ZipFile')]",
-				"[concat(variables('factoryId'), '/datasets/UnzipFile')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Validations_DLS_SQLValidations_SQLPowerAPP')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Copy Data to SQL Table",
-						"type": "Copy",
-						"dependsOn": [
-							{
-								"activity": "CSVtoSQLtable",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "AzureSqlSource",
-								"sqlReaderQuery": "SELECT TOP (1000) [FaultId]\n      ,[FaultDesc]\n      ,[FaultCustomerNumber]\n      ,[Date]\n  FROM [dbo].[TECData]",
-								"queryTimeout": "02:00:00"
-							},
-							"sink": {
-								"type": "AzureSqlSink"
-							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"name": "FaultId",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "FaultId",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "FaultDesc",
-											"type": "String"
-										},
-										"sink": {
-											"name": "FaultDesc",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "FaultCustomerNumber",
-											"type": "String"
-										},
-										"sink": {
-											"name": "FaultCustomerNumber",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Date",
-											"type": "DateTime"
-										},
-										"sink": {
-											"name": "Date",
-											"type": "DateTime"
-										}
-									}
-								]
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "SQLTEC",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "SQLValidations",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					},
-					{
-						"name": "CSVtoSQLtable",
-						"description": "t",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "DelimitedTextSource",
-								"storeSettings": {
-									"type": "AzureBlobFSReadSettings",
-									"recursive": true
-								},
-								"formatSettings": {
-									"type": "DelimitedTextReadSettings"
-								}
-							},
-							"sink": {
-								"type": "AzureSqlSink"
-							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"name": "FaultId",
-											"type": "String"
-										},
-										"sink": {
-											"name": "FaultId",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"name": "FaultDesc",
-											"type": "String"
-										},
-										"sink": {
-											"name": "FaultDesc",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "FaultCustomerName",
-											"type": "String"
-										},
-										"sink": {
-											"name": "FaultCustomerNumber",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Date",
-											"type": "DateTime"
-										},
-										"sink": {
-											"name": "Date",
-											"type": "DateTime"
-										}
-									}
-								]
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "ADLSV2CSV",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "SQLTECData",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					}
-				],
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/SQLValidations')]",
-				"[concat(variables('factoryId'), '/datasets/SQLTECData')]"
 			]
 		}
 	]
