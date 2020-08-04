@@ -2753,7 +2753,7 @@
 											"type": "String"
 										},
 										"sink": {
-											"name": "bd_file_reference",
+											"name": "bd_name",
 											"type": "String"
 										}
 									},
@@ -2863,7 +2863,7 @@
 											"type": "Decimal"
 										},
 										"sink": {
-											"name": "bd_old_balance",
+											"name": "bd_oldbalance",
 											"type": "Decimal"
 										}
 									},
@@ -2939,6 +2939,16 @@
 									},
 									{
 										"source": {
+											"name": "Eight_SignCode",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "bd_new_balance_sign",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
 											"name": "Eight_NewBalance",
 											"type": "Decimal"
 										},
@@ -2985,16 +2995,6 @@
 										"sink": {
 											"name": "bd_credit_movement",
 											"type": "Decimal"
-										}
-									},
-									{
-										"source": {
-											"name": "Eight_SignCode",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "bd_new_balance_sign",
-											"type": "Int32"
 										}
 									}
 								]
