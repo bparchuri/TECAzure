@@ -279,7 +279,7 @@
 				],
 				"typeProperties": {
 					"schema": "dbo",
-					"table": "COD-1"
+					"table": "CODA-1"
 				}
 			},
 			"dependsOn": []
@@ -369,7 +369,7 @@
 				],
 				"typeProperties": {
 					"schema": "dbo",
-					"table": "COD-21"
+					"table": "CODA-21"
 				}
 			},
 			"dependsOn": []
@@ -449,7 +449,7 @@
 				],
 				"typeProperties": {
 					"schema": "dbo",
-					"table": "COD-22"
+					"table": "CODA-22"
 				}
 			},
 			"dependsOn": []
@@ -509,7 +509,7 @@
 				],
 				"typeProperties": {
 					"schema": "dbo",
-					"table": "COD-23"
+					"table": "CODA-23"
 				}
 			},
 			"dependsOn": []
@@ -577,7 +577,7 @@
 				],
 				"typeProperties": {
 					"schema": "dbo",
-					"table": "COD-31"
+					"table": "CODA-31"
 				}
 			},
 			"dependsOn": []
@@ -633,7 +633,7 @@
 				],
 				"typeProperties": {
 					"schema": "dbo",
-					"table": "COD-32"
+					"table": "CODA-32"
 				}
 			},
 			"dependsOn": []
@@ -689,7 +689,7 @@
 				],
 				"typeProperties": {
 					"schema": "dbo",
-					"table": "COD-33"
+					"table": "CODA-33"
 				}
 			},
 			"dependsOn": []
@@ -741,7 +741,7 @@
 				],
 				"typeProperties": {
 					"schema": "dbo",
-					"table": "COD-4"
+					"table": "CODA-4"
 				}
 			},
 			"dependsOn": []
@@ -795,7 +795,7 @@
 				],
 				"typeProperties": {
 					"schema": "dbo",
-					"table": "COD-8"
+					"table": "CODA-8"
 				}
 			},
 			"dependsOn": []
@@ -847,7 +847,7 @@
 				],
 				"typeProperties": {
 					"schema": "dbo",
-					"table": "COD-9"
+					"table": "CODA-9"
 				}
 			},
 			"dependsOn": []
