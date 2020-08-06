@@ -549,6 +549,16 @@
 							},
 							{
 								"source": {
+									"name": "Zero_FileReference",
+									"type": "String"
+								},
+								"sink": {
+									"name": "bd_paymentreferenceidname",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
 									"name": "CODA_Guid",
 									"type": "Guid"
 								},
@@ -563,7 +573,7 @@
 									"type": "String"
 								},
 								"sink": {
-									"name": "bd_sequence_number",
+									"name": "bd_continuous_sequence_number",
 									"type": "String"
 								}
 							},
@@ -583,7 +593,7 @@
 									"type": "String"
 								},
 								"sink": {
-									"name": "bd_bank_reference_number",
+									"name": "bd_bank_reference_number_info",
 									"type": "String"
 								}
 							},
@@ -603,7 +613,7 @@
 									"type": "Decimal"
 								},
 								"sink": {
-									"name": "bd_amount",
+									"name": "bd_movement_amount",
 									"type": "Decimal"
 								}
 							},
@@ -834,6 +844,16 @@
 								},
 								"sink": {
 									"name": "bd_communication_ctd_info_2",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Data_Source",
+									"type": "String"
+								},
+								"sink": {
+									"name": "bd_data_source",
 									"type": "String"
 								}
 							}
