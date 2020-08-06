@@ -79,7 +79,7 @@
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "COD-0"
+			"table": "CODA-0"
 		}
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"
