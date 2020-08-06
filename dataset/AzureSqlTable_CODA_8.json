@@ -45,7 +45,7 @@
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "COD-8"
+			"table": "CODA-8"
 		}
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"
