@@ -1272,7 +1272,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "AzureSqlSource",
-								"sqlReaderQuery": "select\nNEWID() AS GUID,\nZero.FileReference AS Zero_FileReference,\nCODA.GUID AS CODA_Guid,\nTwoOne.RegistrationID AS TwoOne_RegistrationId,\nTwoOne.Sequencenumber AS TwoOne_Sequencenumber,\nTwoOne.Retailnumber AS TwoOne_Retailnumber,\nTwoOne.bankreferencenumber AS TwoOne_bankreferencenumber,\ncase TwoOne.Movementsign\n     when '0' then 899240000\n     when '1' then 899240001\n     end AS TwoOne_Movementsign,\nTwoOne.Amount AS TwoOne_Amount,\nTwoOne.Valuedate AS TwoOne_Valuedate,\nTwoOne.OperationCode AS TwoOne_OperationCode,\ncase TwoOne.communicationtype\n     when '0' then 899240000\n     when '1' then 899240001\n     end AS TwoOne_communicationtype,\nTwoOne.Communicationzone AS TwoOne_Communicationzone,\nTwoOne.Accountdate AS TwoOne_Accountdate,\nTwoOne.Sequencenumberofpaperaccount AS TwoOne_Sequencenumberofpaperaccount,\nTwoOne.Codeglobalization AS TwoOne_Codeglobalization,\nTwoTwo.RegistrationID AS TwoTwo_RegistrationId,\nTwoTwo.Communication AS TwoTwo_Communication,\nTwoTwo.Customerreference AS TwoTwo_Customerreference,\nTwoTwo.BIC AS TwoTwo_BIC,\ncase TwoTwo.Transactiontype\n     when '0' then 899240000\n     when '1' then 899240001\n\t when '2' then 899240002\n     when '3' then 899240003\n\t when '4' then 899240004\n     end AS TwoTwo_Transactiontype,\nTwoTwo.ISOCode AS TwoTwo_ISOCode,\nTwoTwo.CategoryPurpose AS TwoTwo_CategoryPurpose,\nTwoTwo.Purpose AS TwoTwo_Purpose,\nTwoThree.RegistrationID AS TwoThree_RegistrationId,\nTwoThree.Counterpartyaccountnumber AS TwoThree_Counterpartyaccountnumber,\nTwoThree.Nameofcounterparty AS TwoThree_Nameofcounterparty,\nTwoThree.Communication AS TwoThree_Communication,\nThreeOne.RegistrationID AS ThreeOne_RegistrationId,\nThreeOne.AdditionalInformation AS ThreeOne_AdditionalInformation,\nThreeOne.OperationCode AS ThreeOne_OperationCode,\ncase ThreeOne.CommunicationCode\n     when '0' then 899240000\n     when '1' then 899240001\n     end AS ThreeOne_CommunicationCode,\nThreeOne.Communication AS ThreeOne_Communication,\nThreeTwo.RegistrationID AS ThreeTwo_RegistrationId,\nThreeTwo.Communication AS ThreeTwo_Communication,\nThreeThree.RegistrationID AS ThreeThree_RegistrationId,\nThreeThree.Communication AS ThreeThree_Communication \nfrom [dbo].[COD-21] TwoOne\nleft join [dbo].[COD-22] TwoTwo on TwoOne.[Sequencenumber] = TwoTwo.[Sequencenumber]\nleft join [dbo].[COD-23] TwoThree on TwoOne.[Sequencenumber] = TwoThree.[Sequencenumber]\nleft join [dbo].[COD-31] ThreeOne on TwoOne.[Sequencenumber] = ThreeOne.[Sequencenumber]\nleft join [dbo].[COD-32] ThreeTwo on TwoOne.[Sequencenumber] = ThreeTwo.[Sequencenumber]\nleft join [dbo].[COD-33] ThreeThree on TwoOne.[Sequencenumber] = ThreeThree.[Sequencenumber]\nleft join [dbo].[COD-0]  Zero       on 1=1 \nleft join [dbo].[CODAIntegration]  CODA  on 1=1",
+								"sqlReaderQuery": "select\nNEWID() AS GUID,\n'CODA' AS Data_Source,\nZero.FileReference AS Zero_FileReference,\nCODA.GUID AS CODA_Guid,\nTwoOne.RegistrationID AS TwoOne_RegistrationId,\nTwoOne.Sequencenumber AS TwoOne_Sequencenumber,\nTwoOne.Retailnumber AS TwoOne_Retailnumber,\nTwoOne.bankreferencenumber AS TwoOne_bankreferencenumber,\ncase TwoOne.Movementsign\n     when '0' then 899240000\n     when '1' then 899240001\n     end AS TwoOne_Movementsign,\nTwoOne.Amount AS TwoOne_Amount,\nTwoOne.Valuedate AS TwoOne_Valuedate,\nTwoOne.OperationCode AS TwoOne_OperationCode,\ncase TwoOne.communicationtype\n     when '0' then 899240000\n     when '1' then 899240001\n     end AS TwoOne_communicationtype,\nTwoOne.Communicationzone AS TwoOne_Communicationzone,\nTwoOne.Accountdate AS TwoOne_Accountdate,\nTwoOne.Sequencenumberofpaperaccount AS TwoOne_Sequencenumberofpaperaccount,\nTwoOne.Codeglobalization AS TwoOne_Codeglobalization,\nTwoTwo.RegistrationID AS TwoTwo_RegistrationId,\nTwoTwo.Communication AS TwoTwo_Communication,\nTwoTwo.Customerreference AS TwoTwo_Customerreference,\nTwoTwo.BIC AS TwoTwo_BIC,\ncase TwoTwo.Transactiontype\n     when '0' then 899240000\n     when '1' then 899240001\n\t when '2' then 899240002\n     when '3' then 899240003\n\t when '4' then 899240004\n     end AS TwoTwo_Transactiontype,\nTwoTwo.ISOCode AS TwoTwo_ISOCode,\nTwoTwo.CategoryPurpose AS TwoTwo_CategoryPurpose,\nTwoTwo.Purpose AS TwoTwo_Purpose,\nTwoThree.RegistrationID AS TwoThree_RegistrationId,\nTwoThree.Counterpartyaccountnumber AS TwoThree_Counterpartyaccountnumber,\nTwoThree.Nameofcounterparty AS TwoThree_Nameofcounterparty,\nTwoThree.Communication AS TwoThree_Communication,\nThreeOne.RegistrationID AS ThreeOne_RegistrationId,\nThreeOne.AdditionalInformation AS ThreeOne_AdditionalInformation,\nThreeOne.OperationCode AS ThreeOne_OperationCode,\ncase ThreeOne.CommunicationCode\n     when '0' then 899240000\n     when '1' then 899240001\n     end AS ThreeOne_CommunicationCode,\nThreeOne.Communication AS ThreeOne_Communication,\nThreeTwo.RegistrationID AS ThreeTwo_RegistrationId,\nThreeTwo.Communication AS ThreeTwo_Communication,\nThreeThree.RegistrationID AS ThreeThree_RegistrationId,\nThreeThree.Communication AS ThreeThree_Communication \nfrom [dbo].[COD-21] TwoOne\nleft join [dbo].[COD-22] TwoTwo on TwoOne.[Sequencenumber] = TwoTwo.[Sequencenumber]\nleft join [dbo].[COD-23] TwoThree on TwoOne.[Sequencenumber] = TwoThree.[Sequencenumber]\nleft join [dbo].[COD-31] ThreeOne on TwoOne.[Sequencenumber] = ThreeOne.[Sequencenumber]\nleft join [dbo].[COD-32] ThreeTwo on TwoOne.[Sequencenumber] = ThreeTwo.[Sequencenumber]\nleft join [dbo].[COD-33] ThreeThree on TwoOne.[Sequencenumber] = ThreeThree.[Sequencenumber]\nleft join [dbo].[COD-0]  Zero       on 1=1 \nleft join [dbo].[CODAIntegration]  CODA  on 1=1",
 								"queryTimeout": "02:00:00"
 							},
 							"sink": {
@@ -1725,6 +1725,18 @@
 											"type": "String",
 											"physicalType": "varchar"
 										}
+									},
+									{
+										"source": {
+											"name": "Data_Source",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "Data_Source",
+											"type": "String",
+											"physicalType": "varchar"
+										}
 									}
 								],
 								"typeConversion": true,
@@ -1794,6 +1806,16 @@
 									},
 									{
 										"source": {
+											"name": "Zero_FileReference",
+											"type": "String"
+										},
+										"sink": {
+											"name": "bd_paymentreferenceidname",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
 											"name": "CODA_Guid",
 											"type": "Guid"
 										},
@@ -1808,7 +1830,7 @@
 											"type": "String"
 										},
 										"sink": {
-											"name": "bd_sequence_number",
+											"name": "bd_continuous_sequence_number",
 											"type": "String"
 										}
 									},
@@ -1848,7 +1870,7 @@
 											"type": "Decimal"
 										},
 										"sink": {
-											"name": "bd_amount",
+											"name": "bd_movement_amount",
 											"type": "Decimal"
 										}
 									},
@@ -2079,6 +2101,16 @@
 										},
 										"sink": {
 											"name": "bd_communication_ctd_info_2",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Data_Source",
+											"type": "String"
+										},
+										"sink": {
+											"name": "bd_data_source",
 											"type": "String"
 										}
 									}
