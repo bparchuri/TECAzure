@@ -593,7 +593,7 @@
 									"type": "String"
 								},
 								"sink": {
-									"name": "bd_bank_reference_number_info",
+									"name": "bd_bank_reference_number",
 									"type": "String"
 								}
 							},
