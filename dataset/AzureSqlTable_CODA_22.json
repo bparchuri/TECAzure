@@ -71,7 +71,7 @@
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "COD-22"
+			"table": "CODA-22"
 		}
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"
