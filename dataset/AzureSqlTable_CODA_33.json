@@ -47,7 +47,7 @@
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "COD-33"
+			"table": "CODA-33"
 		}
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"
