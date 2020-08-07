@@ -12884,6 +12884,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
+						"fileName": "Merge.csv",
 						"folderPath": "EIS-779_poc/Target",
 						"fileSystem": "integrations-tec"
 					},
