@@ -10,7 +10,6 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "004_REC_20200319_00001_04.csv",
 				"folderPath": "EIS-779_poc/Target",
 				"fileSystem": "integrations-tec"
 			},
