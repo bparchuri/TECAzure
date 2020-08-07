@@ -238,7 +238,8 @@
 							"source": {
 								"type": "AzureSqlSource",
 								"sqlReaderQuery": "SELECT TOP (10) [Code_segment]\n      ,[Poste_segment]\n      ,[Id_transaction]\n      ,[Num_serie]\n      ,[Id_entreprise]\n      ,[Id_paiement]\n      ,[Code_moyen_paiement]\n      ,[Sens_paiement]\n      ,[Montant]\n      ,[Type_equipement]\n      ,[Date_ope]\n      ,[Name]\n      ,[Guid]\n  FROM [dbo].[EIS779_atlas]",
-								"queryTimeout": "02:00:00"
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
 							},
 							"sink": {
 								"type": "DynamicsCrmSink",
@@ -451,7 +452,8 @@
 							"source": {
 								"type": "AzureSqlSource",
 								"sqlReaderQuery": "  SELECT Top(100)\n     E003.Code_segment\n    ,E003.Poste_segment\n    ,E003.Id_transaction\n    ,E001.Num_serie\n    ,E002.Id_entreprise\n    ,E003.Id_paiement\n    ,E003.Code_moyen_paiement\n    ,E003.Sens_paiement\n    ,E003.Montant\n    ,10 AS Type_Eqiupment\n    ,E001.Date_ope\n    ,E000.Plateforme\n\t,NEWID() AS Unique_Id\n  FROM [dbo].[EIS779_SEGMENT_001] E001\n  LEFT JOIN [dbo].[EIS779_SEGMENT_002] E002\n    ON E001.Id_transaction = E002.Id_transaction\n  JOIN [dbo].[EIS779_SEGMENT_003] E003\n    ON E001.Id_transaction = E003.Id_transaction\n  JOIN [dbo].[EIS779_SEGMENT_000] E000\n    ON E000.Code_segment = '000'\n  ORDER by E001.id_transaction",
-								"queryTimeout": "02:00:00"
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
 							},
 							"sink": {
 								"type": "AzureSqlSink",
@@ -752,7 +754,8 @@
 							"source": {
 								"type": "AzureSqlSource",
 								"sqlReaderQuery": "select \nNine.RegistrationID AS Nine_RegistrationId,\nNine.Numberofrecords AS Nine_Numberofrecords,\nNine.DebitRevenue AS Nine_DebitRevenue,\nNine.CreditSales AS Nine_CreditSales,\nNine.Multiplefilecode AS Nine_Multiplefilecode,\nEight.RegistrationID AS Eight_RegistrationId,\nEight.Accountnumber AS Eight_Accountnumber,\nEight.NewBalance AS Eight_NewBalance ,\nEight.Dateofnewbalance AS Eight_Dateofnewbalance,\nOne.RegistrationID AS One_RegistrationId,\nOne.BankAccountType AS One_BankAccountType,\nOne.Sequencenumberofpaperaccount AS One_Sequencenumberofpaperaccount,\nOne.Accountnumber AS One_Accountnumber,\nOne.Oldbalance AS One_Oldbalance,\nOne.Oldpay AS One_Oldpay ,\nOne.Dateofoldbalance AS One_Dateofoldbalance,\nOne.Accountholdername AS One_Accountholdername,\nTwoOne.RegistrationID AS TwoOne_RegistrationId,\nTwoOne.Sequencenumber AS TwoOne_Sequencenumber,\nTwoOne.Amount AS TwoOne_Amount,\nTwoOne.Valuedate AS TwoOne_Valuedate,\nTwoOne.Accountdate AS TwoOne_Accountdate,\nTwoTwo.RegistrationID AS TwoTwo_RegistrationId,\nTwoTwo.Customerreference AS TwoTwo_Customerreference,\nTwoTwo.BIC AS TwoTwo_BIC,\nTwoTwo.Linkcode AS TwoTwo_Linkcode,\nTwoThree.RegistrationID AS TwoThree_RegistrationId,\nTwoThree.ArticleCode AS TwoThree_ArticleCode,\nTwoThree.Counterpartyaccountnumber AS TwoThree_Counterpartyaccountnumber,\nTwoThree.Nameofcounterparty AS TwoThree_Nameofcounterparty,\nTwoThree.SuiteCode AS TwoThree_SuiteCode,\nThreeOne.RegistrationID AS ThreeOne_RegistrationId,\nThreeOne.ArticleCode AS ThreeOne_ArticleCode,\nThreeOne.CommunicationCode AS ThreeOne_CommunicationCode,\nThreeOne.MoreCode AS ThreeOne_MoreCode,\nThreeTwo.RegistrationID AS ThreeTwo_RegistrationId,\nThreeTwo.Sequencenumber AS ThreeTwo_Sequencenumber ,\nThreeTwo.ArticleCode AS ThreeTwo_ArticleCode,\nThreeTwo.Communication AS ThreeTwo_Communication,\nZero.RecordIdentification AS Zero_RecordIdentification,\nZero.CreationDate AS Zero_CreationDate ,\nZero.BankIdentificationNumber AS Zero_BankIdentificationNumber,\nZero.ApplicationCode AS Zero_ApplicationCode,\nZero.BIC AS Zero_BIC,\nZero.IdentificationNumberofBelgium AS Zero_IdentificationNumberofBelgium\nfrom \n(SELECT * , ROW_NUMBER() OVER (ORDER BY RegistrationID) AS row_num FROM [dbo].[COD-21]) TwoOne \nJoin\n(SELECT * , ROW_NUMBER() OVER (ORDER BY RegistrationID) AS row_num FROM [dbo].[COD-22]) TwoTwo on TwoOne.row_num = TwoTwo.row_num\nLeft OUTER Join\n(SELECT * , ROW_NUMBER() OVER (ORDER BY RegistrationID) AS row_num FROM [dbo].[COD-23]) TwoThree on TwoThree.row_num = TwoTwo.row_num\nLEFT OUTER Join\n(SELECT * , ROW_NUMBER() OVER (ORDER BY RegistrationID) AS row_num FROM [dbo].[COD-31]) ThreeOne on ThreeOne.row_num = TwoTwo.row_num\nLEFT OUTER Join\n(SELECT * , ROW_NUMBER() OVER (ORDER BY RegistrationID) AS row_num FROM [dbo].[COD-32]) ThreeTwo on ThreeTwo.row_num = TwoTwo.row_num\nLEFT OUTER Join\n(SELECT * , ROW_NUMBER() OVER (ORDER BY RegistrationID) AS row_num FROM [dbo].[COD-33]) ThreeThree on ThreeThree.row_num = TwoTwo.row_num\nLEFT OUTER Join\n(SELECT * , ROW_NUMBER() OVER (ORDER BY RegistrationID) AS row_num FROM [dbo].[COD-1]) One on One.row_num = TwoTwo.row_num\nLEFT OUTER Join\n(SELECT * , ROW_NUMBER() OVER (ORDER BY RegistrationID) AS row_num FROM [dbo].[COD-8]) Eight on Eight.row_num = TwoTwo.row_num\nLEFT OUTER Join\n(SELECT * , ROW_NUMBER() OVER (ORDER BY RegistrationID) AS row_num FROM [dbo].[COD-9]) Nine on Nine.row_num = TwoTwo.row_num\nLEFT OUTER Join\n(SELECT * , ROW_NUMBER() OVER (ORDER BY RecordIdentification) AS row_num FROM [dbo].[COD-0]) Zero on Zero.row_num = TwoTwo.row_num",
-								"queryTimeout": "02:00:00"
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
 							},
 							"sink": {
 								"type": "AzureSqlSink"
@@ -1354,7 +1357,8 @@
 							"source": {
 								"type": "AzureSqlSource",
 								"sqlReaderQuery": "select\nNEWID() AS GUID,\n'CODA' AS Data_Source,\nZero.FileReference AS Zero_FileReference,\nCODA.GUID AS CODA_Guid,\nTwoOne.RegistrationID AS TwoOne_RegistrationId,\nTwoOne.Sequencenumber AS TwoOne_Sequencenumber,\nTwoOne.Retailnumber AS TwoOne_Retailnumber,\nTwoOne.bankreferencenumber AS TwoOne_bankreferencenumber,\ncase TwoOne.Movementsign\n     when '0' then 899240000\n     when '1' then 899240001\n     end AS TwoOne_Movementsign,\nTwoOne.Amount AS TwoOne_Amount,\nTwoOne.Valuedate AS TwoOne_Valuedate,\nTwoOne.OperationCode AS TwoOne_OperationCode,\ncase TwoOne.communicationtype\n     when '0' then 899240000\n     when '1' then 899240001\n     end AS TwoOne_communicationtype,\nTwoOne.Communicationzone AS TwoOne_Communicationzone,\nTwoOne.Accountdate AS TwoOne_Accountdate,\nTwoOne.Sequencenumberofpaperaccount AS TwoOne_Sequencenumberofpaperaccount,\nTwoOne.Codeglobalization AS TwoOne_Codeglobalization,\nTwoTwo.RegistrationID AS TwoTwo_RegistrationId,\nTwoTwo.Communication AS TwoTwo_Communication,\nTwoTwo.Customerreference AS TwoTwo_Customerreference,\nTwoTwo.BIC AS TwoTwo_BIC,\ncase TwoTwo.Transactiontype\n     when '0' then 899240000\n     when '1' then 899240001\n\t when '2' then 899240002\n     when '3' then 899240003\n\t when '4' then 899240004\n     end AS TwoTwo_Transactiontype,\nTwoTwo.ISOCode AS TwoTwo_ISOCode,\nTwoTwo.CategoryPurpose AS TwoTwo_CategoryPurpose,\nTwoTwo.Purpose AS TwoTwo_Purpose,\nTwoThree.RegistrationID AS TwoThree_RegistrationId,\nTwoThree.Counterpartyaccountnumber AS TwoThree_Counterpartyaccountnumber,\nTwoThree.Nameofcounterparty AS TwoThree_Nameofcounterparty,\nTwoThree.Communication AS TwoThree_Communication,\nThreeOne.RegistrationID AS ThreeOne_RegistrationId,\nThreeOne.AdditionalInformation AS ThreeOne_AdditionalInformation,\nThreeOne.OperationCode AS ThreeOne_OperationCode,\ncase ThreeOne.CommunicationCode\n     when '0' then 899240000\n     when '1' then 899240001\n     end AS ThreeOne_CommunicationCode,\nThreeOne.Communication AS ThreeOne_Communication,\nThreeTwo.RegistrationID AS ThreeTwo_RegistrationId,\nThreeTwo.Communication AS ThreeTwo_Communication,\nThreeThree.RegistrationID AS ThreeThree_RegistrationId,\nThreeThree.Communication AS ThreeThree_Communication \nfrom [dbo].[CODA-21] TwoOne\nleft join [dbo].[CODA-22] TwoTwo on TwoOne.[Sequencenumber] = TwoTwo.[Sequencenumber]\nleft join [dbo].[CODA-23] TwoThree on TwoOne.[Sequencenumber] = TwoThree.[Sequencenumber]\nleft join [dbo].[CODA-31] ThreeOne on TwoOne.[Sequencenumber] = ThreeOne.[Sequencenumber]\nleft join [dbo].[CODA-32] ThreeTwo on TwoOne.[Sequencenumber] = ThreeTwo.[Sequencenumber]\nleft join [dbo].[CODA-33] ThreeThree on TwoOne.[Sequencenumber] = ThreeThree.[Sequencenumber]\nleft join [dbo].[CODA-0]  Zero       on 1=1 \nleft join [dbo].[CODAIntegration]  CODA  on 1=1",
-								"queryTimeout": "02:00:00"
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
 							},
 							"sink": {
 								"type": "AzureSqlSink"
@@ -1864,7 +1868,8 @@
 						"typeProperties": {
 							"source": {
 								"type": "AzureSqlSource",
-								"queryTimeout": "02:00:00"
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
 							},
 							"sink": {
 								"type": "DynamicsCrmSink",
@@ -2244,7 +2249,8 @@
 							"source": {
 								"type": "AzureSqlSource",
 								"sqlReaderQuery": "select\nNEWID() AS GUID,\nZero.RecordIdentification AS Zero_RecordIdentification,\nZero.CreationDate AS Zero_CreationDate,\nZero.BankIdentificationNumber AS Zero_BankIdentificationNumber,\nZero.ApplicationCode AS Zero_ApplicationCode,\nZero.Duplicate AS Zero_Duplicate,\nZero.FileReference AS Zero_FileReference,\nZero.NameAddressee AS Zero_NameAddressee,\nZero.BIC AS Zero_BIC,\nZero.IdentificationNumberofBelgium AS Zero_IdentificationNumberofBelgium,\nZero.CodeSeperateApplication AS Zero_CodeSeperateApplication,\nZero.TransactionReferrence AS Zero_TransactionReferrence,\nZero.RelatedReferrence AS Zero_RelatedReferrence,\nOne.RegistrationID AS One_RegistrationId,\ncase One.BankAccountType\n     when '0' then 899240000\n     when '1' then 899240001\n     when '2' then 899240002\n     when '3' then 899240003\n     end AS One_BankAccountType,\nOne.Sequencenumberofpaperaccount AS One_Sequencenumberofpaperaccount,\nOne.Accountnumber AS One_Accountnumber,\ncase One.Oldbalance\n     when '0' then 899240000\n     when '1' then 899240001\n     end AS One_Oldbalance,\nOne.Oldpay AS One_Oldpay,\nOne.Dateofoldbalance AS One_Dateofoldbalance,\nOne.Accountholdername AS One_Accountholdername,\nOne.Accounttagged AS One_Accounttagged,\nOne.Sequencenumberofthecodified AS One_Sequencenumberofthecodified,\nFour.RegistrationID AS Four_RegistrationID,\nFour.Textofthefreemessage AS Four_Textofthefreemessage,\nEight.RegistrationID AS Eight_RegistrationId,\nEight.Sequencenumber AS Eight_Sequencenumber,\nEight.Accountnumber AS Eight_Accountnumber,\ncase Eight.SignCode\n     when '0' then 899240000\n     when '1' then 899240001\n     end AS Eight_SignCode,\nEight.NewBalance AS Eight_NewBalance ,\nEight.Dateofnewbalance AS Eight_Dateofnewbalance,\nNine.RegistrationID AS Nine_RegistrationId,\nNine.Numberofrecords AS Nine_Numberofrecords,\nNine.DebitRevenue AS Nine_DebitRevenue,\nNine.CreditSales AS Nine_CreditSales\nfrom [dbo].[CODA-0] Zero\nleft join [dbo].[CODA-1] One on 1=1 \nleft join [dbo].[CODA-4] Four on 1=1 \nleft join [dbo].[CODA-8] Eight on 1=1 \nleft join [dbo].[CODA-9] Nine on 1=1 ",
-								"queryTimeout": "02:00:00"
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
 							},
 							"sink": {
 								"type": "AzureSqlSink"
@@ -2718,7 +2724,8 @@
 						"typeProperties": {
 							"source": {
 								"type": "AzureSqlSource",
-								"queryTimeout": "02:00:00"
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
 							},
 							"sink": {
 								"type": "DynamicsCrmSink",
@@ -3178,7 +3185,8 @@
 							"source": {
 								"type": "AzureSqlSource",
 								"sqlReaderQuery": "select\nNEWID() AS GUID,\nZero.RecordIdentification AS Zero_RecordIdentification,\nZero.CreationDate AS Zero_CreationDate,\nZero.BankIdentificationNumber AS Zero_BankIdentificationNumber,\nZero.ApplicationCode AS Zero_ApplicationCode,\nZero.Duplicate AS Zero_Duplicate,\nZero.FileReference AS Zero_FileReference,\nZero.NameAddressee AS Zero_NameAddressee,\nZero.BIC AS Zero_BIC,\nZero.IdentificationNumberofBelgium AS Zero_IdentificationNumberofBelgium,\nZero.CodeSeperateApplication AS Zero_CodeSeperateApplication,\nZero.TransactionReferrence AS Zero_TransactionReferrence,\nZero.RelatedReferrence AS Zero_RelatedReferrence,\nOne.RegistrationID AS One_RegistrationId,\ncase One.BankAccountType\n     when '0' then 899240000\n     when '1' then 899240001\n     when '2' then 899240002\n     when '3' then 899240003\n     end AS One_BankAccountType,\nOne.Sequencenumberofpaperaccount AS One_Sequencenumberofpaperaccount,\nOne.Accountnumber AS One_Accountnumber,\ncase One.Oldbalance\n     when '0' then 899240000\n     when '1' then 899240001\n     end AS One_Oldbalance,\nOne.Oldpay AS One_Oldpay,\nOne.Dateofoldbalance AS One_Dateofoldbalance,\nOne.Accountholdername AS One_Accountholdername,\nOne.Accounttagged AS One_Accounttagged,\nOne.Sequencenumberofthecodified AS One_Sequencenumberofthecodified,\nFour.RegistrationID AS Four_RegistrationID,\nFour.Textofthefreemessage AS Four_Textofthefreemessage,\nEight.RegistrationID AS Eight_RegistrationId,\nEight.Sequencenumber AS Eight_Sequencenumber,\nEight.Accountnumber AS Eight_Accountnumber,\ncase Eight.SignCode\n     when '0' then 899240000\n     when '1' then 899240001\n     end AS Eight_SignCode,\nEight.NewBalance AS Eight_NewBalance ,\nEight.Dateofnewbalance AS Eight_Dateofnewbalance,\nNine.RegistrationID AS Nine_RegistrationId,\nNine.Numberofrecords AS Nine_Numberofrecords,\nNine.DebitRevenue AS Nine_DebitRevenue,\nNine.CreditSales AS Nine_CreditSales\nfrom [dbo].[CODA-0] Zero\nleft join [dbo].[CODA-1] One on 1=1 \nleft join [dbo].[CODA-4] Four on 1=1 \nleft join [dbo].[CODA-8] Eight on 1=1 \nleft join [dbo].[CODA-9] Nine on 1=1 ",
-								"queryTimeout": "02:00:00"
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
 							},
 							"sink": {
 								"type": "AzureSqlSink"
@@ -3652,7 +3660,8 @@
 						"typeProperties": {
 							"source": {
 								"type": "AzureSqlSource",
-								"queryTimeout": "02:00:00"
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
 							},
 							"sink": {
 								"type": "DynamicsCrmSink",
@@ -4004,7 +4013,8 @@
 							"source": {
 								"type": "AzureSqlSource",
 								"sqlReaderQuery": "select\nNEWID() AS GUID,\n'CODA' AS Data_Source,\nZero.FileReference AS Zero_FileReference,\nCODA.GUID AS CODA_Guid,\nTwoOne.RegistrationID AS TwoOne_RegistrationId,\nTwoOne.Sequencenumber AS TwoOne_Sequencenumber,\nTwoOne.Retailnumber AS TwoOne_Retailnumber,\nTwoOne.bankreferencenumber AS TwoOne_bankreferencenumber,\ncase TwoOne.Movementsign\n     when '0' then 899240000\n     when '1' then 899240001\n     end AS TwoOne_Movementsign,\nTwoOne.Amount AS TwoOne_Amount,\nTwoOne.Valuedate AS TwoOne_Valuedate,\nTwoOne.OperationCode AS TwoOne_OperationCode,\ncase TwoOne.communicationtype\n     when '0' then 899240000\n     when '1' then 899240001\n     end AS TwoOne_communicationtype,\nTwoOne.Communicationzone AS TwoOne_Communicationzone,\nTwoOne.Accountdate AS TwoOne_Accountdate,\nTwoOne.Sequencenumberofpaperaccount AS TwoOne_Sequencenumberofpaperaccount,\nTwoOne.Codeglobalization AS TwoOne_Codeglobalization,\nTwoTwo.RegistrationID AS TwoTwo_RegistrationId,\nTwoTwo.Communication AS TwoTwo_Communication,\nTwoTwo.Customerreference AS TwoTwo_Customerreference,\nTwoTwo.BIC AS TwoTwo_BIC,\ncase TwoTwo.Transactiontype\n     when '0' then 899240000\n     when '1' then 899240001\n\t when '2' then 899240002\n     when '3' then 899240003\n\t when '4' then 899240004\n     end AS TwoTwo_Transactiontype,\nTwoTwo.ISOCode AS TwoTwo_ISOCode,\nTwoTwo.CategoryPurpose AS TwoTwo_CategoryPurpose,\nTwoTwo.Purpose AS TwoTwo_Purpose,\nTwoThree.RegistrationID AS TwoThree_RegistrationId,\nTwoThree.Counterpartyaccountnumber AS TwoThree_Counterpartyaccountnumber,\nTwoThree.Nameofcounterparty AS TwoThree_Nameofcounterparty,\nTwoThree.Communication AS TwoThree_Communication,\nThreeOne.RegistrationID AS ThreeOne_RegistrationId,\nThreeOne.AdditionalInformation AS ThreeOne_AdditionalInformation,\nThreeOne.OperationCode AS ThreeOne_OperationCode,\ncase ThreeOne.CommunicationCode\n     when '0' then 899240000\n     when '1' then 899240001\n     end AS ThreeOne_CommunicationCode,\nThreeOne.Communication AS ThreeOne_Communication,\nThreeTwo.RegistrationID AS ThreeTwo_RegistrationId,\nThreeTwo.Communication AS ThreeTwo_Communication,\nThreeThree.RegistrationID AS ThreeThree_RegistrationId,\nThreeThree.Communication AS ThreeThree_Communication \nfrom [dbo].[CODA-21] TwoOne\nleft join [dbo].[CODA-22] TwoTwo on TwoOne.[Sequencenumber] = TwoTwo.[Sequencenumber]\nleft join [dbo].[CODA-23] TwoThree on TwoOne.[Sequencenumber] = TwoThree.[Sequencenumber]\nleft join [dbo].[CODA-31] ThreeOne on TwoOne.[Sequencenumber] = ThreeOne.[Sequencenumber]\nleft join [dbo].[CODA-32] ThreeTwo on TwoOne.[Sequencenumber] = ThreeTwo.[Sequencenumber]\nleft join [dbo].[CODA-33] ThreeThree on TwoOne.[Sequencenumber] = ThreeThree.[Sequencenumber]\nleft join [dbo].[CODA-0]  Zero       on 1=1 \nleft join [dbo].[CODAIntegration]  CODA  on 1=1",
-								"queryTimeout": "02:00:00"
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
 							},
 							"sink": {
 								"type": "AzureSqlSink"
@@ -4514,7 +4524,8 @@
 						"typeProperties": {
 							"source": {
 								"type": "AzureSqlSource",
-								"queryTimeout": "02:00:00"
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
 							},
 							"sink": {
 								"type": "DynamicsCrmSink",
@@ -6113,7 +6124,8 @@
 							"source": {
 								"type": "AzureSqlSource",
 								"sqlReaderQuery": "delete from GTFS\nSELECT TOP(10) Agencies.Agency_name,\n      10 AS Agency_id,\n      Agencies.Agency_url,\n      Agencies.Agency_timezone,\n      Agencies.Agency_lang,\n      Agencies.Agency_phone,\n\t  Route.Route_id,\n\t  Route.Route_short_name,\n\t  Route.Route_long_name,\n\t  Route.Route_desc,\n\t  10 AS Route_type,\n\t  Route.Route_url,\n\t  trip.Trip_id,\n\t  CONVERT(int, trip.Trip_short_name) AS Trip_short_name,\n\t  10 AS Direction_id,\n\t  trip.Block_id,\n\t  Cal.Service_id,\t  \n          case when Cal.Monday = '0' \n            then 0 \n            else 1 \n          end as Monday,   \n\t\t  case when Cal.Tuesday = '0' \n            then 0 \n            else 1 \n          end as Tuesday, \n\t\t  case when Cal.Wednesday = '0' \n            then 0 \n            else 1 \n          end as Wednesday, \n\t\t  case when Cal.Thursday = '0' \n            then 0 \n            else 1 \n          end as Thursday, \n\t\t case when Cal.Friday = '0' \n            then 0 \n            else 1 \n          end as Friday, \n\t\t  case when Cal.Saturday = '0' \n            then 0 \n            else 1 \n          end as Saturday, \n\t\t case when Cal.Sunday = '0' \n            then 0 \n            else 1 \n          end as Sunday, \n\t  Cal.Start_date,\n\t  Cal.End_date,\n\t  CalDate.Date,\n\t  10 AS Exception_type,\n\t  Shape.shape_id,\n\t  CONVERT(DOUBLE PRECISION, Shape.shape_pt_lat) AS shape_pt_lat,\n\t  CONVERT(DOUBLE PRECISION, Shape.shape_pt_lon) AS shape_pt_lon,\n\t  CONVERT(int, Shape.shape_pt_sequence) AS shape_pt_sequence,\n\t  NEWID() as GuId\n  FROM [Routes] Route\n  LEFT JOIN [Agency] Agencies\n    ON Route.Agency_id = Agencies.Agency_id\t\n\tJOIN [Trips] trip\n    ON Route.Route_id = trip.Route_id\n\tJOIN [CalendarUpdate] Cal\n    ON Cal.Service_id=trip.Service_id\n\tJOIN [calendar_dates_update] CalDate\n\t ON Cal.Service_id=CalDate.Service_id\n\tJOIN [Shapes] Shape\n    ON Shape.shape_id = trip.Shape_id\n  ORDER by Agencies.Agency_id",
-								"queryTimeout": "02:00:00"
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
 							},
 							"sink": {
 								"type": "AzureSqlSink"
@@ -6492,7 +6504,8 @@
 						"typeProperties": {
 							"source": {
 								"type": "AzureSqlSource",
-								"queryTimeout": "02:00:00"
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
 							},
 							"sink": {
 								"type": "DynamicsCrmSink",
@@ -7028,7 +7041,8 @@
 							"source": {
 								"type": "AzureSqlSource",
 								"sqlReaderQuery": "SELECT TOP (1000) [FaultId]\n      ,[FaultDesc]\n      ,[FaultCustomerNumber]\n      ,[Date]\n  FROM [dbo].[TECData]",
-								"queryTimeout": "02:00:00"
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
 							},
 							"sink": {
 								"type": "AzureSqlSink"
@@ -12747,6 +12761,142 @@
 				"[concat(variables('factoryId'), '/datasets/AzureSqlTable_CODA_8')]",
 				"[concat(variables('factoryId'), '/datasets/AzureSqlTable_CODA_9')]",
 				"[concat(variables('factoryId'), '/datasets/AzureSqlTable_CODA_4')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/MergeCSVfiles')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy data from ADLS",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true,
+									"wildcardFolderPath": "Source",
+									"wildcardFileName": "*",
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "DelimitedTextSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings",
+									"copyBehavior": "MergeFiles"
+								},
+								"formatSettings": {
+									"type": "DelimitedTextWriteSettings",
+									"quoteAllText": true,
+									"fileExtension": ".txt"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "DelimitedText_CSV",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DelimitedText1",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/DelimitedText_CSV')]",
+				"[concat(variables('factoryId'), '/datasets/DelimitedText1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DelimitedText_CSV')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "linkedservice_ADLSGen2",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": "EIS-779_poc/Source",
+						"fileSystem": "integrations-tec"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/linkedservice_ADLSGen2')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DelimitedText1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "linkedservice_ADLSGen2",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "Merge.csv",
+						"folderPath": "EIS-779_poc/Target",
+						"fileSystem": "integrations-tec"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/linkedservice_ADLSGen2')]"
 			]
 		}
 	]
