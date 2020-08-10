@@ -1,5 +1,5 @@
 {
-	"name": "DelimitedText_CSV",
+	"name": "DelimitedText_EIS779_Source_CSV",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "linkedservice_ADLSGen2",
