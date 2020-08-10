@@ -10,9 +10,9 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "004_REC_20200319_00001_04.csv",
-				"folderPath": "7Zfiles",
-				"fileSystem": "poc-tec"
+				"fileName": "EIS_779.csv",
+				"folderPath": "EIS-779/Target",
+				"fileSystem": "integrations-tec"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
