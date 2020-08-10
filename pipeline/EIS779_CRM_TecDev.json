@@ -5,7 +5,14 @@
 			{
 				"name": "Copy CSV to SQL Table",
 				"type": "Copy",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "Copy data to Merge CSV files",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "7.00:00:00",
 					"retry": 0,
@@ -252,7 +259,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "dataflowSegments",
+						"referenceName": "dataflow_EIS779_Segments_plit",
 						"type": "DataFlowReference"
 					},
 					"compute": {
@@ -431,7 +438,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "SQLJoin",
+						"referenceName": "EIS779_SQL_Join",
 						"type": "DatasetReference"
 					}
 				],
