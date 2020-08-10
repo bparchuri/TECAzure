@@ -6,7 +6,7 @@
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "DataflowSQLEIS779",
+						"referenceName": "Dataflow_SQLTable_EIS779",
 						"type": "DatasetReference"
 					},
 					"name": "dataflowSource"
