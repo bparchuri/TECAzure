@@ -1,5 +1,5 @@
 {
-	"name": "SQLJoin",
+	"name": "EIS779_SQL_Join",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureSqlDatabase_PCRM",
