@@ -1,8 +1,8 @@
 {
-	"name": "SQLAtlasCRM",
+	"name": "EIS779_SQL_CRM",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "SQLPocTec",
+			"referenceName": "AzureSqlDatabase_PCRM",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
