@@ -2,7 +2,7 @@
 	"name": "tecdevcrmconnection",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "TecDevCRM",
+			"referenceName": "DynamicsCrm_TECDev",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
