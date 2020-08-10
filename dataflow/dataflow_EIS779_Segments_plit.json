@@ -1,5 +1,5 @@
 {
-	"name": "dataflowSegments",
+	"name": "dataflow_EIS779_Segments_plit",
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
