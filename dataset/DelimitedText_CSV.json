@@ -10,7 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"folderPath": "EIS-779_poc/Source",
+				"folderPath": "EIS-779/Source",
 				"fileSystem": "integrations-tec"
 			},
 			"columnDelimiter": ",",
