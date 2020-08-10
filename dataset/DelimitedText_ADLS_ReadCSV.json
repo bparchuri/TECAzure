@@ -1,5 +1,5 @@
 {
-	"name": "ADLSGen2CSV",
+	"name": "DelimitedText_ADLS_ReadCSV",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "linkedservice_ADLSGen2",
