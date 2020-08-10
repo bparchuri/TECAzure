@@ -51,13 +51,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "DelimitedText_CSV",
+						"referenceName": "DelimitedText_EIS779_Source_CSV",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "DelimitedText1",
+						"referenceName": "DelimitedText_EIS779_Target",
 						"type": "DatasetReference"
 					}
 				]
