@@ -48,13 +48,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "ADLSGen2CSV",
+						"referenceName": "DelimitedText_ADLS_ReadCSV",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "SQLEIS779",
+						"referenceName": "SQL_EIS779",
 						"type": "DatasetReference"
 					}
 				]
@@ -219,7 +219,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "SQLAtlasCRM",
+						"referenceName": "EIS779_SQL_CRM",
 						"type": "DatasetReference"
 					}
 				],
@@ -251,7 +251,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "dataflowSegments",
+						"referenceName": "dataflow_EIS779_Segments_plit",
 						"type": "DataFlowReference"
 					},
 					"compute": {
@@ -430,7 +430,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "SQLJoin",
+						"referenceName": "EIS779_SQL_Join",
 						"type": "DatasetReference"
 					}
 				],

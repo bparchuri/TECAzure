@@ -227,7 +227,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "SQLAtlasCRM",
+						"referenceName": "EIS779_SQL_CRM",
 						"type": "DatasetReference"
 					}
 				],
