@@ -40,7 +40,8 @@
 									"ordinal": 1
 								},
 								"sink": {
-									"name": "Code_segment"
+									"name": "Code_segment",
+									"type": "String"
 								}
 							}
 						]
@@ -48,13 +49,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "ADLSGen2CSV",
+						"referenceName": "DelimitedText_ADLS_ReadCSV",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "SQLEIS779",
+						"referenceName": "SQL_EIS779",
 						"type": "DatasetReference"
 					}
 				]
