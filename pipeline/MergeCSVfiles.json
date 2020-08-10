@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy data from ADLS",
+				"name": "Copy data to Merge CSV files",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
