@@ -18,7 +18,8 @@
 					"source": {
 						"type": "AzureSqlSource",
 						"sqlReaderQuery": "delete from GTFS\nSELECT TOP(10) Agencies.Agency_name,\n      10 AS Agency_id,\n      Agencies.Agency_url,\n      Agencies.Agency_timezone,\n      Agencies.Agency_lang,\n      Agencies.Agency_phone,\n\t  Route.Route_id,\n\t  Route.Route_short_name,\n\t  Route.Route_long_name,\n\t  Route.Route_desc,\n\t  10 AS Route_type,\n\t  Route.Route_url,\n\t  trip.Trip_id,\n\t  CONVERT(int, trip.Trip_short_name) AS Trip_short_name,\n\t  10 AS Direction_id,\n\t  trip.Block_id,\n\t  Cal.Service_id,\t  \n          case when Cal.Monday = '0' \n            then 0 \n            else 1 \n          end as Monday,   \n\t\t  case when Cal.Tuesday = '0' \n            then 0 \n            else 1 \n          end as Tuesday, \n\t\t  case when Cal.Wednesday = '0' \n            then 0 \n            else 1 \n          end as Wednesday, \n\t\t  case when Cal.Thursday = '0' \n            then 0 \n            else 1 \n          end as Thursday, \n\t\t case when Cal.Friday = '0' \n            then 0 \n            else 1 \n          end as Friday, \n\t\t  case when Cal.Saturday = '0' \n            then 0 \n            else 1 \n          end as Saturday, \n\t\t case when Cal.Sunday = '0' \n            then 0 \n            else 1 \n          end as Sunday, \n\t  Cal.Start_date,\n\t  Cal.End_date,\n\t  CalDate.Date,\n\t  10 AS Exception_type,\n\t  Shape.shape_id,\n\t  CONVERT(DOUBLE PRECISION, Shape.shape_pt_lat) AS shape_pt_lat,\n\t  CONVERT(DOUBLE PRECISION, Shape.shape_pt_lon) AS shape_pt_lon,\n\t  CONVERT(int, Shape.shape_pt_sequence) AS shape_pt_sequence,\n\t  NEWID() as GuId\n  FROM [Routes] Route\n  LEFT JOIN [Agency] Agencies\n    ON Route.Agency_id = Agencies.Agency_id\t\n\tJOIN [Trips] trip\n    ON Route.Route_id = trip.Route_id\n\tJOIN [CalendarUpdate] Cal\n    ON Cal.Service_id=trip.Service_id\n\tJOIN [calendar_dates_update] CalDate\n\t ON Cal.Service_id=CalDate.Service_id\n\tJOIN [Shapes] Shape\n    ON Shape.shape_id = trip.Shape_id\n  ORDER by Agencies.Agency_id",
-						"queryTimeout": "02:00:00"
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
 					},
 					"sink": {
 						"type": "AzureSqlSink"
@@ -395,7 +396,8 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"queryTimeout": "02:00:00"
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
 					},
 					"sink": {
 						"type": "DynamicsCrmSink",
@@ -603,7 +605,8 @@
 				]
 			}
 		],
-		"annotations": []
+		"annotations": [],
+		"lastPublishTime": "2020-08-03T17:26:05Z"
 	},
 	"type": "Microsoft.DataFactory/factories/pipelines"
 }

@@ -11,5 +11,6 @@
 		"typeProperties": {
 			"entityName": "bd_payment"
 		}
-	}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
 }

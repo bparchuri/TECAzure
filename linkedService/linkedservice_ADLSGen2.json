@@ -1,5 +1,6 @@
 {
 	"name": "linkedservice_ADLSGen2",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
 	"properties": {
 		"annotations": [],
 		"type": "AzureBlobFS",

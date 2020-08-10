@@ -273,7 +273,8 @@
 				"defaultValue": "dlspoctec"
 			}
 		},
-		"annotations": []
+		"annotations": [],
+		"lastPublishTime": "2020-08-03T17:26:11Z"
 	},
 	"type": "Microsoft.DataFactory/factories/pipelines"
 }

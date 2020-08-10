@@ -1,9 +1,9 @@
 {
-	"name": "CODA File",
+	"name": "CODA File_copy1",
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy Coda file",
+				"name": "pipeline_CODAIntegration",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -35,13 +35,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "Binary1",
+						"referenceName": "binary_CODAFile",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "CODFile",
+						"referenceName": "binary_CODAcsv",
 						"type": "DatasetReference"
 					}
 				]
@@ -51,7 +51,7 @@
 				"type": "ExecuteDataFlow",
 				"dependsOn": [
 					{
-						"activity": "Copy Coda file",
+						"activity": "pipeline_CODAIntegration",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -78,7 +78,7 @@
 			}
 		],
 		"annotations": [],
-		"lastPublishTime": "2020-08-03T17:26:07Z"
+		"lastPublishTime": "2020-07-30T18:27:28Z"
 	},
 	"type": "Microsoft.DataFactory/factories/pipelines"
 }
