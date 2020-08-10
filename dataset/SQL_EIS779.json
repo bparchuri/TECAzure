@@ -1,5 +1,5 @@
 {
-	"name": "SQLEIS779",
+	"name": "SQL_EIS779",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureSqlDatabase_PCRM",
