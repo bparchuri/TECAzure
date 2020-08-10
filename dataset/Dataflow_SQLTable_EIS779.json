@@ -1,5 +1,5 @@
 {
-	"name": "DataflowSQLEIS779",
+	"name": "Dataflow_SQLTable_EIS779",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureSqlDatabase_PCRM",
