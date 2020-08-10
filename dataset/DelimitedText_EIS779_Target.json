@@ -1,5 +1,5 @@
 {
-	"name": "DelimitedText1",
+	"name": "DelimitedText_EIS779_Target",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "linkedservice_ADLSGen2",
@@ -10,8 +10,8 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "Merge.csv",
-				"folderPath": "EIS-779_poc/Target",
+				"fileName": "EIS_779.csv",
+				"folderPath": "EIS-779/Target",
 				"fileSystem": "integrations-tec"
 			},
 			"columnDelimiter": ",",
