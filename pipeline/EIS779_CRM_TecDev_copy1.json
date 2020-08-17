@@ -26,6 +26,11 @@
 				}
 			}
 		],
+		"variables": {
+			"fileName": {
+				"type": "String"
+			}
+		},
 		"folder": {
 			"name": "EIS-779"
 		},
