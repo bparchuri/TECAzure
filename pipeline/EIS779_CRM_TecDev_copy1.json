@@ -1,0 +1,355 @@
+{
+	"name": "EIS779_CRM_TecDev_copy1",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy CSV to SQL Table",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Copy data to Merge CSV files",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"parallelCopies": 50,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"type": "String",
+									"ordinal": 1
+								},
+								"sink": {
+									"name": "Code_segment",
+									"type": "String"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "DelimitedText_ADLS_ReadCSV",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "SQL_EIS779",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Send data to CRM",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": "SELECT TOP (10) [Code_segment]\n      ,[Poste_segment]\n      ,[Id_transaction]\n      ,[Num_serie]\n      ,[Id_entreprise]\n      ,[Id_paiement]\n      ,[Code_moyen_paiement]\n      ,[Sens_paiement]\n      ,[Montant]\n      ,[Type_equipement]\n      ,[Date_ope]\n      ,[Name]\n      ,[Guid]\n  FROM [dbo].[EIS779_atlas]",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "DynamicsCrmSink",
+						"writeBatchSize": 10,
+						"writeBehavior": "upsert",
+						"ignoreNullValues": false
+					},
+					"enableStaging": false,
+					"parallelCopies": 50,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Name",
+									"type": "String"
+								},
+								"sink": {
+									"name": "tec_name",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Code_segment",
+									"type": "String"
+								},
+								"sink": {
+									"name": "tec_codesegment",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Sens_paiement",
+									"type": "String"
+								},
+								"sink": {
+									"name": "tec_senspaiement",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Num_serie",
+									"type": "String"
+								},
+								"sink": {
+									"name": "tec_numserie",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Id_paiement",
+									"type": "String"
+								},
+								"sink": {
+									"name": "tec_idpaiement",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Guid",
+									"type": "Guid"
+								},
+								"sink": {
+									"name": "tec_eis779atlasid",
+									"type": "Guid"
+								}
+							},
+							{
+								"source": {
+									"name": "Code_moyen_paiement",
+									"type": "String"
+								},
+								"sink": {
+									"name": "tec_codemoyenpaiement",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Poste_segment",
+									"type": "String"
+								},
+								"sink": {
+									"name": "tec_postesegment",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Id_entreprise",
+									"type": "String"
+								},
+								"sink": {
+									"name": "tec_identreprise",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Date_ope",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "tec_dateope",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "Id_transaction",
+									"type": "String"
+								},
+								"sink": {
+									"name": "tec_idtransaction",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Type_equipement"
+								},
+								"sink": {
+									"name": "tec_typeequipment"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "EIS779_SQL_CRM",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "tecdevcrmconnection",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "dataflowusingsplittoSegments",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [
+					{
+						"activity": "Copy CSV to SQL Table",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "dataflow_EIS779_Segments_plit",
+						"type": "DataFlowReference"
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					}
+				}
+			},
+			{
+				"name": "Copy data to Merge CSV files",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"wildcardFileName": "*",
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings",
+							"copyBehavior": "MergeFiles"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".csv"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "DelimitedText_EIS779_Source_CSV",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DelimitedText_EIS779_Target",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "dataflow1",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "dataflow1",
+						"type": "DataFlowReference"
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					}
+				}
+			}
+		],
+		"folder": {
+			"name": "EIS-779"
+		},
+		"annotations": [],
+		"lastPublishTime": "2020-08-10T18:35:41Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
