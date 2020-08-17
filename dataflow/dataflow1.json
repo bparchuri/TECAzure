@@ -18,7 +18,7 @@
 					"name": "ConditionalSplit1"
 				}
 			],
-			"script": "source(output(\n\t\tCode_segment as string,\n\t\tPoste_segment as string,\n\t\tId_transaction as string,\n\t\tNum_serie as string,\n\t\tId_entreprise as string,\n\t\tId_paiement as string,\n\t\tCode_moyen_paiement as string,\n\t\tSens_paiement as string,\n\t\tMontant as double,\n\t\tType_equipement as integer,\n\t\tDate_ope as timestamp,\n\t\tName as string,\n\t\tGuid as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> source1\nsource1 split(ERROR_FUNCTION(''),\n\tERROR_FUNCTION(''),\n\tdisjoint: true) ~> ConditionalSplit1@(, , )"
+			"script": "source(output(\n\t\tCode_segment as string,\n\t\tPoste_segment as string,\n\t\tId_transaction as string,\n\t\tNum_serie as string,\n\t\tId_entreprise as string,\n\t\tId_paiement as string,\n\t\tCode_moyen_paiement as string,\n\t\tSens_paiement as string,\n\t\tMontant as double,\n\t\tType_equipement as integer,\n\t\tDate_ope as timestamp,\n\t\tName as string,\n\t\tGuid as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> source1\nsource1 split(length(Code_segment)<50,\n\tdisjoint: true) ~> ConditionalSplit1@(length check, )"
 		}
 	}
 }
