@@ -1,0 +1,37 @@
+{
+	"name": "AzureSqlTable17",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase_PCRM",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "file_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "success",
+				"type": "nvarchar"
+			},
+			{
+				"name": "date",
+				"type": "date"
+			},
+			{
+				"name": "system",
+				"type": "nvarchar"
+			},
+			{
+				"name": "record_detail",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "EIS-779-Errors"
+		}
+	}
+}
