@@ -15,7 +15,7 @@
 				"fileSystem": "integrations-tec"
 			},
 			"columnDelimiter": ",",
-			"encodingName": "UTF-7",
+			"encodingName": "ISO-8859-1",
 			"escapeChar": "\\",
 			"firstRowAsHeader": true,
 			"quoteChar": "\""
