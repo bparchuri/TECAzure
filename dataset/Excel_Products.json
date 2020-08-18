@@ -8,9 +8,10 @@
 		"annotations": [],
 		"type": "Excel",
 		"typeProperties": {
+			"sheetName": "Liste des produits",
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "Productdata.csv",
+				"fileName": "Productdata.xlsx",
 				"folderPath": "Products/Source",
 				"fileSystem": "integrations-tec"
 			},
