@@ -8,6 +8,7 @@
 		"annotations": [],
 		"type": "Excel",
 		"typeProperties": {
+			"sheetName": "Liste des produits",
 			"location": {
 				"type": "AzureBlobFSLocation",
 				"fileName": "Productdata.xlsx",
