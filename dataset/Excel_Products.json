@@ -1,0 +1,90 @@
+{
+	"name": "Excel_Products",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "linkedservice_ADLSGen2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "Productdata.xlsx",
+				"folderPath": "Products/Source",
+				"fileSystem": "integrations-tec"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "ID",
+				"type": "String"
+			},
+			{
+				"name": "N° Reseau",
+				"type": "String"
+			},
+			{
+				"name": "Libelle Reseau Produit",
+				"type": "String"
+			},
+			{
+				"name": "N° Produit",
+				"type": "String"
+			},
+			{
+				"name": "Libelle long Produit",
+				"type": "String"
+			},
+			{
+				"name": "DDV Produit",
+				"type": "String"
+			},
+			{
+				"name": "DEV Produit",
+				"type": "String"
+			},
+			{
+				"name": "Supprimé ?",
+				"type": "String"
+			},
+			{
+				"name": "Date Suppression",
+				"type": "String"
+			},
+			{
+				"name": "Libellé du Type de support",
+				"type": "String"
+			},
+			{
+				"name": "Decimals Supported",
+				"type": "String"
+			},
+			{
+				"name": "Unit Group",
+				"type": "String"
+			},
+			{
+				"name": "Price List",
+				"type": "String"
+			},
+			{
+				"name": "Default Unit",
+				"type": "String"
+			},
+			{
+				"name": "Unit Group Name",
+				"type": "String"
+			},
+			{
+				"name": "Price List Name",
+				"type": "String"
+			},
+			{
+				"name": "Default Unit Name",
+				"type": "String"
+			}
+		]
+	}
+}
