@@ -57,34 +57,6 @@
 			{
 				"name": "Libellé du Type de support",
 				"type": "String"
-			},
-			{
-				"name": "Decimals Supported",
-				"type": "String"
-			},
-			{
-				"name": "Unit Group",
-				"type": "String"
-			},
-			{
-				"name": "Price List",
-				"type": "String"
-			},
-			{
-				"name": "Default Unit",
-				"type": "String"
-			},
-			{
-				"name": "Unit Group Name",
-				"type": "String"
-			},
-			{
-				"name": "Price List Name",
-				"type": "String"
-			},
-			{
-				"name": "Default Unit Name",
-				"type": "String"
 			}
 		]
 	}
