@@ -26,11 +26,6 @@
 				}
 			}
 		],
-		"parameters": {
-			"fileNameParameter": {
-				"type": "string"
-			}
-		},
 		"variables": {
 			"fileName": {
 				"type": "String"
