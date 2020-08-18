@@ -18,7 +18,7 @@
 					"name": "DerivedColumnTypeConvertions"
 				}
 			],
-			"script": "source(output(\n\t\tID as string,\n\t\t{N° Reseau} as string,\n\t\t{Libelle Reseau Produit} as string,\n\t\t{N° Produit} as string,\n\t\t{Libelle long Produit} as string,\n\t\t{DDV Produit} as string,\n\t\t{DEV Produit} as string,\n\t\t{Supprimé ?} as string,\n\t\t{Date Suppression} as string,\n\t\t{Libellé du Type de support} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> sourceproducts\nsourceproducts derive(DDV_Product = toDate('DDV Produit')) ~> DerivedColumnTypeConvertions"
+			"script": "source(output(\n\t\tID as string,\n\t\t{N° Reseau} as string,\n\t\t{Libelle Reseau Produit} as string,\n\t\t{N° Produit} as string,\n\t\t{Libelle long Produit} as string,\n\t\t{DDV Produit} as string,\n\t\t{DEV Produit} as string,\n\t\t{Supprimé ?} as string,\n\t\t{Date Suppression} as string,\n\t\t{Libellé du Type de support} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> sourceproducts\nsourceproducts derive(DDV_Product = substring({DDV Produit},4,4)) ~> DerivedColumnTypeConvertions"
 		}
 	}
 }
