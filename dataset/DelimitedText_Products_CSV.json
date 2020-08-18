@@ -15,39 +15,50 @@
 				"fileSystem": "integrations-tec"
 			},
 			"columnDelimiter": ",",
+			"encodingName": "UTF-7",
 			"escapeChar": "\\",
 			"firstRowAsHeader": true,
 			"quoteChar": "\""
 		},
 		"schema": [
 			{
+				"name": "ID",
 				"type": "String"
 			},
 			{
+				"name": "N° Reseau",
 				"type": "String"
 			},
 			{
+				"name": "Libelle Reseau Produit",
 				"type": "String"
 			},
 			{
+				"name": "N° Produit",
 				"type": "String"
 			},
 			{
+				"name": "Libelle long Produit",
 				"type": "String"
 			},
 			{
+				"name": "DDV Produit",
 				"type": "String"
 			},
 			{
+				"name": "DEV Produit",
 				"type": "String"
 			},
 			{
+				"name": "Supprimé ?",
 				"type": "String"
 			},
 			{
+				"name": "Date Suppression",
 				"type": "String"
 			},
 			{
+				"name": "Libellé du Type de support",
 				"type": "String"
 			}
 		]
