@@ -28,6 +28,10 @@
 				"name": "record_detail",
 				"type": "nvarchar"
 			}
-		]
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "EIS-779-Errors"
+		}
 	}
 }
