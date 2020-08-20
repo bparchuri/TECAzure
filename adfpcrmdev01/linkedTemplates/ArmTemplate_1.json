@@ -6,12 +6,183 @@
 			"type": "string",
 			"metadata": "Data Factory name",
 			"defaultValue": "adfpcrmdev01"
+		},
+		"DynamicsCrm_TECDev_properties_typeProperties_username": {
+			"type": "string",
+			"defaultValue": "Bhargav.Parchuri@letec.be"
+		},
+		"SQLPocTec_properties_typeProperties_connectionString_secretName": {
+			"type": "string",
+			"defaultValue": "SQL19"
+		},
+		"SQLPocTec_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "b4537ba3-1639-42cb-9143-8bfbcb683e79"
+		},
+		"SQLPocTec_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "6e5433e0-76fc-44b7-b71b-0e5446a3fa94"
+		},
+		"TecDevCRM_properties_typeProperties_username": {
+			"type": "string",
+			"defaultValue": "Bhargav.Parchuri@letec.be"
+		},
+		"linkedService_ADLS_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://sapcrmdev01.dfs.core.windows.net"
+		},
+		"linkedService_ADLS_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "2291afd2-1191-4bcb-9906-c1406010941b"
+		},
+		"linkedService_ADLS_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "b74b5688-5ee7-4c50-8364-ddd607f525ac"
+		},
+		"linkedservice_ADLSGen2_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://sapcrmdev01.dfs.core.windows.net"
+		},
+		"linkedservice_ADLSGen2_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "2291afd2-1191-4bcb-9906-c1406010941b"
+		},
+		"linkedservice_ADLSGen2_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "b74b5688-5ee7-4c50-8364-ddd607f525ac"
 		}
 	},
 	"variables": {
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/DynamicsCrm_TECDev')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "DynamicsCrm",
+				"typeProperties": {
+					"deploymentType": "Online",
+					"serviceUri": "https://tec-crm-dev.crm4.dynamics.com",
+					"authenticationType": "Office365",
+					"username": "[parameters('DynamicsCrm_TECDev_properties_typeProperties_username')]",
+					"password": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "AzureKeyVault_Dev",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "tec-dev-dynamicscrmpwd",
+						"secretVersion": "7be7b0e7ab794f39b7be5079c1c0314a"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SQLPocTec')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "KeyVaultPoc",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "[parameters('SQLPocTec_properties_typeProperties_connectionString_secretName')]"
+					},
+					"servicePrincipalId": "[parameters('SQLPocTec_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "KeyVaultPoc",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "pockey"
+					},
+					"tenant": "[parameters('SQLPocTec_properties_typeProperties_tenant')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/TecDevCRM')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "DynamicsCrm",
+				"typeProperties": {
+					"deploymentType": "Online",
+					"serviceUri": "https://tec-crm-dev.crm4.dynamics.com",
+					"authenticationType": "Office365",
+					"username": "[parameters('TecDevCRM_properties_typeProperties_username')]",
+					"password": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "KeyVaultPoc",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "crmpwd"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/linkedService_ADLS')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('linkedService_ADLS_properties_typeProperties_url')]",
+					"tenant": "[parameters('linkedService_ADLS_properties_typeProperties_tenant')]",
+					"servicePrincipalId": "[parameters('linkedService_ADLS_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "AzureKeyVault_Dev",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "tec-dev-prinicipalkey",
+						"secretVersion": "ea7baf49a5774322b0ca7dc1d9b5f923"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/linkedservice_ADLSGen2')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('linkedservice_ADLSGen2_properties_typeProperties_url')]",
+					"tenant": "[parameters('linkedservice_ADLSGen2_properties_typeProperties_tenant')]",
+					"servicePrincipalId": "[parameters('linkedservice_ADLSGen2_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "keyvault_TEC",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "tec-dev-prinicipalkey",
+						"secretVersion": "ea7baf49a5774322b0ca7dc1d9b5f923"
+					}
+				}
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/ADLSGen2CSV')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
@@ -40,7 +211,9 @@
 					}
 				]
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/linkedservice_ADLSGen2')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/ADLSV2CSV')]",
@@ -168,7 +341,9 @@
 					"table": "COD-0"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SQLPocTec')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AzureSqlTable10')]",
@@ -220,7 +395,9 @@
 					"table": "COD-9"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SQLPocTec')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AzureSqlTable11')]",
@@ -272,7 +449,9 @@
 					"table": "COD-4"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SQLPocTec')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AzureSqlTable12')]",
@@ -334,7 +513,9 @@
 					"table": "COD-1"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SQLPocTec')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AzureSqlTable13')]",
@@ -414,7 +595,9 @@
 					"table": "COD-22"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SQLPocTec')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AzureSqlTable14')]",
@@ -430,7 +613,9 @@
 				"schema": [],
 				"typeProperties": {}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SQLPocTec')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AzureSqlTable15')]",
@@ -640,6 +825,164 @@
 					"table": "CODIntegration"
 				}
 			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SQLPocTec')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTable16')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase_PCRM",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Code_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Poste_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_transaction",
+						"type": "nchar"
+					},
+					{
+						"name": "Num_serie",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_entreprise",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_paiement",
+						"type": "nchar"
+					},
+					{
+						"name": "Code_moyen_paiement",
+						"type": "nchar"
+					},
+					{
+						"name": "Sens_paiement",
+						"type": "varchar"
+					},
+					{
+						"name": "Montant",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Type_equipement",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Date_ope",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Name",
+						"type": "varchar"
+					},
+					{
+						"name": "Guid",
+						"type": "uniqueidentifier"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EIS779_atlas"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTable17')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase_PCRM",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "file_name",
+						"type": "nvarchar"
+					},
+					{
+						"name": "success",
+						"type": "nvarchar"
+					},
+					{
+						"name": "date",
+						"type": "date"
+					},
+					{
+						"name": "system",
+						"type": "nvarchar"
+					},
+					{
+						"name": "record_detail",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EIS-779-Errors"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTable18')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase_PCRM",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "file_name",
+						"type": "nvarchar"
+					},
+					{
+						"name": "success",
+						"type": "nvarchar"
+					},
+					{
+						"name": "date",
+						"type": "date"
+					},
+					{
+						"name": "system",
+						"type": "nvarchar"
+					},
+					{
+						"name": "record_detail",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EIS-779-Errors"
+				}
+			},
 			"dependsOn": []
 		},
 		{
@@ -792,7 +1135,9 @@
 					"table": "COD-21"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SQLPocTec')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AzureSqlTable4')]",
@@ -811,783 +1156,9 @@
 					"table": "COD-23"
 				}
 			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureSqlTable5')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "SQLPocTec",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "RegistrationID",
-						"type": "varchar"
-					},
-					{
-						"name": "ArticleCode",
-						"type": "varchar"
-					},
-					{
-						"name": "Sequencenumber",
-						"type": "varchar"
-					},
-					{
-						"name": "Retailnumber",
-						"type": "varchar"
-					},
-					{
-						"name": "Communication",
-						"type": "varchar"
-					},
-					{
-						"name": "Customerreference",
-						"type": "varchar"
-					},
-					{
-						"name": "BIC",
-						"type": "varchar"
-					},
-					{
-						"name": "BlankColumn1",
-						"type": "varchar"
-					},
-					{
-						"name": "Transactiontype",
-						"type": "varchar"
-					},
-					{
-						"name": "ISOCode",
-						"type": "varchar"
-					},
-					{
-						"name": "CategoryPurpose",
-						"type": "varchar"
-					},
-					{
-						"name": "Purpose",
-						"type": "varchar"
-					},
-					{
-						"name": "MoreCode",
-						"type": "varchar"
-					},
-					{
-						"name": "BlankColumn2",
-						"type": "varchar"
-					},
-					{
-						"name": "Linkcode",
-						"type": "varchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "COD-22"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureSqlTable6')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "SQLPocTec",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "RegistrationID",
-						"type": "varchar"
-					},
-					{
-						"name": "ArticleCode",
-						"type": "varchar"
-					},
-					{
-						"name": "Sequencenumber",
-						"type": "varchar"
-					},
-					{
-						"name": "Retailnumber",
-						"type": "varchar"
-					},
-					{
-						"name": "AdditionalInformation",
-						"type": "varchar"
-					},
-					{
-						"name": "OperationCode",
-						"type": "varchar"
-					},
-					{
-						"name": "CommunicationCode",
-						"type": "varchar"
-					},
-					{
-						"name": "Communication",
-						"type": "varchar"
-					},
-					{
-						"name": "BlankColumn1",
-						"type": "varchar"
-					},
-					{
-						"name": "MoreCode",
-						"type": "varchar"
-					},
-					{
-						"name": "BlankColumn2",
-						"type": "varchar"
-					},
-					{
-						"name": "LinkCode",
-						"type": "varchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "COD-31"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureSqlTable7')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "SQLPocTec",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "RegistrationID",
-						"type": "varchar"
-					},
-					{
-						"name": "ArticleCode",
-						"type": "varchar"
-					},
-					{
-						"name": "Sequencenumber",
-						"type": "varchar"
-					},
-					{
-						"name": "Retailnumber",
-						"type": "varchar"
-					},
-					{
-						"name": "Communication",
-						"type": "varchar"
-					},
-					{
-						"name": "BlankColumn1",
-						"type": "varchar"
-					},
-					{
-						"name": "Codesuite",
-						"type": "varchar"
-					},
-					{
-						"name": "BlankColumn2",
-						"type": "varchar"
-					},
-					{
-						"name": "LinkCode",
-						"type": "varchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "COD-32"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureSqlTable8')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "SQLPocTec",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "RegistrationID",
-						"type": "varchar"
-					},
-					{
-						"name": "ArticleCode",
-						"type": "varchar"
-					},
-					{
-						"name": "Sequencenumber",
-						"type": "varchar"
-					},
-					{
-						"name": "Retailnumber",
-						"type": "varchar"
-					},
-					{
-						"name": "Communication",
-						"type": "varchar"
-					},
-					{
-						"name": "BlankColumn1",
-						"type": "varchar"
-					},
-					{
-						"name": "Codesuite",
-						"type": "varchar"
-					},
-					{
-						"name": "BlankColumn2",
-						"type": "varchar"
-					},
-					{
-						"name": "LinkCode",
-						"type": "varchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "COD-33"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureSqlTable9')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "SQLPocTec",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "RegistrationID",
-						"type": "varchar"
-					},
-					{
-						"name": "Sequencenumber",
-						"type": "varchar"
-					},
-					{
-						"name": "Accountnumber",
-						"type": "varchar"
-					},
-					{
-						"name": "SignCode",
-						"type": "varchar"
-					},
-					{
-						"name": "NewBalance",
-						"type": "decimal",
-						"precision": 15,
-						"scale": 3
-					},
-					{
-						"name": "Dateofnewbalance",
-						"type": "date"
-					},
-					{
-						"name": "BlankColumn",
-						"type": "varchar"
-					},
-					{
-						"name": "LinkCode",
-						"type": "varchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "COD-8"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureSqlTable_CODA0')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase_PCRM",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "RecordIdentification",
-						"type": "varchar"
-					},
-					{
-						"name": "Zeros",
-						"type": "varchar"
-					},
-					{
-						"name": "CreationDate",
-						"type": "date"
-					},
-					{
-						"name": "BankIdentificationNumber",
-						"type": "varchar"
-					},
-					{
-						"name": "ApplicationCode",
-						"type": "varchar"
-					},
-					{
-						"name": "Duplicate",
-						"type": "varchar"
-					},
-					{
-						"name": "BlankColumn1",
-						"type": "varchar"
-					},
-					{
-						"name": "FileReference",
-						"type": "varchar"
-					},
-					{
-						"name": "NameAddressee",
-						"type": "varchar"
-					},
-					{
-						"name": "BIC",
-						"type": "varchar"
-					},
-					{
-						"name": "IdentificationNumberofBelgium",
-						"type": "varchar"
-					},
-					{
-						"name": "BlankColumn2",
-						"type": "varchar"
-					},
-					{
-						"name": "CodeSeperateApplication",
-						"type": "varchar"
-					},
-					{
-						"name": "TransactionReferrence",
-						"type": "varchar"
-					},
-					{
-						"name": "RelatedReferrence",
-						"type": "varchar"
-					},
-					{
-						"name": "BlankColumn3",
-						"type": "varchar"
-					},
-					{
-						"name": "VersionCode",
-						"type": "varchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "CODA-0"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureSqlTable_CODAEntity')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase_PCRM",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "Zero_RecordIdentification",
-						"type": "varchar"
-					},
-					{
-						"name": "Zero_CreationDate",
-						"type": "date"
-					},
-					{
-						"name": "Zero_BankIdentificationNumber",
-						"type": "varchar"
-					},
-					{
-						"name": "Zero_ApplicationCode",
-						"type": "varchar"
-					},
-					{
-						"name": "Zero_Duplicate",
-						"type": "varchar"
-					},
-					{
-						"name": "Zero_FileReference",
-						"type": "varchar"
-					},
-					{
-						"name": "Zero_NameAddressee",
-						"type": "varchar"
-					},
-					{
-						"name": "Zero_BIC",
-						"type": "varchar"
-					},
-					{
-						"name": "Zero_IdentificationNumberofBelgium",
-						"type": "varchar"
-					},
-					{
-						"name": "Zero_CodeSeperateApplication",
-						"type": "varchar"
-					},
-					{
-						"name": "Zero_TransactionReferrence",
-						"type": "varchar"
-					},
-					{
-						"name": "Zero_RelatedReferrence",
-						"type": "varchar"
-					},
-					{
-						"name": "One_RegistrationId",
-						"type": "varchar"
-					},
-					{
-						"name": "One_BankAccountType",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "One_Sequencenumberofpaperaccount",
-						"type": "varchar"
-					},
-					{
-						"name": "One_Accountnumber",
-						"type": "varchar"
-					},
-					{
-						"name": "One_Oldbalance",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "One_Oldpay",
-						"type": "decimal",
-						"precision": 15,
-						"scale": 3
-					},
-					{
-						"name": "One_Dateofoldbalance",
-						"type": "date"
-					},
-					{
-						"name": "One_Accountholdername",
-						"type": "varchar"
-					},
-					{
-						"name": "One_Accounttagged",
-						"type": "varchar"
-					},
-					{
-						"name": "One_Sequencenumberofthecodified",
-						"type": "varchar"
-					},
-					{
-						"name": "Four_RegistrationID",
-						"type": "varchar"
-					},
-					{
-						"name": "Four_Textofthefreemessage",
-						"type": "varchar"
-					},
-					{
-						"name": "Eight_RegistrationId",
-						"type": "varchar"
-					},
-					{
-						"name": "Eight_Sequencenumber",
-						"type": "varchar"
-					},
-					{
-						"name": "Eight_Accountnumber",
-						"type": "varchar"
-					},
-					{
-						"name": "Eight_SignCode",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Eight_NewBalance",
-						"type": "decimal",
-						"precision": 15,
-						"scale": 3
-					},
-					{
-						"name": "Eight_Dateofnewbalance",
-						"type": "date"
-					},
-					{
-						"name": "Nine_RegistrationId",
-						"type": "varchar"
-					},
-					{
-						"name": "Nine_Numberofrecords",
-						"type": "varchar"
-					},
-					{
-						"name": "Nine_DebitRevenue",
-						"type": "decimal",
-						"precision": 15,
-						"scale": 3
-					},
-					{
-						"name": "Nine_CreditSales",
-						"type": "decimal",
-						"precision": 15,
-						"scale": 3
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "CODAIntegration"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureSqlTable_CODAIntegration')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase_PCRM",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "Nine_RegistrationID",
-						"type": "varchar"
-					},
-					{
-						"name": "Nine_Numberofrecords",
-						"type": "varchar"
-					},
-					{
-						"name": "Nine_DebitRevenue",
-						"type": "decimal",
-						"precision": 15,
-						"scale": 3
-					},
-					{
-						"name": "Nine_CreditSales",
-						"type": "decimal",
-						"precision": 15,
-						"scale": 3
-					},
-					{
-						"name": "Nine_Multiplefilecode",
-						"type": "varchar"
-					},
-					{
-						"name": "Eight_RegistrationID",
-						"type": "varchar"
-					},
-					{
-						"name": "Eight_Accountnumber",
-						"type": "varchar"
-					},
-					{
-						"name": "Eight_NewBalance",
-						"type": "decimal",
-						"precision": 15,
-						"scale": 3
-					},
-					{
-						"name": "Eight_Dateofnewbalance",
-						"type": "date"
-					},
-					{
-						"name": "One_RegistrationID",
-						"type": "varchar"
-					},
-					{
-						"name": "One_BankAccountType",
-						"type": "varchar"
-					},
-					{
-						"name": "One_Sequencenumberofpaperaccount",
-						"type": "varchar"
-					},
-					{
-						"name": "One_Accountnumber",
-						"type": "varchar"
-					},
-					{
-						"name": "One_Oldbalance",
-						"type": "varchar"
-					},
-					{
-						"name": "One_Oldpay",
-						"type": "decimal",
-						"precision": 15,
-						"scale": 3
-					},
-					{
-						"name": "One_Dateofoldbalance",
-						"type": "date"
-					},
-					{
-						"name": "One_Accountholdername",
-						"type": "varchar"
-					},
-					{
-						"name": "TwoOne_RegistrationID",
-						"type": "varchar"
-					},
-					{
-						"name": "TwoOne_Sequencenumber",
-						"type": "varchar"
-					},
-					{
-						"name": "TwoOne_Amount",
-						"type": "decimal",
-						"precision": 15,
-						"scale": 3
-					},
-					{
-						"name": "TwoOne_Valuedate",
-						"type": "date"
-					},
-					{
-						"name": "TwoOne_Accountdate",
-						"type": "date"
-					},
-					{
-						"name": "TwoTwo_RegistrationID",
-						"type": "varchar"
-					},
-					{
-						"name": "TwoTwo_Customerreference",
-						"type": "varchar"
-					},
-					{
-						"name": "TwoTwo_BIC",
-						"type": "varchar"
-					},
-					{
-						"name": "TwoTwo_Linkcode",
-						"type": "varchar"
-					},
-					{
-						"name": "TwoThird_RegistrationID",
-						"type": "varchar"
-					},
-					{
-						"name": "TwoThird_ArticleCode",
-						"type": "varchar"
-					},
-					{
-						"name": "TwoThird_Counterpartyaccountnumber",
-						"type": "varchar"
-					},
-					{
-						"name": "TwoThird_Nameofcounterparty",
-						"type": "varchar"
-					},
-					{
-						"name": "TwoThird_SuiteCode",
-						"type": "varchar"
-					},
-					{
-						"name": "ThirdOne_RegistrationID",
-						"type": "varchar"
-					},
-					{
-						"name": "ThirdOne_ArticleCode",
-						"type": "varchar"
-					},
-					{
-						"name": "ThirdOne_CommunicationCode",
-						"type": "varchar"
-					},
-					{
-						"name": "ThirdOne_MoreCode",
-						"type": "varchar"
-					},
-					{
-						"name": "ThirdTwo_RegistrationID",
-						"type": "varchar"
-					},
-					{
-						"name": "ThirdTwo_Sequencenumber",
-						"type": "varchar"
-					},
-					{
-						"name": "ThirdTwo_ArticleCode",
-						"type": "varchar"
-					},
-					{
-						"name": "ThirdTwo_Communication",
-						"type": "varchar"
-					},
-					{
-						"name": "Zero_RecordIdentification",
-						"type": "varchar"
-					},
-					{
-						"name": "Zero_CreationDate",
-						"type": "date"
-					},
-					{
-						"name": "Zero_BankIdentificationNumber",
-						"type": "varchar"
-					},
-					{
-						"name": "Zero_ApplicationCode",
-						"type": "varchar"
-					},
-					{
-						"name": "Zero_BIC",
-						"type": "varchar"
-					},
-					{
-						"name": "Zero_IdentificationNumberofBelgium",
-						"type": "varchar"
-					}
-				],
-				"typeProperties": {}
-			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SQLPocTec')]"
+			]
 		}
 	]
 }

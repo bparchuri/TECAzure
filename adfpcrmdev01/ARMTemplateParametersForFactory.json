@@ -14,6 +14,9 @@
 		"AzureFileStorage1_password": {
 			"value": ""
 		},
+		"Sftp1_password": {
+			"value": ""
+		},
 		"ADLSCOD_properties_typeProperties_url": {
 			"value": "https://sapoctec.dfs.core.windows.net"
 		},
@@ -73,6 +76,12 @@
 		},
 		"SQLPocTec_properties_typeProperties_tenant": {
 			"value": "6e5433e0-76fc-44b7-b71b-0e5446a3fa94"
+		},
+		"Sftp1_properties_typeProperties_host": {
+			"value": "217.117.38.238"
+		},
+		"Sftp1_properties_typeProperties_userName": {
+			"value": "crm"
 		},
 		"TecDevCRM_properties_typeProperties_username": {
 			"value": "Bhargav.Parchuri@letec.be"

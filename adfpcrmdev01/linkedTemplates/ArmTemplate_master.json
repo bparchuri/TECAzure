@@ -19,6 +19,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'AzureFileStorage1'"
 		},
+		"Sftp1_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'Sftp1'"
+		},
 		"ADLSCOD_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://sapoctec.dfs.core.windows.net"
@@ -98,6 +102,14 @@
 		"SQLPocTec_properties_typeProperties_tenant": {
 			"type": "string",
 			"defaultValue": "6e5433e0-76fc-44b7-b71b-0e5446a3fa94"
+		},
+		"Sftp1_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "217.117.38.238"
+		},
+		"Sftp1_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "crm"
 		},
 		"TecDevCRM_properties_typeProperties_username": {
 			"type": "string",
@@ -181,6 +193,9 @@
 					"AzureFileStorage1_password": {
 						"value": "[parameters('AzureFileStorage1_password')]"
 					},
+					"Sftp1_password": {
+						"value": "[parameters('Sftp1_password')]"
+					},
 					"AzureDataLakeStorage1_properties_typeProperties_url": {
 						"value": "[parameters('AzureDataLakeStorage1_properties_typeProperties_url')]"
 					},
@@ -201,6 +216,12 @@
 					},
 					"KeyVaultPoc_properties_typeProperties_baseUrl": {
 						"value": "[parameters('KeyVaultPoc_properties_typeProperties_baseUrl')]"
+					},
+					"Sftp1_properties_typeProperties_host": {
+						"value": "[parameters('Sftp1_properties_typeProperties_host')]"
+					},
+					"Sftp1_properties_typeProperties_userName": {
+						"value": "[parameters('Sftp1_properties_typeProperties_userName')]"
 					},
 					"keyvault_TEC_properties_typeProperties_baseUrl": {
 						"value": "[parameters('keyvault_TEC_properties_typeProperties_baseUrl')]"
@@ -243,6 +264,24 @@
 					},
 					"AzureSqlDatabase_PCRM_properties_typeProperties_tenant": {
 						"value": "[parameters('AzureSqlDatabase_PCRM_properties_typeProperties_tenant')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "adfpcrmdev01_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
 					},
 					"DynamicsCrm_TECDev_properties_typeProperties_username": {
 						"value": "[parameters('DynamicsCrm_TECDev_properties_typeProperties_username')]"
@@ -276,24 +315,6 @@
 					},
 					"linkedservice_ADLSGen2_properties_typeProperties_servicePrincipalId": {
 						"value": "[parameters('linkedservice_ADLSGen2_properties_typeProperties_servicePrincipalId')]"
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "adfpcrmdev01_ArmTemplate_1",
-			"type": "Microsoft.Resources/deployments",
-			"apiVersion": "2018-02-01",
-			"properties": {
-				"mode": "incremental",
-				"templateLink": {
-					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
-					"contentVersion": "1.0.0.0"
-				},
-				"parameters": {
-					"factoryName": {
-						"value": "[parameters('factoryName')]"
 					}
 				}
 			},
@@ -399,6 +420,26 @@
 			},
 			"dependsOn": [
 				"[resourceId('Microsoft.Resources/deployments', 'adfpcrmdev01_ArmTemplate_5')]"
+			]
+		},
+		{
+			"name": "adfpcrmdev01_ArmTemplate_7",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_7.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfpcrmdev01_ArmTemplate_6')]"
 			]
 		}
 	]

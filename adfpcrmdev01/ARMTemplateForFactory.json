@@ -19,6 +19,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'AzureFileStorage1'"
 		},
+		"Sftp1_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'Sftp1'"
+		},
 		"ADLSCOD_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://sapoctec.dfs.core.windows.net"
@@ -98,6 +102,14 @@
 		"SQLPocTec_properties_typeProperties_tenant": {
 			"type": "string",
 			"defaultValue": "6e5433e0-76fc-44b7-b71b-0e5446a3fa94"
+		},
+		"Sftp1_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "217.117.38.238"
+		},
+		"Sftp1_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "crm"
 		},
 		"TecDevCRM_properties_typeProperties_username": {
 			"type": "string",
@@ -6430,6 +6442,57 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/EIS779_CRM_TecDev_copy1')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "dataflow1",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "dataflow1",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"source1": {},
+									"sink1": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							}
+						}
+					}
+				],
+				"variables": {
+					"fileName": {
+						"type": "String"
+					}
+				},
+				"folder": {
+					"name": "EIS-779"
+				},
+				"annotations": [],
+				"lastPublishTime": "2020-08-10T18:35:41Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/dataflows/dataflow1')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/GTFS')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -7689,6 +7752,49 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/Products_CRM_TecDev')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Execute SSIS package Products",
+						"type": "ExecuteSSISPackage",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"packageLocation": {
+								"packagePath": "Tec-SSISPackages/SSISpackages-TecDev/Products.dtsx",
+								"type": "SSISDB"
+							},
+							"environmentPath": null,
+							"connectVia": {
+								"referenceName": "integrationRuntime1",
+								"type": "IntegrationRuntimeReference"
+							},
+							"loggingLevel": "Basic",
+							"projectConnectionManagers": {},
+							"packageConnectionManagers": {}
+						}
+					}
+				],
+				"folder": {
+					"name": "Products"
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntime1')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/SQLtoGTFS')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -8798,27 +8904,6 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/pipeline1')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Wait1",
-						"type": "Wait",
-						"dependsOn": [],
-						"userProperties": [],
-						"typeProperties": {
-							"waitTimeInSeconds": 1
-						}
-					}
-				],
-				"annotations": [],
-				"lastPublishTime": "2020-08-03T17:26:02Z"
-			},
-			"dependsOn": []
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/ADLSGen2CSV')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -9464,6 +9549,168 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/SQLPocTec')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTable16')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase_PCRM",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Code_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Poste_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_transaction",
+						"type": "nchar"
+					},
+					{
+						"name": "Num_serie",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_entreprise",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_paiement",
+						"type": "nchar"
+					},
+					{
+						"name": "Code_moyen_paiement",
+						"type": "nchar"
+					},
+					{
+						"name": "Sens_paiement",
+						"type": "varchar"
+					},
+					{
+						"name": "Montant",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Type_equipement",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Date_ope",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Name",
+						"type": "varchar"
+					},
+					{
+						"name": "Guid",
+						"type": "uniqueidentifier"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EIS779_atlas"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase_PCRM')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTable17')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase_PCRM",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "file_name",
+						"type": "nvarchar"
+					},
+					{
+						"name": "success",
+						"type": "nvarchar"
+					},
+					{
+						"name": "date",
+						"type": "date"
+					},
+					{
+						"name": "system",
+						"type": "nvarchar"
+					},
+					{
+						"name": "record_detail",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EIS-779-Errors"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase_PCRM')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTable18')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase_PCRM",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "file_name",
+						"type": "nvarchar"
+					},
+					{
+						"name": "success",
+						"type": "nvarchar"
+					},
+					{
+						"name": "date",
+						"type": "date"
+					},
+					{
+						"name": "system",
+						"type": "nvarchar"
+					},
+					{
+						"name": "record_detail",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EIS-779-Errors"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase_PCRM')]"
 			]
 		},
 		{
@@ -11521,6 +11768,27 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/Binary3')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Sftp1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "SftpLocation"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Sftp1')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/CODFile')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -11770,6 +12038,77 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/DelimitedText_Products_CSV')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "linkedservice_ADLSGen2",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "Productdata.csv",
+						"folderPath": "Products/Source",
+						"fileSystem": "integrations-tec"
+					},
+					"columnDelimiter": ",",
+					"encodingName": "ISO-8859-1",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "ID",
+						"type": "String"
+					},
+					{
+						"name": "N° Reseau",
+						"type": "String"
+					},
+					{
+						"name": "Libelle Reseau Produit",
+						"type": "String"
+					},
+					{
+						"name": "N° Produit",
+						"type": "String"
+					},
+					{
+						"name": "Libelle long Produit",
+						"type": "String"
+					},
+					{
+						"name": "DDV Produit",
+						"type": "String"
+					},
+					{
+						"name": "DEV Produit",
+						"type": "String"
+					},
+					{
+						"name": "Supprimé ?",
+						"type": "String"
+					},
+					{
+						"name": "Date Suppression",
+						"type": "String"
+					},
+					{
+						"name": "Libellé du Type de support",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/linkedservice_ADLSGen2')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/Delimited_CODACSV')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -11969,6 +12308,74 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase_PCRM')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Excel_Products')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "linkedservice_ADLSGen2",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Excel",
+				"typeProperties": {
+					"sheetName": "Liste des produits",
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "Productdata.xlsx",
+						"folderPath": "Products/Source",
+						"fileSystem": "integrations-tec"
+					},
+					"firstRowAsHeader": true
+				},
+				"schema": [
+					{
+						"name": "ID",
+						"type": "String"
+					},
+					{
+						"name": "N° Reseau",
+						"type": "String"
+					},
+					{
+						"name": "Libelle Reseau Produit",
+						"type": "String"
+					},
+					{
+						"name": "N° Produit",
+						"type": "String"
+					},
+					{
+						"name": "Libelle long Produit",
+						"type": "String"
+					},
+					{
+						"name": "DDV Produit",
+						"type": "String"
+					},
+					{
+						"name": "DEV Produit",
+						"type": "String"
+					},
+					{
+						"name": "Supprimé ?",
+						"type": "String"
+					},
+					{
+						"name": "Date Suppression",
+						"type": "String"
+					},
+					{
+						"name": "Libellé du Type de support",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/linkedservice_ADLSGen2')]"
 			]
 		},
 		{
@@ -14216,6 +14623,27 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/Sftp1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "Sftp",
+				"typeProperties": {
+					"host": "[parameters('Sftp1_properties_typeProperties_host')]",
+					"port": 22,
+					"skipHostKeyValidation": true,
+					"authenticationType": "Basic",
+					"userName": "[parameters('Sftp1_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('Sftp1_password')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/TecDevCRM')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -14346,6 +14774,86 @@
 				}
 			},
 			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/integrationRuntime2')]",
+			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "SelfHosted",
+				"typeProperties": {}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/integrationRuntime3')]",
+			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "Managed",
+				"typeProperties": {
+					"computeProperties": {
+						"location": "North Europe",
+						"dataFlowProperties": {
+							"computeType": "General",
+							"coreCount": 8,
+							"timeToLive": 0
+						}
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/integrationRuntimeSFTP')]",
+			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "SelfHosted",
+				"typeProperties": {}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/dataflow1')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "AzureSqlTable16",
+								"type": "DatasetReference"
+							},
+							"name": "source1"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "AzureSqlTable17",
+								"type": "DatasetReference"
+							},
+							"name": "sink1"
+						}
+					],
+					"transformations": [
+						{
+							"name": "ConditionalSplit1"
+						},
+						{
+							"name": "DerivedColumn1"
+						}
+					],
+					"script": "source(output(\n\t\tCode_segment as string,\n\t\tPoste_segment as string,\n\t\tId_transaction as string,\n\t\tNum_serie as string,\n\t\tId_entreprise as string,\n\t\tId_paiement as string,\n\t\tCode_moyen_paiement as string,\n\t\tSens_paiement as string,\n\t\tMontant as double,\n\t\tType_equipement as integer,\n\t\tDate_ope as timestamp,\n\t\tName as string,\n\t\tGuid as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> source1\nsource1 split(length(rtrim(Code_segment))==2,\n\tdisjoint: true) ~> ConditionalSplit1@(lengthcheck, goodrows)\nConditionalSplit1@lengthcheck derive(Date = currentDate(),\n\t\tSystem = \"Atlas\",\n\t\tFileName = \"Merge.csv\",\n\t\tSuccess = \"No\") ~> DerivedColumn1\nDerivedColumn1 sink(input(\n\t\tfile_name as string,\n\t\tsuccess as string,\n\t\tdate as date,\n\t\tsystem as string,\n\t\trecord_detail as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tmapColumn(\n\t\tfile_name = FileName,\n\t\tsuccess = Success,\n\t\tdate = Date,\n\t\tsystem = System,\n\t\trecord_detail = Guid\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> sink1"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/AzureSqlTable16')]",
+				"[concat(variables('factoryId'), '/datasets/AzureSqlTable17')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/dataflowSegments')]",
@@ -14537,6 +15045,44 @@
 				"[concat(variables('factoryId'), '/datasets/SQLSegment3')]",
 				"[concat(variables('factoryId'), '/datasets/SQLSegment4')]",
 				"[concat(variables('factoryId'), '/datasets/SQLSegment5')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/dataflow_Products')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "DelimitedText_Products_CSV",
+								"type": "DatasetReference"
+							},
+							"name": "sourceproducts"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "AzureSqlTable1",
+								"type": "DatasetReference"
+							},
+							"name": "sink1"
+						}
+					],
+					"transformations": [
+						{
+							"name": "DerivedColumnTypeConvertions"
+						}
+					],
+					"script": "source(output(\n\t\tID as string,\n\t\t{N° Reseau} as string,\n\t\t{Libelle Reseau Produit} as string,\n\t\t{N° Produit} as string,\n\t\t{Libelle long Produit} as string,\n\t\t{DDV Produit} as string,\n\t\t{DEV Produit} as string,\n\t\t{Supprimé ?} as string,\n\t\t{Date Suppression} as string,\n\t\t{Libellé du Type de support} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> sourceproducts\nsourceproducts derive(DDV_Product = iif(length({DDV Produit})==10,toDate(substring({DDV Produit},7,4)+\"-\"+substring({DDV Produit},4,2)+\"-\"+substring({DDV Produit},1,2)),toDate(substring({DDV Produit},6,4)+\"-\"+substring({DDV Produit},3,2)+\"-\"+\"0\"+substring({DDV Produit},1,1))),\n\t\tDEV_Product = iif(length({DEV Produit})==10,toDate(substring({DEV Produit},7,4)+\"-\"+substring({DEV Produit},4,2)+\"-\"+substring({DEV Produit},1,2)),toDate(substring({DEV Produit},6,4)+\"-\"+substring({DEV Produit},3,2)+\"-\"+\"0\"+substring({DEV Produit},1,1))),\n\t\t{Supprimé} = iif({Supprimé ?}=='N',0,1),\n\t\t{Date Suppression} = iif(length({Date Suppression})==10,toDate(substring({Date Suppression},7,4)+\"-\"+substring({Date Suppression},4,2)+\"-\"+substring({Date Suppression},1,2)),toDate(substring({Date Suppression},6,4)+\"-\"+substring({Date Suppression},3,2)+\"-\"+\"0\"+substring({Date Suppression},1,1))),\n\t\tsupporttypelabel = case({Libellé du Type de support}==\"Carte sans contact\",899240000, case({Libellé du Type de support}==\"Ticket sans contact\", 899240001, case({Libellé du Type de support}==\"Ticket papier\", 899240002,899240003))),\n\t\tUnit_Group = \"655ae15c-f836-4690-b39a-b2f3828916d5\",\n\t\tPrice_List = \"fd17b017-0ad3-ea11-a812-000d3aba7e84\",\n\t\tUnit = \"9cbc6280-1e90-4492-9bfc-71d1d83c1c5a\") ~> DerivedColumnTypeConvertions\nDerivedColumnTypeConvertions sink(input(\n\t\tRecordIdentification as string,\n\t\tZeros as string,\n\t\tCreationDate as date,\n\t\tBankIdentificationNumber as string,\n\t\tApplicationCode as string,\n\t\tDuplicate as string,\n\t\tBlankColumn1 as string,\n\t\tFileReference as string,\n\t\tNameAddressee as string,\n\t\tBIC as string,\n\t\tIdentificationNumberofBelgium as string,\n\t\tBlankColumn2 as string,\n\t\tCodeSeperateApplication as string,\n\t\tTransactionReferrence as string,\n\t\tRelatedReferrence as string,\n\t\tBlankColumn3 as string,\n\t\tVersionCode as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> sink1"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/DelimitedText_Products_CSV')]",
+				"[concat(variables('factoryId'), '/datasets/AzureSqlTable1')]"
 			]
 		},
 		{
@@ -14773,13 +15319,13 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/EIS779_CRM_TecDev_copy1')]",
+			"name": "[concat(parameters('factoryName'), '/Products_CRM_TecDev_copy1')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"activities": [
 					{
-						"name": "dataflow1",
+						"name": "dataflow2",
 						"type": "ExecuteDataFlow",
 						"dependsOn": [],
 						"policy": {
@@ -14792,11 +15338,11 @@
 						"userProperties": [],
 						"typeProperties": {
 							"dataflow": {
-								"referenceName": "dataflow1",
+								"referenceName": "dataflow_Products",
 								"type": "DataFlowReference",
 								"parameters": {},
 								"datasetParameters": {
-									"source1": {},
+									"sourceproducts": {},
 									"sink1": {}
 								}
 							},
@@ -14806,177 +15352,43 @@
 								"computeType": "General"
 							}
 						}
+					},
+					{
+						"name": "Execute SSIS package Products",
+						"type": "ExecuteSSISPackage",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"packageLocation": {
+								"packagePath": "Tec-SSISPackages/SSISpackages-TecDev/Products.dtsx",
+								"type": "SSISDB"
+							},
+							"environmentPath": null,
+							"connectVia": {
+								"referenceName": "integrationRuntime1",
+								"type": "IntegrationRuntimeReference"
+							},
+							"loggingLevel": "Basic",
+							"projectConnectionManagers": {},
+							"packageConnectionManagers": {}
+						}
 					}
 				],
 				"folder": {
-					"name": "EIS-779"
+					"name": "Products"
 				},
-				"annotations": [],
-				"lastPublishTime": "2020-08-10T18:35:41Z"
+				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/dataflows/dataflow1')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/dataflow1')]",
-			"type": "Microsoft.DataFactory/factories/dataflows",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"type": "MappingDataFlow",
-				"typeProperties": {
-					"sources": [
-						{
-							"dataset": {
-								"referenceName": "AzureSqlTable16",
-								"type": "DatasetReference"
-							},
-							"name": "source1"
-						}
-					],
-					"sinks": [
-						{
-							"dataset": {
-								"referenceName": "AzureSqlTable17",
-								"type": "DatasetReference"
-							},
-							"name": "sink1"
-						}
-					],
-					"transformations": [
-						{
-							"name": "ConditionalSplit1"
-						},
-						{
-							"name": "DerivedColumn1"
-						}
-					],
-					"script": "source(output(\n\t\tCode_segment as string,\n\t\tPoste_segment as string,\n\t\tId_transaction as string,\n\t\tNum_serie as string,\n\t\tId_entreprise as string,\n\t\tId_paiement as string,\n\t\tCode_moyen_paiement as string,\n\t\tSens_paiement as string,\n\t\tMontant as double,\n\t\tType_equipement as integer,\n\t\tDate_ope as timestamp,\n\t\tName as string,\n\t\tGuid as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> source1\nsource1 split(length(Code_segment)==2,\n\tdisjoint: true) ~> ConditionalSplit1@(lengthcheck, goodrows)\nConditionalSplit1@lengthcheck derive(Date = currentDate(),\n\t\tSystem = \"Atlas\",\n\t\tFileName = \"Merge.csv\",\n\t\tSuccess = \"No\") ~> DerivedColumn1\nDerivedColumn1 sink(input(\n\t\tfile_name as string,\n\t\tsuccess as string,\n\t\tdate as date,\n\t\tsystem as string,\n\t\trecord_detail as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tmapColumn(\n\t\tfile_name = FileName,\n\t\tsuccess = Success,\n\t\tdate = Date,\n\t\tsystem = System,\n\t\trecord_detail = Guid\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> sink1"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/AzureSqlTable16')]",
-				"[concat(variables('factoryId'), '/datasets/AzureSqlTable17')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureSqlTable16')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase_PCRM",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "Code_segment",
-						"type": "nchar"
-					},
-					{
-						"name": "Poste_segment",
-						"type": "nchar"
-					},
-					{
-						"name": "Id_transaction",
-						"type": "nchar"
-					},
-					{
-						"name": "Num_serie",
-						"type": "nchar"
-					},
-					{
-						"name": "Id_entreprise",
-						"type": "nchar"
-					},
-					{
-						"name": "Id_paiement",
-						"type": "nchar"
-					},
-					{
-						"name": "Code_moyen_paiement",
-						"type": "nchar"
-					},
-					{
-						"name": "Sens_paiement",
-						"type": "varchar"
-					},
-					{
-						"name": "Montant",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "Type_equipement",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Date_ope",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "Name",
-						"type": "varchar"
-					},
-					{
-						"name": "Guid",
-						"type": "uniqueidentifier"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "EIS779_atlas"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase_PCRM')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureSqlTable17')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase_PCRM",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "file_name",
-						"type": "nvarchar"
-					},
-					{
-						"name": "success",
-						"type": "nvarchar"
-					},
-					{
-						"name": "date",
-						"type": "date"
-					},
-					{
-						"name": "system",
-						"type": "nvarchar"
-					},
-					{
-						"name": "record_detail",
-						"type": "nvarchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "EIS-779-Errors"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase_PCRM')]"
+				"[concat(variables('factoryId'), '/dataflows/dataflow_Products')]",
+				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntime1')]"
 			]
 		}
 	]
