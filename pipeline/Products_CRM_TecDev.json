@@ -3,8 +3,8 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "dataflow2",
-				"type": "ExecuteDataFlow",
+				"name": "Execute SSIS package Products",
+				"type": "ExecuteSSISPackage",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "7.00:00:00",
@@ -15,14 +15,16 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"dataflow": {
-						"referenceName": "dataflow_Products",
-						"type": "DataFlowReference"
+					"packageLocation": {
+						"packagePath": "Tec-SSISPackages/SSISpackages-TecDev/Products.dtsx",
+						"type": "SSISDB"
 					},
-					"compute": {
-						"coreCount": 8,
-						"computeType": "General"
-					}
+					"environmentPath": null,
+					"connectVia": {
+						"referenceName": "integrationRuntime1",
+						"type": "IntegrationRuntimeReference"
+					},
+					"loggingLevel": "Basic"
 				}
 			}
 		],
