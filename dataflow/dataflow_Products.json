@@ -12,13 +12,17 @@
 					"name": "sourceproducts"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"name": "sink1"
+				}
+			],
 			"transformations": [
 				{
 					"name": "DerivedColumnTypeConvertions"
 				}
 			],
-			"script": "source(output(\n\t\tID as string,\n\t\t{N° Reseau} as string,\n\t\t{Libelle Reseau Produit} as string,\n\t\t{N° Produit} as string,\n\t\t{Libelle long Produit} as string,\n\t\t{DDV Produit} as string,\n\t\t{DEV Produit} as string,\n\t\t{Supprimé ?} as string,\n\t\t{Date Suppression} as string,\n\t\t{Libellé du Type de support} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> sourceproducts\nsourceproducts derive(DDV_Product = iif(length({DDV Produit})==10,toDate(substring({DDV Produit},7,4)+\"-\"+substring({DDV Produit},4,2)+\"-\"+substring({DDV Produit},1,2)),toDate(substring({DDV Produit},6,4)+\"-\"+substring({DDV Produit},3,2)+\"-\"+\"0\"+substring({DDV Produit},1,1))),\n\t\tDEV_Product = iif(length({DEV Produit})==10,toDate(substring({DEV Produit},7,4)+\"-\"+substring({DEV Produit},4,2)+\"-\"+substring({DEV Produit},1,2)),toDate(substring({DEV Produit},6,4)+\"-\"+substring({DEV Produit},3,2)+\"-\"+\"0\"+substring({DEV Produit},1,1))),\n\t\t{Supprimé} = iif({Supprimé ?}=='N',0,1),\n\t\t{Date Suppression} = iif(length({Date Suppression})==10,toDate(substring({Date Suppression},7,4)+\"-\"+substring({Date Suppression},4,2)+\"-\"+substring({Date Suppression},1,2)),toDate(substring({Date Suppression},6,4)+\"-\"+substring({Date Suppression},3,2)+\"-\"+\"0\"+substring({Date Suppression},1,1))),\n\t\tsupporttypelabel = case({Libellé du Type de support}==\"Carte sans contact\",899240000, case({Libellé du Type de support}==\"Ticket sans contact\", 899240001, case({Libellé du Type de support}==\"Ticket papier\", 899240002,899240003))),\n\t\tUnit_Group = \"655ae15c-f836-4690-b39a-b2f3828916d5\",\n\t\tPrice_List = \"fd17b017-0ad3-ea11-a812-000d3aba7e84\",\n\t\tUnit = \"9cbc6280-1e90-4492-9bfc-71d1d83c1c5a\") ~> DerivedColumnTypeConvertions"
+			"script": "source(output(\n\t\tID as string,\n\t\t{N° Reseau} as string,\n\t\t{Libelle Reseau Produit} as string,\n\t\t{N° Produit} as string,\n\t\t{Libelle long Produit} as string,\n\t\t{DDV Produit} as string,\n\t\t{DEV Produit} as string,\n\t\t{Supprimé ?} as string,\n\t\t{Date Suppression} as string,\n\t\t{Libellé du Type de support} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> sourceproducts\nsourceproducts derive(DDV_Product = iif(length({DDV Produit})==10,toDate(substring({DDV Produit},7,4)+\"-\"+substring({DDV Produit},4,2)+\"-\"+substring({DDV Produit},1,2)),toDate(substring({DDV Produit},6,4)+\"-\"+substring({DDV Produit},3,2)+\"-\"+\"0\"+substring({DDV Produit},1,1))),\n\t\tDEV_Product = iif(length({DEV Produit})==10,toDate(substring({DEV Produit},7,4)+\"-\"+substring({DEV Produit},4,2)+\"-\"+substring({DEV Produit},1,2)),toDate(substring({DEV Produit},6,4)+\"-\"+substring({DEV Produit},3,2)+\"-\"+\"0\"+substring({DEV Produit},1,1))),\n\t\t{Supprimé} = iif({Supprimé ?}=='N',0,1),\n\t\t{Date Suppression} = iif(length({Date Suppression})==10,toDate(substring({Date Suppression},7,4)+\"-\"+substring({Date Suppression},4,2)+\"-\"+substring({Date Suppression},1,2)),toDate(substring({Date Suppression},6,4)+\"-\"+substring({Date Suppression},3,2)+\"-\"+\"0\"+substring({Date Suppression},1,1))),\n\t\tsupporttypelabel = case({Libellé du Type de support}==\"Carte sans contact\",899240000, case({Libellé du Type de support}==\"Ticket sans contact\", 899240001, case({Libellé du Type de support}==\"Ticket papier\", 899240002,899240003))),\n\t\tUnit_Group = \"655ae15c-f836-4690-b39a-b2f3828916d5\",\n\t\tPrice_List = \"fd17b017-0ad3-ea11-a812-000d3aba7e84\",\n\t\tUnit = \"9cbc6280-1e90-4492-9bfc-71d1d83c1c5a\") ~> DerivedColumnTypeConvertions\nDerivedColumnTypeConvertions sink(skipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> sink1"
 		}
 	}
 }
