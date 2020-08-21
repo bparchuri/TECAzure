@@ -95,14 +95,7 @@
 					{
 						"name": "Execute SSIS package Products",
 						"type": "ExecuteSSISPackage",
-						"dependsOn": [
-							{
-								"activity": "Copy Products Zip file",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
+						"dependsOn": [],
 						"policy": {
 							"timeout": "7.00:00:00",
 							"retry": 0,
@@ -148,7 +141,8 @@
 								"formatSettings": {
 									"type": "BinaryReadSettings",
 									"compressionProperties": {
-										"type": "ZipDeflateReadSettings"
+										"type": "ZipDeflateReadSettings",
+										"preserveZipFileNameAsFolder": false
 									}
 								}
 							},
