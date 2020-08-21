@@ -7,26 +7,6 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "adfpcrmdev01"
 		},
-		"DynamicsCrm_TECDev_properties_typeProperties_username": {
-			"type": "string",
-			"defaultValue": "Bhargav.Parchuri@letec.be"
-		},
-		"SQLPocTec_properties_typeProperties_connectionString_secretName": {
-			"type": "string",
-			"defaultValue": "SQL19"
-		},
-		"SQLPocTec_properties_typeProperties_servicePrincipalId": {
-			"type": "string",
-			"defaultValue": "b4537ba3-1639-42cb-9143-8bfbcb683e79"
-		},
-		"SQLPocTec_properties_typeProperties_tenant": {
-			"type": "string",
-			"defaultValue": "6e5433e0-76fc-44b7-b71b-0e5446a3fa94"
-		},
-		"TecDevCRM_properties_typeProperties_username": {
-			"type": "string",
-			"defaultValue": "Bhargav.Parchuri@letec.be"
-		},
 		"linkedService_ADLS_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://sapcrmdev01.dfs.core.windows.net"
@@ -56,85 +36,6 @@
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
-		{
-			"name": "[concat(parameters('factoryName'), '/DynamicsCrm_TECDev')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "DynamicsCrm",
-				"typeProperties": {
-					"deploymentType": "Online",
-					"serviceUri": "https://tec-crm-dev.crm4.dynamics.com",
-					"authenticationType": "Office365",
-					"username": "[parameters('DynamicsCrm_TECDev_properties_typeProperties_username')]",
-					"password": {
-						"type": "AzureKeyVaultSecret",
-						"store": {
-							"referenceName": "AzureKeyVault_Dev",
-							"type": "LinkedServiceReference"
-						},
-						"secretName": "tec-dev-dynamicscrmpwd",
-						"secretVersion": "7be7b0e7ab794f39b7be5079c1c0314a"
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/SQLPocTec')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureSqlDatabase",
-				"typeProperties": {
-					"connectionString": {
-						"type": "AzureKeyVaultSecret",
-						"store": {
-							"referenceName": "KeyVaultPoc",
-							"type": "LinkedServiceReference"
-						},
-						"secretName": "[parameters('SQLPocTec_properties_typeProperties_connectionString_secretName')]"
-					},
-					"servicePrincipalId": "[parameters('SQLPocTec_properties_typeProperties_servicePrincipalId')]",
-					"servicePrincipalKey": {
-						"type": "AzureKeyVaultSecret",
-						"store": {
-							"referenceName": "KeyVaultPoc",
-							"type": "LinkedServiceReference"
-						},
-						"secretName": "pockey"
-					},
-					"tenant": "[parameters('SQLPocTec_properties_typeProperties_tenant')]"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/TecDevCRM')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "DynamicsCrm",
-				"typeProperties": {
-					"deploymentType": "Online",
-					"serviceUri": "https://tec-crm-dev.crm4.dynamics.com",
-					"authenticationType": "Office365",
-					"username": "[parameters('TecDevCRM_properties_typeProperties_username')]",
-					"password": {
-						"type": "AzureKeyVaultSecret",
-						"store": {
-							"referenceName": "KeyVaultPoc",
-							"type": "LinkedServiceReference"
-						},
-						"secretName": "crmpwd"
-					}
-				}
-			},
-			"dependsOn": []
-		},
 		{
 			"name": "[concat(parameters('factoryName'), '/linkedService_ADLS')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
@@ -341,9 +242,7 @@
 					"table": "COD-0"
 				}
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/SQLPocTec')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AzureSqlTable10')]",
@@ -395,9 +294,7 @@
 					"table": "COD-9"
 				}
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/SQLPocTec')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AzureSqlTable11')]",
@@ -449,9 +346,7 @@
 					"table": "COD-4"
 				}
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/SQLPocTec')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AzureSqlTable12')]",
@@ -513,9 +408,7 @@
 					"table": "COD-1"
 				}
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/SQLPocTec')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AzureSqlTable13')]",
@@ -595,9 +488,7 @@
 					"table": "COD-22"
 				}
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/SQLPocTec')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AzureSqlTable14')]",
@@ -613,9 +504,7 @@
 				"schema": [],
 				"typeProperties": {}
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/SQLPocTec')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AzureSqlTable15')]",
@@ -825,9 +714,7 @@
 					"table": "CODIntegration"
 				}
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/SQLPocTec')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AzureSqlTable16')]",
@@ -1135,9 +1022,7 @@
 					"table": "COD-21"
 				}
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/SQLPocTec')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AzureSqlTable4')]",
@@ -1156,9 +1041,211 @@
 					"table": "COD-23"
 				}
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/SQLPocTec')]"
-			]
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTable5')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SQLPocTec",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "RegistrationID",
+						"type": "varchar"
+					},
+					{
+						"name": "ArticleCode",
+						"type": "varchar"
+					},
+					{
+						"name": "Sequencenumber",
+						"type": "varchar"
+					},
+					{
+						"name": "Retailnumber",
+						"type": "varchar"
+					},
+					{
+						"name": "Communication",
+						"type": "varchar"
+					},
+					{
+						"name": "Customerreference",
+						"type": "varchar"
+					},
+					{
+						"name": "BIC",
+						"type": "varchar"
+					},
+					{
+						"name": "BlankColumn1",
+						"type": "varchar"
+					},
+					{
+						"name": "Transactiontype",
+						"type": "varchar"
+					},
+					{
+						"name": "ISOCode",
+						"type": "varchar"
+					},
+					{
+						"name": "CategoryPurpose",
+						"type": "varchar"
+					},
+					{
+						"name": "Purpose",
+						"type": "varchar"
+					},
+					{
+						"name": "MoreCode",
+						"type": "varchar"
+					},
+					{
+						"name": "BlankColumn2",
+						"type": "varchar"
+					},
+					{
+						"name": "Linkcode",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "COD-22"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTable6')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SQLPocTec",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "RegistrationID",
+						"type": "varchar"
+					},
+					{
+						"name": "ArticleCode",
+						"type": "varchar"
+					},
+					{
+						"name": "Sequencenumber",
+						"type": "varchar"
+					},
+					{
+						"name": "Retailnumber",
+						"type": "varchar"
+					},
+					{
+						"name": "AdditionalInformation",
+						"type": "varchar"
+					},
+					{
+						"name": "OperationCode",
+						"type": "varchar"
+					},
+					{
+						"name": "CommunicationCode",
+						"type": "varchar"
+					},
+					{
+						"name": "Communication",
+						"type": "varchar"
+					},
+					{
+						"name": "BlankColumn1",
+						"type": "varchar"
+					},
+					{
+						"name": "MoreCode",
+						"type": "varchar"
+					},
+					{
+						"name": "BlankColumn2",
+						"type": "varchar"
+					},
+					{
+						"name": "LinkCode",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "COD-31"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTable7')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SQLPocTec",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "RegistrationID",
+						"type": "varchar"
+					},
+					{
+						"name": "ArticleCode",
+						"type": "varchar"
+					},
+					{
+						"name": "Sequencenumber",
+						"type": "varchar"
+					},
+					{
+						"name": "Retailnumber",
+						"type": "varchar"
+					},
+					{
+						"name": "Communication",
+						"type": "varchar"
+					},
+					{
+						"name": "BlankColumn1",
+						"type": "varchar"
+					},
+					{
+						"name": "Codesuite",
+						"type": "varchar"
+					},
+					{
+						"name": "BlankColumn2",
+						"type": "varchar"
+					},
+					{
+						"name": "LinkCode",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "COD-32"
+				}
+			},
+			"dependsOn": []
 		}
 	]
 }

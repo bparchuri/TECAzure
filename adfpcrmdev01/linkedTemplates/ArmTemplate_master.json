@@ -264,6 +264,21 @@
 					},
 					"AzureSqlDatabase_PCRM_properties_typeProperties_tenant": {
 						"value": "[parameters('AzureSqlDatabase_PCRM_properties_typeProperties_tenant')]"
+					},
+					"DynamicsCrm_TECDev_properties_typeProperties_username": {
+						"value": "[parameters('DynamicsCrm_TECDev_properties_typeProperties_username')]"
+					},
+					"SQLPocTec_properties_typeProperties_connectionString_secretName": {
+						"value": "[parameters('SQLPocTec_properties_typeProperties_connectionString_secretName')]"
+					},
+					"SQLPocTec_properties_typeProperties_servicePrincipalId": {
+						"value": "[parameters('SQLPocTec_properties_typeProperties_servicePrincipalId')]"
+					},
+					"SQLPocTec_properties_typeProperties_tenant": {
+						"value": "[parameters('SQLPocTec_properties_typeProperties_tenant')]"
+					},
+					"TecDevCRM_properties_typeProperties_username": {
+						"value": "[parameters('TecDevCRM_properties_typeProperties_username')]"
 					}
 				}
 			},
@@ -282,21 +297,6 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
-					},
-					"DynamicsCrm_TECDev_properties_typeProperties_username": {
-						"value": "[parameters('DynamicsCrm_TECDev_properties_typeProperties_username')]"
-					},
-					"SQLPocTec_properties_typeProperties_connectionString_secretName": {
-						"value": "[parameters('SQLPocTec_properties_typeProperties_connectionString_secretName')]"
-					},
-					"SQLPocTec_properties_typeProperties_servicePrincipalId": {
-						"value": "[parameters('SQLPocTec_properties_typeProperties_servicePrincipalId')]"
-					},
-					"SQLPocTec_properties_typeProperties_tenant": {
-						"value": "[parameters('SQLPocTec_properties_typeProperties_tenant')]"
-					},
-					"TecDevCRM_properties_typeProperties_username": {
-						"value": "[parameters('TecDevCRM_properties_typeProperties_username')]"
 					},
 					"linkedService_ADLS_properties_typeProperties_url": {
 						"value": "[parameters('linkedService_ADLS_properties_typeProperties_url')]"
@@ -420,26 +420,6 @@
 			},
 			"dependsOn": [
 				"[resourceId('Microsoft.Resources/deployments', 'adfpcrmdev01_ArmTemplate_5')]"
-			]
-		},
-		{
-			"name": "adfpcrmdev01_ArmTemplate_7",
-			"type": "Microsoft.Resources/deployments",
-			"apiVersion": "2018-02-01",
-			"properties": {
-				"mode": "incremental",
-				"templateLink": {
-					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_7.json', parameters('containerSasToken'))]",
-					"contentVersion": "1.0.0.0"
-				},
-				"parameters": {
-					"factoryName": {
-						"value": "[parameters('factoryName')]"
-					}
-				}
-			},
-			"dependsOn": [
-				"[resourceId('Microsoft.Resources/deployments', 'adfpcrmdev01_ArmTemplate_6')]"
 			]
 		}
 	]
