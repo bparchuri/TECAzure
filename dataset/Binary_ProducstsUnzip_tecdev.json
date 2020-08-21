@@ -1,0 +1,18 @@
+{
+	"name": "Binary_ProducstsUnzip_tecdev",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "linkedservice_ADLSGen2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "Products/Source",
+				"fileSystem": "integrations-tec"
+			}
+		}
+	}
+}
