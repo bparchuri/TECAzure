@@ -1,0 +1,23 @@
+{
+	"name": "Binary_ProductsZip_TecDev",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "linkedservice_ADLSGen2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "MNT020 - Liste des produits et articles _ 91966170.zip",
+				"folderPath": "Products/ZipFile",
+				"fileSystem": "integrations-tec"
+			},
+			"compression": {
+				"type": "ZipDeflate",
+				"level": "Fastest"
+			}
+		}
+	}
+}
