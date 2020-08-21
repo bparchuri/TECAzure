@@ -132,6 +132,18 @@
 		"TecDevCRM_properties_typeProperties_username": {
 			"type": "string",
 			"defaultValue": "Bhargav.Parchuri@letec.be"
+		},
+		"linkedService_ADLS_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://sapcrmdev01.dfs.core.windows.net"
+		},
+		"linkedService_ADLS_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "2291afd2-1191-4bcb-9906-c1406010941b"
+		},
+		"linkedService_ADLS_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "b74b5688-5ee7-4c50-8364-ddd607f525ac"
 		}
 	},
 	"variables": {
@@ -355,49 +367,6 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Products_CRM_TecDev')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Execute SSIS package Products",
-						"type": "ExecuteSSISPackage",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"packageLocation": {
-								"packagePath": "Tec-SSISPackages/SSISpackages-TecDev/Products.dtsx",
-								"type": "SSISDB"
-							},
-							"environmentPath": null,
-							"connectVia": {
-								"referenceName": "integrationRuntime1",
-								"type": "IntegrationRuntimeReference"
-							},
-							"loggingLevel": "Basic",
-							"projectConnectionManagers": {},
-							"packageConnectionManagers": {}
-						}
-					}
-				],
-				"folder": {
-					"name": "Products"
-				},
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntime1')]"
-			]
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/Binary3')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -610,6 +579,32 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/KeyVaultPoc')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/linkedService_ADLS')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('linkedService_ADLS_properties_typeProperties_url')]",
+					"tenant": "[parameters('linkedService_ADLS_properties_typeProperties_tenant')]",
+					"servicePrincipalId": "[parameters('linkedService_ADLS_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "AzureKeyVault_Dev",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "tec-dev-prinicipalkey",
+						"secretVersion": "ea7baf49a5774322b0ca7dc1d9b5f923"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureKeyVault_Dev')]"
 			]
 		}
 	]

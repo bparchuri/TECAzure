@@ -279,6 +279,15 @@
 					},
 					"TecDevCRM_properties_typeProperties_username": {
 						"value": "[parameters('TecDevCRM_properties_typeProperties_username')]"
+					},
+					"linkedService_ADLS_properties_typeProperties_url": {
+						"value": "[parameters('linkedService_ADLS_properties_typeProperties_url')]"
+					},
+					"linkedService_ADLS_properties_typeProperties_tenant": {
+						"value": "[parameters('linkedService_ADLS_properties_typeProperties_tenant')]"
+					},
+					"linkedService_ADLS_properties_typeProperties_servicePrincipalId": {
+						"value": "[parameters('linkedService_ADLS_properties_typeProperties_servicePrincipalId')]"
 					}
 				}
 			},
@@ -297,15 +306,6 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
-					},
-					"linkedService_ADLS_properties_typeProperties_url": {
-						"value": "[parameters('linkedService_ADLS_properties_typeProperties_url')]"
-					},
-					"linkedService_ADLS_properties_typeProperties_tenant": {
-						"value": "[parameters('linkedService_ADLS_properties_typeProperties_tenant')]"
-					},
-					"linkedService_ADLS_properties_typeProperties_servicePrincipalId": {
-						"value": "[parameters('linkedService_ADLS_properties_typeProperties_servicePrincipalId')]"
 					},
 					"linkedservice_ADLSGen2_properties_typeProperties_url": {
 						"value": "[parameters('linkedservice_ADLSGen2_properties_typeProperties_url')]"

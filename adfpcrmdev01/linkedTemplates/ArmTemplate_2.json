@@ -13,62 +13,6 @@
 	},
 	"resources": [
 		{
-			"name": "[concat(parameters('factoryName'), '/AzureSqlTable8')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "SQLPocTec",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "RegistrationID",
-						"type": "varchar"
-					},
-					{
-						"name": "ArticleCode",
-						"type": "varchar"
-					},
-					{
-						"name": "Sequencenumber",
-						"type": "varchar"
-					},
-					{
-						"name": "Retailnumber",
-						"type": "varchar"
-					},
-					{
-						"name": "Communication",
-						"type": "varchar"
-					},
-					{
-						"name": "BlankColumn1",
-						"type": "varchar"
-					},
-					{
-						"name": "Codesuite",
-						"type": "varchar"
-					},
-					{
-						"name": "BlankColumn2",
-						"type": "varchar"
-					},
-					{
-						"name": "LinkCode",
-						"type": "varchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "COD-33"
-				}
-			},
-			"dependsOn": []
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/AzureSqlTable9')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -1657,6 +1601,27 @@
 						"type": "AzureBlobFSLocation",
 						"fileName": "Belfius.csv",
 						"folderPath": "CODFile/CSV",
+						"fileSystem": "poc-tec"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DLSV2GTFS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ADLSGen2",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": "GTFS",
 						"fileSystem": "poc-tec"
 					}
 				}
