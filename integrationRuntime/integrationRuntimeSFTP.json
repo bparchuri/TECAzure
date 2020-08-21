@@ -1,6 +1,0 @@
-{
-	"name": "integrationRuntimeSFTP",
-	"properties": {
-		"type": "SelfHosted"
-	}
-}
