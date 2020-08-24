@@ -1586,12 +1586,12 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/CODFile')]",
+			"name": "[concat(parameters('factoryName'), '/Binary_ProducstsUnzip_tecdev')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "ADLSCOD",
+					"referenceName": "linkedservice_ADLSGen2",
 					"type": "LinkedServiceReference"
 				},
 				"annotations": [],
@@ -1599,21 +1599,20 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
-						"fileName": "Belfius.csv",
-						"folderPath": "CODFile/CSV",
-						"fileSystem": "poc-tec"
+						"folderPath": "atlas/mnt020/csv/produits",
+						"fileSystem": "raw"
 					}
 				}
 			},
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/DLSV2GTFS')]",
+			"name": "[concat(parameters('factoryName'), '/Binary_ProductsZip_TecDev')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "ADLSGen2",
+					"referenceName": "linkedservice_ADLSGen2",
 					"type": "LinkedServiceReference"
 				},
 				"annotations": [],
@@ -1621,8 +1620,12 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
-						"folderPath": "GTFS",
-						"fileSystem": "poc-tec"
+						"folderPath": "atlas/mnt020/zip",
+						"fileSystem": "raw"
+					},
+					"compression": {
+						"type": "ZipDeflate",
+						"level": "Fastest"
 					}
 				}
 			},
