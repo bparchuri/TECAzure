@@ -7834,6 +7834,59 @@
 								"parameters": {}
 							}
 						]
+					},
+					{
+						"name": "Copy Products Zip file_copy1",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "BinarySource",
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": false,
+									"wildcardFolderPath": "atlas / mnt020 / csv / produits",
+									"wildcardFileName": "*.articles.csv",
+									"deleteFilesAfterCompletion": false
+								},
+								"formatSettings": {
+									"type": "BinaryReadSettings",
+									"compressionProperties": {
+										"type": "ZipDeflateReadSettings",
+										"preserveZipFileNameAsFolder": false
+									}
+								}
+							},
+							"sink": {
+								"type": "BinarySink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								}
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "Binary4",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "Binary5",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
 					}
 				],
 				"folder": {
@@ -7844,7 +7897,9 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntime1')]",
 				"[concat(variables('factoryId'), '/datasets/Binary_ProductsZip_TecDev')]",
-				"[concat(variables('factoryId'), '/datasets/Binary_ProducstsUnzip_tecdev')]"
+				"[concat(variables('factoryId'), '/datasets/Binary_ProducstsUnzip_tecdev')]",
+				"[concat(variables('factoryId'), '/datasets/Binary4')]",
+				"[concat(variables('factoryId'), '/datasets/Binary5')]"
 			]
 		},
 		{
@@ -15436,6 +15491,53 @@
 				"[concat(variables('factoryId'), '/datasets/AzureSqlTable_CODA_8')]",
 				"[concat(variables('factoryId'), '/datasets/AzureSqlTable_CODA_9')]",
 				"[concat(variables('factoryId'), '/datasets/AzureSqlTable_CODA_4')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Binary4')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "linkedservice_ADLSGen2",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "Liste des articles.csv",
+						"folderPath": "atlas/mnt020/csv/produits",
+						"fileSystem": "raw"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/linkedservice_ADLSGen2')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Binary5')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "linkedservice_ADLSGen2",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": "atlas/mnt020/csv/articles",
+						"fileSystem": "raw"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/linkedservice_ADLSGen2')]"
 			]
 		}
 	]
