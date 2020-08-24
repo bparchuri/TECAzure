@@ -10,9 +10,8 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "MNT020 - Liste des produits et articles _ 91966170.zip",
-				"folderPath": "Products/ZipFile",
-				"fileSystem": "integrations-tec"
+				"folderPath": "atlas/mnt020/zip",
+				"fileSystem": "raw"
 			},
 			"compression": {
 				"type": "ZipDeflate",
