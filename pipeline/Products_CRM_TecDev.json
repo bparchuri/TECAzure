@@ -99,11 +99,7 @@
 							"deleteFilesAfterCompletion": false
 						},
 						"formatSettings": {
-							"type": "BinaryReadSettings",
-							"compressionProperties": {
-								"type": "ZipDeflateReadSettings",
-								"preserveZipFileNameAsFolder": false
-							}
+							"type": "BinaryReadSettings"
 						}
 					},
 					"sink": {
