@@ -1586,7 +1586,7 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Binary_ProducstsUnzip_tecdev')]",
+			"name": "[concat(parameters('factoryName'), '/Binary4')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -1599,15 +1599,19 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
+						"fileName": "Liste des articles.csv",
 						"folderPath": "atlas/mnt020/csv/produits",
 						"fileSystem": "raw"
+					},
+					"compression": {
+						"type": "gzip"
 					}
 				}
 			},
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Binary_ProductsZip_TecDev')]",
+			"name": "[concat(parameters('factoryName'), '/Binary5')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -1620,12 +1624,8 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
-						"folderPath": "atlas/mnt020/zip",
+						"folderPath": "atlas/mnt020/csv/articles",
 						"fileSystem": "raw"
-					},
-					"compression": {
-						"type": "ZipDeflate",
-						"level": "Fastest"
 					}
 				}
 			},
