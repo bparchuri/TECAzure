@@ -10,8 +10,8 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"folderPath": "Products/Source",
-				"fileSystem": "integrations-tec"
+				"folderPath": "atlas/mnt020/csv/produits",
+				"fileSystem": "raw"
 			}
 		}
 	}
