@@ -95,7 +95,7 @@
 							"type": "AzureBlobFSReadSettings",
 							"recursive": false,
 							"wildcardFolderPath": "atlas / mnt020 / csv / produits",
-							"wildcardFileName": "*.articles.csv",
+							"wildcardFileName": "Liste des articles.csv",
 							"deleteFilesAfterCompletion": false
 						},
 						"formatSettings": {
