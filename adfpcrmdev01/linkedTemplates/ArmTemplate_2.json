@@ -1602,9 +1602,6 @@
 						"fileName": "Liste des articles.csv",
 						"folderPath": "atlas/mnt020/csv/produits",
 						"fileSystem": "raw"
-					},
-					"compression": {
-						"type": "gzip"
 					}
 				}
 			},
