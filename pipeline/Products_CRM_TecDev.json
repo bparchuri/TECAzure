@@ -37,7 +37,14 @@
 			{
 				"name": "Copy Products Zip file",
 				"type": "Copy",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "Execute SSIS to copy zip files from SFTP to Data Lake",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "7.00:00:00",
 					"retry": 0,
@@ -166,6 +173,31 @@
 						"type": "AzureBlobFSReadSettings",
 						"recursive": true
 					}
+				}
+			},
+			{
+				"name": "Execute SSIS to copy zip files from SFTP to Data Lake",
+				"type": "ExecuteSSISPackage",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"packageLocation": {
+						"packagePath": "SSISPackagesTecDev/ProductsTecDev/ProductsSFTPTask.dtsx",
+						"type": "SSISDB"
+					},
+					"environmentPath": null,
+					"connectVia": {
+						"referenceName": "integrationRuntime1",
+						"type": "IntegrationRuntimeReference"
+					},
+					"loggingLevel": "Basic"
 				}
 			}
 		],
