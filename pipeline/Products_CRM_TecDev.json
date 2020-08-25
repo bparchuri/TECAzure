@@ -7,7 +7,7 @@
 				"type": "ExecuteSSISPackage",
 				"dependsOn": [
 					{
-						"activity": "Delete1",
+						"activity": "Delete Articles CSV in Products folder",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -23,7 +23,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"packageLocation": {
-						"packagePath": "Tec-SSISPackages/SSISpackages-TecDev/Products.dtsx",
+						"packagePath": "SSISPackagesTecDev/ProductsTecDev/ProductstoCRM.dtsx",
 						"type": "SSISDB"
 					},
 					"environmentPath": null,
@@ -35,11 +35,11 @@
 				}
 			},
 			{
-				"name": "Copy Products Zip file",
+				"name": "Unzip Products Data",
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "Execute SSIS to copy zip files from SFTP to Data Lake",
+						"activity": "copy zip files from SFTP to Data Lake",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -91,11 +91,11 @@
 				]
 			},
 			{
-				"name": "Copy Products Zip file_copy1",
+				"name": "Move Articles CSV to Articles folder",
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "Copy Products Zip file",
+						"activity": "Unzip Products Data",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -133,23 +133,23 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "Binary4",
+						"referenceName": "Binary_Articlescsv_Products",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "Binary5",
+						"referenceName": "Binary_articlesCSV_ArticlesFolder",
 						"type": "DatasetReference"
 					}
 				]
 			},
 			{
-				"name": "Delete1",
+				"name": "Delete Articles CSV in Products folder",
 				"type": "Delete",
 				"dependsOn": [
 					{
-						"activity": "Copy Products Zip file_copy1",
+						"activity": "Move Articles CSV to Articles folder",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -165,7 +165,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "Binary4",
+						"referenceName": "Binary_Articlescsv_Products",
 						"type": "DatasetReference"
 					},
 					"enableLogging": false,
@@ -176,7 +176,7 @@
 				}
 			},
 			{
-				"name": "Execute SSIS to copy zip files from SFTP to Data Lake",
+				"name": "copy zip files from SFTP to Data Lake",
 				"type": "ExecuteSSISPackage",
 				"dependsOn": [],
 				"policy": {
