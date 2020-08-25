@@ -96,7 +96,7 @@
 							"recursive": false,
 							"wildcardFolderPath": "atlas/mnt020/csv/produits",
 							"wildcardFileName": "Liste des articles.csv",
-							"deleteFilesAfterCompletion": false
+							"deleteFilesAfterCompletion": true
 						},
 						"formatSettings": {
 							"type": "BinaryReadSettings"
