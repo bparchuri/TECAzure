@@ -1586,7 +1586,7 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Binary4')]",
+			"name": "[concat(parameters('factoryName'), '/Binary_Articlescsv_Products')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -1608,7 +1608,7 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Binary5')]",
+			"name": "[concat(parameters('factoryName'), '/Binary_articlesCSV_ArticlesFolder')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
