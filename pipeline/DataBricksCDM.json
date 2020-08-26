@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Notebook to Transform CDM data to Data Bricks",
+				"name": "Contact CDM to SQL Contact Table",
 				"type": "DatabricksNotebook",
 				"dependsOn": [],
 				"policy": {
@@ -15,14 +15,17 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"notebookPath": "/Users/bparchuri@adflux.net/ContactCDM"
+					"notebookPath": "/Shared/ContactTecDev"
 				},
 				"linkedServiceName": {
-					"referenceName": "AzureDatabricks1",
+					"referenceName": "AzureDatabricks_ContactsTecDev",
 					"type": "LinkedServiceReference"
 				}
 			}
 		],
+		"folder": {
+			"name": "DataBricks"
+		},
 		"annotations": [],
 		"lastPublishTime": "2020-08-03T17:26:03Z"
 	},
