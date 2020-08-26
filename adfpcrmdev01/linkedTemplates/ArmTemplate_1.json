@@ -6,18 +6,6 @@
 			"type": "string",
 			"metadata": "Data Factory name",
 			"defaultValue": "adfpcrmdev01"
-		},
-		"linkedservice_ADLSGen2_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://sapcrmdev01.dfs.core.windows.net"
-		},
-		"linkedservice_ADLSGen2_properties_typeProperties_tenant": {
-			"type": "string",
-			"defaultValue": "2291afd2-1191-4bcb-9906-c1406010941b"
-		},
-		"linkedservice_ADLSGen2_properties_typeProperties_servicePrincipalId": {
-			"type": "string",
-			"defaultValue": "b74b5688-5ee7-4c50-8364-ddd607f525ac"
 		}
 	},
 	"variables": {
@@ -25,28 +13,64 @@
 	},
 	"resources": [
 		{
-			"name": "[concat(parameters('factoryName'), '/linkedservice_ADLSGen2')]",
+			"name": "[concat(parameters('factoryName'), '/AzureDatabricks_ContactsTecDev')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
-				"type": "AzureBlobFS",
+				"type": "AzureDatabricks",
 				"typeProperties": {
-					"url": "[parameters('linkedservice_ADLSGen2_properties_typeProperties_url')]",
-					"tenant": "[parameters('linkedservice_ADLSGen2_properties_typeProperties_tenant')]",
-					"servicePrincipalId": "[parameters('linkedservice_ADLSGen2_properties_typeProperties_servicePrincipalId')]",
-					"servicePrincipalKey": {
+					"domain": "https://adb-4694361580888380.0.azuredatabricks.net",
+					"accessToken": {
 						"type": "AzureKeyVaultSecret",
 						"store": {
 							"referenceName": "keyvault_TEC",
 							"type": "LinkedServiceReference"
 						},
-						"secretName": "tec-dev-prinicipalkey",
-						"secretVersion": "ea7baf49a5774322b0ca7dc1d9b5f923"
-					}
+						"secretName": "tec-dev-azuredatabricks-accesstoken",
+						"secretVersion": "85a69a3638d3411a8527ff3fa1ed4e26"
+					},
+					"existingClusterId": "0826-082939-plod17"
 				}
 			},
 			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DataBricksCDM')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Contact CDM to SQL Contact Table",
+						"type": "DatabricksNotebook",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"notebookPath": "/Shared/ContactTecDev"
+						},
+						"linkedServiceName": {
+							"referenceName": "AzureDatabricks_ContactsTecDev",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"folder": {
+					"name": "DataBricks"
+				},
+				"annotations": [],
+				"lastPublishTime": "2020-08-03T17:26:03Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureDatabricks_ContactsTecDev')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/ADLSGen2CSV')]",
@@ -76,9 +100,7 @@
 					}
 				]
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/linkedservice_ADLSGen2')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/ADLSV2CSV')]",
@@ -1207,62 +1229,6 @@
 				"typeProperties": {
 					"schema": "dbo",
 					"table": "COD-32"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureSqlTable8')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "SQLPocTec",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "RegistrationID",
-						"type": "varchar"
-					},
-					{
-						"name": "ArticleCode",
-						"type": "varchar"
-					},
-					{
-						"name": "Sequencenumber",
-						"type": "varchar"
-					},
-					{
-						"name": "Retailnumber",
-						"type": "varchar"
-					},
-					{
-						"name": "Communication",
-						"type": "varchar"
-					},
-					{
-						"name": "BlankColumn1",
-						"type": "varchar"
-					},
-					{
-						"name": "Codesuite",
-						"type": "varchar"
-					},
-					{
-						"name": "BlankColumn2",
-						"type": "varchar"
-					},
-					{
-						"name": "LinkCode",
-						"type": "varchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "COD-33"
 				}
 			},
 			"dependsOn": []

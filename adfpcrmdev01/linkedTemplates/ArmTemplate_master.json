@@ -288,6 +288,15 @@
 					},
 					"linkedService_ADLS_properties_typeProperties_servicePrincipalId": {
 						"value": "[parameters('linkedService_ADLS_properties_typeProperties_servicePrincipalId')]"
+					},
+					"linkedservice_ADLSGen2_properties_typeProperties_url": {
+						"value": "[parameters('linkedservice_ADLSGen2_properties_typeProperties_url')]"
+					},
+					"linkedservice_ADLSGen2_properties_typeProperties_tenant": {
+						"value": "[parameters('linkedservice_ADLSGen2_properties_typeProperties_tenant')]"
+					},
+					"linkedservice_ADLSGen2_properties_typeProperties_servicePrincipalId": {
+						"value": "[parameters('linkedservice_ADLSGen2_properties_typeProperties_servicePrincipalId')]"
 					}
 				}
 			},
@@ -306,15 +315,6 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
-					},
-					"linkedservice_ADLSGen2_properties_typeProperties_url": {
-						"value": "[parameters('linkedservice_ADLSGen2_properties_typeProperties_url')]"
-					},
-					"linkedservice_ADLSGen2_properties_typeProperties_tenant": {
-						"value": "[parameters('linkedservice_ADLSGen2_properties_typeProperties_tenant')]"
-					},
-					"linkedservice_ADLSGen2_properties_typeProperties_servicePrincipalId": {
-						"value": "[parameters('linkedservice_ADLSGen2_properties_typeProperties_servicePrincipalId')]"
 					}
 				}
 			},

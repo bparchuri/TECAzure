@@ -59,6 +59,27 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/Binary_articlesCSV_ArticlesFolder')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "linkedservice_ADLSGen2",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": "atlas/mnt020/csv/articles",
+						"fileSystem": "raw"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/CODFile')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -599,72 +620,6 @@
 					"schema": "dbo",
 					"table": "EIS779_atlas"
 				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Excel_Products')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "linkedservice_ADLSGen2",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Excel",
-				"typeProperties": {
-					"sheetName": "Liste des produits",
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"fileName": "Productdata.xlsx",
-						"folderPath": "Products/Source",
-						"fileSystem": "integrations-tec"
-					},
-					"firstRowAsHeader": true
-				},
-				"schema": [
-					{
-						"name": "ID",
-						"type": "String"
-					},
-					{
-						"name": "N° Reseau",
-						"type": "String"
-					},
-					{
-						"name": "Libelle Reseau Produit",
-						"type": "String"
-					},
-					{
-						"name": "N° Produit",
-						"type": "String"
-					},
-					{
-						"name": "Libelle long Produit",
-						"type": "String"
-					},
-					{
-						"name": "DDV Produit",
-						"type": "String"
-					},
-					{
-						"name": "DEV Produit",
-						"type": "String"
-					},
-					{
-						"name": "Supprimé ?",
-						"type": "String"
-					},
-					{
-						"name": "Date Suppression",
-						"type": "String"
-					},
-					{
-						"name": "Libellé du Type de support",
-						"type": "String"
-					}
-				]
 			},
 			"dependsOn": []
 		}

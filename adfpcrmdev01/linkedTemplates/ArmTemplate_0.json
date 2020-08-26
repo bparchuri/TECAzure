@@ -144,6 +144,18 @@
 		"linkedService_ADLS_properties_typeProperties_servicePrincipalId": {
 			"type": "string",
 			"defaultValue": "b74b5688-5ee7-4c50-8364-ddd607f525ac"
+		},
+		"linkedservice_ADLSGen2_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://sapcrmdev01.dfs.core.windows.net"
+		},
+		"linkedservice_ADLSGen2_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "2291afd2-1191-4bcb-9906-c1406010941b"
+		},
+		"linkedservice_ADLSGen2_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "b74b5688-5ee7-4c50-8364-ddd607f525ac"
 		}
 	},
 	"variables": {
@@ -331,40 +343,6 @@
 				}
 			},
 			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/DataBricksCDM')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Notebook to Transform CDM data to Data Bricks",
-						"type": "DatabricksNotebook",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"notebookPath": "/Users/bparchuri@adflux.net/ContactCDM"
-						},
-						"linkedServiceName": {
-							"referenceName": "AzureDatabricks1",
-							"type": "LinkedServiceReference"
-						}
-					}
-				],
-				"annotations": [],
-				"lastPublishTime": "2020-08-03T17:26:03Z"
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureDatabricks1')]"
-			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/Binary3')]",
@@ -605,6 +583,32 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/AzureKeyVault_Dev')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/linkedservice_ADLSGen2')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('linkedservice_ADLSGen2_properties_typeProperties_url')]",
+					"tenant": "[parameters('linkedservice_ADLSGen2_properties_typeProperties_tenant')]",
+					"servicePrincipalId": "[parameters('linkedservice_ADLSGen2_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "keyvault_TEC",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "tec-dev-prinicipalkey",
+						"secretVersion": "ea7baf49a5774322b0ca7dc1d9b5f923"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/keyvault_TEC')]"
 			]
 		}
 	]

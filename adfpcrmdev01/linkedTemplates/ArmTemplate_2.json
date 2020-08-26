@@ -13,6 +13,62 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTable8')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SQLPocTec",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "RegistrationID",
+						"type": "varchar"
+					},
+					{
+						"name": "ArticleCode",
+						"type": "varchar"
+					},
+					{
+						"name": "Sequencenumber",
+						"type": "varchar"
+					},
+					{
+						"name": "Retailnumber",
+						"type": "varchar"
+					},
+					{
+						"name": "Communication",
+						"type": "varchar"
+					},
+					{
+						"name": "BlankColumn1",
+						"type": "varchar"
+					},
+					{
+						"name": "Codesuite",
+						"type": "varchar"
+					},
+					{
+						"name": "BlankColumn2",
+						"type": "varchar"
+					},
+					{
+						"name": "LinkCode",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "COD-33"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/AzureSqlTable9')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -1601,27 +1657,6 @@
 						"type": "AzureBlobFSLocation",
 						"fileName": "Liste des articles.csv",
 						"folderPath": "atlas/mnt020/csv/produits",
-						"fileSystem": "raw"
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Binary_articlesCSV_ArticlesFolder')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "linkedservice_ADLSGen2",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Binary",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"folderPath": "atlas/mnt020/csv/articles",
 						"fileSystem": "raw"
 					}
 				}
