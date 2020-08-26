@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Contact CDM to SQL Contact Table",
+				"name": "ContactStatus CDM to SQL ContactStatus Table",
 				"type": "DatabricksNotebook",
 				"dependsOn": [],
 				"policy": {
@@ -15,7 +15,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"notebookPath": "/Shared/ContactTecDev"
+					"notebookPath": "/Shared/ContactStatusTecDev"
 				},
 				"linkedServiceName": {
 					"referenceName": "AzureDatabricks_ContactsTecDev",
