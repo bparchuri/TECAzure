@@ -13,6 +13,607 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/CODAIntegration')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy SQL Join to CODA Integration",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "AzureSqlSource",
+								"sqlReaderQuery": "select \nNine.RegistrationID AS Nine_RegistrationId,\nNine.Numberofrecords AS Nine_Numberofrecords,\nNine.DebitRevenue AS Nine_DebitRevenue,\nNine.CreditSales AS Nine_CreditSales,\nNine.Multiplefilecode AS Nine_Multiplefilecode,\nEight.RegistrationID AS Eight_RegistrationId,\nEight.Accountnumber AS Eight_Accountnumber,\nEight.NewBalance AS Eight_NewBalance ,\nEight.Dateofnewbalance AS Eight_Dateofnewbalance,\nOne.RegistrationID AS One_RegistrationId,\nOne.BankAccountType AS One_BankAccountType,\nOne.Sequencenumberofpaperaccount AS One_Sequencenumberofpaperaccount,\nOne.Accountnumber AS One_Accountnumber,\nOne.Oldbalance AS One_Oldbalance,\nOne.Oldpay AS One_Oldpay ,\nOne.Dateofoldbalance AS One_Dateofoldbalance,\nOne.Accountholdername AS One_Accountholdername,\nTwoOne.RegistrationID AS TwoOne_RegistrationId,\nTwoOne.Sequencenumber AS TwoOne_Sequencenumber,\nTwoOne.Amount AS TwoOne_Amount,\nTwoOne.Valuedate AS TwoOne_Valuedate,\nTwoOne.Accountdate AS TwoOne_Accountdate,\nTwoTwo.RegistrationID AS TwoTwo_RegistrationId,\nTwoTwo.Customerreference AS TwoTwo_Customerreference,\nTwoTwo.BIC AS TwoTwo_BIC,\nTwoTwo.Linkcode AS TwoTwo_Linkcode,\nTwoThree.RegistrationID AS TwoThree_RegistrationId,\nTwoThree.ArticleCode AS TwoThree_ArticleCode,\nTwoThree.Counterpartyaccountnumber AS TwoThree_Counterpartyaccountnumber,\nTwoThree.Nameofcounterparty AS TwoThree_Nameofcounterparty,\nTwoThree.SuiteCode AS TwoThree_SuiteCode,\nThreeOne.RegistrationID AS ThreeOne_RegistrationId,\nThreeOne.ArticleCode AS ThreeOne_ArticleCode,\nThreeOne.CommunicationCode AS ThreeOne_CommunicationCode,\nThreeOne.MoreCode AS ThreeOne_MoreCode,\nThreeTwo.RegistrationID AS ThreeTwo_RegistrationId,\nThreeTwo.Sequencenumber AS ThreeTwo_Sequencenumber ,\nThreeTwo.ArticleCode AS ThreeTwo_ArticleCode,\nThreeTwo.Communication AS ThreeTwo_Communication,\nZero.RecordIdentification AS Zero_RecordIdentification,\nZero.CreationDate AS Zero_CreationDate ,\nZero.BankIdentificationNumber AS Zero_BankIdentificationNumber,\nZero.ApplicationCode AS Zero_ApplicationCode,\nZero.BIC AS Zero_BIC,\nZero.IdentificationNumberofBelgium AS Zero_IdentificationNumberofBelgium\nfrom \n(SELECT * , ROW_NUMBER() OVER (ORDER BY RegistrationID) AS row_num FROM [dbo].[COD-21]) TwoOne \nJoin\n(SELECT * , ROW_NUMBER() OVER (ORDER BY RegistrationID) AS row_num FROM [dbo].[COD-22]) TwoTwo on TwoOne.row_num = TwoTwo.row_num\nLeft OUTER Join\n(SELECT * , ROW_NUMBER() OVER (ORDER BY RegistrationID) AS row_num FROM [dbo].[COD-23]) TwoThree on TwoThree.row_num = TwoTwo.row_num\nLEFT OUTER Join\n(SELECT * , ROW_NUMBER() OVER (ORDER BY RegistrationID) AS row_num FROM [dbo].[COD-31]) ThreeOne on ThreeOne.row_num = TwoTwo.row_num\nLEFT OUTER Join\n(SELECT * , ROW_NUMBER() OVER (ORDER BY RegistrationID) AS row_num FROM [dbo].[COD-32]) ThreeTwo on ThreeTwo.row_num = TwoTwo.row_num\nLEFT OUTER Join\n(SELECT * , ROW_NUMBER() OVER (ORDER BY RegistrationID) AS row_num FROM [dbo].[COD-33]) ThreeThree on ThreeThree.row_num = TwoTwo.row_num\nLEFT OUTER Join\n(SELECT * , ROW_NUMBER() OVER (ORDER BY RegistrationID) AS row_num FROM [dbo].[COD-1]) One on One.row_num = TwoTwo.row_num\nLEFT OUTER Join\n(SELECT * , ROW_NUMBER() OVER (ORDER BY RegistrationID) AS row_num FROM [dbo].[COD-8]) Eight on Eight.row_num = TwoTwo.row_num\nLEFT OUTER Join\n(SELECT * , ROW_NUMBER() OVER (ORDER BY RegistrationID) AS row_num FROM [dbo].[COD-9]) Nine on Nine.row_num = TwoTwo.row_num\nLEFT OUTER Join\n(SELECT * , ROW_NUMBER() OVER (ORDER BY RecordIdentification) AS row_num FROM [dbo].[COD-0]) Zero on Zero.row_num = TwoTwo.row_num",
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"sink": {
+								"type": "AzureSqlSink"
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "Nine_RegistrationId",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "Nine_RegistrationID",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Nine_Numberofrecords",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "Nine_Numberofrecords",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Nine_DebitRevenue",
+											"type": "Decimal",
+											"physicalType": "decimal"
+										},
+										"sink": {
+											"name": "Nine_DebitRevenue",
+											"type": "Decimal",
+											"physicalType": "decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "Nine_CreditSales",
+											"type": "Decimal",
+											"physicalType": "decimal"
+										},
+										"sink": {
+											"name": "Nine_CreditSales",
+											"type": "Decimal",
+											"physicalType": "decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "Nine_Multiplefilecode",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "Nine_Multiplefilecode",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Eight_RegistrationId",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "Eight_RegistrationID",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Eight_Accountnumber",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "Eight_Accountnumber",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Eight_NewBalance",
+											"type": "Decimal",
+											"physicalType": "decimal"
+										},
+										"sink": {
+											"name": "Eight_NewBalance",
+											"type": "Decimal",
+											"physicalType": "decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "Eight_Dateofnewbalance",
+											"type": "DateTime",
+											"physicalType": "date"
+										},
+										"sink": {
+											"name": "Eight_Dateofnewbalance",
+											"type": "DateTime",
+											"physicalType": "date"
+										}
+									},
+									{
+										"source": {
+											"name": "One_RegistrationId",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "One_RegistrationID",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "One_BankAccountType",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "One_BankAccountType",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "One_Sequencenumberofpaperaccount",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "One_Sequencenumberofpaperaccount",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "One_Accountnumber",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "One_Accountnumber",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "One_Oldbalance",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "One_Oldbalance",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "One_Oldpay",
+											"type": "Decimal",
+											"physicalType": "decimal"
+										},
+										"sink": {
+											"name": "One_Oldpay",
+											"type": "Decimal",
+											"physicalType": "decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "One_Dateofoldbalance",
+											"type": "DateTime",
+											"physicalType": "date"
+										},
+										"sink": {
+											"name": "One_Dateofoldbalance",
+											"type": "DateTime",
+											"physicalType": "date"
+										}
+									},
+									{
+										"source": {
+											"name": "One_Accountholdername",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "One_Accountholdername",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoOne_RegistrationId",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "TwoOne_RegistrationID",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoOne_Sequencenumber",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "TwoOne_Sequencenumber",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoOne_Amount",
+											"type": "Decimal",
+											"physicalType": "decimal"
+										},
+										"sink": {
+											"name": "TwoOne_Amount",
+											"type": "Decimal",
+											"physicalType": "decimal"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoOne_Valuedate",
+											"type": "DateTime",
+											"physicalType": "date"
+										},
+										"sink": {
+											"name": "TwoOne_Valuedate",
+											"type": "DateTime",
+											"physicalType": "date"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoOne_Accountdate",
+											"type": "DateTime",
+											"physicalType": "date"
+										},
+										"sink": {
+											"name": "TwoOne_Accountdate",
+											"type": "DateTime",
+											"physicalType": "date"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoTwo_RegistrationId",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "TwoTwo_RegistrationID",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoTwo_Customerreference",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "TwoTwo_Customerreference",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoTwo_BIC",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "TwoTwo_BIC",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoTwo_Linkcode",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "TwoTwo_Linkcode",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoThree_RegistrationId",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "TwoThird_RegistrationID",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoThree_ArticleCode",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "TwoThird_ArticleCode",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoThree_Counterpartyaccountnumber",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "TwoThird_Counterpartyaccountnumber",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoThree_Nameofcounterparty",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "TwoThird_Nameofcounterparty",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "TwoThree_SuiteCode",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "TwoThird_SuiteCode",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "ThreeOne_RegistrationId",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "ThirdOne_RegistrationID",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "ThreeOne_ArticleCode",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "ThirdOne_ArticleCode",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "ThreeOne_CommunicationCode",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "ThirdOne_CommunicationCode",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "ThreeOne_MoreCode",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "ThirdOne_MoreCode",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "ThreeTwo_RegistrationId",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "ThirdTwo_RegistrationID",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "ThreeTwo_Sequencenumber",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "ThirdTwo_Sequencenumber",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "ThreeTwo_ArticleCode",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "ThirdTwo_ArticleCode",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "ThreeTwo_Communication",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "ThirdTwo_Communication",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Zero_RecordIdentification",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "Zero_RecordIdentification",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Zero_CreationDate",
+											"type": "DateTime",
+											"physicalType": "date"
+										},
+										"sink": {
+											"name": "Zero_CreationDate",
+											"type": "DateTime",
+											"physicalType": "date"
+										}
+									},
+									{
+										"source": {
+											"name": "Zero_BankIdentificationNumber",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "Zero_BankIdentificationNumber",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Zero_ApplicationCode",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "Zero_ApplicationCode",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Zero_BIC",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "Zero_BIC",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									},
+									{
+										"source": {
+											"name": "Zero_IdentificationNumberofBelgium",
+											"type": "String",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "Zero_IdentificationNumberofBelgium",
+											"type": "String",
+											"physicalType": "varchar"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "AzureSqlTable14",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AzureSqlTable15",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"annotations": [],
+				"lastPublishTime": "2020-08-03T17:26:08Z"
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/CODAIntegration_copy1')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -6923,549 +7524,6 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/dataflows/dataflowtosplitcodafile')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/EIS779_CRM_TecDev')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Copy CSV to SQL Table",
-						"type": "Copy",
-						"dependsOn": [
-							{
-								"activity": "Copy data to Merge CSV files",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "DelimitedTextSource",
-								"storeSettings": {
-									"type": "AzureBlobFSReadSettings",
-									"recursive": true
-								},
-								"formatSettings": {
-									"type": "DelimitedTextReadSettings"
-								}
-							},
-							"sink": {
-								"type": "AzureSqlSink",
-								"disableMetricsCollection": false
-							},
-							"enableStaging": false,
-							"parallelCopies": 50,
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"type": "String",
-											"ordinal": 1
-										},
-										"sink": {
-											"name": "Code_segment",
-											"type": "String"
-										}
-									}
-								]
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "DelimitedText_ADLS_ReadCSV",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "SQL_EIS779",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					},
-					{
-						"name": "Send data to CRM",
-						"type": "Copy",
-						"dependsOn": [
-							{
-								"activity": "Copy data_Using Joins",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "AzureSqlSource",
-								"sqlReaderQuery": "SELECT TOP (10) [Code_segment]\n      ,[Poste_segment]\n      ,[Id_transaction]\n      ,[Num_serie]\n      ,[Id_entreprise]\n      ,[Id_paiement]\n      ,[Code_moyen_paiement]\n      ,[Sens_paiement]\n      ,[Montant]\n      ,[Type_equipement]\n      ,[Date_ope]\n      ,[Name]\n      ,[Guid]\n  FROM [dbo].[EIS779_atlas]",
-								"queryTimeout": "02:00:00",
-								"partitionOption": "None"
-							},
-							"sink": {
-								"type": "DynamicsCrmSink",
-								"writeBatchSize": 10,
-								"writeBehavior": "upsert",
-								"ignoreNullValues": false
-							},
-							"enableStaging": false,
-							"parallelCopies": 50,
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"name": "Name",
-											"type": "String"
-										},
-										"sink": {
-											"name": "tec_name",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Code_segment",
-											"type": "String"
-										},
-										"sink": {
-											"name": "tec_codesegment",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Sens_paiement",
-											"type": "String"
-										},
-										"sink": {
-											"name": "tec_senspaiement",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Num_serie",
-											"type": "String"
-										},
-										"sink": {
-											"name": "tec_numserie",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Id_paiement",
-											"type": "String"
-										},
-										"sink": {
-											"name": "tec_idpaiement",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Guid",
-											"type": "Guid"
-										},
-										"sink": {
-											"name": "tec_eis779atlasid",
-											"type": "Guid"
-										}
-									},
-									{
-										"source": {
-											"name": "Code_moyen_paiement",
-											"type": "String"
-										},
-										"sink": {
-											"name": "tec_codemoyenpaiement",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Poste_segment",
-											"type": "String"
-										},
-										"sink": {
-											"name": "tec_postesegment",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Id_entreprise",
-											"type": "String"
-										},
-										"sink": {
-											"name": "tec_identreprise",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Date_ope",
-											"type": "DateTime"
-										},
-										"sink": {
-											"name": "tec_dateope",
-											"type": "DateTime"
-										}
-									},
-									{
-										"source": {
-											"name": "Id_transaction",
-											"type": "String"
-										},
-										"sink": {
-											"name": "tec_idtransaction",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Type_equipement"
-										},
-										"sink": {
-											"name": "tec_typeequipment"
-										}
-									}
-								]
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "EIS779_SQL_CRM",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "tecdevcrmconnection",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					},
-					{
-						"name": "dataflowusingsplittoSegments",
-						"type": "ExecuteDataFlow",
-						"dependsOn": [
-							{
-								"activity": "Copy CSV to SQL Table",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "dataflow_EIS779_Segments_plit",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"dataflowSource": {},
-									"SQLSegment0": {},
-									"SQLSegment1": {},
-									"SQLSegment2": {},
-									"SQLSegment3": {},
-									"SQLSegment4": {},
-									"SQLSegment5": {}
-								}
-							},
-							"staging": {},
-							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
-							}
-						}
-					},
-					{
-						"name": "Copy data_Using Joins",
-						"type": "Copy",
-						"dependsOn": [
-							{
-								"activity": "dataflowusingsplittoSegments",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "AzureSqlSource",
-								"sqlReaderQuery": "  SELECT Top(100)\n     E003.Code_segment\n    ,E003.Poste_segment\n    ,E003.Id_transaction\n    ,E001.Num_serie\n    ,E002.Id_entreprise\n    ,E003.Id_paiement\n    ,E003.Code_moyen_paiement\n    ,E003.Sens_paiement\n    ,E003.Montant\n    ,10 AS Type_Eqiupment\n    ,E001.Date_ope\n    ,E000.Plateforme\n\t,NEWID() AS Unique_Id\n  FROM [dbo].[EIS779_SEGMENT_001] E001\n  LEFT JOIN [dbo].[EIS779_SEGMENT_002] E002\n    ON E001.Id_transaction = E002.Id_transaction\n  JOIN [dbo].[EIS779_SEGMENT_003] E003\n    ON E001.Id_transaction = E003.Id_transaction\n  JOIN [dbo].[EIS779_SEGMENT_000] E000\n    ON E000.Code_segment = '000'\n  ORDER by E001.id_transaction",
-								"queryTimeout": "02:00:00",
-								"partitionOption": "None"
-							},
-							"sink": {
-								"type": "AzureSqlSink",
-								"disableMetricsCollection": false
-							},
-							"enableStaging": false,
-							"parallelCopies": 50,
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"name": "Code_segment",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Code_segment",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Poste_segment",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Poste_segment",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Id_transaction",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Id_transaction",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Num_serie",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Num_serie",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Id_entreprise",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Id_entreprise",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Id_paiement",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Id_paiement",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Code_moyen_paiement",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Code_moyen_paiement",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Sens_paiement",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Sens_paiement",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Montant",
-											"type": "Double"
-										},
-										"sink": {
-											"name": "Montant",
-											"type": "Double"
-										}
-									},
-									{
-										"source": {
-											"name": "Type_Eqiupment",
-											"type": "Int32"
-										},
-										"sink": {
-											"name": "Type_equipement",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Date_ope",
-											"type": "DateTime"
-										},
-										"sink": {
-											"name": "Date_ope",
-											"type": "DateTime"
-										}
-									},
-									{
-										"source": {
-											"name": "Plateforme",
-											"type": "String"
-										},
-										"sink": {
-											"name": "Name",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "Unique_Id",
-											"type": "Guid"
-										},
-										"sink": {
-											"name": "Guid",
-											"type": "Guid"
-										}
-									}
-								]
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "EIS779_SQL_Join",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "SQLEIS779ATLAS",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					},
-					{
-						"name": "Copy data to Merge CSV files",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "DelimitedTextSource",
-								"storeSettings": {
-									"type": "AzureBlobFSReadSettings",
-									"recursive": true,
-									"wildcardFileName": "*",
-									"enablePartitionDiscovery": false
-								},
-								"formatSettings": {
-									"type": "DelimitedTextReadSettings"
-								}
-							},
-							"sink": {
-								"type": "DelimitedTextSink",
-								"storeSettings": {
-									"type": "AzureBlobFSWriteSettings",
-									"copyBehavior": "MergeFiles"
-								},
-								"formatSettings": {
-									"type": "DelimitedTextWriteSettings",
-									"quoteAllText": true,
-									"fileExtension": ".csv"
-								}
-							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"typeConversion": true,
-								"typeConversionSettings": {
-									"allowDataTruncation": true,
-									"treatBooleanAsNumber": false
-								}
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "DelimitedText_EIS779_Source_CSV",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "DelimitedText_EIS779_Target",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					}
-				],
-				"folder": {
-					"name": "EIS-779"
-				},
-				"annotations": [],
-				"lastPublishTime": "2020-08-10T18:35:41Z"
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/dataflows/dataflow_EIS779_Segments_plit')]"
 			]
 		}
 	]
