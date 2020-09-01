@@ -2,7 +2,7 @@
 	"name": "SQLSegment4",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "SQLPocTec",
+			"referenceName": "AzureSqlDatabase_PCRM",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],

@@ -48,13 +48,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "ADLSGen2CSV",
+						"referenceName": "DelimitedText_ADLS_ReadCSV",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "SQLEIS779",
+						"referenceName": "SQL_EIS779",
 						"type": "DatasetReference"
 					}
 				]
@@ -82,7 +82,8 @@
 					"source": {
 						"type": "AzureSqlSource",
 						"sqlReaderQuery": "SELECT TOP (10) [Code_segment]\n      ,[Poste_segment]\n      ,[Id_transaction]\n      ,[Num_serie]\n      ,[Id_entreprise]\n      ,[Id_paiement]\n      ,[Code_moyen_paiement]\n      ,[Sens_paiement]\n      ,[Montant]\n      ,[Type_equipement]\n      ,[Date_ope]\n      ,[Name]\n      ,[Guid]\n  FROM [dbo].[EIS779_atlas]",
-						"queryTimeout": "02:00:00"
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
 					},
 					"sink": {
 						"type": "DynamicsCrmSink",
@@ -218,7 +219,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "SQLAtlasCRM",
+						"referenceName": "EIS779_SQL_CRM",
 						"type": "DatasetReference"
 					}
 				],
@@ -250,7 +251,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "dataflowSegments",
+						"referenceName": "dataflow_EIS779_Segments_plit",
 						"type": "DataFlowReference"
 					},
 					"compute": {
@@ -282,7 +283,8 @@
 					"source": {
 						"type": "AzureSqlSource",
 						"sqlReaderQuery": "  SELECT Top(100)\n     E003.Code_segment\n    ,E003.Poste_segment\n    ,E003.Id_transaction\n    ,E001.Num_serie\n    ,E002.Id_entreprise\n    ,E003.Id_paiement\n    ,E003.Code_moyen_paiement\n    ,E003.Sens_paiement\n    ,E003.Montant\n    ,10 AS Type_Eqiupment\n    ,E001.Date_ope\n    ,E000.Plateforme\n\t,NEWID() AS Unique_Id\n  FROM [dbo].[EIS779_SEGMENT_001] E001\n  LEFT JOIN [dbo].[EIS779_SEGMENT_002] E002\n    ON E001.Id_transaction = E002.Id_transaction\n  JOIN [dbo].[EIS779_SEGMENT_003] E003\n    ON E001.Id_transaction = E003.Id_transaction\n  JOIN [dbo].[EIS779_SEGMENT_000] E000\n    ON E000.Code_segment = '000'\n  ORDER by E001.id_transaction",
-						"queryTimeout": "02:00:00"
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
 					},
 					"sink": {
 						"type": "AzureSqlSink",
@@ -428,7 +430,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "SQLJoin",
+						"referenceName": "EIS779_SQL_Join",
 						"type": "DatasetReference"
 					}
 				],
@@ -440,7 +442,8 @@
 				]
 			}
 		],
-		"annotations": []
+		"annotations": [],
+		"lastPublishTime": "2020-08-10T18:35:41Z"
 	},
 	"type": "Microsoft.DataFactory/factories/pipelines"
 }

@@ -1,0 +1,16 @@
+{
+	"name": "DynamicsCrm_TecDev_CODA",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DynamicsCrm_TECDev",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DynamicsCrmEntity",
+		"schema": [],
+		"typeProperties": {
+			"entityName": "bd_coda"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

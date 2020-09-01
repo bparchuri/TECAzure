@@ -1,0 +1,16 @@
+{
+	"name": "DynamicsCrmEntity_Payment",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DynamicsCrm_TECDev",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DynamicsCrmEntity",
+		"schema": [],
+		"typeProperties": {
+			"entityName": "bd_payment"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

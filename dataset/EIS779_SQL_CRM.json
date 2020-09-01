@@ -1,0 +1,73 @@
+{
+	"name": "EIS779_SQL_CRM",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase_PCRM",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Code_segment",
+				"type": "nchar"
+			},
+			{
+				"name": "Poste_segment",
+				"type": "nchar"
+			},
+			{
+				"name": "Id_transaction",
+				"type": "nchar"
+			},
+			{
+				"name": "Num_serie",
+				"type": "nchar"
+			},
+			{
+				"name": "Id_entreprise",
+				"type": "nchar"
+			},
+			{
+				"name": "Id_paiement",
+				"type": "nchar"
+			},
+			{
+				"name": "Code_moyen_paiement",
+				"type": "nchar"
+			},
+			{
+				"name": "Sens_paiement",
+				"type": "varchar"
+			},
+			{
+				"name": "Montant",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "Type_equipement",
+				"type": "nchar"
+			},
+			{
+				"name": "Date_ope",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Name",
+				"type": "varchar"
+			},
+			{
+				"name": "Guid",
+				"type": "uniqueidentifier"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "EIS779_atlas"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

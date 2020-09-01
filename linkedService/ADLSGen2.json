@@ -5,16 +5,17 @@
 		"annotations": [],
 		"type": "AzureBlobFS",
 		"typeProperties": {
-			"url": "https://sapoctec.dfs.core.windows.net",
-			"tenant": "6e5433e0-76fc-44b7-b71b-0e5446a3fa94",
-			"servicePrincipalId": "b4537ba3-1639-42cb-9143-8bfbcb683e79",
+			"url": "https://sapcrmdev01.dfs.core.windows.net",
+			"tenant": "2291afd2-1191-4bcb-9906-c1406010941b",
+			"servicePrincipalId": "b74b5688-5ee7-4c50-8364-ddd607f525ac",
 			"servicePrincipalKey": {
 				"type": "AzureKeyVaultSecret",
 				"store": {
-					"referenceName": "KeyVaultPoc",
+					"referenceName": "AzureKeyVault_Dev",
 					"type": "LinkedServiceReference"
 				},
-				"secretName": "pockey"
+				"secretName": "tec-dev-prinicipalkey",
+				"secretVersion": ""
 			}
 		}
 	}

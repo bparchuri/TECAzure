@@ -1,0 +1,22 @@
+{
+	"name": "Dataflow_SQLTable_EIS779",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase_PCRM",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Code_segment",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "EIS779"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

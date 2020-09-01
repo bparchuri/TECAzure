@@ -1,0 +1,33 @@
+{
+	"name": "DataBricks_ContactStatus_TecDev",
+	"properties": {
+		"activities": [
+			{
+				"name": "ContactStatus CDM to SQL ContactStatus Table",
+				"type": "DatabricksNotebook",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Shared/ContactStatusTecDev"
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureDatabricks_ContactsTecDev",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"folder": {
+			"name": "DataBricks"
+		},
+		"annotations": [],
+		"lastPublishTime": "2020-08-26T15:26:00Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

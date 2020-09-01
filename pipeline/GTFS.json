@@ -47,7 +47,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "DLSV2GTFS",
+						"referenceName": "Binary_GTFSZipFile",
 						"type": "DatasetReference"
 					}
 				]
@@ -912,7 +912,8 @@
 				"defaultValue": "X"
 			}
 		},
-		"annotations": []
+		"annotations": [],
+		"lastPublishTime": "2020-09-01T10:21:40Z"
 	},
 	"type": "Microsoft.DataFactory/factories/pipelines"
 }

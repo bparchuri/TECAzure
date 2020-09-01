@@ -1,0 +1,21 @@
+{
+	"name": "AzureDatabricks_ContactsTecDev",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureDatabricks",
+		"typeProperties": {
+			"domain": "https://adb-4694361580888380.0.azuredatabricks.net",
+			"accessToken": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "keyvault_TEC",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "tec-dev-azuredatabricks-accesstoken",
+				"secretVersion": "85a69a3638d3411a8527ff3fa1ed4e26"
+			},
+			"existingClusterId": "0826-082939-plod17"
+		}
+	}
+}

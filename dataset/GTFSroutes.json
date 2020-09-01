@@ -11,8 +11,8 @@
 			"location": {
 				"type": "AzureBlobFSLocation",
 				"fileName": "routes.txt",
-				"folderPath": "GTFS",
-				"fileSystem": "poc-tec"
+				"folderPath": "GTFS/Source",
+				"fileSystem": "raw"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",

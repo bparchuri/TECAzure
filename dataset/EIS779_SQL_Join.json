@@ -1,0 +1,17 @@
+{
+	"name": "EIS779_SQL_Join",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase_PCRM",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "EIS779_atlas"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -25,7 +25,8 @@
 					"source": {
 						"type": "AzureSqlSource",
 						"sqlReaderQuery": "SELECT TOP (1000) [FaultId]\n      ,[FaultDesc]\n      ,[FaultCustomerNumber]\n      ,[Date]\n  FROM [dbo].[TECData]",
-						"queryTimeout": "02:00:00"
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
 					},
 					"sink": {
 						"type": "AzureSqlSink"
@@ -178,7 +179,8 @@
 				]
 			}
 		],
-		"annotations": []
+		"annotations": [],
+		"lastPublishTime": "2020-08-03T17:26:05Z"
 	},
 	"type": "Microsoft.DataFactory/factories/pipelines"
 }

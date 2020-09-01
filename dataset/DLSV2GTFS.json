@@ -10,8 +10,8 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"folderPath": "GTFS",
-				"fileSystem": "poc-tec"
+				"folderPath": "GTFS/Source",
+				"fileSystem": "raw"
 			}
 		}
 	},
