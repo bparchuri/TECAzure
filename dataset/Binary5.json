@@ -10,6 +10,10 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "\"Aricles\"+@utcnow()+\".csv\"",
+					"type": "Expression"
+				},
 				"folderPath": "atlas/mnt020/csv/produits",
 				"fileSystem": "raw"
 			}
