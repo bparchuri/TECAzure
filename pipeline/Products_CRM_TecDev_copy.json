@@ -44,7 +44,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "Binary_articlesCSV_ArticlesFolder",
+						"referenceName": "Binary5",
 						"type": "DatasetReference"
 					}
 				]
