@@ -13,6 +13,280 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/GTFStrips')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ADLSGen2",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "trips.txt",
+						"folderPath": "GTFS",
+						"fileSystem": "poc-tec"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "route_id",
+						"type": "String"
+					},
+					{
+						"name": "service_id",
+						"type": "String"
+					},
+					{
+						"name": "trip_id",
+						"type": "String"
+					},
+					{
+						"name": "trip_short_name",
+						"type": "String"
+					},
+					{
+						"name": "direction_id",
+						"type": "String"
+					},
+					{
+						"name": "block_id",
+						"type": "String"
+					},
+					{
+						"name": "shape_id",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SQLAgency')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SQLPocTec",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Agency_id",
+						"type": "varchar"
+					},
+					{
+						"name": "Agency_name",
+						"type": "varchar"
+					},
+					{
+						"name": "Agency_url",
+						"type": "varchar"
+					},
+					{
+						"name": "Agency_timezone",
+						"type": "varchar"
+					},
+					{
+						"name": "Agency_lang",
+						"type": "varchar"
+					},
+					{
+						"name": "Agency_phone",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Agency"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SQLAtlasCRM')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SQLPocTec",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Code_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Poste_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_transaction",
+						"type": "nchar"
+					},
+					{
+						"name": "Num_serie",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_entreprise",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_paiement",
+						"type": "nchar"
+					},
+					{
+						"name": "Code_moyen_paiement",
+						"type": "nchar"
+					},
+					{
+						"name": "Sens_paiement",
+						"type": "varchar"
+					},
+					{
+						"name": "Montant",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "Type_equipement",
+						"type": "nchar"
+					},
+					{
+						"name": "Date_ope",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Name",
+						"type": "varchar"
+					},
+					{
+						"name": "Guid",
+						"type": "uniqueidentifier"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EIS779_atlas"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SQLEIS779')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SQLPocTec",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Code_segment",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EIS779"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SQLEIS779ATLAS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase_PCRM",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Code_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Poste_segment",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_transaction",
+						"type": "nchar"
+					},
+					{
+						"name": "Num_serie",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_entreprise",
+						"type": "nchar"
+					},
+					{
+						"name": "Id_paiement",
+						"type": "nchar"
+					},
+					{
+						"name": "Code_moyen_paiement",
+						"type": "nchar"
+					},
+					{
+						"name": "Sens_paiement",
+						"type": "varchar"
+					},
+					{
+						"name": "Montant",
+						"type": "varchar"
+					},
+					{
+						"name": "Type_equipement",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Date_ope",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Name",
+						"type": "varchar"
+					},
+					{
+						"name": "Guid",
+						"type": "uniqueidentifier"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EIS779_atlas"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/SQLGTFSTableConnection')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -785,212 +1059,6 @@
 				"typeProperties": {
 					"schema": "dbo",
 					"table": "Routes"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/SQLshapes')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "SQLPocTec",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "shape_id",
-						"type": "varchar"
-					},
-					{
-						"name": "shape_pt_lat",
-						"type": "varchar"
-					},
-					{
-						"name": "shape_pt_lon",
-						"type": "varchar"
-					},
-					{
-						"name": "shape_pt_sequence",
-						"type": "varchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "Shapes"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/SQLstop_times')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "SQLPocTec",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "Trip_id",
-						"type": "varchar"
-					},
-					{
-						"name": "Arrival_time",
-						"type": "varchar"
-					},
-					{
-						"name": "Departure_time",
-						"type": "varchar"
-					},
-					{
-						"name": "Stop_id",
-						"type": "varchar"
-					},
-					{
-						"name": "Stop_sequence",
-						"type": "varchar"
-					},
-					{
-						"name": "Pickup_type",
-						"type": "varchar"
-					},
-					{
-						"name": "Drop_off_type",
-						"type": "varchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "Stop_Times"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/SQLstops')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "SQLPocTec",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "Stop_id",
-						"type": "varchar"
-					},
-					{
-						"name": "Stop_code",
-						"type": "varchar"
-					},
-					{
-						"name": "Stop_name",
-						"type": "varchar"
-					},
-					{
-						"name": "Stop_desc",
-						"type": "varchar"
-					},
-					{
-						"name": "Stop_lat",
-						"type": "varchar"
-					},
-					{
-						"name": "Stop_lon",
-						"type": "varchar"
-					},
-					{
-						"name": "Zone_id",
-						"type": "varchar"
-					},
-					{
-						"name": "Stop_url",
-						"type": "varchar"
-					},
-					{
-						"name": "Location_type",
-						"type": "varchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "Stops"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/SQLtrips')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "SQLPocTec",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "Route_id",
-						"type": "varchar"
-					},
-					{
-						"name": "Service_id",
-						"type": "varchar"
-					},
-					{
-						"name": "Trip_id",
-						"type": "varchar"
-					},
-					{
-						"name": "Trip_short_name",
-						"type": "varchar"
-					},
-					{
-						"name": "Direction_id",
-						"type": "varchar"
-					},
-					{
-						"name": "Block_id",
-						"type": "varchar"
-					},
-					{
-						"name": "Shape_id",
-						"type": "varchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "Trips"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/TECDevCRM')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "TecDevCRM",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DynamicsCrmEntity",
-				"schema": [],
-				"typeProperties": {
-					"entityName": "bd_lignes"
 				}
 			},
 			"dependsOn": []
