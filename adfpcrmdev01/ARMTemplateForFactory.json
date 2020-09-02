@@ -37,15 +37,15 @@
 		},
 		"ADLSGen2_properties_typeProperties_url": {
 			"type": "string",
-			"defaultValue": "https://sapoctec.dfs.core.windows.net"
+			"defaultValue": "https://sapcrmdev01.dfs.core.windows.net"
 		},
 		"ADLSGen2_properties_typeProperties_tenant": {
 			"type": "string",
-			"defaultValue": "6e5433e0-76fc-44b7-b71b-0e5446a3fa94"
+			"defaultValue": "2291afd2-1191-4bcb-9906-c1406010941b"
 		},
 		"ADLSGen2_properties_typeProperties_servicePrincipalId": {
 			"type": "string",
-			"defaultValue": "b4537ba3-1639-42cb-9143-8bfbcb683e79"
+			"defaultValue": "b74b5688-5ee7-4c50-8364-ddd607f525ac"
 		},
 		"AzureDataLakeStorage1_properties_typeProperties_url": {
 			"type": "string",
@@ -636,6 +636,50 @@
 				"[concat(variables('factoryId'), '/dataflows/dataflow_EIS779_Segments_plit')]",
 				"[concat(variables('factoryId'), '/datasets/EIS779_SQL_Join')]",
 				"[concat(variables('factoryId'), '/datasets/SQLEIS779ATLAS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Articles_CRM_TecDev')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Execute SSIS package Articles",
+						"type": "ExecuteSSISPackage",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"packageLocation": {
+								"packagePath": "SSISPackagesTecDev/ArticlesTecDev/ArticlestoCRM.dtsx",
+								"type": "SSISDB"
+							},
+							"environmentPath": null,
+							"connectVia": {
+								"referenceName": "integrationRuntime1",
+								"type": "IntegrationRuntimeReference"
+							},
+							"loggingLevel": "Basic",
+							"projectConnectionManagers": {},
+							"packageConnectionManagers": {}
+						}
+					}
+				],
+				"folder": {
+					"name": "MNT020"
+				},
+				"annotations": [],
+				"lastPublishTime": "2020-09-01T20:34:40Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntime1')]"
 			]
 		},
 		{
@@ -5842,7 +5886,7 @@
 					"name": "CODA"
 				},
 				"annotations": [],
-				"lastPublishTime": "2020-08-06T17:37:47Z"
+				"lastPublishTime": "2020-08-17T20:03:31Z"
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/binary_CODAFile')]",
@@ -5854,6 +5898,76 @@
 				"[concat(variables('factoryId'), '/datasets/DynamicsCrm_TecDev_CODA')]",
 				"[concat(variables('factoryId'), '/datasets/AzureSqlTable_PaymentJoin')]",
 				"[concat(variables('factoryId'), '/datasets/DynamicsCrmEntity_Payment')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DataBricksCDM')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Notebook to Transform CDM data to Data Bricks",
+						"type": "DatabricksNotebook",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"notebookPath": "/Users/bparchuri@adflux.net/ContactCDM"
+						},
+						"linkedServiceName": {
+							"referenceName": "AzureDatabricks1",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureDatabricks1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DataBricks_ContactStatus_TecDev')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "ContactStatus CDM to SQL ContactStatus Table",
+						"type": "DatabricksNotebook",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"notebookPath": "/Shared/ContactStatusTecDev"
+						},
+						"linkedServiceName": {
+							"referenceName": "AzureDatabricks_ContactsTecDev",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"folder": {
+					"name": "DataBricks"
+				},
+				"annotations": [],
+				"lastPublishTime": "2020-08-26T15:26:00Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureDatabricks_ContactsTecDev')]"
 			]
 		},
 		{
@@ -5887,7 +6001,7 @@
 					"name": "DataBricks"
 				},
 				"annotations": [],
-				"lastPublishTime": "2020-08-03T17:26:03Z"
+				"lastPublishTime": "2020-08-26T15:26:00Z"
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/AzureDatabricks_ContactsTecDev')]"
@@ -6430,7 +6544,7 @@
 					"name": "EIS-779"
 				},
 				"annotations": [],
-				"lastPublishTime": "2020-08-10T18:35:41Z"
+				"lastPublishTime": "2020-08-17T20:03:31Z"
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/DelimitedText_ADLS_ReadCSV')]",
@@ -6489,7 +6603,7 @@
 					"name": "EIS-779"
 				},
 				"annotations": [],
-				"lastPublishTime": "2020-08-10T18:35:41Z"
+				"lastPublishTime": "2020-08-20T16:23:21Z"
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/dataflows/dataflow1')]"
@@ -6547,7 +6661,7 @@
 						],
 						"outputs": [
 							{
-								"referenceName": "DLSV2GTFS",
+								"referenceName": "Binary_GTFSZipFile",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -7440,10 +7554,11 @@
 					}
 				},
 				"annotations": [],
-				"lastPublishTime": "2020-08-03T17:26:11Z"
+				"lastPublishTime": "2020-09-01T10:21:40Z"
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/ZipFileGTFS')]",
+				"[concat(variables('factoryId'), '/datasets/Binary_GTFSZipFile')]",
 				"[concat(variables('factoryId'), '/datasets/DLSV2GTFS')]",
 				"[concat(variables('factoryId'), '/pipelines/SQLtoGTFS')]",
 				"[concat(variables('factoryId'), '/datasets/GTFSAgency')]",
@@ -7675,6 +7790,974 @@
 				"[concat(variables('factoryId'), '/datasets/DLSV2GTFS')]",
 				"[concat(variables('factoryId'), '/dataflows/dataflowcalendardates')]",
 				"[concat(variables('factoryId'), '/dataflows/dataflowcalander')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/GTFS_copy2')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "GTFSZipfilestoDLS",
+						"description": "t",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "BinarySource",
+								"storeSettings": {
+									"type": "HttpReadSettings",
+									"requestMethod": "GET",
+									"requestTimeout": ""
+								},
+								"formatSettings": {
+									"type": "BinaryReadSettings",
+									"compressionProperties": {
+										"type": "ZipDeflateReadSettings",
+										"preserveZipFileNameAsFolder": false
+									}
+								}
+							},
+							"sink": {
+								"type": "BinarySink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								}
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "ZipFileGTFS",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "Binary_GTFSZipFile",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Get Metadata of GTFS folder",
+						"type": "GetMetadata",
+						"dependsOn": [
+							{
+								"activity": "GTFSZipfilestoDLS",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "DLSV2GTFS",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"fieldList": [
+								"childItems"
+							],
+							"storeSettings": {
+								"type": "AzureBlobFSReadSettings",
+								"recursive": true
+							},
+							"formatSettings": {
+								"type": "BinaryReadSettings"
+							}
+						}
+					},
+					{
+						"name": "ForEach",
+						"type": "ForEach",
+						"dependsOn": [
+							{
+								"activity": "Get Metadata of GTFS folder",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@activity('Get Metadata of GTFS folder').output.childItems",
+								"type": "Expression"
+							},
+							"activities": [
+								{
+									"name": "SwitchToSQLTables",
+									"type": "Switch",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"on": {
+											"value": "@item().name",
+											"type": "Expression"
+										},
+										"cases": [
+											{
+												"value": "agency.txt",
+												"activities": [
+													{
+														"name": "Copy data to Agency SQL Table",
+														"type": "Copy",
+														"dependsOn": [],
+														"policy": {
+															"timeout": "7.00:00:00",
+															"retry": 0,
+															"retryIntervalInSeconds": 30,
+															"secureOutput": false,
+															"secureInput": false
+														},
+														"userProperties": [],
+														"typeProperties": {
+															"source": {
+																"type": "DelimitedTextSource",
+																"storeSettings": {
+																	"type": "AzureBlobFSReadSettings",
+																	"recursive": true
+																},
+																"formatSettings": {
+																	"type": "DelimitedTextReadSettings"
+																}
+															},
+															"sink": {
+																"type": "AzureSqlSink"
+															},
+															"enableStaging": false,
+															"translator": {
+																"type": "TabularTranslator",
+																"mappings": [
+																	{
+																		"source": {
+																			"name": "agency_id",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "Agency_id",
+																			"type": "String"
+																		}
+																	},
+																	{
+																		"source": {
+																			"name": "agency_name",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "Agency_name",
+																			"type": "String"
+																		}
+																	},
+																	{
+																		"source": {
+																			"name": "agency_url",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "Agency_url",
+																			"type": "String"
+																		}
+																	},
+																	{
+																		"source": {
+																			"name": "agency_timezone",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "Agency_timezone",
+																			"type": "String"
+																		}
+																	},
+																	{
+																		"source": {
+																			"name": "agency_lang",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "Agency_lang",
+																			"type": "String"
+																		}
+																	},
+																	{
+																		"source": {
+																			"name": "agency_phone",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "Agency_phone",
+																			"type": "String"
+																		}
+																	}
+																]
+															}
+														},
+														"inputs": [
+															{
+																"referenceName": "GTFSAgency",
+																"type": "DatasetReference",
+																"parameters": {}
+															}
+														],
+														"outputs": [
+															{
+																"referenceName": "SQLAgency",
+																"type": "DatasetReference",
+																"parameters": {}
+															}
+														]
+													}
+												]
+											},
+											{
+												"value": "calendar_dates.txt",
+												"activities": [
+													{
+														"name": "dataflowtocalendardatesSQL",
+														"type": "ExecuteDataFlow",
+														"dependsOn": [],
+														"policy": {
+															"timeout": "7.00:00:00",
+															"retry": 0,
+															"retryIntervalInSeconds": 30,
+															"secureOutput": false,
+															"secureInput": false
+														},
+														"userProperties": [],
+														"typeProperties": {
+															"dataflow": {
+																"referenceName": "dataflowcalendardates",
+																"type": "DataFlowReference",
+																"parameters": {},
+																"datasetParameters": {
+																	"dataflowcalendardatessource": {},
+																	"sinktocalendardatesSQLtable": {}
+																}
+															},
+															"staging": {},
+															"compute": {
+																"coreCount": 8,
+																"computeType": "General"
+															}
+														}
+													}
+												]
+											},
+											{
+												"value": "calendar.txt",
+												"activities": [
+													{
+														"name": "dataflowtocalendarSQLtable",
+														"type": "ExecuteDataFlow",
+														"dependsOn": [],
+														"policy": {
+															"timeout": "7.00:00:00",
+															"retry": 0,
+															"retryIntervalInSeconds": 30,
+															"secureOutput": false,
+															"secureInput": false
+														},
+														"userProperties": [],
+														"typeProperties": {
+															"dataflow": {
+																"referenceName": "dataflowcalander",
+																"type": "DataFlowReference",
+																"parameters": {},
+																"datasetParameters": {
+																	"DataFlowCalendersource": {},
+																	"sinktoSQLCalendar": {}
+																}
+															},
+															"staging": {},
+															"compute": {
+																"coreCount": 8,
+																"computeType": "General"
+															}
+														}
+													}
+												]
+											},
+											{
+												"value": "routes.txt",
+												"activities": [
+													{
+														"name": "Copy data routes SQL Table",
+														"type": "Copy",
+														"dependsOn": [],
+														"policy": {
+															"timeout": "7.00:00:00",
+															"retry": 0,
+															"retryIntervalInSeconds": 30,
+															"secureOutput": false,
+															"secureInput": false
+														},
+														"userProperties": [],
+														"typeProperties": {
+															"source": {
+																"type": "DelimitedTextSource",
+																"storeSettings": {
+																	"type": "AzureBlobFSReadSettings",
+																	"recursive": true
+																},
+																"formatSettings": {
+																	"type": "DelimitedTextReadSettings"
+																}
+															},
+															"sink": {
+																"type": "AzureSqlSink"
+															},
+															"enableStaging": false,
+															"translator": {
+																"type": "TabularTranslator",
+																"mappings": [
+																	{
+																		"source": {
+																			"name": "route_id",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "Route_id",
+																			"type": "String"
+																		}
+																	},
+																	{
+																		"source": {
+																			"name": "agency_id",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "Agency_id",
+																			"type": "String"
+																		}
+																	},
+																	{
+																		"source": {
+																			"name": "route_short_name",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "Route_short_name",
+																			"type": "String"
+																		}
+																	},
+																	{
+																		"source": {
+																			"name": "route_long_name",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "Route_long_name",
+																			"type": "String"
+																		}
+																	},
+																	{
+																		"source": {
+																			"name": "route_desc",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "Route_desc",
+																			"type": "String"
+																		}
+																	},
+																	{
+																		"source": {
+																			"name": "route_type",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "Route_type",
+																			"type": "String"
+																		}
+																	},
+																	{
+																		"source": {
+																			"name": "route_url",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "Route_url",
+																			"type": "String"
+																		}
+																	}
+																]
+															}
+														},
+														"inputs": [
+															{
+																"referenceName": "GTFSroutes",
+																"type": "DatasetReference",
+																"parameters": {}
+															}
+														],
+														"outputs": [
+															{
+																"referenceName": "SQLroutes",
+																"type": "DatasetReference",
+																"parameters": {}
+															}
+														]
+													}
+												]
+											},
+											{
+												"value": "shapes.txt",
+												"activities": [
+													{
+														"name": "Copy data shapes SQL Table",
+														"type": "Copy",
+														"dependsOn": [],
+														"policy": {
+															"timeout": "7.00:00:00",
+															"retry": 0,
+															"retryIntervalInSeconds": 30,
+															"secureOutput": false,
+															"secureInput": false
+														},
+														"userProperties": [],
+														"typeProperties": {
+															"source": {
+																"type": "DelimitedTextSource",
+																"storeSettings": {
+																	"type": "AzureBlobFSReadSettings",
+																	"recursive": true
+																},
+																"formatSettings": {
+																	"type": "DelimitedTextReadSettings"
+																}
+															},
+															"sink": {
+																"type": "AzureSqlSink"
+															},
+															"enableStaging": false,
+															"translator": {
+																"type": "TabularTranslator",
+																"mappings": [
+																	{
+																		"source": {
+																			"name": "shape_id",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "shape_id",
+																			"type": "String"
+																		}
+																	},
+																	{
+																		"source": {
+																			"name": "shape_pt_lat",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "shape_pt_lat",
+																			"type": "String"
+																		}
+																	},
+																	{
+																		"source": {
+																			"name": "shape_pt_lon",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "shape_pt_lon",
+																			"type": "String"
+																		}
+																	},
+																	{
+																		"source": {
+																			"name": "shape_pt_sequence",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "shape_pt_sequence",
+																			"type": "String"
+																		}
+																	}
+																]
+															}
+														},
+														"inputs": [
+															{
+																"referenceName": "GTFSshapes",
+																"type": "DatasetReference",
+																"parameters": {}
+															}
+														],
+														"outputs": [
+															{
+																"referenceName": "SQLshapes",
+																"type": "DatasetReference",
+																"parameters": {}
+															}
+														]
+													}
+												]
+											},
+											{
+												"value": "stop_times.txt",
+												"activities": [
+													{
+														"name": "Copy data stoptimes SQL Table",
+														"type": "Copy",
+														"dependsOn": [],
+														"policy": {
+															"timeout": "7.00:00:00",
+															"retry": 0,
+															"retryIntervalInSeconds": 30,
+															"secureOutput": false,
+															"secureInput": false
+														},
+														"userProperties": [],
+														"typeProperties": {
+															"source": {
+																"type": "DelimitedTextSource",
+																"storeSettings": {
+																	"type": "AzureBlobFSReadSettings",
+																	"recursive": true
+																},
+																"formatSettings": {
+																	"type": "DelimitedTextReadSettings"
+																}
+															},
+															"sink": {
+																"type": "AzureSqlSink"
+															},
+															"enableStaging": false,
+															"translator": {
+																"type": "TabularTranslator",
+																"mappings": [
+																	{
+																		"source": {
+																			"name": "trip_id",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "Trip_id",
+																			"type": "String"
+																		}
+																	},
+																	{
+																		"source": {
+																			"name": "arrival_time",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "Arrival_time",
+																			"type": "String"
+																		}
+																	},
+																	{
+																		"source": {
+																			"name": "departure_time",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "Departure_time",
+																			"type": "String"
+																		}
+																	},
+																	{
+																		"source": {
+																			"name": "stop_id",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "Stop_id",
+																			"type": "String"
+																		}
+																	},
+																	{
+																		"source": {
+																			"name": "stop_sequence",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "Stop_sequence",
+																			"type": "String"
+																		}
+																	},
+																	{
+																		"source": {
+																			"name": "pickup_type",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "Pickup_type",
+																			"type": "String"
+																		}
+																	},
+																	{
+																		"source": {
+																			"name": "drop_off_type",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "Drop_off_type",
+																			"type": "String"
+																		}
+																	}
+																]
+															}
+														},
+														"inputs": [
+															{
+																"referenceName": "GTFSstop_times",
+																"type": "DatasetReference",
+																"parameters": {}
+															}
+														],
+														"outputs": [
+															{
+																"referenceName": "SQLstop_times",
+																"type": "DatasetReference",
+																"parameters": {}
+															}
+														]
+													}
+												]
+											},
+											{
+												"value": "stops.txt",
+												"activities": [
+													{
+														"name": "Copy data stops SQL Table",
+														"type": "Copy",
+														"dependsOn": [],
+														"policy": {
+															"timeout": "7.00:00:00",
+															"retry": 0,
+															"retryIntervalInSeconds": 30,
+															"secureOutput": false,
+															"secureInput": false
+														},
+														"userProperties": [],
+														"typeProperties": {
+															"source": {
+																"type": "DelimitedTextSource",
+																"storeSettings": {
+																	"type": "AzureBlobFSReadSettings",
+																	"recursive": true
+																},
+																"formatSettings": {
+																	"type": "DelimitedTextReadSettings"
+																}
+															},
+															"sink": {
+																"type": "AzureSqlSink"
+															},
+															"enableStaging": false,
+															"translator": {
+																"type": "TabularTranslator",
+																"mappings": [
+																	{
+																		"source": {
+																			"name": "stop_id",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "Stop_id",
+																			"type": "String"
+																		}
+																	},
+																	{
+																		"source": {
+																			"name": "stop_code",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "Stop_code",
+																			"type": "String"
+																		}
+																	},
+																	{
+																		"source": {
+																			"name": "stop_name",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "Stop_name",
+																			"type": "String"
+																		}
+																	},
+																	{
+																		"source": {
+																			"name": "stop_desc",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "Stop_desc",
+																			"type": "String"
+																		}
+																	},
+																	{
+																		"source": {
+																			"name": "stop_lat",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "Stop_lat",
+																			"type": "String"
+																		}
+																	},
+																	{
+																		"source": {
+																			"name": "stop_lon",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "Stop_lon",
+																			"type": "String"
+																		}
+																	},
+																	{
+																		"source": {
+																			"name": "zone_id",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "Zone_id",
+																			"type": "String"
+																		}
+																	},
+																	{
+																		"source": {
+																			"name": "stop_url",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "Stop_url",
+																			"type": "String"
+																		}
+																	},
+																	{
+																		"source": {
+																			"name": "location_type",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "Location_type",
+																			"type": "String"
+																		}
+																	}
+																]
+															}
+														},
+														"inputs": [
+															{
+																"referenceName": "GTFSstops",
+																"type": "DatasetReference",
+																"parameters": {}
+															}
+														],
+														"outputs": [
+															{
+																"referenceName": "SQLstops",
+																"type": "DatasetReference",
+																"parameters": {}
+															}
+														]
+													}
+												]
+											},
+											{
+												"value": "trips.txt",
+												"activities": [
+													{
+														"name": "Copy data trips SQL Table",
+														"type": "Copy",
+														"dependsOn": [],
+														"policy": {
+															"timeout": "7.00:00:00",
+															"retry": 0,
+															"retryIntervalInSeconds": 30,
+															"secureOutput": false,
+															"secureInput": false
+														},
+														"userProperties": [],
+														"typeProperties": {
+															"source": {
+																"type": "DelimitedTextSource",
+																"storeSettings": {
+																	"type": "AzureBlobFSReadSettings",
+																	"recursive": true
+																},
+																"formatSettings": {
+																	"type": "DelimitedTextReadSettings"
+																}
+															},
+															"sink": {
+																"type": "AzureSqlSink"
+															},
+															"enableStaging": false,
+															"translator": {
+																"type": "TabularTranslator",
+																"mappings": [
+																	{
+																		"source": {
+																			"name": "route_id",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "Route_id",
+																			"type": "String"
+																		}
+																	},
+																	{
+																		"source": {
+																			"name": "service_id",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "Service_id",
+																			"type": "String"
+																		}
+																	},
+																	{
+																		"source": {
+																			"name": "trip_id",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "Trip_id",
+																			"type": "String"
+																		}
+																	},
+																	{
+																		"source": {
+																			"name": "trip_short_name",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "Trip_short_name",
+																			"type": "String"
+																		}
+																	},
+																	{
+																		"source": {
+																			"name": "direction_id",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "Direction_id",
+																			"type": "String"
+																		}
+																	},
+																	{
+																		"source": {
+																			"name": "block_id",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "Block_id",
+																			"type": "String"
+																		}
+																	},
+																	{
+																		"source": {
+																			"name": "shape_id",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "Shape_id",
+																			"type": "String"
+																		}
+																	}
+																]
+															}
+														},
+														"inputs": [
+															{
+																"referenceName": "GTFStrips",
+																"type": "DatasetReference",
+																"parameters": {}
+															}
+														],
+														"outputs": [
+															{
+																"referenceName": "SQLtrips",
+																"type": "DatasetReference",
+																"parameters": {}
+															}
+														]
+													}
+												]
+											}
+										]
+									}
+								}
+							]
+						}
+					},
+					{
+						"name": "SQLtoGTFStoCRM",
+						"type": "ExecutePipeline",
+						"dependsOn": [
+							{
+								"activity": "ForEach",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "SQLtoGTFS",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					}
+				],
+				"variables": {
+					"fileName": {
+						"type": "String",
+						"defaultValue": "X"
+					}
+				},
+				"annotations": [],
+				"lastPublishTime": "2020-09-01T10:21:40Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/ZipFileGTFS')]",
+				"[concat(variables('factoryId'), '/datasets/Binary_GTFSZipFile')]",
+				"[concat(variables('factoryId'), '/datasets/DLSV2GTFS')]",
+				"[concat(variables('factoryId'), '/pipelines/SQLtoGTFS')]",
+				"[concat(variables('factoryId'), '/datasets/GTFSAgency')]",
+				"[concat(variables('factoryId'), '/datasets/SQLAgency')]",
+				"[concat(variables('factoryId'), '/dataflows/dataflowcalendardates')]",
+				"[concat(variables('factoryId'), '/dataflows/dataflowcalander')]",
+				"[concat(variables('factoryId'), '/datasets/GTFSroutes')]",
+				"[concat(variables('factoryId'), '/datasets/SQLroutes')]",
+				"[concat(variables('factoryId'), '/datasets/GTFSshapes')]",
+				"[concat(variables('factoryId'), '/datasets/SQLshapes')]",
+				"[concat(variables('factoryId'), '/datasets/GTFSstop_times')]",
+				"[concat(variables('factoryId'), '/datasets/SQLstop_times')]",
+				"[concat(variables('factoryId'), '/datasets/GTFSstops')]",
+				"[concat(variables('factoryId'), '/datasets/SQLstops')]",
+				"[concat(variables('factoryId'), '/datasets/GTFStrips')]",
+				"[concat(variables('factoryId'), '/datasets/SQLtrips')]"
 			]
 		},
 		{
@@ -7971,7 +9054,8 @@
 				"folder": {
 					"name": "MNT020"
 				},
-				"annotations": []
+				"annotations": [],
+				"lastPublishTime": "2020-09-01T21:19:03Z"
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntime1')]",
@@ -9089,6 +10173,26 @@
 				"[concat(variables('factoryId'), '/datasets/ADLSV2CSV')]",
 				"[concat(variables('factoryId'), '/datasets/SQLTECData')]"
 			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pipeline1')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Wait1",
+						"type": "Wait",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"waitTimeInSeconds": 1
+						}
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/ADLSGen2CSV')]",
@@ -12000,6 +13104,29 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/Binary_GTFSZipFile')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "linkedservice_ADLSGen2",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": "GTFS/Source",
+						"fileSystem": "raw"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/linkedservice_ADLSGen2')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/Binary_ProducstsUnzip_tecdev')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -12110,8 +13237,8 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
-						"folderPath": "GTFS",
-						"fileSystem": "poc-tec"
+						"folderPath": "GTFS/Source",
+						"fileSystem": "raw"
 					}
 				}
 			},
@@ -13053,8 +14180,8 @@
 					"location": {
 						"type": "AzureBlobFSLocation",
 						"fileName": "routes.txt",
-						"folderPath": "GTFS",
-						"fileSystem": "poc-tec"
+						"folderPath": "GTFS/Source",
+						"fileSystem": "raw"
 					},
 					"columnDelimiter": ",",
 					"escapeChar": "\\",
@@ -14751,15 +15878,16 @@
 					"servicePrincipalKey": {
 						"type": "AzureKeyVaultSecret",
 						"store": {
-							"referenceName": "KeyVaultPoc",
+							"referenceName": "AzureKeyVault_Dev",
 							"type": "LinkedServiceReference"
 						},
-						"secretName": "pockey"
+						"secretName": "tec-dev-prinicipalkey",
+						"secretVersion": ""
 					}
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/KeyVaultPoc')]"
+				"[concat(variables('factoryId'), '/linkedServices/AzureKeyVault_Dev')]"
 			]
 		},
 		{
@@ -14796,6 +15924,31 @@
 				}
 			},
 			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureDatabricks_ContactsTecDev')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureDatabricks",
+				"typeProperties": {
+					"domain": "https://adb-4694361580888380.0.azuredatabricks.net",
+					"accessToken": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "keyvault_TEC",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "tec-dev-azuredatabricks-accesstoken",
+						"secretVersion": "85a69a3638d3411a8527ff3fa1ed4e26"
+					},
+					"existingClusterId": "0826-082939-plod17"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/keyvault_TEC')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AzureFileStorage1')]",
@@ -15620,39 +16773,21 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/AzureDatabricks_ContactsTecDev')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"name": "[concat(parameters('factoryName'), '/default')]",
+			"type": "Microsoft.DataFactory/factories/managedVirtualNetworks",
 			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureDatabricks",
-				"typeProperties": {
-					"domain": "https://adb-4694361580888380.0.azuredatabricks.net",
-					"accessToken": {
-						"type": "AzureKeyVaultSecret",
-						"store": {
-							"referenceName": "keyvault_TEC",
-							"type": "LinkedServiceReference"
-						},
-						"secretName": "tec-dev-azuredatabricks-accesstoken",
-						"secretVersion": "85a69a3638d3411a8527ff3fa1ed4e26"
-					},
-					"existingClusterId": "0826-082939-plod17"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/keyvault_TEC')]"
-			]
+			"properties": {},
+			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/DataBricks_ContactStatus_TecDev')]",
+			"name": "[concat(parameters('factoryName'), '/Products_CRM_TecDev_copy')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"activities": [
 					{
-						"name": "ContactStatus CDM to SQL ContactStatus Table",
-						"type": "DatabricksNotebook",
+						"name": "Move Articles CSV to Articles folder",
+						"type": "Copy",
 						"dependsOn": [],
 						"policy": {
 							"timeout": "7.00:00:00",
@@ -15663,22 +16798,98 @@
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"notebookPath": "/Shared/ContactStatusTecDev"
+							"source": {
+								"type": "BinarySource",
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": false,
+									"wildcardFolderPath": "atlas/mnt020/csv/",
+									"wildcardFileName": "*.articles.csv",
+									"deleteFilesAfterCompletion": true
+								},
+								"formatSettings": {
+									"type": "BinaryReadSettings"
+								}
+							},
+							"sink": {
+								"type": "BinarySink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								}
+							},
+							"enableStaging": false
 						},
-						"linkedServiceName": {
-							"referenceName": "AzureDatabricks_ContactsTecDev",
-							"type": "LinkedServiceReference"
-						}
+						"inputs": [
+							{
+								"referenceName": "Binary4",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "Binary5",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
 					}
 				],
 				"folder": {
-					"name": "DataBricks"
+					"name": "MNT020"
 				},
 				"annotations": [],
-				"lastPublishTime": "2020-08-03T17:26:03Z"
+				"lastPublishTime": "2020-09-01T21:19:03Z"
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureDatabricks_ContactsTecDev')]"
+				"[concat(variables('factoryId'), '/datasets/Binary4')]",
+				"[concat(variables('factoryId'), '/datasets/Binary5')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Binary4')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "linkedservice_ADLSGen2",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": "atlas/mnt020/csv",
+						"fileSystem": "raw"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/linkedservice_ADLSGen2')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Binary5')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "linkedservice_ADLSGen2",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": "atlas/mnt020/csv/produits",
+						"fileSystem": "raw"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/linkedservice_ADLSGen2')]"
 			]
 		}
 	]

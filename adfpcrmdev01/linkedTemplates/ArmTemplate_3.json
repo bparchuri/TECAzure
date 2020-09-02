@@ -13,6 +13,318 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTable_CODA_9')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase_PCRM",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "RegistrationID",
+						"type": "varchar"
+					},
+					{
+						"name": "BlankColumn1",
+						"type": "varchar"
+					},
+					{
+						"name": "Numberofrecords",
+						"type": "varchar"
+					},
+					{
+						"name": "DebitRevenue",
+						"type": "decimal",
+						"precision": 15,
+						"scale": 3
+					},
+					{
+						"name": "CreditSales",
+						"type": "decimal",
+						"precision": 15,
+						"scale": 3
+					},
+					{
+						"name": "BlankColumn2",
+						"type": "varchar"
+					},
+					{
+						"name": "Multiplefilecode",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "CODA-9"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTable_PaymentJoin')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase_PCRM",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "GUID",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "Zero_FileReference",
+						"type": "varchar"
+					},
+					{
+						"name": "CODA_Guid",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "TwoOne_RegistrationId",
+						"type": "varchar"
+					},
+					{
+						"name": "TwoOne_Sequencenumber",
+						"type": "varchar"
+					},
+					{
+						"name": "TwoOne_Retailnumber",
+						"type": "varchar"
+					},
+					{
+						"name": "TwoOne_bankreferencenumber",
+						"type": "varchar"
+					},
+					{
+						"name": "TwoOne_Movementsign",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "TwoOne_Amount",
+						"type": "decimal",
+						"precision": 15,
+						"scale": 3
+					},
+					{
+						"name": "TwoOne_Valuedate",
+						"type": "date"
+					},
+					{
+						"name": "TwoOne_OperationCode",
+						"type": "varchar"
+					},
+					{
+						"name": "TwoOne_communicationtype",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "TwoOne_Communicationzone",
+						"type": "varchar"
+					},
+					{
+						"name": "TwoOne_Accountdate",
+						"type": "date"
+					},
+					{
+						"name": "TwoOne_Sequencenumberofpaperaccount",
+						"type": "varchar"
+					},
+					{
+						"name": "TwoOne_Codeglobalization",
+						"type": "varchar"
+					},
+					{
+						"name": "TwoTwo_RegistrationId",
+						"type": "varchar"
+					},
+					{
+						"name": "TwoTwo_Communication",
+						"type": "varchar"
+					},
+					{
+						"name": "TwoTwo_Customerreference",
+						"type": "varchar"
+					},
+					{
+						"name": "TwoTwo_BIC",
+						"type": "varchar"
+					},
+					{
+						"name": "TwoTwo_Transactiontype",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "TwoTwo_ISOCode",
+						"type": "varchar"
+					},
+					{
+						"name": "TwoTwo_CategoryPurpose",
+						"type": "varchar"
+					},
+					{
+						"name": "TwoTwo_Purpose",
+						"type": "varchar"
+					},
+					{
+						"name": "TwoThree_RegistrationId",
+						"type": "varchar"
+					},
+					{
+						"name": "TwoThree_Counterpartyaccountnumber",
+						"type": "varchar"
+					},
+					{
+						"name": "TwoThree_Nameofcounterparty",
+						"type": "varchar"
+					},
+					{
+						"name": "TwoThree_Communication",
+						"type": "varchar"
+					},
+					{
+						"name": "ThreeOne_RegistrationId",
+						"type": "varchar"
+					},
+					{
+						"name": "ThreeOne_AdditionalInformation",
+						"type": "varchar"
+					},
+					{
+						"name": "ThreeOne_OperationCode",
+						"type": "varchar"
+					},
+					{
+						"name": "ThreeOne_CommunicationCode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ThreeOne_Communication",
+						"type": "varchar"
+					},
+					{
+						"name": "ThreeTwo_RegistrationId",
+						"type": "varchar"
+					},
+					{
+						"name": "ThreeTwo_Communication",
+						"type": "varchar"
+					},
+					{
+						"name": "ThreeThree_RegistrationId",
+						"type": "varchar"
+					},
+					{
+						"name": "ThreeThree_Communication",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "COD-Payment"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Binary1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ADLSCOD",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "BelfiusCDA20200625_212325_582_OS1TMGH25F_235242590.COD",
+						"folderPath": "CODFile",
+						"fileSystem": "poc-tec"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Binary2')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "linkedservice_ADLSGen2",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": "EIS-779_poc/Target",
+						"fileSystem": "integrations-tec"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Binary_Articlescsv_Products')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "linkedservice_ADLSGen2",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "Liste des articles.csv",
+						"folderPath": "atlas/mnt020/csv/produits",
+						"fileSystem": "raw"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Binary_GTFSZipFile')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "linkedservice_ADLSGen2",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": "GTFS/Source",
+						"fileSystem": "raw"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/Binary_ProducstsUnzip_tecdev')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -115,8 +427,8 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
-						"folderPath": "GTFS",
-						"fileSystem": "poc-tec"
+						"folderPath": "GTFS/Source",
+						"fileSystem": "raw"
 					}
 				}
 			},
@@ -430,196 +742,6 @@
 						"type": "String"
 					}
 				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Delimited_CODACSV')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "linkedService_ADLS",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"fileName": "coda.csv",
-						"folderPath": "CODA/CSV",
-						"fileSystem": "integrations-tec"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Delimited_Coda_csv')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "linkedService_ADLS",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"fileName": "coda.csv",
-						"folderPath": "CODA/CSV",
-						"fileSystem": "integrations-tec"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/DynamicsCrmEntity_Payment')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "DynamicsCrm_TECDev",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DynamicsCrmEntity",
-				"schema": [],
-				"typeProperties": {
-					"entityName": "bd_payment"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/DynamicsCrm_TecDev_CODA')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "DynamicsCrm_TECDev",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DynamicsCrmEntity",
-				"schema": [],
-				"typeProperties": {
-					"entityName": "bd_coda"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/EIS779_SQL_CRM')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase_PCRM",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "Code_segment",
-						"type": "nchar"
-					},
-					{
-						"name": "Poste_segment",
-						"type": "nchar"
-					},
-					{
-						"name": "Id_transaction",
-						"type": "nchar"
-					},
-					{
-						"name": "Num_serie",
-						"type": "nchar"
-					},
-					{
-						"name": "Id_entreprise",
-						"type": "nchar"
-					},
-					{
-						"name": "Id_paiement",
-						"type": "nchar"
-					},
-					{
-						"name": "Code_moyen_paiement",
-						"type": "nchar"
-					},
-					{
-						"name": "Sens_paiement",
-						"type": "varchar"
-					},
-					{
-						"name": "Montant",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "Type_equipement",
-						"type": "nchar"
-					},
-					{
-						"name": "Date_ope",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "Name",
-						"type": "varchar"
-					},
-					{
-						"name": "Guid",
-						"type": "uniqueidentifier"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "EIS779_atlas"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/EIS779_SQL_Join')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase_PCRM",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "EIS779_atlas"
-				}
 			},
 			"dependsOn": []
 		}

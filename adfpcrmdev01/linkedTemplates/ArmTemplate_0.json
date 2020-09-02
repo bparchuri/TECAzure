@@ -91,15 +91,15 @@
 		},
 		"ADLSGen2_properties_typeProperties_url": {
 			"type": "string",
-			"defaultValue": "https://sapoctec.dfs.core.windows.net"
+			"defaultValue": "https://sapcrmdev01.dfs.core.windows.net"
 		},
 		"ADLSGen2_properties_typeProperties_tenant": {
 			"type": "string",
-			"defaultValue": "6e5433e0-76fc-44b7-b71b-0e5446a3fa94"
+			"defaultValue": "2291afd2-1191-4bcb-9906-c1406010941b"
 		},
 		"ADLSGen2_properties_typeProperties_servicePrincipalId": {
 			"type": "string",
-			"defaultValue": "b4537ba3-1639-42cb-9143-8bfbcb683e79"
+			"defaultValue": "b74b5688-5ee7-4c50-8364-ddd607f525ac"
 		},
 		"AzureSqlDatabase_PCRM_properties_typeProperties_connectionString_secretName": {
 			"type": "string",
@@ -112,56 +112,32 @@
 		"AzureSqlDatabase_PCRM_properties_typeProperties_tenant": {
 			"type": "string",
 			"defaultValue": "2291afd2-1191-4bcb-9906-c1406010941b"
-		},
-		"DynamicsCrm_TECDev_properties_typeProperties_username": {
-			"type": "string",
-			"defaultValue": "Bhargav.Parchuri@letec.be"
-		},
-		"SQLPocTec_properties_typeProperties_connectionString_secretName": {
-			"type": "string",
-			"defaultValue": "SQL19"
-		},
-		"SQLPocTec_properties_typeProperties_servicePrincipalId": {
-			"type": "string",
-			"defaultValue": "b4537ba3-1639-42cb-9143-8bfbcb683e79"
-		},
-		"SQLPocTec_properties_typeProperties_tenant": {
-			"type": "string",
-			"defaultValue": "6e5433e0-76fc-44b7-b71b-0e5446a3fa94"
-		},
-		"TecDevCRM_properties_typeProperties_username": {
-			"type": "string",
-			"defaultValue": "Bhargav.Parchuri@letec.be"
-		},
-		"linkedService_ADLS_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://sapcrmdev01.dfs.core.windows.net"
-		},
-		"linkedService_ADLS_properties_typeProperties_tenant": {
-			"type": "string",
-			"defaultValue": "2291afd2-1191-4bcb-9906-c1406010941b"
-		},
-		"linkedService_ADLS_properties_typeProperties_servicePrincipalId": {
-			"type": "string",
-			"defaultValue": "b74b5688-5ee7-4c50-8364-ddd607f525ac"
-		},
-		"linkedservice_ADLSGen2_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://sapcrmdev01.dfs.core.windows.net"
-		},
-		"linkedservice_ADLSGen2_properties_typeProperties_tenant": {
-			"type": "string",
-			"defaultValue": "2291afd2-1191-4bcb-9906-c1406010941b"
-		},
-		"linkedservice_ADLSGen2_properties_typeProperties_servicePrincipalId": {
-			"type": "string",
-			"defaultValue": "b74b5688-5ee7-4c50-8364-ddd607f525ac"
 		}
 	},
 	"variables": {
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/pipeline1')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Wait1",
+						"type": "Wait",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"waitTimeInSeconds": 1
+						}
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AzureDataLakeStorage1')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
@@ -345,6 +321,90 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/default')]",
+			"type": "Microsoft.DataFactory/factories/managedVirtualNetworks",
+			"apiVersion": "2018-06-01",
+			"properties": {},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Articles_CRM_TecDev')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Execute SSIS package Articles",
+						"type": "ExecuteSSISPackage",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"packageLocation": {
+								"packagePath": "SSISPackagesTecDev/ArticlesTecDev/ArticlestoCRM.dtsx",
+								"type": "SSISDB"
+							},
+							"environmentPath": null,
+							"connectVia": {
+								"referenceName": "integrationRuntime1",
+								"type": "IntegrationRuntimeReference"
+							},
+							"loggingLevel": "Basic",
+							"projectConnectionManagers": {},
+							"packageConnectionManagers": {}
+						}
+					}
+				],
+				"folder": {
+					"name": "MNT020"
+				},
+				"annotations": [],
+				"lastPublishTime": "2020-09-01T20:34:40Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntime1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DataBricksCDM')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Notebook to Transform CDM data to Data Bricks",
+						"type": "DatabricksNotebook",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"notebookPath": "/Users/bparchuri@adflux.net/ContactCDM"
+						},
+						"linkedServiceName": {
+							"referenceName": "AzureDatabricks1",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureDatabricks1')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/Binary3')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -429,15 +489,41 @@
 					"servicePrincipalKey": {
 						"type": "AzureKeyVaultSecret",
 						"store": {
-							"referenceName": "KeyVaultPoc",
+							"referenceName": "AzureKeyVault_Dev",
 							"type": "LinkedServiceReference"
 						},
-						"secretName": "pockey"
+						"secretName": "tec-dev-prinicipalkey",
+						"secretVersion": ""
 					}
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/KeyVaultPoc')]"
+				"[concat(variables('factoryId'), '/linkedServices/AzureKeyVault_Dev')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureDatabricks_ContactsTecDev')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureDatabricks",
+				"typeProperties": {
+					"domain": "https://adb-4694361580888380.0.azuredatabricks.net",
+					"accessToken": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "keyvault_TEC",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "tec-dev-azuredatabricks-accesstoken",
+						"secretVersion": "85a69a3638d3411a8527ff3fa1ed4e26"
+					},
+					"existingClusterId": "0826-082939-plod17"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/keyvault_TEC')]"
 			]
 		},
 		{
@@ -472,143 +558,6 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/AzureKeyVault_Dev')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/DynamicsCrm_TECDev')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "DynamicsCrm",
-				"typeProperties": {
-					"deploymentType": "Online",
-					"serviceUri": "https://tec-crm-dev.crm4.dynamics.com",
-					"authenticationType": "Office365",
-					"username": "[parameters('DynamicsCrm_TECDev_properties_typeProperties_username')]",
-					"password": {
-						"type": "AzureKeyVaultSecret",
-						"store": {
-							"referenceName": "AzureKeyVault_Dev",
-							"type": "LinkedServiceReference"
-						},
-						"secretName": "tec-dev-dynamicscrmpwd",
-						"secretVersion": "7be7b0e7ab794f39b7be5079c1c0314a"
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureKeyVault_Dev')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/SQLPocTec')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureSqlDatabase",
-				"typeProperties": {
-					"connectionString": {
-						"type": "AzureKeyVaultSecret",
-						"store": {
-							"referenceName": "KeyVaultPoc",
-							"type": "LinkedServiceReference"
-						},
-						"secretName": "[parameters('SQLPocTec_properties_typeProperties_connectionString_secretName')]"
-					},
-					"servicePrincipalId": "[parameters('SQLPocTec_properties_typeProperties_servicePrincipalId')]",
-					"servicePrincipalKey": {
-						"type": "AzureKeyVaultSecret",
-						"store": {
-							"referenceName": "KeyVaultPoc",
-							"type": "LinkedServiceReference"
-						},
-						"secretName": "pockey"
-					},
-					"tenant": "[parameters('SQLPocTec_properties_typeProperties_tenant')]"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/KeyVaultPoc')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/TecDevCRM')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "DynamicsCrm",
-				"typeProperties": {
-					"deploymentType": "Online",
-					"serviceUri": "https://tec-crm-dev.crm4.dynamics.com",
-					"authenticationType": "Office365",
-					"username": "[parameters('TecDevCRM_properties_typeProperties_username')]",
-					"password": {
-						"type": "AzureKeyVaultSecret",
-						"store": {
-							"referenceName": "KeyVaultPoc",
-							"type": "LinkedServiceReference"
-						},
-						"secretName": "crmpwd"
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/KeyVaultPoc')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/linkedService_ADLS')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobFS",
-				"typeProperties": {
-					"url": "[parameters('linkedService_ADLS_properties_typeProperties_url')]",
-					"tenant": "[parameters('linkedService_ADLS_properties_typeProperties_tenant')]",
-					"servicePrincipalId": "[parameters('linkedService_ADLS_properties_typeProperties_servicePrincipalId')]",
-					"servicePrincipalKey": {
-						"type": "AzureKeyVaultSecret",
-						"store": {
-							"referenceName": "AzureKeyVault_Dev",
-							"type": "LinkedServiceReference"
-						},
-						"secretName": "tec-dev-prinicipalkey",
-						"secretVersion": "ea7baf49a5774322b0ca7dc1d9b5f923"
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureKeyVault_Dev')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/linkedservice_ADLSGen2')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobFS",
-				"typeProperties": {
-					"url": "[parameters('linkedservice_ADLSGen2_properties_typeProperties_url')]",
-					"tenant": "[parameters('linkedservice_ADLSGen2_properties_typeProperties_tenant')]",
-					"servicePrincipalId": "[parameters('linkedservice_ADLSGen2_properties_typeProperties_servicePrincipalId')]",
-					"servicePrincipalKey": {
-						"type": "AzureKeyVaultSecret",
-						"store": {
-							"referenceName": "keyvault_TEC",
-							"type": "LinkedServiceReference"
-						},
-						"secretName": "tec-dev-prinicipalkey",
-						"secretVersion": "ea7baf49a5774322b0ca7dc1d9b5f923"
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/keyvault_TEC')]"
 			]
 		}
 	]
