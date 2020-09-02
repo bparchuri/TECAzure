@@ -16802,7 +16802,7 @@
 								"type": "DelimitedTextSource",
 								"storeSettings": {
 									"type": "AzureBlobFSReadSettings",
-									"recursive": true
+									"recursive": false
 								},
 								"formatSettings": {
 									"type": "DelimitedTextReadSettings"
@@ -16811,7 +16811,8 @@
 							"sink": {
 								"type": "DelimitedTextSink",
 								"storeSettings": {
-									"type": "AzureBlobFSWriteSettings"
+									"type": "AzureBlobFSWriteSettings",
+									"copyBehavior": "FlattenHierarchy"
 								},
 								"formatSettings": {
 									"type": "DelimitedTextWriteSettings",
@@ -16974,7 +16975,7 @@
 					"location": {
 						"type": "AzureBlobFSLocation",
 						"fileName": {
-							"value": "@utcnow()",
+							"value": "articles-@utcnow().csv",
 							"type": "Expression"
 						},
 						"folderPath": "atlas/mnt020/csv/articles",
