@@ -11,7 +11,7 @@
 			"location": {
 				"type": "AzureBlobFSLocation",
 				"fileName": {
-					"value": "@concat('Articles-',formatDateTime(utcnow(), 'yy-MM-dd [hh:mm:ss tt]'),'.csv')",
+					"value": "@concat('Articles-',formatDateTime(utcnow(), 'yyyy-MM-dd [hh:mm:ss tt]'),'.csv')",
 					"type": "Expression"
 				},
 				"folderPath": "atlas/mnt020/csv/articles",
