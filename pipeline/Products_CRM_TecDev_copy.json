@@ -21,7 +21,7 @@
 							"type": "AzureBlobFSReadSettings",
 							"recursive": false,
 							"wildcardFolderPath": "atlas/mnt020/csv/",
-							"wildcardFileName": "*.articles.csv",
+							"wildcardFileName": "*articles.csv",
 							"deleteFilesAfterCompletion": true
 						},
 						"formatSettings": {
