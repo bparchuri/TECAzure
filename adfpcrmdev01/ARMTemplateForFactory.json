@@ -16799,36 +16799,38 @@
 						"userProperties": [],
 						"typeProperties": {
 							"source": {
-								"type": "BinarySource",
+								"type": "DelimitedTextSource",
 								"storeSettings": {
 									"type": "AzureBlobFSReadSettings",
-									"recursive": false,
-									"wildcardFolderPath": "atlas/mnt020/csv/",
-									"wildcardFileName": "*articles.csv",
-									"deleteFilesAfterCompletion": true
+									"recursive": true
 								},
 								"formatSettings": {
-									"type": "BinaryReadSettings"
+									"type": "DelimitedTextReadSettings"
 								}
 							},
 							"sink": {
-								"type": "BinarySink",
+								"type": "DelimitedTextSink",
 								"storeSettings": {
 									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "DelimitedTextWriteSettings",
+									"quoteAllText": true,
+									"fileExtension": ".txt"
 								}
 							},
 							"enableStaging": false
 						},
 						"inputs": [
 							{
-								"referenceName": "Binary4",
+								"referenceName": "DelimitedText5",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
 						],
 						"outputs": [
 							{
-								"referenceName": "Binary5",
+								"referenceName": "DelimitedText4",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -16842,8 +16844,8 @@
 				"lastPublishTime": "2020-09-01T21:19:03Z"
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/Binary4')]",
-				"[concat(variables('factoryId'), '/datasets/Binary5')]"
+				"[concat(variables('factoryId'), '/datasets/DelimitedText5')]",
+				"[concat(variables('factoryId'), '/datasets/DelimitedText4')]"
 			]
 		},
 		{
@@ -16887,6 +16889,195 @@
 						"fileSystem": "raw"
 					}
 				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/linkedservice_ADLSGen2')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DelimitedText3')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "linkedservice_ADLSGen2",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@utcnow()",
+							"type": "Expression"
+						},
+						"folderPath": "atlas/mnt020/csv/produits",
+						"fileSystem": "raw"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/linkedservice_ADLSGen2')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DelimitedText4')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "linkedservice_ADLSGen2",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "Liste des articles.csv",
+						"folderPath": "atlas/mnt020/csv/articles",
+						"fileSystem": "raw"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/linkedservice_ADLSGen2')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DelimitedText5')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "linkedservice_ADLSGen2",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "Liste des articles.csv",
+						"folderPath": "atlas/mnt020/csv/articles",
+						"fileSystem": "raw"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					}
+				]
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/linkedservice_ADLSGen2')]"
