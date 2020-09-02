@@ -236,7 +236,7 @@
 					"location": {
 						"type": "AzureBlobFSLocation",
 						"fileName": {
-							"value": "articles-@utcnow().csv",
+							"value": "@concat('Articles-',utcnow(),'.csv')",
 							"type": "Expression"
 						},
 						"folderPath": "atlas/mnt020/csv/articles",
