@@ -5,18 +5,13 @@
 			"referenceName": "linkedservice_ADLSGen2",
 			"type": "LinkedServiceReference"
 		},
-		"parameters": {
-			"CopyDate": {
-				"type": "string"
-			}
-		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
 				"fileName": {
-					"value": "@concat('Articles-',utcnow(),'.csv')",
+					"value": "@concat('Articles-',formatDateTime(utcnow(), 'yy-MM-dd [hh:mm:ss tt]'),'.csv')",
 					"type": "Expression"
 				},
 				"folderPath": "atlas/mnt020/csv/articles",
