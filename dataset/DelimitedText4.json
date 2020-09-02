@@ -5,6 +5,11 @@
 			"referenceName": "linkedservice_ADLSGen2",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"CopyDate": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
