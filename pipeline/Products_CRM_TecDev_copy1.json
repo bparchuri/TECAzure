@@ -20,7 +20,7 @@
 						"storeSettings": {
 							"type": "AzureBlobFSReadSettings",
 							"recursive": false,
-							"wildcardFolderPath": "atlas/mnt020/csv/produits",
+							"wildcardFolderPath": "atlas/mnt020/csv/",
 							"wildcardFileName": "*.articles.csv",
 							"deleteFilesAfterCompletion": true
 						},
