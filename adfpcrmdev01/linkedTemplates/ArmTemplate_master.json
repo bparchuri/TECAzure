@@ -255,15 +255,6 @@
 					},
 					"ADLSGen2_properties_typeProperties_servicePrincipalId": {
 						"value": "[parameters('ADLSGen2_properties_typeProperties_servicePrincipalId')]"
-					},
-					"AzureSqlDatabase_PCRM_properties_typeProperties_connectionString_secretName": {
-						"value": "[parameters('AzureSqlDatabase_PCRM_properties_typeProperties_connectionString_secretName')]"
-					},
-					"AzureSqlDatabase_PCRM_properties_typeProperties_servicePrincipalId": {
-						"value": "[parameters('AzureSqlDatabase_PCRM_properties_typeProperties_servicePrincipalId')]"
-					},
-					"AzureSqlDatabase_PCRM_properties_typeProperties_tenant": {
-						"value": "[parameters('AzureSqlDatabase_PCRM_properties_typeProperties_tenant')]"
 					}
 				}
 			},
@@ -282,6 +273,15 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"AzureSqlDatabase_PCRM_properties_typeProperties_connectionString_secretName": {
+						"value": "[parameters('AzureSqlDatabase_PCRM_properties_typeProperties_connectionString_secretName')]"
+					},
+					"AzureSqlDatabase_PCRM_properties_typeProperties_servicePrincipalId": {
+						"value": "[parameters('AzureSqlDatabase_PCRM_properties_typeProperties_servicePrincipalId')]"
+					},
+					"AzureSqlDatabase_PCRM_properties_typeProperties_tenant": {
+						"value": "[parameters('AzureSqlDatabase_PCRM_properties_typeProperties_tenant')]"
 					},
 					"DynamicsCrm_TECDev_properties_typeProperties_username": {
 						"value": "[parameters('DynamicsCrm_TECDev_properties_typeProperties_username')]"

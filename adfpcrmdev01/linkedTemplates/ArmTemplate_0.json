@@ -100,18 +100,6 @@
 		"ADLSGen2_properties_typeProperties_servicePrincipalId": {
 			"type": "string",
 			"defaultValue": "b74b5688-5ee7-4c50-8364-ddd607f525ac"
-		},
-		"AzureSqlDatabase_PCRM_properties_typeProperties_connectionString_secretName": {
-			"type": "string",
-			"defaultValue": "tec-dev-sqlconnectionprincipal"
-		},
-		"AzureSqlDatabase_PCRM_properties_typeProperties_servicePrincipalId": {
-			"type": "string",
-			"defaultValue": "b74b5688-5ee7-4c50-8364-ddd607f525ac"
-		},
-		"AzureSqlDatabase_PCRM_properties_typeProperties_tenant": {
-			"type": "string",
-			"defaultValue": "2291afd2-1191-4bcb-9906-c1406010941b"
 		}
 	},
 	"variables": {
@@ -357,190 +345,7 @@
 							},
 							"loggingLevel": "Basic",
 							"projectConnectionManagers": {},
-							"packageConnectionManagers": {
-								"Azure Data Lake Storage Connection Manager": {
-									"AuthenticationMode": {
-										"value": "1"
-									},
-									"AzureDataLakeStorageGen": {
-										"value": "1"
-									},
-									"ClientId": {
-										"value": "b74b5688-5ee7-4c50-8364-ddd607f525ac"
-									},
-									"ClientSecret": {
-										"value": {
-											"type": "SecureString",
-											"value": "**********"
-										}
-									},
-									"ConnectionString": {
-										"value": "AzureDataLakeStorageGen=Gen2;StorageAccount=sapcrmdev01;AuthenticationMode=ClientCredentials;FileSystem=;ClientId=b74b5688-5ee7-4c50-8364-ddd607f525ac;TenantId=2291afd2-1191-4bcb-9906-c1406010941b;StorageEndpointsDomain=core.windows.net;ProxyMode=NoProxy;ProxyUsername=;ProxyServer=;ProxyServerPort=0;Timeout=120;RetryOnIntermittentErrors=True;UploadChunkSize=\"0 MB\""
-									},
-									"FileSystem": {},
-									"ProxyMode": {
-										"value": "0"
-									},
-									"ProxyPassword": {
-										"value": {
-											"type": "SecureString",
-											"value": "**********"
-										}
-									},
-									"ProxyServer": {},
-									"ProxyServerPort": {
-										"value": "0"
-									},
-									"ProxyUsername": {},
-									"RedirectUrl": {},
-									"RetryOnIntermittentErrors": {
-										"value": "True"
-									},
-									"SharedKey": {
-										"value": {
-											"type": "SecureString",
-											"value": "**********"
-										}
-									},
-									"StorageAccount": {
-										"value": "sapcrmdev01"
-									},
-									"StorageEndpointsDomain": {
-										"value": "core.windows.net"
-									},
-									"TargetServerVersion": {
-										"value": "150"
-									},
-									"TenantId": {
-										"value": "2291afd2-1191-4bcb-9906-c1406010941b"
-									},
-									"Timeout": {
-										"value": "120"
-									},
-									"TokenFilePassword": {
-										"value": {
-											"type": "SecureString",
-											"value": "**********"
-										}
-									},
-									"TokenFilePath": {},
-									"UploadChunkSize": {
-										"value": "0 MB"
-									}
-								},
-								"Dynamics CRM Connection Manager": {
-									"ApiVersion": {},
-									"AuthorizationServerUrl": {},
-									"BypassProxyOnLocal": {
-										"value": "False"
-									},
-									"CertificateThumbprint": {},
-									"ClientAppId": {},
-									"ClientSecret": {
-										"value": {
-											"type": "SecureString",
-											"value": "**********"
-										}
-									},
-									"ConnectionString": {
-										"value": "AuthenticationType=Federation;ServiceEndpoint=Soap2011;UserName=Bhargav.Parchuri@letec.be;Domain=;CrmServerUrl=https://tec-crm-dev.api.crm4.dynamics.com;ProxyUsername=;ProxyMode=NoProxy;ProxyServer=;ProxyServerPort=0;BypassProxyOnLocal=False;HomeRealmUri=;ApiVersion=;ServiceTimeout=120;RetryOnIntermittentErrors=True;IgnoreCertificateErrors=False"
-									},
-									"CrmAuthenticationType": {
-										"value": "1"
-									},
-									"CrmServerUrl": {
-										"value": "https://tec-crm-dev.api.crm4.dynamics.com"
-									},
-									"Domain": {},
-									"HomeRealmUri": {},
-									"IgnoreCertificateErrors": {
-										"value": "False"
-									},
-									"OAuthType": {
-										"value": "0"
-									},
-									"Password": {
-										"value": {
-											"type": "SecureString",
-											"value": "**********"
-										}
-									},
-									"ProxyMode": {
-										"value": "0"
-									},
-									"ProxyPassword": {
-										"value": {
-											"type": "SecureString",
-											"value": "**********"
-										}
-									},
-									"ProxyServer": {},
-									"ProxyServerPort": {
-										"value": "0"
-									},
-									"ProxyUsername": {},
-									"RetryOnIntermittentErrors": {
-										"value": "True"
-									},
-									"ServiceEndpoint": {
-										"value": "1"
-									},
-									"ServiceResource": {},
-									"ServiceTimeout": {
-										"value": "120"
-									},
-									"TargetServerVersion": {
-										"value": "150"
-									},
-									"UserName": {
-										"value": "Bhargav.Parchuri@letec.be"
-									}
-								},
-								"SSIS Connection Manager for Azure Storage": {
-									"AccountKey": {
-										"value": {
-											"type": "SecureString",
-											"value": "**********"
-										}
-									},
-									"AccountName": {
-										"value": "sapcrmdev01"
-									},
-									"AuthType": {
-										"value": "2"
-									},
-									"ConnectUsingManagedIdentity": {
-										"value": "False"
-									},
-									"ConnectionString": {
-										"value": "ServiceType=AzureBlobFS;AuthType=ServicePrincipal;ServicePrincipalId=b74b5688-5ee7-4c50-8364-ddd607f525ac;TenantId=2291afd2-1191-4bcb-9906-c1406010941b;AccountName=sapcrmdev01;DefaultEndpointsProtocol=https;EndpointSuffix=core.windows.net;"
-									},
-									"EndpointSuffix": {
-										"value": "core.windows.net"
-									},
-									"ServicePrincipalId": {
-										"value": "b74b5688-5ee7-4c50-8364-ddd607f525ac"
-									},
-									"ServicePrincipalKey": {
-										"value": {
-											"type": "SecureString",
-											"value": "**********"
-										}
-									},
-									"ServiceType": {
-										"value": "2"
-									},
-									"TargetServerVersion": {
-										"value": "150"
-									},
-									"TenantId": {
-										"value": "2291afd2-1191-4bcb-9906-c1406010941b"
-									},
-									"UseHttps": {
-										"value": "True"
-									}
-								}
-							}
+							"packageConnectionManagers": {}
 						}
 					}
 				],
@@ -585,6 +390,50 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/AzureDatabricks1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Products_CRM_TecDev_copy1')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Execute SSIS package1",
+						"type": "ExecuteSSISPackage",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"packageLocation": {
+								"packagePath": "SSISPackagesTecDev/ProductTecDev/ProductsSFTPTask.dtsx",
+								"type": "SSISDB"
+							},
+							"environmentPath": null,
+							"connectVia": {
+								"referenceName": "integrationRuntime1",
+								"type": "IntegrationRuntimeReference"
+							},
+							"loggingLevel": "Basic",
+							"projectConnectionManagers": {},
+							"packageConnectionManagers": {}
+						}
+					}
+				],
+				"folder": {
+					"name": "MNT020"
+				},
+				"annotations": [],
+				"lastPublishTime": "2020-09-01T21:19:03Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntime1')]"
 			]
 		},
 		{
@@ -707,40 +556,6 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/keyvault_TEC')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase_PCRM')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureSqlDatabase",
-				"typeProperties": {
-					"connectionString": {
-						"type": "AzureKeyVaultSecret",
-						"store": {
-							"referenceName": "AzureKeyVault_Dev",
-							"type": "LinkedServiceReference"
-						},
-						"secretName": "[parameters('AzureSqlDatabase_PCRM_properties_typeProperties_connectionString_secretName')]",
-						"secretVersion": "fe72a966c4d640f1af00a886103ed09f"
-					},
-					"servicePrincipalId": "[parameters('AzureSqlDatabase_PCRM_properties_typeProperties_servicePrincipalId')]",
-					"servicePrincipalKey": {
-						"type": "AzureKeyVaultSecret",
-						"store": {
-							"referenceName": "AzureKeyVault_Dev",
-							"type": "LinkedServiceReference"
-						},
-						"secretName": "tec-dev-prinicipalkey",
-						"secretVersion": "ea7baf49a5774322b0ca7dc1d9b5f923"
-					},
-					"tenant": "[parameters('AzureSqlDatabase_PCRM_properties_typeProperties_tenant')]"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureKeyVault_Dev')]"
 			]
 		}
 	]
