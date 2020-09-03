@@ -17277,7 +17277,7 @@
 			"properties": {
 				"activities": [
 					{
-						"name": "copy zip files from SFTP to Data Lake",
+						"name": "Execute SSIS package1",
 						"type": "ExecuteSSISPackage",
 						"dependsOn": [],
 						"policy": {
