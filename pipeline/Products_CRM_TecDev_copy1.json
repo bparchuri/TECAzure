@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"packageLocation": {
-						"packagePath": "SSISPackagesTecDev/ProductSFTPTecDev/ProductsSFTPTask.dtsx",
+						"packagePath": "SSISPackagesTecDev/ProductsTest/Package.dtsx",
 						"type": "SSISDB"
 					},
 					"environmentPath": null,
