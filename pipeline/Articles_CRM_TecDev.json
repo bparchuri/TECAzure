@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"packageLocation": {
-						"packagePath": "SSISPackagesTecDev/ArticlesTestupgrade/Package.dtsx",
+						"packagePath": "SSISPackagesTecDev/Script/Package.dtsx",
 						"type": "SSISDB"
 					},
 					"environmentPath": null,
