@@ -335,7 +335,7 @@
 						"userProperties": [],
 						"typeProperties": {
 							"packageLocation": {
-								"packagePath": "SSISPackagesTecDev/ArticlesTecDev/ArticlestoCRM.dtsx",
+								"packagePath": "SSISPackagesTecDev/ArticlesTestupgrade/ArticlestoCRM.dtsx",
 								"type": "SSISDB"
 							},
 							"environmentPath": null,
