@@ -645,7 +645,7 @@
 			"properties": {
 				"activities": [
 					{
-						"name": "Execute SSIS package Articles",
+						"name": "Execute SSIS package of Articles to CRM",
 						"type": "ExecuteSSISPackage",
 						"dependsOn": [],
 						"policy": {
