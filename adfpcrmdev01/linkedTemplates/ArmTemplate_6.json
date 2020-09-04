@@ -3627,7 +3627,7 @@
 						"userProperties": [],
 						"typeProperties": {
 							"packageLocation": {
-								"packagePath": "SSISPackagesTecDev/ProductsTecDev/ProductstoCRM.dtsx",
+								"packagePath": "SSISPackagesTecDev/MNT020Products-Articles/ProductstoCRM.dtsx",
 								"type": "SSISDB"
 							},
 							"environmentPath": null,
@@ -3800,7 +3800,7 @@
 						"userProperties": [],
 						"typeProperties": {
 							"packageLocation": {
-								"packagePath": "SSISPackagesTecDev/ProductsTecDev/ProductsSFTPTask.dtsx",
+								"packagePath": "SSISPackagesTecDev/SFTP-MNT020/SFTPTransfer.dtsx",
 								"type": "SSISDB"
 							},
 							"environmentPath": null,
