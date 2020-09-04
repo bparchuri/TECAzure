@@ -23,7 +23,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"packageLocation": {
-						"packagePath": "SSISPackagesTecDev/ProductsTecDev/ProductstoCRM.dtsx",
+						"packagePath": "SSISPackagesTecDev/MNT020Products-Articles/ProductstoCRM.dtsx",
 						"type": "SSISDB"
 					},
 					"environmentPath": null,
