@@ -412,7 +412,7 @@
 						"userProperties": [],
 						"typeProperties": {
 							"packageLocation": {
-								"packagePath": "SSISPackagesTecDev/SFTP-MNT020/SFTPTransfer.dtsx",
+								"packagePath": "SSISPackagesTecDev/TecTest/ProductstoCRM.dtsx",
 								"type": "SSISDB"
 							},
 							"environmentPath": null,
