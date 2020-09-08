@@ -5,14 +5,7 @@
 			{
 				"name": "Execute SSIS package Products",
 				"type": "ExecuteSSISPackage",
-				"dependsOn": [
-					{
-						"activity": "Delete Articles CSV in Products folder",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
+				"dependsOn": [],
 				"policy": {
 					"timeout": "7.00:00:00",
 					"retry": 0,
@@ -91,91 +84,6 @@
 				]
 			},
 			{
-				"name": "Move Articles CSV to Articles folder",
-				"type": "Copy",
-				"dependsOn": [
-					{
-						"activity": "Move Products CSV to Products folder",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "7.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"source": {
-						"type": "BinarySource",
-						"storeSettings": {
-							"type": "AzureBlobFSReadSettings",
-							"recursive": false,
-							"wildcardFolderPath": "atlas/mnt020/csv/source",
-							"wildcardFileName": "*articles.csv",
-							"deleteFilesAfterCompletion": true
-						},
-						"formatSettings": {
-							"type": "BinaryReadSettings"
-						}
-					},
-					"sink": {
-						"type": "BinarySink",
-						"storeSettings": {
-							"type": "AzureBlobFSWriteSettings"
-						}
-					},
-					"enableStaging": false
-				},
-				"inputs": [
-					{
-						"referenceName": "Binary_Products_Articles_CSV",
-						"type": "DatasetReference"
-					}
-				],
-				"outputs": [
-					{
-						"referenceName": "Binary_articlesCSV_ArticlesFolder",
-						"type": "DatasetReference"
-					}
-				]
-			},
-			{
-				"name": "Delete Articles CSV in Products folder",
-				"type": "Delete",
-				"dependsOn": [
-					{
-						"activity": "Move Articles CSV to Articles folder",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "7.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"dataset": {
-						"referenceName": "Binary_Products_Articles_CSV",
-						"type": "DatasetReference"
-					},
-					"enableLogging": false,
-					"storeSettings": {
-						"type": "AzureBlobFSReadSettings",
-						"recursive": true
-					}
-				}
-			},
-			{
 				"name": "copy zip files from SFTP to Data Lake",
 				"type": "ExecuteSSISPackage",
 				"dependsOn": [],
@@ -199,56 +107,6 @@
 					},
 					"loggingLevel": "Basic"
 				}
-			},
-			{
-				"name": "Move Articles CSV to Articles folder_copy1",
-				"type": "Copy",
-				"dependsOn": [],
-				"policy": {
-					"timeout": "7.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"source": {
-						"type": "DelimitedTextSource",
-						"storeSettings": {
-							"type": "AzureBlobFSReadSettings",
-							"recursive": false
-						},
-						"formatSettings": {
-							"type": "DelimitedTextReadSettings"
-						}
-					},
-					"sink": {
-						"type": "DelimitedTextSink",
-						"storeSettings": {
-							"type": "AzureBlobFSWriteSettings",
-							"copyBehavior": "FlattenHierarchy"
-						},
-						"formatSettings": {
-							"type": "DelimitedTextWriteSettings",
-							"quoteAllText": true,
-							"fileExtension": ".txt"
-						}
-					},
-					"enableStaging": false
-				},
-				"inputs": [
-					{
-						"referenceName": "DelimitedText5",
-						"type": "DatasetReference"
-					}
-				],
-				"outputs": [
-					{
-						"referenceName": "DelimitedText4",
-						"type": "DatasetReference"
-					}
-				]
 			},
 			{
 				"name": "Move Products CSV to Products folder",
