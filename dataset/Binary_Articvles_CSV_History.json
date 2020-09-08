@@ -1,0 +1,19 @@
+{
+	"name": "Binary_Articvles_CSV_History",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "linkedservice_ADLSGen2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "Liste des articles.csv",
+				"folderPath": "atlas/mnt020/csv/articles",
+				"fileSystem": "raw"
+			}
+		}
+	}
+}
