@@ -82,7 +82,14 @@
 			{
 				"name": "Move Articles CSV to history with Date Stamp",
 				"type": "Copy",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "Execute SSIS package of Articles to CRM",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "7.00:00:00",
 					"retry": 0,
