@@ -3723,8 +3723,8 @@
 								"storeSettings": {
 									"type": "AzureBlobFSReadSettings",
 									"recursive": false,
-									"wildcardFolderPath": "atlas/mnt020/csv/produits",
-									"wildcardFileName": "Liste des articles.csv",
+									"wildcardFolderPath": "atlas/mnt020/csv/source",
+									"wildcardFileName": "*articles.csv",
 									"deleteFilesAfterCompletion": true
 								},
 								"formatSettings": {
@@ -3741,7 +3741,7 @@
 						},
 						"inputs": [
 							{
-								"referenceName": "Binary_Articlescsv_Products",
+								"referenceName": "Binary_Articles_CSV",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -3775,7 +3775,7 @@
 						"userProperties": [],
 						"typeProperties": {
 							"dataset": {
-								"referenceName": "Binary_Articlescsv_Products",
+								"referenceName": "Binary_Articles_CSV",
 								"type": "DatasetReference",
 								"parameters": {}
 							},

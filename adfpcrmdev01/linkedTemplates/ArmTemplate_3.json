@@ -378,7 +378,7 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Binary_Articlescsv_Products')]",
+			"name": "[concat(parameters('factoryName'), '/Binary_Articles_CSV')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -391,8 +391,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
-						"fileName": "Liste des articles.csv",
-						"folderPath": "atlas/mnt020/csv/produits",
+						"folderPath": "atlas/mnt020/csv/source",
 						"fileSystem": "raw"
 					}
 				}
@@ -434,7 +433,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
-						"folderPath": "atlas/mnt020/csv/produits",
+						"folderPath": "atlas/mnt020/csv/Source",
 						"fileSystem": "raw"
 					}
 				}
