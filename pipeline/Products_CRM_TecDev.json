@@ -187,8 +187,6 @@
 						"storeSettings": {
 							"type": "AzureBlobFSReadSettings",
 							"recursive": true,
-							"wildcardFolderPath": "/atlas/mnt020/zip",
-							"wildcardFileName": "*.zip",
 							"deleteFilesAfterCompletion": false
 						},
 						"formatSettings": {
