@@ -142,7 +142,7 @@
 							"recursive": false,
 							"wildcardFolderPath": "atlas/mnt020/csv/source",
 							"wildcardFileName": "*products.csv",
-							"deleteFilesAfterCompletion": true
+							"deleteFilesAfterCompletion": false
 						},
 						"formatSettings": {
 							"type": "BinaryReadSettings"
