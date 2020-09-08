@@ -5,7 +5,14 @@
 			{
 				"name": "Execute SSIS package Products",
 				"type": "ExecuteSSISPackage",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "Move Products CSV to Products folder",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "7.00:00:00",
 					"retry": 0,
