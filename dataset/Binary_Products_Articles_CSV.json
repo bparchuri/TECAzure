@@ -10,7 +10,8 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"folderPath": "atlas/mnt020/csv/source",
+				"fileName": "Liste des produits.csv",
+				"folderPath": "atlas/mnt020/csv/produits",
 				"fileSystem": "raw"
 			}
 		}
