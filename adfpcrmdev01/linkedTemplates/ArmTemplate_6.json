@@ -13,54 +13,6 @@
 	},
 	"resources": [
 		{
-			"name": "[concat(parameters('factoryName'), '/SQLroutes')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "SQLPocTec",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "Route_id",
-						"type": "varchar"
-					},
-					{
-						"name": "Agency_id",
-						"type": "varchar"
-					},
-					{
-						"name": "Route_short_name",
-						"type": "varchar"
-					},
-					{
-						"name": "Route_long_name",
-						"type": "varchar"
-					},
-					{
-						"name": "Route_desc",
-						"type": "varchar"
-					},
-					{
-						"name": "Route_type",
-						"type": "varchar"
-					},
-					{
-						"name": "Route_url",
-						"type": "varchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "Routes"
-				}
-			},
-			"dependsOn": []
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/SQLshapes')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -367,6 +319,150 @@
 				"typeProperties": {
 					"entityName": "tec_eis779atlas"
 				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Binary_productsCSV_ProductsFolder')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "linkedservice_ADLSGen2",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": "atlas/mnt020/csv/produits",
+						"fileSystem": "raw"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Articles_CRM_TecDev')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Execute SSIS package of Articles to CRM",
+						"type": "ExecuteSSISPackage",
+						"dependsOn": [
+							{
+								"activity": "Move Articles CSV to Articles folder",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"packageLocation": {
+								"packagePath": "SSISPackagesTecDev/MNT020Products-Articles/ArticlestoCRM.dtsx",
+								"type": "SSISDB"
+							},
+							"environmentPath": null,
+							"connectVia": {
+								"referenceName": "integrationRuntime1",
+								"type": "IntegrationRuntimeReference"
+							},
+							"loggingLevel": "Basic",
+							"projectConnectionManagers": {},
+							"packageConnectionManagers": {}
+						}
+					},
+					{
+						"name": "Move Articles CSV to Articles folder",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "BinarySource",
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": false,
+									"wildcardFolderPath": "atlas/mnt020/csv/source",
+									"wildcardFileName": "*articles.csv",
+									"deleteFilesAfterCompletion": true
+								},
+								"formatSettings": {
+									"type": "BinaryReadSettings"
+								}
+							},
+							"sink": {
+								"type": "BinarySink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								}
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "Binary_Products_Articles_CSV",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "Binary_articlesCSV_ArticlesFolder",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Delete Articles CSV in Products folder",
+						"type": "Delete",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "Binary_Products_Articles_CSV",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"enableLogging": false,
+							"storeSettings": {
+								"type": "AzureBlobFSReadSettings",
+								"recursive": true
+							}
+						}
+					}
+				],
+				"folder": {
+					"name": "MNT020"
+				},
+				"annotations": [],
+				"lastPublishTime": "2020-09-01T20:34:40Z"
 			},
 			"dependsOn": []
 		},
@@ -3611,7 +3707,7 @@
 						"type": "ExecuteSSISPackage",
 						"dependsOn": [
 							{
-								"activity": "Delete Articles CSV in Products folder",
+								"activity": "Move Products CSV to Products folder",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -3699,94 +3795,6 @@
 						]
 					},
 					{
-						"name": "Move Articles CSV to Articles folder",
-						"type": "Copy",
-						"dependsOn": [
-							{
-								"activity": "Unzip Products Data",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "BinarySource",
-								"storeSettings": {
-									"type": "AzureBlobFSReadSettings",
-									"recursive": false,
-									"wildcardFolderPath": "atlas/mnt020/csv/source",
-									"wildcardFileName": "*articles.csv",
-									"deleteFilesAfterCompletion": true
-								},
-								"formatSettings": {
-									"type": "BinaryReadSettings"
-								}
-							},
-							"sink": {
-								"type": "BinarySink",
-								"storeSettings": {
-									"type": "AzureBlobFSWriteSettings"
-								}
-							},
-							"enableStaging": false
-						},
-						"inputs": [
-							{
-								"referenceName": "Binary_Articles_CSV",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "Binary_articlesCSV_ArticlesFolder",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					},
-					{
-						"name": "Delete Articles CSV in Products folder",
-						"type": "Delete",
-						"dependsOn": [
-							{
-								"activity": "Move Articles CSV to Articles folder",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataset": {
-								"referenceName": "Binary_Articles_CSV",
-								"type": "DatasetReference",
-								"parameters": {}
-							},
-							"enableLogging": false,
-							"storeSettings": {
-								"type": "AzureBlobFSReadSettings",
-								"recursive": true
-							}
-						}
-					},
-					{
 						"name": "copy zip files from SFTP to Data Lake",
 						"type": "ExecuteSSISPackage",
 						"dependsOn": [],
@@ -3812,6 +3820,62 @@
 							"projectConnectionManagers": {},
 							"packageConnectionManagers": {}
 						}
+					},
+					{
+						"name": "Move Products CSV to Products folder",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Unzip Products Data",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "BinarySource",
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": false,
+									"wildcardFolderPath": "atlas/mnt020/csv/source",
+									"wildcardFileName": "*products.csv",
+									"deleteFilesAfterCompletion": true
+								},
+								"formatSettings": {
+									"type": "BinaryReadSettings"
+								}
+							},
+							"sink": {
+								"type": "BinarySink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								}
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "Binary_Products_Articles_CSV",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "Binary_productsCSV_ProductsFolder",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
 					}
 				],
 				"folder": {
@@ -3820,7 +3884,9 @@
 				"annotations": [],
 				"lastPublishTime": "2020-09-01T21:19:03Z"
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/Binary_productsCSV_ProductsFolder')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/Products_CRM_TecDev_copy')]",
@@ -4507,296 +4573,6 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/TECDevCRM')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Unzip 7z file to Blob')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "WebHook",
-						"type": "WebHook",
-						"dependsOn": [
-							{
-								"activity": "Set variable of unzip foldername",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"url": {
-								"value": "https://73b5abb6-b245-4036-a400-b70e2ee719cd.webhook.ne.azure-automation.net/webhooks?token=8LyOr5IWcaX0XlNXtAVn4%2bBho02rNT9g5unFl2cEnR4%3d",
-								"type": "Expression"
-							},
-							"method": "POST",
-							"headers": {},
-							"body": {
-								"value": "@json(\nconcat(\n'\n{\n\"connectionName\":\"',variables('varConnectionName'),'\",\"storageAccountKey\":\"',variables('storageAccountKey'),'\",\"fileName\":\"',variables('fileName'),'\"\n,\"zipfolder\":\"',variables('zipfolder'),'\"\n,\"Unzipfolder\":\"',variables('Unzipfolder'),'\"\n,\"extractfolder\":\"',variables('extractfolder'),'\"\n,\"dataLakeStorageGen1Name\":\"',variables('dataLakeStorageGen1Name'),'\"\n}'))",
-								"type": "Expression"
-							},
-							"timeout": "00:10:00",
-							"reportStatusOnCallBack": true
-						}
-					},
-					{
-						"name": "Copy Zip file to ADLS",
-						"description": "t",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [
-							{
-								"name": "Source",
-								"value": "Datatest/"
-							},
-							{
-								"name": "Destination",
-								"value": "tec-zip//"
-							}
-						],
-						"typeProperties": {
-							"source": {
-								"type": "BinarySource",
-								"storeSettings": {
-									"type": "AzureBlobFSReadSettings",
-									"recursive": true
-								},
-								"formatSettings": {
-									"type": "BinaryReadSettings"
-								}
-							},
-							"sink": {
-								"type": "BinarySink",
-								"storeSettings": {
-									"type": "AzureBlobFSWriteSettings"
-								}
-							},
-							"enableStaging": false,
-							"skipErrorFile": {
-								"fileMissing": true
-							},
-							"validateDataConsistency": false
-						},
-						"inputs": [
-							{
-								"referenceName": "ZipFile",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "UnzipFile",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					},
-					{
-						"name": "Get Metadata of Zip File",
-						"type": "GetMetadata",
-						"dependsOn": [
-							{
-								"activity": "Copy Zip file to ADLS",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataset": {
-								"referenceName": "ZipFile",
-								"type": "DatasetReference",
-								"parameters": {}
-							},
-							"fieldList": [
-								"childItems",
-								"itemName"
-							],
-							"storeSettings": {
-								"type": "AzureBlobFSReadSettings",
-								"recursive": true
-							},
-							"formatSettings": {
-								"type": "BinaryReadSettings"
-							}
-						}
-					},
-					{
-						"name": "Filter 7z files",
-						"type": "Filter",
-						"dependsOn": [
-							{
-								"activity": "Get Metadata of Unzip File",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"items": {
-								"value": "@activity('Get Metadata of Zip File').output.childItems",
-								"type": "Expression"
-							},
-							"condition": {
-								"value": "@endswith(item().name,'.7z')",
-								"type": "Expression"
-							}
-						}
-					},
-					{
-						"name": "Set variable of zip file name",
-						"type": "SetVariable",
-						"dependsOn": [
-							{
-								"activity": "Filter 7z files",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"variableName": "fileName",
-							"value": {
-								"value": "@string(activity('Filter 7z files').output.value[0].name)",
-								"type": "Expression"
-							}
-						}
-					},
-					{
-						"name": "Set variable of zip folder name",
-						"type": "SetVariable",
-						"dependsOn": [
-							{
-								"activity": "Set variable of zip file name",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"variableName": "zipfolder",
-							"value": {
-								"value": "@activity('Get Metadata of Zip File').output.itemName",
-								"type": "Expression"
-							}
-						}
-					},
-					{
-						"name": "Set variable of unzip foldername",
-						"type": "SetVariable",
-						"dependsOn": [
-							{
-								"activity": "Set variable of zip folder name",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"variableName": "Unzipfolder",
-							"value": {
-								"value": "@activity('Get Metadata of Unzip File').output.itemName",
-								"type": "Expression"
-							}
-						}
-					},
-					{
-						"name": "Get Metadata of Unzip File",
-						"type": "GetMetadata",
-						"dependsOn": [
-							{
-								"activity": "Get Metadata of Zip File",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataset": {
-								"referenceName": "UnzipFile",
-								"type": "DatasetReference",
-								"parameters": {}
-							},
-							"fieldList": [
-								"itemName"
-							],
-							"storeSettings": {
-								"type": "AzureBlobFSReadSettings",
-								"recursive": true
-							},
-							"formatSettings": {
-								"type": "BinaryReadSettings"
-							}
-						}
-					}
-				],
-				"variables": {
-					"varConnectionName": {
-						"type": "String",
-						"defaultValue": "AzureRunAsConnection"
-					},
-					"storageAccountKey": {
-						"type": "String",
-						"defaultValue": " YDuDqj7C2A+fWSpmuibYXlDAsVRyIXQpgZcCtm23kUEFTsYFMvZbxhUmBHmbgHEeNcCmukz6O1Iji7H6deZPiw=="
-					},
-					"fileName": {
-						"type": "String",
-						"defaultValue": "TECValidation.7z"
-					},
-					"zipfolder": {
-						"type": "String",
-						"defaultValue": "PocTecZip"
-					},
-					"Unzipfolder": {
-						"type": "String",
-						"defaultValue": "PocTecUnzip"
-					},
-					"extractfolder": {
-						"type": "String",
-						"defaultValue": "7Zfiles"
-					},
-					"dataLakeStorageGen1Name": {
-						"type": "String",
-						"defaultValue": "dlspoctec"
-					}
-				},
-				"annotations": [],
-				"lastPublishTime": "2020-08-03T17:26:11Z"
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/ZipFile')]",
-				"[concat(variables('factoryId'), '/datasets/UnzipFile')]"
 			]
 		}
 	]

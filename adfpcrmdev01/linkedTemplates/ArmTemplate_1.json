@@ -7,18 +7,6 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "adfpcrmdev01"
 		},
-		"AzureSqlDatabase_PCRM_properties_typeProperties_connectionString_secretName": {
-			"type": "string",
-			"defaultValue": "tec-dev-sqlconnectionprincipal"
-		},
-		"AzureSqlDatabase_PCRM_properties_typeProperties_servicePrincipalId": {
-			"type": "string",
-			"defaultValue": "b74b5688-5ee7-4c50-8364-ddd607f525ac"
-		},
-		"AzureSqlDatabase_PCRM_properties_typeProperties_tenant": {
-			"type": "string",
-			"defaultValue": "2291afd2-1191-4bcb-9906-c1406010941b"
-		},
 		"DynamicsCrm_TECDev_properties_typeProperties_username": {
 			"type": "string",
 			"defaultValue": "Bhargav.Parchuri@letec.be"
@@ -68,38 +56,6 @@
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase_PCRM')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureSqlDatabase",
-				"typeProperties": {
-					"connectionString": {
-						"type": "AzureKeyVaultSecret",
-						"store": {
-							"referenceName": "AzureKeyVault_Dev",
-							"type": "LinkedServiceReference"
-						},
-						"secretName": "[parameters('AzureSqlDatabase_PCRM_properties_typeProperties_connectionString_secretName')]",
-						"secretVersion": "fe72a966c4d640f1af00a886103ed09f"
-					},
-					"servicePrincipalId": "[parameters('AzureSqlDatabase_PCRM_properties_typeProperties_servicePrincipalId')]",
-					"servicePrincipalKey": {
-						"type": "AzureKeyVaultSecret",
-						"store": {
-							"referenceName": "AzureKeyVault_Dev",
-							"type": "LinkedServiceReference"
-						},
-						"secretName": "tec-dev-prinicipalkey",
-						"secretVersion": "ea7baf49a5774322b0ca7dc1d9b5f923"
-					},
-					"tenant": "[parameters('AzureSqlDatabase_PCRM_properties_typeProperties_tenant')]"
-				}
-			},
-			"dependsOn": []
-		},
 		{
 			"name": "[concat(parameters('factoryName'), '/DynamicsCrm_TECDev')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
@@ -1017,9 +973,7 @@
 					"table": "EIS779_atlas"
 				}
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase_PCRM')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AzureSqlTable17')]",
@@ -1059,9 +1013,7 @@
 					"table": "EIS-779-Errors"
 				}
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase_PCRM')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AzureSqlTable18')]",
@@ -1101,9 +1053,69 @@
 					"table": "EIS-779-Errors"
 				}
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase_PCRM')]"
-			]
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTable2')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase_PCRM",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "RegistrationID",
+						"type": "varchar"
+					},
+					{
+						"name": "BankAccountType",
+						"type": "varchar"
+					},
+					{
+						"name": "Sequencenumberofpaperaccount",
+						"type": "varchar"
+					},
+					{
+						"name": "Accountnumber",
+						"type": "varchar"
+					},
+					{
+						"name": "Oldbalance",
+						"type": "varchar"
+					},
+					{
+						"name": "Oldpay",
+						"type": "decimal",
+						"precision": 15,
+						"scale": 3
+					},
+					{
+						"name": "Dateofoldbalance",
+						"type": "date"
+					},
+					{
+						"name": "Accountholdername",
+						"type": "varchar"
+					},
+					{
+						"name": "Accounttagged",
+						"type": "varchar"
+					},
+					{
+						"name": "Sequencenumberofthecodified",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "COD-1"
+				}
+			},
+			"dependsOn": []
 		}
 	]
 }
