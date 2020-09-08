@@ -95,7 +95,7 @@
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "Unzip Products Data",
+						"activity": "Move Products CSV to Products folder",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -133,7 +133,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "Binary_Articles_CSV",
+						"referenceName": "Binary_Products_Articles_CSV",
 						"type": "DatasetReference"
 					}
 				],
@@ -165,7 +165,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "Binary_Articles_CSV",
+						"referenceName": "Binary_Products_Articles_CSV",
 						"type": "DatasetReference"
 					},
 					"enableLogging": false,
@@ -199,6 +199,110 @@
 					},
 					"loggingLevel": "Basic"
 				}
+			},
+			{
+				"name": "Move Articles CSV to Articles folder_copy1",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings",
+							"copyBehavior": "FlattenHierarchy"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "DelimitedText5",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DelimitedText4",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Move Products CSV to Products folder",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Unzip Products Data",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "BinarySource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": false,
+							"wildcardFolderPath": "atlas/mnt020/csv/source",
+							"wildcardFileName": "*products.csv",
+							"deleteFilesAfterCompletion": true
+						},
+						"formatSettings": {
+							"type": "BinaryReadSettings"
+						}
+					},
+					"sink": {
+						"type": "BinarySink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						}
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "Binary_Products_Articles_CSV",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "Binary_productsCSV_ProductsFolder",
+						"type": "DatasetReference"
+					}
+				]
 			}
 		],
 		"folder": {
