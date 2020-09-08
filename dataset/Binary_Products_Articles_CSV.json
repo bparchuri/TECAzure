@@ -1,5 +1,5 @@
 {
-	"name": "Binary_Articles_CSV",
+	"name": "Binary_Products_Articles_CSV",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "linkedservice_ADLSGen2",
