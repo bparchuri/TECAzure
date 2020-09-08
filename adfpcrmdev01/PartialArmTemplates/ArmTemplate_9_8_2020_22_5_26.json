@@ -6,156 +6,6 @@
 			"type": "string",
 			"metadata": "Data Factory name",
 			"defaultValue": "adfpcrmdev01"
-		},
-		"AzureDataLakeStorage1_accountKey": {
-			"type": "secureString",
-			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage1'"
-		},
-		"AzureDatabricks1_accessToken": {
-			"type": "secureString",
-			"metadata": "Secure string for 'accessToken' of 'AzureDatabricks1'"
-		},
-		"AzureFileStorage1_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'AzureFileStorage1'"
-		},
-		"Sftp1_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'Sftp1'"
-		},
-		"ADLSCOD_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://sapoctec.dfs.core.windows.net"
-		},
-		"ADLSCOD_properties_typeProperties_tenant": {
-			"type": "string",
-			"defaultValue": "6e5433e0-76fc-44b7-b71b-0e5446a3fa94"
-		},
-		"ADLSCOD_properties_typeProperties_servicePrincipalId": {
-			"type": "string",
-			"defaultValue": "b4537ba3-1639-42cb-9143-8bfbcb683e79"
-		},
-		"ADLSGen2_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://sapcrmdev01.dfs.core.windows.net"
-		},
-		"ADLSGen2_properties_typeProperties_tenant": {
-			"type": "string",
-			"defaultValue": "2291afd2-1191-4bcb-9906-c1406010941b"
-		},
-		"ADLSGen2_properties_typeProperties_servicePrincipalId": {
-			"type": "string",
-			"defaultValue": "b74b5688-5ee7-4c50-8364-ddd607f525ac"
-		},
-		"AzureDataLakeStorage1_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://sapoctec.dfs.core.windows.net"
-		},
-		"AzureFileStorage1_properties_typeProperties_host": {
-			"type": "string",
-			"defaultValue": "\\\\sapoctec.file.core.windows.net\\adls-poc"
-		},
-		"AzureFileStorage1_properties_typeProperties_userId": {
-			"type": "string",
-			"defaultValue": "Azure\\sapoctec"
-		},
-		"AzureKeyVault1_properties_typeProperties_baseUrl": {
-			"type": "string",
-			"defaultValue": "https://kvpcrm01.vault.azure.net/"
-		},
-		"AzureKeyVault_Dev_properties_typeProperties_baseUrl": {
-			"type": "string",
-			"defaultValue": "https://kvpcrm01.vault.azure.net/"
-		},
-		"AzureSqlDatabase_PCRM_properties_typeProperties_connectionString_secretName": {
-			"type": "string",
-			"defaultValue": "tec-dev-sqlconnectionprincipal"
-		},
-		"AzureSqlDatabase_PCRM_properties_typeProperties_servicePrincipalId": {
-			"type": "string",
-			"defaultValue": "b74b5688-5ee7-4c50-8364-ddd607f525ac"
-		},
-		"AzureSqlDatabase_PCRM_properties_typeProperties_tenant": {
-			"type": "string",
-			"defaultValue": "2291afd2-1191-4bcb-9906-c1406010941b"
-		},
-		"DynamicsCrm_TECDev_properties_typeProperties_username": {
-			"type": "string",
-			"defaultValue": "Bhargav.Parchuri@letec.be"
-		},
-		"HttpServer1_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "http://opendata.tec-wl.be/Current%20GTFS/TEC-GTFS.zip"
-		},
-		"KeyVaultPoc_properties_typeProperties_baseUrl": {
-			"type": "string",
-			"defaultValue": "https://keyvault-Poc-tec.vault.azure.net/"
-		},
-		"SQLPocTec_properties_typeProperties_connectionString_secretName": {
-			"type": "string",
-			"defaultValue": "SQL19"
-		},
-		"SQLPocTec_properties_typeProperties_servicePrincipalId": {
-			"type": "string",
-			"defaultValue": "b4537ba3-1639-42cb-9143-8bfbcb683e79"
-		},
-		"SQLPocTec_properties_typeProperties_tenant": {
-			"type": "string",
-			"defaultValue": "6e5433e0-76fc-44b7-b71b-0e5446a3fa94"
-		},
-		"Sftp1_properties_typeProperties_host": {
-			"type": "string",
-			"defaultValue": "217.117.38.238"
-		},
-		"Sftp1_properties_typeProperties_userName": {
-			"type": "string",
-			"defaultValue": "crm"
-		},
-		"TecDevCRM_properties_typeProperties_username": {
-			"type": "string",
-			"defaultValue": "Bhargav.Parchuri@letec.be"
-		},
-		"keyvault_TEC_properties_typeProperties_baseUrl": {
-			"type": "string",
-			"defaultValue": "https://kvpcrm01.vault.azure.net/"
-		},
-		"linkedService_ADLS_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://sapcrmdev01.dfs.core.windows.net"
-		},
-		"linkedService_ADLS_properties_typeProperties_tenant": {
-			"type": "string",
-			"defaultValue": "2291afd2-1191-4bcb-9906-c1406010941b"
-		},
-		"linkedService_ADLS_properties_typeProperties_servicePrincipalId": {
-			"type": "string",
-			"defaultValue": "b74b5688-5ee7-4c50-8364-ddd607f525ac"
-		},
-		"linkedservice_ADLSGen2_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://sapcrmdev01.dfs.core.windows.net"
-		},
-		"linkedservice_ADLSGen2_properties_typeProperties_tenant": {
-			"type": "string",
-			"defaultValue": "2291afd2-1191-4bcb-9906-c1406010941b"
-		},
-		"linkedservice_ADLSGen2_properties_typeProperties_servicePrincipalId": {
-			"type": "string",
-			"defaultValue": "b74b5688-5ee7-4c50-8364-ddd607f525ac"
-		},
-		"integrationRuntime1_properties_typeProperties_ssisProperties_catalogInfo_catalogServerEndpoint": {
-			"type": "string",
-			"defaultValue": "sqlpcrmpdev01.database.windows.net"
-		},
-		"integrationRuntime1_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminUserName": {
-			"type": "string",
-			"defaultValue": "Groot"
-		},
-		"integrationRuntime1_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminPassword": {
-			"type": "secureString"
-		},
-		"integrationRuntime1_properties_typeProperties_ssisProperties_customSetupScriptProperties_sasToken": {
-			"type": "secureString"
 		}
 	},
 	"variables": {
@@ -215,15 +65,13 @@
 						"inputs": [
 							{
 								"referenceName": "DelimitedText_ADLS_ReadCSV",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "SQL_EIS779",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					},
@@ -388,15 +236,13 @@
 						"inputs": [
 							{
 								"referenceName": "EIS779_SQL_CRM",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "tecdevcrmconnection",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					},
@@ -422,19 +268,8 @@
 						"typeProperties": {
 							"dataflow": {
 								"referenceName": "dataflow_EIS779_Segments_plit",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"dataflowSource": {},
-									"SQLSegment0": {},
-									"SQLSegment1": {},
-									"SQLSegment2": {},
-									"SQLSegment3": {},
-									"SQLSegment4": {},
-									"SQLSegment5": {}
-								}
+								"type": "DataFlowReference"
 							},
-							"staging": {},
 							"compute": {
 								"coreCount": 8,
 								"computeType": "General"
@@ -612,15 +447,13 @@
 						"inputs": [
 							{
 								"referenceName": "EIS779_SQL_Join",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "SQLEIS779ATLAS",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					}
@@ -673,9 +506,7 @@
 								"referenceName": "integrationRuntime1",
 								"type": "IntegrationRuntimeReference"
 							},
-							"loggingLevel": "Basic",
-							"projectConnectionManagers": {},
-							"packageConnectionManagers": {}
+							"loggingLevel": "Basic"
 						}
 					},
 					{
@@ -713,15 +544,13 @@
 						"inputs": [
 							{
 								"referenceName": "Binary_Articles_CSV",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "Binary_articlesCSV_ArticlesFolder",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					},
@@ -766,15 +595,13 @@
 						"inputs": [
 							{
 								"referenceName": "Binary_Articvles_CSV_History",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "Binary_Articles_CSV_History_Sink",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					}
@@ -786,7 +613,6 @@
 				"lastPublishTime": "2020-09-01T20:34:40Z"
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntime1')]",
 				"[concat(variables('factoryId'), '/datasets/Binary_Articles_CSV')]",
 				"[concat(variables('factoryId'), '/datasets/Binary_articlesCSV_ArticlesFolder')]",
 				"[concat(variables('factoryId'), '/datasets/Binary_Articvles_CSV_History')]",
@@ -833,15 +659,13 @@
 						"inputs": [
 							{
 								"referenceName": "Binary1",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "CODFile",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					},
@@ -867,24 +691,8 @@
 						"typeProperties": {
 							"dataflow": {
 								"referenceName": "dataflowtosplitcodafile",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"codacsvfromadls": {},
-									"SQLCODA0": {},
-									"sinkCODA1": {},
-									"sinkCODA21": {},
-									"sinkCODA22": {},
-									"sinkCODA23": {},
-									"sinkCODA31": {},
-									"sinkCODA32": {},
-									"sinkCODA33": {},
-									"sinkCODA8": {},
-									"sinkCODA9": {},
-									"sink1CODA4": {}
-								}
+								"type": "DataFlowReference"
 							},
-							"staging": {},
 							"compute": {
 								"coreCount": 8,
 								"computeType": "General"
@@ -941,15 +749,13 @@
 						"inputs": [
 							{
 								"referenceName": "binary_CODAFile",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "binary_CODAcsv",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					},
@@ -975,24 +781,8 @@
 						"typeProperties": {
 							"dataflow": {
 								"referenceName": "dataflowtosplitcodafile",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"codacsvfromadls": {},
-									"SQLCODA0": {},
-									"sinkCODA1": {},
-									"sinkCODA21": {},
-									"sinkCODA22": {},
-									"sinkCODA23": {},
-									"sinkCODA31": {},
-									"sinkCODA32": {},
-									"sinkCODA33": {},
-									"sinkCODA8": {},
-									"sinkCODA9": {},
-									"sink1CODA4": {}
-								}
+								"type": "DataFlowReference"
 							},
-							"staging": {},
 							"compute": {
 								"coreCount": 8,
 								"computeType": "General"
@@ -1592,15 +1382,13 @@
 						"inputs": [
 							{
 								"referenceName": "AzureSqlTable14",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "AzureSqlTable15",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					}
@@ -2076,15 +1864,13 @@
 						"inputs": [
 							{
 								"referenceName": "AzureSqlTable_CODAIntegration",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "AzureSqlTable_CODAJoin",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					},
@@ -2428,15 +2214,13 @@
 						"inputs": [
 							{
 								"referenceName": "AzureSqlTable_CODAEntity",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "DynamicsCrm_TecDev_CODA",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					}
@@ -2950,15 +2734,13 @@
 						"inputs": [
 							{
 								"referenceName": "AzureSqlTable_CODAIntegration",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "AzureSqlTable_PaymentJoin",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					},
@@ -3322,15 +3104,13 @@
 						"inputs": [
 							{
 								"referenceName": "AzureSqlTable_PaymentJoin",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "DynamicsCrmEntity_Payment",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					}
@@ -3807,15 +3587,13 @@
 						"inputs": [
 							{
 								"referenceName": "AzureSqlTable_CODAIntegration",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "AzureSqlTable_CODAJoin",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					},
@@ -4159,15 +3937,13 @@
 						"inputs": [
 							{
 								"referenceName": "AzureSqlTable_CODAEntity",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "DynamicsCrm_TecDev_CODA",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					}
@@ -4222,15 +3998,13 @@
 						"inputs": [
 							{
 								"referenceName": "binary_CODAFile",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "binary_CODAcsv",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					},
@@ -4256,24 +4030,8 @@
 						"typeProperties": {
 							"dataflow": {
 								"referenceName": "dataflowtosplitcodafile",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"codacsvfromadls": {},
-									"SQLCODA0": {},
-									"sinkCODA1": {},
-									"sinkCODA21": {},
-									"sinkCODA22": {},
-									"sinkCODA23": {},
-									"sinkCODA31": {},
-									"sinkCODA32": {},
-									"sinkCODA33": {},
-									"sinkCODA8": {},
-									"sinkCODA9": {},
-									"sink1CODA4": {}
-								}
+								"type": "DataFlowReference"
 							},
-							"staging": {},
 							"compute": {
 								"coreCount": 8,
 								"computeType": "General"
@@ -4744,15 +4502,13 @@
 						"inputs": [
 							{
 								"referenceName": "AzureSqlTable_CODAIntegration",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "AzureSqlTable_CODAJoin",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					},
@@ -5096,15 +4852,13 @@
 						"inputs": [
 							{
 								"referenceName": "AzureSqlTable_CODAEntity",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "DynamicsCrm_TecDev_CODA",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					},
@@ -5608,15 +5362,13 @@
 						"inputs": [
 							{
 								"referenceName": "AzureSqlTable_CODAIntegration",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "AzureSqlTable_PaymentJoin",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					},
@@ -5980,15 +5732,13 @@
 						"inputs": [
 							{
 								"referenceName": "AzureSqlTable_PaymentJoin",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "DynamicsCrmEntity_Payment",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					}
@@ -6179,15 +5929,13 @@
 						"inputs": [
 							{
 								"referenceName": "DelimitedText_ADLS_ReadCSV",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "SQL_EIS779",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					},
@@ -6352,15 +6100,13 @@
 						"inputs": [
 							{
 								"referenceName": "EIS779_SQL_CRM",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "tecdevcrmconnection",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					},
@@ -6386,19 +6132,8 @@
 						"typeProperties": {
 							"dataflow": {
 								"referenceName": "dataflow_EIS779_Segments_plit",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"dataflowSource": {},
-									"SQLSegment0": {},
-									"SQLSegment1": {},
-									"SQLSegment2": {},
-									"SQLSegment3": {},
-									"SQLSegment4": {},
-									"SQLSegment5": {}
-								}
+								"type": "DataFlowReference"
 							},
-							"staging": {},
 							"compute": {
 								"coreCount": 8,
 								"computeType": "General"
@@ -6576,15 +6311,13 @@
 						"inputs": [
 							{
 								"referenceName": "EIS779_SQL_Join",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "SQLEIS779ATLAS",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					},
@@ -6638,15 +6371,13 @@
 						"inputs": [
 							{
 								"referenceName": "DelimitedText_EIS779_Source_CSV",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "DelimitedText_EIS779_Target",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					}
@@ -6690,14 +6421,8 @@
 						"typeProperties": {
 							"dataflow": {
 								"referenceName": "dataflow1",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"source1": {},
-									"sink1": {}
-								}
+								"type": "DataFlowReference"
 							},
-							"staging": {},
 							"compute": {
 								"coreCount": 8,
 								"computeType": "General"
@@ -6766,15 +6491,13 @@
 						"inputs": [
 							{
 								"referenceName": "ZipFileGTFS",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "Binary_GTFSZipFile",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					},
@@ -6800,8 +6523,7 @@
 						"typeProperties": {
 							"dataset": {
 								"referenceName": "DLSV2GTFS",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							},
 							"fieldList": [
 								"childItems"
@@ -6943,15 +6665,13 @@
 														"inputs": [
 															{
 																"referenceName": "GTFSAgency",
-																"type": "DatasetReference",
-																"parameters": {}
+																"type": "DatasetReference"
 															}
 														],
 														"outputs": [
 															{
 																"referenceName": "SQLAgency",
-																"type": "DatasetReference",
-																"parameters": {}
+																"type": "DatasetReference"
 															}
 														]
 													}
@@ -6975,14 +6695,8 @@
 														"typeProperties": {
 															"dataflow": {
 																"referenceName": "dataflowcalendardates",
-																"type": "DataFlowReference",
-																"parameters": {},
-																"datasetParameters": {
-																	"dataflowcalendardatessource": {},
-																	"sinktocalendardatesSQLtable": {}
-																}
+																"type": "DataFlowReference"
 															},
-															"staging": {},
 															"compute": {
 																"coreCount": 8,
 																"computeType": "General"
@@ -7009,14 +6723,8 @@
 														"typeProperties": {
 															"dataflow": {
 																"referenceName": "dataflowcalander",
-																"type": "DataFlowReference",
-																"parameters": {},
-																"datasetParameters": {
-																	"DataFlowCalendersource": {},
-																	"sinktoSQLCalendar": {}
-																}
+																"type": "DataFlowReference"
 															},
-															"staging": {},
 															"compute": {
 																"coreCount": 8,
 																"computeType": "General"
@@ -7134,15 +6842,13 @@
 														"inputs": [
 															{
 																"referenceName": "GTFSroutes",
-																"type": "DatasetReference",
-																"parameters": {}
+																"type": "DatasetReference"
 															}
 														],
 														"outputs": [
 															{
 																"referenceName": "SQLroutes",
-																"type": "DatasetReference",
-																"parameters": {}
+																"type": "DatasetReference"
 															}
 														]
 													}
@@ -7227,15 +6933,13 @@
 														"inputs": [
 															{
 																"referenceName": "GTFSshapes",
-																"type": "DatasetReference",
-																"parameters": {}
+																"type": "DatasetReference"
 															}
 														],
 														"outputs": [
 															{
 																"referenceName": "SQLshapes",
-																"type": "DatasetReference",
-																"parameters": {}
+																"type": "DatasetReference"
 															}
 														]
 													}
@@ -7350,15 +7054,13 @@
 														"inputs": [
 															{
 																"referenceName": "GTFSstop_times",
-																"type": "DatasetReference",
-																"parameters": {}
+																"type": "DatasetReference"
 															}
 														],
 														"outputs": [
 															{
 																"referenceName": "SQLstop_times",
-																"type": "DatasetReference",
-																"parameters": {}
+																"type": "DatasetReference"
 															}
 														]
 													}
@@ -7493,15 +7195,13 @@
 														"inputs": [
 															{
 																"referenceName": "GTFSstops",
-																"type": "DatasetReference",
-																"parameters": {}
+																"type": "DatasetReference"
 															}
 														],
 														"outputs": [
 															{
 																"referenceName": "SQLstops",
-																"type": "DatasetReference",
-																"parameters": {}
+																"type": "DatasetReference"
 															}
 														]
 													}
@@ -7616,15 +7316,13 @@
 														"inputs": [
 															{
 																"referenceName": "GTFStrips",
-																"type": "DatasetReference",
-																"parameters": {}
+																"type": "DatasetReference"
 															}
 														],
 														"outputs": [
 															{
 																"referenceName": "SQLtrips",
-																"type": "DatasetReference",
-																"parameters": {}
+																"type": "DatasetReference"
 															}
 														]
 													}
@@ -7653,8 +7351,7 @@
 								"referenceName": "SQLtoGTFS",
 								"type": "PipelineReference"
 							},
-							"waitOnCompletion": true,
-							"parameters": {}
+							"waitOnCompletion": true
 						}
 					}
 				],
@@ -7734,15 +7431,13 @@
 						"inputs": [
 							{
 								"referenceName": "ZipFileGTFS",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "DLSV2GTFS",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					},
@@ -7768,8 +7463,7 @@
 						"typeProperties": {
 							"dataset": {
 								"referenceName": "DLSV2GTFS",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							},
 							"fieldList": [
 								"childItems"
@@ -7830,14 +7524,8 @@
 														"typeProperties": {
 															"dataflow": {
 																"referenceName": "dataflowcalendardates",
-																"type": "DataFlowReference",
-																"parameters": {},
-																"datasetParameters": {
-																	"dataflowcalendardatessource": {},
-																	"sinktocalendardatesSQLtable": {}
-																}
+																"type": "DataFlowReference"
 															},
-															"staging": {},
 															"compute": {
 																"coreCount": 8,
 																"computeType": "General"
@@ -7864,14 +7552,8 @@
 														"typeProperties": {
 															"dataflow": {
 																"referenceName": "dataflowcalander",
-																"type": "DataFlowReference",
-																"parameters": {},
-																"datasetParameters": {
-																	"DataFlowCalendersource": {},
-																	"sinktoSQLCalendar": {}
-																}
+																"type": "DataFlowReference"
 															},
-															"staging": {},
 															"compute": {
 																"coreCount": 8,
 																"computeType": "General"
@@ -7949,15 +7631,13 @@
 						"inputs": [
 							{
 								"referenceName": "ZipFileGTFS",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "Binary_GTFSZipFile",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					},
@@ -7983,8 +7663,7 @@
 						"typeProperties": {
 							"dataset": {
 								"referenceName": "DLSV2GTFS",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							},
 							"fieldList": [
 								"childItems"
@@ -8126,15 +7805,13 @@
 														"inputs": [
 															{
 																"referenceName": "GTFSAgency",
-																"type": "DatasetReference",
-																"parameters": {}
+																"type": "DatasetReference"
 															}
 														],
 														"outputs": [
 															{
 																"referenceName": "SQLAgency",
-																"type": "DatasetReference",
-																"parameters": {}
+																"type": "DatasetReference"
 															}
 														]
 													}
@@ -8158,14 +7835,8 @@
 														"typeProperties": {
 															"dataflow": {
 																"referenceName": "dataflowcalendardates",
-																"type": "DataFlowReference",
-																"parameters": {},
-																"datasetParameters": {
-																	"dataflowcalendardatessource": {},
-																	"sinktocalendardatesSQLtable": {}
-																}
+																"type": "DataFlowReference"
 															},
-															"staging": {},
 															"compute": {
 																"coreCount": 8,
 																"computeType": "General"
@@ -8192,14 +7863,8 @@
 														"typeProperties": {
 															"dataflow": {
 																"referenceName": "dataflowcalander",
-																"type": "DataFlowReference",
-																"parameters": {},
-																"datasetParameters": {
-																	"DataFlowCalendersource": {},
-																	"sinktoSQLCalendar": {}
-																}
+																"type": "DataFlowReference"
 															},
-															"staging": {},
 															"compute": {
 																"coreCount": 8,
 																"computeType": "General"
@@ -8317,15 +7982,13 @@
 														"inputs": [
 															{
 																"referenceName": "GTFSroutes",
-																"type": "DatasetReference",
-																"parameters": {}
+																"type": "DatasetReference"
 															}
 														],
 														"outputs": [
 															{
 																"referenceName": "SQLroutes",
-																"type": "DatasetReference",
-																"parameters": {}
+																"type": "DatasetReference"
 															}
 														]
 													}
@@ -8410,15 +8073,13 @@
 														"inputs": [
 															{
 																"referenceName": "GTFSshapes",
-																"type": "DatasetReference",
-																"parameters": {}
+																"type": "DatasetReference"
 															}
 														],
 														"outputs": [
 															{
 																"referenceName": "SQLshapes",
-																"type": "DatasetReference",
-																"parameters": {}
+																"type": "DatasetReference"
 															}
 														]
 													}
@@ -8533,15 +8194,13 @@
 														"inputs": [
 															{
 																"referenceName": "GTFSstop_times",
-																"type": "DatasetReference",
-																"parameters": {}
+																"type": "DatasetReference"
 															}
 														],
 														"outputs": [
 															{
 																"referenceName": "SQLstop_times",
-																"type": "DatasetReference",
-																"parameters": {}
+																"type": "DatasetReference"
 															}
 														]
 													}
@@ -8676,15 +8335,13 @@
 														"inputs": [
 															{
 																"referenceName": "GTFSstops",
-																"type": "DatasetReference",
-																"parameters": {}
+																"type": "DatasetReference"
 															}
 														],
 														"outputs": [
 															{
 																"referenceName": "SQLstops",
-																"type": "DatasetReference",
-																"parameters": {}
+																"type": "DatasetReference"
 															}
 														]
 													}
@@ -8799,15 +8456,13 @@
 														"inputs": [
 															{
 																"referenceName": "GTFStrips",
-																"type": "DatasetReference",
-																"parameters": {}
+																"type": "DatasetReference"
 															}
 														],
 														"outputs": [
 															{
 																"referenceName": "SQLtrips",
-																"type": "DatasetReference",
-																"parameters": {}
+																"type": "DatasetReference"
 															}
 														]
 													}
@@ -8836,8 +8491,7 @@
 								"referenceName": "SQLtoGTFS",
 								"type": "PipelineReference"
 							},
-							"waitOnCompletion": true,
-							"parameters": {}
+							"waitOnCompletion": true
 						}
 					}
 				],
@@ -8927,15 +8581,13 @@
 						"inputs": [
 							{
 								"referenceName": "DelimitedText_EIS779_Source_CSV",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "DelimitedText_EIS779_Target",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					}
@@ -8983,9 +8635,7 @@
 								"referenceName": "integrationRuntime1",
 								"type": "IntegrationRuntimeReference"
 							},
-							"loggingLevel": "Basic",
-							"projectConnectionManagers": {},
-							"packageConnectionManagers": {}
+							"loggingLevel": "Basic"
 						}
 					},
 					{
@@ -9034,15 +8684,13 @@
 						"inputs": [
 							{
 								"referenceName": "Binary_ProductsZip_TecDev",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "Binary_ProducstsUnzip_tecdev",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					},
@@ -9068,9 +8716,7 @@
 								"referenceName": "integrationRuntime1",
 								"type": "IntegrationRuntimeReference"
 							},
-							"loggingLevel": "Basic",
-							"projectConnectionManagers": {},
-							"packageConnectionManagers": {}
+							"loggingLevel": "Basic"
 						}
 					},
 					{
@@ -9115,15 +8761,13 @@
 						"inputs": [
 							{
 								"referenceName": "Binary_Products_Articles_CSV",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "Binary_productsCSV_ProductsFolder",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					},
@@ -9169,15 +8813,13 @@
 						"inputs": [
 							{
 								"referenceName": "Binary_MNT020_Zip",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "Binary_MNT020_Ziphistory",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					},
@@ -9223,15 +8865,13 @@
 						"inputs": [
 							{
 								"referenceName": "Binary_ProductsCSV_History",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "Binary_Products_HistoryDateStamp",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					}
@@ -9243,7 +8883,6 @@
 				"lastPublishTime": "2020-09-01T21:19:03Z"
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntime1')]",
 				"[concat(variables('factoryId'), '/datasets/Binary_ProductsZip_TecDev')]",
 				"[concat(variables('factoryId'), '/datasets/Binary_ProducstsUnzip_tecdev')]",
 				"[concat(variables('factoryId'), '/datasets/Binary_Products_Articles_CSV')]",
@@ -9300,15 +8939,13 @@
 						"inputs": [
 							{
 								"referenceName": "DelimitedText5",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "DelimitedText4",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					}
@@ -9352,9 +8989,7 @@
 								"referenceName": "integrationRuntime1",
 								"type": "IntegrationRuntimeReference"
 							},
-							"loggingLevel": "Basic",
-							"projectConnectionManagers": {},
-							"packageConnectionManagers": {}
+							"loggingLevel": "Basic"
 						}
 					}
 				],
@@ -9364,9 +8999,7 @@
 				"annotations": [],
 				"lastPublishTime": "2020-09-01T21:19:03Z"
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntime1')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/SQLtoGTFS')]",
@@ -9736,15 +9369,13 @@
 						"inputs": [
 							{
 								"referenceName": "SQLGTFSTableConnection",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "GTFSSQLSink",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					},
@@ -9968,15 +9599,13 @@
 						"inputs": [
 							{
 								"referenceName": "GTFSSQLSink",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "TECDevCRM",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					}
@@ -10014,7 +9643,6 @@
 								"type": "Expression"
 							},
 							"method": "POST",
-							"headers": {},
 							"body": {
 								"value": "@json(\nconcat(\n'\n{\n\"connectionName\":\"',variables('varConnectionName'),'\",\"storageAccountKey\":\"',variables('storageAccountKey'),'\",\"fileName\":\"',variables('fileName'),'\"\n,\"zipfolder\":\"',variables('zipfolder'),'\"\n,\"Unzipfolder\":\"',variables('Unzipfolder'),'\"\n,\"extractfolder\":\"',variables('extractfolder'),'\"\n,\"dataLakeStorageGen1Name\":\"',variables('dataLakeStorageGen1Name'),'\"\n}'))",
 								"type": "Expression"
@@ -10071,15 +9699,13 @@
 						"inputs": [
 							{
 								"referenceName": "ZipFile",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "UnzipFile",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					},
@@ -10105,8 +9731,7 @@
 						"typeProperties": {
 							"dataset": {
 								"referenceName": "ZipFile",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							},
 							"fieldList": [
 								"childItems",
@@ -10226,8 +9851,7 @@
 						"typeProperties": {
 							"dataset": {
 								"referenceName": "UnzipFile",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							},
 							"fieldList": [
 								"itemName"
@@ -10365,15 +9989,13 @@
 						"inputs": [
 							{
 								"referenceName": "SQLTEC",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "SQLValidations",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					},
@@ -10454,15 +10076,13 @@
 						"inputs": [
 							{
 								"referenceName": "ADLSV2CSV",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "SQLTECData",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					}
@@ -10926,8 +10546,7 @@
 				},
 				"annotations": [],
 				"type": "AzureSqlTable",
-				"schema": [],
-				"typeProperties": {}
+				"schema": []
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/SQLPocTec')]"
@@ -12269,8 +11888,7 @@
 						"name": "Zero_IdentificationNumberofBelgium",
 						"type": "varchar"
 					}
-				],
-				"typeProperties": {}
+				]
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase_PCRM')]"
@@ -15229,8 +14847,7 @@
 				},
 				"annotations": [],
 				"type": "AzureSqlTable",
-				"schema": [],
-				"typeProperties": {}
+				"schema": []
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/SQLPocTec')]"
@@ -16388,9 +16005,9 @@
 				"annotations": [],
 				"type": "AzureBlobFS",
 				"typeProperties": {
-					"url": "[parameters('ADLSCOD_properties_typeProperties_url')]",
-					"tenant": "[parameters('ADLSCOD_properties_typeProperties_tenant')]",
-					"servicePrincipalId": "[parameters('ADLSCOD_properties_typeProperties_servicePrincipalId')]",
+					"url": "https://sapoctec.dfs.core.windows.net",
+					"tenant": "6e5433e0-76fc-44b7-b71b-0e5446a3fa94",
+					"servicePrincipalId": "b4537ba3-1639-42cb-9143-8bfbcb683e79",
 					"servicePrincipalKey": {
 						"type": "AzureKeyVaultSecret",
 						"store": {
@@ -16413,9 +16030,9 @@
 				"annotations": [],
 				"type": "AzureBlobFS",
 				"typeProperties": {
-					"url": "[parameters('ADLSGen2_properties_typeProperties_url')]",
-					"tenant": "[parameters('ADLSGen2_properties_typeProperties_tenant')]",
-					"servicePrincipalId": "[parameters('ADLSGen2_properties_typeProperties_servicePrincipalId')]",
+					"url": "https://sapcrmdev01.dfs.core.windows.net",
+					"tenant": "2291afd2-1191-4bcb-9906-c1406010941b",
+					"servicePrincipalId": "b74b5688-5ee7-4c50-8364-ddd607f525ac",
 					"servicePrincipalKey": {
 						"type": "AzureKeyVaultSecret",
 						"store": {
@@ -16439,10 +16056,10 @@
 				"annotations": [],
 				"type": "AzureBlobFS",
 				"typeProperties": {
-					"url": "[parameters('AzureDataLakeStorage1_properties_typeProperties_url')]",
+					"url": "https://sapoctec.dfs.core.windows.net",
 					"accountKey": {
 						"type": "SecureString",
-						"value": "[parameters('AzureDataLakeStorage1_accountKey')]"
+						"value": "**********"
 					}
 				}
 			},
@@ -16459,7 +16076,7 @@
 					"domain": "https://adb-6692331139697790.10.azuredatabricks.net",
 					"accessToken": {
 						"type": "SecureString",
-						"value": "[parameters('AzureDatabricks1_accessToken')]"
+						"value": "**********"
 					},
 					"existingClusterId": "0616-141858-paged980"
 				}
@@ -16499,11 +16116,11 @@
 				"annotations": [],
 				"type": "AzureFileStorage",
 				"typeProperties": {
-					"host": "[parameters('AzureFileStorage1_properties_typeProperties_host')]",
-					"userId": "[parameters('AzureFileStorage1_properties_typeProperties_userId')]",
+					"host": "\\\\sapoctec.file.core.windows.net\\adls-poc",
+					"userId": "Azure\\sapoctec",
 					"password": {
 						"type": "SecureString",
-						"value": "[parameters('AzureFileStorage1_password')]"
+						"value": "**********"
 					}
 				}
 			},
@@ -16517,7 +16134,7 @@
 				"annotations": [],
 				"type": "AzureKeyVault",
 				"typeProperties": {
-					"baseUrl": "[parameters('AzureKeyVault1_properties_typeProperties_baseUrl')]"
+					"baseUrl": "https://kvpcrm01.vault.azure.net/"
 				}
 			},
 			"dependsOn": []
@@ -16530,7 +16147,7 @@
 				"annotations": [],
 				"type": "AzureKeyVault",
 				"typeProperties": {
-					"baseUrl": "[parameters('AzureKeyVault_Dev_properties_typeProperties_baseUrl')]"
+					"baseUrl": "https://kvpcrm01.vault.azure.net/"
 				}
 			},
 			"dependsOn": []
@@ -16549,10 +16166,10 @@
 							"referenceName": "AzureKeyVault_Dev",
 							"type": "LinkedServiceReference"
 						},
-						"secretName": "[parameters('AzureSqlDatabase_PCRM_properties_typeProperties_connectionString_secretName')]",
+						"secretName": "tec-dev-sqlconnectionprincipal",
 						"secretVersion": "fe72a966c4d640f1af00a886103ed09f"
 					},
-					"servicePrincipalId": "[parameters('AzureSqlDatabase_PCRM_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalId": "b74b5688-5ee7-4c50-8364-ddd607f525ac",
 					"servicePrincipalKey": {
 						"type": "AzureKeyVaultSecret",
 						"store": {
@@ -16562,7 +16179,7 @@
 						"secretName": "tec-dev-prinicipalkey",
 						"secretVersion": "ea7baf49a5774322b0ca7dc1d9b5f923"
 					},
-					"tenant": "[parameters('AzureSqlDatabase_PCRM_properties_typeProperties_tenant')]"
+					"tenant": "2291afd2-1191-4bcb-9906-c1406010941b"
 				}
 			},
 			"dependsOn": [
@@ -16580,7 +16197,7 @@
 					"deploymentType": "Online",
 					"serviceUri": "https://tec-crm-dev.crm4.dynamics.com",
 					"authenticationType": "Office365",
-					"username": "[parameters('DynamicsCrm_TECDev_properties_typeProperties_username')]",
+					"username": "Bhargav.Parchuri@letec.be",
 					"password": {
 						"type": "AzureKeyVaultSecret",
 						"store": {
@@ -16604,7 +16221,7 @@
 				"annotations": [],
 				"type": "HttpServer",
 				"typeProperties": {
-					"url": "[parameters('HttpServer1_properties_typeProperties_url')]",
+					"url": "http://opendata.tec-wl.be/Current%20GTFS/TEC-GTFS.zip",
 					"enableServerCertificateValidation": true,
 					"authenticationType": "Anonymous"
 				}
@@ -16619,7 +16236,7 @@
 				"annotations": [],
 				"type": "AzureKeyVault",
 				"typeProperties": {
-					"baseUrl": "[parameters('KeyVaultPoc_properties_typeProperties_baseUrl')]"
+					"baseUrl": "https://keyvault-Poc-tec.vault.azure.net/"
 				}
 			},
 			"dependsOn": []
@@ -16638,9 +16255,9 @@
 							"referenceName": "KeyVaultPoc",
 							"type": "LinkedServiceReference"
 						},
-						"secretName": "[parameters('SQLPocTec_properties_typeProperties_connectionString_secretName')]"
+						"secretName": "SQL19"
 					},
-					"servicePrincipalId": "[parameters('SQLPocTec_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalId": "b4537ba3-1639-42cb-9143-8bfbcb683e79",
 					"servicePrincipalKey": {
 						"type": "AzureKeyVaultSecret",
 						"store": {
@@ -16649,7 +16266,7 @@
 						},
 						"secretName": "pockey"
 					},
-					"tenant": "[parameters('SQLPocTec_properties_typeProperties_tenant')]"
+					"tenant": "6e5433e0-76fc-44b7-b71b-0e5446a3fa94"
 				}
 			},
 			"dependsOn": [
@@ -16664,14 +16281,14 @@
 				"annotations": [],
 				"type": "Sftp",
 				"typeProperties": {
-					"host": "[parameters('Sftp1_properties_typeProperties_host')]",
+					"host": "217.117.38.238",
 					"port": 22,
 					"skipHostKeyValidation": true,
 					"authenticationType": "Basic",
-					"userName": "[parameters('Sftp1_properties_typeProperties_userName')]",
+					"userName": "crm",
 					"password": {
 						"type": "SecureString",
-						"value": "[parameters('Sftp1_password')]"
+						"value": "**********"
 					}
 				}
 			},
@@ -16688,7 +16305,7 @@
 					"deploymentType": "Online",
 					"serviceUri": "https://tec-crm-dev.crm4.dynamics.com",
 					"authenticationType": "Office365",
-					"username": "[parameters('TecDevCRM_properties_typeProperties_username')]",
+					"username": "Bhargav.Parchuri@letec.be",
 					"password": {
 						"type": "AzureKeyVaultSecret",
 						"store": {
@@ -16711,7 +16328,7 @@
 				"annotations": [],
 				"type": "AzureKeyVault",
 				"typeProperties": {
-					"baseUrl": "[parameters('keyvault_TEC_properties_typeProperties_baseUrl')]"
+					"baseUrl": "https://kvpcrm01.vault.azure.net/"
 				}
 			},
 			"dependsOn": []
@@ -16724,9 +16341,9 @@
 				"annotations": [],
 				"type": "AzureBlobFS",
 				"typeProperties": {
-					"url": "[parameters('linkedService_ADLS_properties_typeProperties_url')]",
-					"tenant": "[parameters('linkedService_ADLS_properties_typeProperties_tenant')]",
-					"servicePrincipalId": "[parameters('linkedService_ADLS_properties_typeProperties_servicePrincipalId')]",
+					"url": "https://sapcrmdev01.dfs.core.windows.net",
+					"tenant": "2291afd2-1191-4bcb-9906-c1406010941b",
+					"servicePrincipalId": "b74b5688-5ee7-4c50-8364-ddd607f525ac",
 					"servicePrincipalKey": {
 						"type": "AzureKeyVaultSecret",
 						"store": {
@@ -16750,9 +16367,9 @@
 				"annotations": [],
 				"type": "AzureBlobFS",
 				"typeProperties": {
-					"url": "[parameters('linkedservice_ADLSGen2_properties_typeProperties_url')]",
-					"tenant": "[parameters('linkedservice_ADLSGen2_properties_typeProperties_tenant')]",
-					"servicePrincipalId": "[parameters('linkedservice_ADLSGen2_properties_typeProperties_servicePrincipalId')]",
+					"url": "https://sapcrmdev01.dfs.core.windows.net",
+					"tenant": "2291afd2-1191-4bcb-9906-c1406010941b",
+					"servicePrincipalId": "b74b5688-5ee7-4c50-8364-ddd607f525ac",
 					"servicePrincipalKey": {
 						"type": "AzureKeyVaultSecret",
 						"store": {
@@ -16767,47 +16384,6 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/keyvault_TEC')]"
 			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/integrationRuntime1')]",
-			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"type": "Managed",
-				"typeProperties": {
-					"computeProperties": {
-						"location": "North Europe",
-						"nodeSize": "Standard_D2_v3",
-						"numberOfNodes": 1,
-						"maxParallelExecutionsPerNode": 2,
-						"vNetProperties": {
-							"vNetId": "/subscriptions/5d5e2d67-4aa7-4698-aa6e-48bdb423d69a/resourceGroups/rs-networking/providers/Microsoft.Network/virtualNetworks/vn-linkedtotec",
-							"subnet": "sn-01"
-						}
-					},
-					"ssisProperties": {
-						"catalogInfo": {
-							"catalogServerEndpoint": "[parameters('integrationRuntime1_properties_typeProperties_ssisProperties_catalogInfo_catalogServerEndpoint')]",
-							"catalogAdminUserName": "[parameters('integrationRuntime1_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminUserName')]",
-							"catalogAdminPassword": {
-								"type": "SecureString",
-								"value": "[parameters('integrationRuntime1_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminPassword')]"
-							},
-							"catalogPricingTier": "S1"
-						},
-						"customSetupScriptProperties": {
-							"blobContainerUri": "https://sapcrmcommon01.blob.core.windows.net/kingswaysoft",
-							"sasToken": {
-								"type": "SecureString",
-								"value": "[parameters('integrationRuntime1_properties_typeProperties_ssisProperties_customSetupScriptProperties_sasToken')]"
-							}
-						},
-						"edition": "Standard",
-						"licenseType": "BasePrice"
-					}
-				}
-			},
-			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/dataflow1')]",
@@ -17312,13 +16888,6 @@
 				"[concat(variables('factoryId'), '/datasets/AzureSqlTable_CODA_9')]",
 				"[concat(variables('factoryId'), '/datasets/AzureSqlTable_CODA_4')]"
 			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/default')]",
-			"type": "Microsoft.DataFactory/factories/managedVirtualNetworks",
-			"apiVersion": "2018-06-01",
-			"properties": {},
-			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/Binary_productsCSV_ProductsFolder')]",

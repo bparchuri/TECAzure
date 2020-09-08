@@ -13,6 +13,1545 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/EIS779_CRM_TecDev')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy CSV to SQL Table",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Copy data to Merge CSV files",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false,
+							"parallelCopies": 50,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"type": "String",
+											"ordinal": 1
+										},
+										"sink": {
+											"name": "Code_segment",
+											"type": "String"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "DelimitedText_ADLS_ReadCSV",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "SQL_EIS779",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Send data to CRM",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Copy data_Using Joins",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "AzureSqlSource",
+								"sqlReaderQuery": "SELECT TOP (10) [Code_segment]\n      ,[Poste_segment]\n      ,[Id_transaction]\n      ,[Num_serie]\n      ,[Id_entreprise]\n      ,[Id_paiement]\n      ,[Code_moyen_paiement]\n      ,[Sens_paiement]\n      ,[Montant]\n      ,[Type_equipement]\n      ,[Date_ope]\n      ,[Name]\n      ,[Guid]\n  FROM [dbo].[EIS779_atlas]",
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"sink": {
+								"type": "DynamicsCrmSink",
+								"writeBatchSize": 10,
+								"writeBehavior": "upsert",
+								"ignoreNullValues": false
+							},
+							"enableStaging": false,
+							"parallelCopies": 50,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "Name",
+											"type": "String"
+										},
+										"sink": {
+											"name": "tec_name",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Code_segment",
+											"type": "String"
+										},
+										"sink": {
+											"name": "tec_codesegment",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Sens_paiement",
+											"type": "String"
+										},
+										"sink": {
+											"name": "tec_senspaiement",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Num_serie",
+											"type": "String"
+										},
+										"sink": {
+											"name": "tec_numserie",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Id_paiement",
+											"type": "String"
+										},
+										"sink": {
+											"name": "tec_idpaiement",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Guid",
+											"type": "Guid"
+										},
+										"sink": {
+											"name": "tec_eis779atlasid",
+											"type": "Guid"
+										}
+									},
+									{
+										"source": {
+											"name": "Code_moyen_paiement",
+											"type": "String"
+										},
+										"sink": {
+											"name": "tec_codemoyenpaiement",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Poste_segment",
+											"type": "String"
+										},
+										"sink": {
+											"name": "tec_postesegment",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Id_entreprise",
+											"type": "String"
+										},
+										"sink": {
+											"name": "tec_identreprise",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Date_ope",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "tec_dateope",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "Id_transaction",
+											"type": "String"
+										},
+										"sink": {
+											"name": "tec_idtransaction",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Type_equipement"
+										},
+										"sink": {
+											"name": "tec_typeequipment"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "EIS779_SQL_CRM",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "tecdevcrmconnection",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "dataflowusingsplittoSegments",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [
+							{
+								"activity": "Copy CSV to SQL Table",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "dataflow_EIS779_Segments_plit",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"dataflowSource": {},
+									"SQLSegment0": {},
+									"SQLSegment1": {},
+									"SQLSegment2": {},
+									"SQLSegment3": {},
+									"SQLSegment4": {},
+									"SQLSegment5": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							}
+						}
+					},
+					{
+						"name": "Copy data_Using Joins",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "dataflowusingsplittoSegments",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "AzureSqlSource",
+								"sqlReaderQuery": "  SELECT Top(100)\n     E003.Code_segment\n    ,E003.Poste_segment\n    ,E003.Id_transaction\n    ,E001.Num_serie\n    ,E002.Id_entreprise\n    ,E003.Id_paiement\n    ,E003.Code_moyen_paiement\n    ,E003.Sens_paiement\n    ,E003.Montant\n    ,10 AS Type_Eqiupment\n    ,E001.Date_ope\n    ,E000.Plateforme\n\t,NEWID() AS Unique_Id\n  FROM [dbo].[EIS779_SEGMENT_001] E001\n  LEFT JOIN [dbo].[EIS779_SEGMENT_002] E002\n    ON E001.Id_transaction = E002.Id_transaction\n  JOIN [dbo].[EIS779_SEGMENT_003] E003\n    ON E001.Id_transaction = E003.Id_transaction\n  JOIN [dbo].[EIS779_SEGMENT_000] E000\n    ON E000.Code_segment = '000'\n  ORDER by E001.id_transaction",
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false,
+							"parallelCopies": 50,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "Code_segment",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Code_segment",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Poste_segment",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Poste_segment",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Id_transaction",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Id_transaction",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Num_serie",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Num_serie",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Id_entreprise",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Id_entreprise",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Id_paiement",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Id_paiement",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Code_moyen_paiement",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Code_moyen_paiement",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Sens_paiement",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Sens_paiement",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Montant",
+											"type": "Double"
+										},
+										"sink": {
+											"name": "Montant",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"name": "Type_Eqiupment",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "Type_equipement",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Date_ope",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "Date_ope",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "Plateforme",
+											"type": "String"
+										},
+										"sink": {
+											"name": "Name",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Unique_Id",
+											"type": "Guid"
+										},
+										"sink": {
+											"name": "Guid",
+											"type": "Guid"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "EIS779_SQL_Join",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "SQLEIS779ATLAS",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Copy data to Merge CSV files",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true,
+									"wildcardFileName": "*",
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "DelimitedTextSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings",
+									"copyBehavior": "MergeFiles"
+								},
+								"formatSettings": {
+									"type": "DelimitedTextWriteSettings",
+									"quoteAllText": true,
+									"fileExtension": ".csv"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "DelimitedText_EIS779_Source_CSV",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DelimitedText_EIS779_Target",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"folder": {
+					"name": "EIS-779"
+				},
+				"annotations": [],
+				"lastPublishTime": "2020-08-17T20:03:31Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/EIS779_CRM_TecDev_copy1')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "dataflow1",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "dataflow1",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"source1": {},
+									"sink1": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							}
+						}
+					}
+				],
+				"variables": {
+					"fileName": {
+						"type": "String"
+					}
+				},
+				"folder": {
+					"name": "EIS-779"
+				},
+				"annotations": [],
+				"lastPublishTime": "2020-08-20T16:23:21Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/GTFS')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "GTFSZipfilestoDLS",
+						"description": "t",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "BinarySource",
+								"storeSettings": {
+									"type": "HttpReadSettings",
+									"requestMethod": "GET",
+									"requestTimeout": ""
+								},
+								"formatSettings": {
+									"type": "BinaryReadSettings",
+									"compressionProperties": {
+										"type": "ZipDeflateReadSettings",
+										"preserveZipFileNameAsFolder": false
+									}
+								}
+							},
+							"sink": {
+								"type": "BinarySink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								}
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "ZipFileGTFS",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "Binary_GTFSZipFile",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Get Metadata of GTFS folder",
+						"type": "GetMetadata",
+						"dependsOn": [
+							{
+								"activity": "GTFSZipfilestoDLS",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "DLSV2GTFS",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"fieldList": [
+								"childItems"
+							],
+							"storeSettings": {
+								"type": "AzureBlobFSReadSettings",
+								"recursive": true
+							},
+							"formatSettings": {
+								"type": "BinaryReadSettings"
+							}
+						}
+					},
+					{
+						"name": "ForEach",
+						"type": "ForEach",
+						"dependsOn": [
+							{
+								"activity": "Get Metadata of GTFS folder",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@activity('Get Metadata of GTFS folder').output.childItems",
+								"type": "Expression"
+							},
+							"activities": [
+								{
+									"name": "SwitchToSQLTables",
+									"type": "Switch",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"on": {
+											"value": "@item().name",
+											"type": "Expression"
+										},
+										"cases": [
+											{
+												"value": "agency.txt",
+												"activities": [
+													{
+														"name": "Copy data to Agency SQL Table",
+														"type": "Copy",
+														"dependsOn": [],
+														"policy": {
+															"timeout": "7.00:00:00",
+															"retry": 0,
+															"retryIntervalInSeconds": 30,
+															"secureOutput": false,
+															"secureInput": false
+														},
+														"userProperties": [],
+														"typeProperties": {
+															"source": {
+																"type": "DelimitedTextSource",
+																"storeSettings": {
+																	"type": "AzureBlobFSReadSettings",
+																	"recursive": true
+																},
+																"formatSettings": {
+																	"type": "DelimitedTextReadSettings"
+																}
+															},
+															"sink": {
+																"type": "AzureSqlSink"
+															},
+															"enableStaging": false,
+															"translator": {
+																"type": "TabularTranslator",
+																"mappings": [
+																	{
+																		"source": {
+																			"name": "agency_id",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "Agency_id",
+																			"type": "String"
+																		}
+																	},
+																	{
+																		"source": {
+																			"name": "agency_name",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "Agency_name",
+																			"type": "String"
+																		}
+																	},
+																	{
+																		"source": {
+																			"name": "agency_url",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "Agency_url",
+																			"type": "String"
+																		}
+																	},
+																	{
+																		"source": {
+																			"name": "agency_timezone",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "Agency_timezone",
+																			"type": "String"
+																		}
+																	},
+																	{
+																		"source": {
+																			"name": "agency_lang",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "Agency_lang",
+																			"type": "String"
+																		}
+																	},
+																	{
+																		"source": {
+																			"name": "agency_phone",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "Agency_phone",
+																			"type": "String"
+																		}
+																	}
+																]
+															}
+														},
+														"inputs": [
+															{
+																"referenceName": "GTFSAgency",
+																"type": "DatasetReference",
+																"parameters": {}
+															}
+														],
+														"outputs": [
+															{
+																"referenceName": "SQLAgency",
+																"type": "DatasetReference",
+																"parameters": {}
+															}
+														]
+													}
+												]
+											},
+											{
+												"value": "calendar_dates.txt",
+												"activities": [
+													{
+														"name": "dataflowtocalendardatesSQL",
+														"type": "ExecuteDataFlow",
+														"dependsOn": [],
+														"policy": {
+															"timeout": "7.00:00:00",
+															"retry": 0,
+															"retryIntervalInSeconds": 30,
+															"secureOutput": false,
+															"secureInput": false
+														},
+														"userProperties": [],
+														"typeProperties": {
+															"dataflow": {
+																"referenceName": "dataflowcalendardates",
+																"type": "DataFlowReference",
+																"parameters": {},
+																"datasetParameters": {
+																	"dataflowcalendardatessource": {},
+																	"sinktocalendardatesSQLtable": {}
+																}
+															},
+															"staging": {},
+															"compute": {
+																"coreCount": 8,
+																"computeType": "General"
+															}
+														}
+													}
+												]
+											},
+											{
+												"value": "calendar.txt",
+												"activities": [
+													{
+														"name": "dataflowtocalendarSQLtable",
+														"type": "ExecuteDataFlow",
+														"dependsOn": [],
+														"policy": {
+															"timeout": "7.00:00:00",
+															"retry": 0,
+															"retryIntervalInSeconds": 30,
+															"secureOutput": false,
+															"secureInput": false
+														},
+														"userProperties": [],
+														"typeProperties": {
+															"dataflow": {
+																"referenceName": "dataflowcalander",
+																"type": "DataFlowReference",
+																"parameters": {},
+																"datasetParameters": {
+																	"DataFlowCalendersource": {},
+																	"sinktoSQLCalendar": {}
+																}
+															},
+															"staging": {},
+															"compute": {
+																"coreCount": 8,
+																"computeType": "General"
+															}
+														}
+													}
+												]
+											},
+											{
+												"value": "routes.txt",
+												"activities": [
+													{
+														"name": "Copy data routes SQL Table",
+														"type": "Copy",
+														"dependsOn": [],
+														"policy": {
+															"timeout": "7.00:00:00",
+															"retry": 0,
+															"retryIntervalInSeconds": 30,
+															"secureOutput": false,
+															"secureInput": false
+														},
+														"userProperties": [],
+														"typeProperties": {
+															"source": {
+																"type": "DelimitedTextSource",
+																"storeSettings": {
+																	"type": "AzureBlobFSReadSettings",
+																	"recursive": true
+																},
+																"formatSettings": {
+																	"type": "DelimitedTextReadSettings"
+																}
+															},
+															"sink": {
+																"type": "AzureSqlSink"
+															},
+															"enableStaging": false,
+															"translator": {
+																"type": "TabularTranslator",
+																"mappings": [
+																	{
+																		"source": {
+																			"name": "route_id",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "Route_id",
+																			"type": "String"
+																		}
+																	},
+																	{
+																		"source": {
+																			"name": "agency_id",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "Agency_id",
+																			"type": "String"
+																		}
+																	},
+																	{
+																		"source": {
+																			"name": "route_short_name",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "Route_short_name",
+																			"type": "String"
+																		}
+																	},
+																	{
+																		"source": {
+																			"name": "route_long_name",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "Route_long_name",
+																			"type": "String"
+																		}
+																	},
+																	{
+																		"source": {
+																			"name": "route_desc",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "Route_desc",
+																			"type": "String"
+																		}
+																	},
+																	{
+																		"source": {
+																			"name": "route_type",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "Route_type",
+																			"type": "String"
+																		}
+																	},
+																	{
+																		"source": {
+																			"name": "route_url",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "Route_url",
+																			"type": "String"
+																		}
+																	}
+																]
+															}
+														},
+														"inputs": [
+															{
+																"referenceName": "GTFSroutes",
+																"type": "DatasetReference",
+																"parameters": {}
+															}
+														],
+														"outputs": [
+															{
+																"referenceName": "SQLroutes",
+																"type": "DatasetReference",
+																"parameters": {}
+															}
+														]
+													}
+												]
+											},
+											{
+												"value": "shapes.txt",
+												"activities": [
+													{
+														"name": "Copy data shapes SQL Table",
+														"type": "Copy",
+														"dependsOn": [],
+														"policy": {
+															"timeout": "7.00:00:00",
+															"retry": 0,
+															"retryIntervalInSeconds": 30,
+															"secureOutput": false,
+															"secureInput": false
+														},
+														"userProperties": [],
+														"typeProperties": {
+															"source": {
+																"type": "DelimitedTextSource",
+																"storeSettings": {
+																	"type": "AzureBlobFSReadSettings",
+																	"recursive": true
+																},
+																"formatSettings": {
+																	"type": "DelimitedTextReadSettings"
+																}
+															},
+															"sink": {
+																"type": "AzureSqlSink"
+															},
+															"enableStaging": false,
+															"translator": {
+																"type": "TabularTranslator",
+																"mappings": [
+																	{
+																		"source": {
+																			"name": "shape_id",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "shape_id",
+																			"type": "String"
+																		}
+																	},
+																	{
+																		"source": {
+																			"name": "shape_pt_lat",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "shape_pt_lat",
+																			"type": "String"
+																		}
+																	},
+																	{
+																		"source": {
+																			"name": "shape_pt_lon",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "shape_pt_lon",
+																			"type": "String"
+																		}
+																	},
+																	{
+																		"source": {
+																			"name": "shape_pt_sequence",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "shape_pt_sequence",
+																			"type": "String"
+																		}
+																	}
+																]
+															}
+														},
+														"inputs": [
+															{
+																"referenceName": "GTFSshapes",
+																"type": "DatasetReference",
+																"parameters": {}
+															}
+														],
+														"outputs": [
+															{
+																"referenceName": "SQLshapes",
+																"type": "DatasetReference",
+																"parameters": {}
+															}
+														]
+													}
+												]
+											},
+											{
+												"value": "stop_times.txt",
+												"activities": [
+													{
+														"name": "Copy data stoptimes SQL Table",
+														"type": "Copy",
+														"dependsOn": [],
+														"policy": {
+															"timeout": "7.00:00:00",
+															"retry": 0,
+															"retryIntervalInSeconds": 30,
+															"secureOutput": false,
+															"secureInput": false
+														},
+														"userProperties": [],
+														"typeProperties": {
+															"source": {
+																"type": "DelimitedTextSource",
+																"storeSettings": {
+																	"type": "AzureBlobFSReadSettings",
+																	"recursive": true
+																},
+																"formatSettings": {
+																	"type": "DelimitedTextReadSettings"
+																}
+															},
+															"sink": {
+																"type": "AzureSqlSink"
+															},
+															"enableStaging": false,
+															"translator": {
+																"type": "TabularTranslator",
+																"mappings": [
+																	{
+																		"source": {
+																			"name": "trip_id",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "Trip_id",
+																			"type": "String"
+																		}
+																	},
+																	{
+																		"source": {
+																			"name": "arrival_time",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "Arrival_time",
+																			"type": "String"
+																		}
+																	},
+																	{
+																		"source": {
+																			"name": "departure_time",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "Departure_time",
+																			"type": "String"
+																		}
+																	},
+																	{
+																		"source": {
+																			"name": "stop_id",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "Stop_id",
+																			"type": "String"
+																		}
+																	},
+																	{
+																		"source": {
+																			"name": "stop_sequence",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "Stop_sequence",
+																			"type": "String"
+																		}
+																	},
+																	{
+																		"source": {
+																			"name": "pickup_type",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "Pickup_type",
+																			"type": "String"
+																		}
+																	},
+																	{
+																		"source": {
+																			"name": "drop_off_type",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "Drop_off_type",
+																			"type": "String"
+																		}
+																	}
+																]
+															}
+														},
+														"inputs": [
+															{
+																"referenceName": "GTFSstop_times",
+																"type": "DatasetReference",
+																"parameters": {}
+															}
+														],
+														"outputs": [
+															{
+																"referenceName": "SQLstop_times",
+																"type": "DatasetReference",
+																"parameters": {}
+															}
+														]
+													}
+												]
+											},
+											{
+												"value": "stops.txt",
+												"activities": [
+													{
+														"name": "Copy data stops SQL Table",
+														"type": "Copy",
+														"dependsOn": [],
+														"policy": {
+															"timeout": "7.00:00:00",
+															"retry": 0,
+															"retryIntervalInSeconds": 30,
+															"secureOutput": false,
+															"secureInput": false
+														},
+														"userProperties": [],
+														"typeProperties": {
+															"source": {
+																"type": "DelimitedTextSource",
+																"storeSettings": {
+																	"type": "AzureBlobFSReadSettings",
+																	"recursive": true
+																},
+																"formatSettings": {
+																	"type": "DelimitedTextReadSettings"
+																}
+															},
+															"sink": {
+																"type": "AzureSqlSink"
+															},
+															"enableStaging": false,
+															"translator": {
+																"type": "TabularTranslator",
+																"mappings": [
+																	{
+																		"source": {
+																			"name": "stop_id",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "Stop_id",
+																			"type": "String"
+																		}
+																	},
+																	{
+																		"source": {
+																			"name": "stop_code",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "Stop_code",
+																			"type": "String"
+																		}
+																	},
+																	{
+																		"source": {
+																			"name": "stop_name",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "Stop_name",
+																			"type": "String"
+																		}
+																	},
+																	{
+																		"source": {
+																			"name": "stop_desc",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "Stop_desc",
+																			"type": "String"
+																		}
+																	},
+																	{
+																		"source": {
+																			"name": "stop_lat",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "Stop_lat",
+																			"type": "String"
+																		}
+																	},
+																	{
+																		"source": {
+																			"name": "stop_lon",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "Stop_lon",
+																			"type": "String"
+																		}
+																	},
+																	{
+																		"source": {
+																			"name": "zone_id",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "Zone_id",
+																			"type": "String"
+																		}
+																	},
+																	{
+																		"source": {
+																			"name": "stop_url",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "Stop_url",
+																			"type": "String"
+																		}
+																	},
+																	{
+																		"source": {
+																			"name": "location_type",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "Location_type",
+																			"type": "String"
+																		}
+																	}
+																]
+															}
+														},
+														"inputs": [
+															{
+																"referenceName": "GTFSstops",
+																"type": "DatasetReference",
+																"parameters": {}
+															}
+														],
+														"outputs": [
+															{
+																"referenceName": "SQLstops",
+																"type": "DatasetReference",
+																"parameters": {}
+															}
+														]
+													}
+												]
+											},
+											{
+												"value": "trips.txt",
+												"activities": [
+													{
+														"name": "Copy data trips SQL Table",
+														"type": "Copy",
+														"dependsOn": [],
+														"policy": {
+															"timeout": "7.00:00:00",
+															"retry": 0,
+															"retryIntervalInSeconds": 30,
+															"secureOutput": false,
+															"secureInput": false
+														},
+														"userProperties": [],
+														"typeProperties": {
+															"source": {
+																"type": "DelimitedTextSource",
+																"storeSettings": {
+																	"type": "AzureBlobFSReadSettings",
+																	"recursive": true
+																},
+																"formatSettings": {
+																	"type": "DelimitedTextReadSettings"
+																}
+															},
+															"sink": {
+																"type": "AzureSqlSink"
+															},
+															"enableStaging": false,
+															"translator": {
+																"type": "TabularTranslator",
+																"mappings": [
+																	{
+																		"source": {
+																			"name": "route_id",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "Route_id",
+																			"type": "String"
+																		}
+																	},
+																	{
+																		"source": {
+																			"name": "service_id",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "Service_id",
+																			"type": "String"
+																		}
+																	},
+																	{
+																		"source": {
+																			"name": "trip_id",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "Trip_id",
+																			"type": "String"
+																		}
+																	},
+																	{
+																		"source": {
+																			"name": "trip_short_name",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "Trip_short_name",
+																			"type": "String"
+																		}
+																	},
+																	{
+																		"source": {
+																			"name": "direction_id",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "Direction_id",
+																			"type": "String"
+																		}
+																	},
+																	{
+																		"source": {
+																			"name": "block_id",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "Block_id",
+																			"type": "String"
+																		}
+																	},
+																	{
+																		"source": {
+																			"name": "shape_id",
+																			"type": "String"
+																		},
+																		"sink": {
+																			"name": "Shape_id",
+																			"type": "String"
+																		}
+																	}
+																]
+															}
+														},
+														"inputs": [
+															{
+																"referenceName": "GTFStrips",
+																"type": "DatasetReference",
+																"parameters": {}
+															}
+														],
+														"outputs": [
+															{
+																"referenceName": "SQLtrips",
+																"type": "DatasetReference",
+																"parameters": {}
+															}
+														]
+													}
+												]
+											}
+										]
+									}
+								}
+							]
+						}
+					},
+					{
+						"name": "SQLtoGTFStoCRM",
+						"type": "ExecutePipeline",
+						"dependsOn": [
+							{
+								"activity": "ForEach",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "SQLtoGTFS",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					}
+				],
+				"variables": {
+					"fileName": {
+						"type": "String",
+						"defaultValue": "X"
+					}
+				},
+				"annotations": [],
+				"lastPublishTime": "2020-09-01T10:21:40Z"
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/GTFS_copy1')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
