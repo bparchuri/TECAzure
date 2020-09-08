@@ -379,7 +379,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
-						"folderPath": "atlas/mnt020/csv/Source",
+						"folderPath": "atlas/mnt020/csv/source",
 						"fileSystem": "raw"
 					}
 				}
