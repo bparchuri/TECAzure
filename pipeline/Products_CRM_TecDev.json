@@ -220,6 +220,58 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "Move Products CSV file to History with datestamp",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Move zip file to History with datestamp",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "BinarySource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"deleteFilesAfterCompletion": false
+						},
+						"formatSettings": {
+							"type": "BinaryReadSettings"
+						}
+					},
+					"sink": {
+						"type": "BinarySink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						}
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "Binary_MNT020_Zip",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "Binary_MNT020_Ziphistory",
+						"type": "DatasetReference"
+					}
+				]
 			}
 		],
 		"folder": {
