@@ -262,13 +262,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "Binary_MNT020_Zip",
+						"referenceName": "Binary_ProductsCSV_History",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "Binary_MNT020_Ziphistory",
+						"referenceName": "Binary_Products_HistoryDateStamp",
 						"type": "DatasetReference"
 					}
 				]

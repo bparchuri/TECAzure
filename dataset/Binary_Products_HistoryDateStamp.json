@@ -1,0 +1,18 @@
+{
+	"name": "Binary_Products_HistoryDateStamp",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "linkedservice_ADLSGen2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "atlas/mnt020/csv/produits/history",
+				"fileSystem": "raw"
+			}
+		}
+	}
+}
